@@ -52,5 +52,14 @@
     "venue": "theater",
     "picker": "joint",
     "consumesTurn": false
+  },
+  {
+    "id": "w_mubjnvnpcb2wv",
+    "date": "2026-08-22",
+    "title": "The End of Oak Street",
+    "movieId": "the-end-of-oak-street-2026",
+    "venue": "theater",
+    "picker": "joint",
+    "consumesTurn": false
   }
 ]
