@@ -10,18 +10,21 @@ import {
   type Snapshot,
 } from './lib/store';
 import { getToken, getWhoAmI } from './lib/github';
-import { DRAFT_EVENT, loadDraft, readyCount } from './lib/draft';
+import { DRAFT_EVENT, totalUnsaved } from './lib/draft';
 import { loadAdded, saveAdded, type AddedMovie } from './lib/added';
+import { loadMarks, saveMarks, type Marks } from './lib/marks';
+import { saveOverride, clearOverride } from './lib/store';
 import { TurnPanel } from './components/TurnPanel';
 import { WatchForm } from './components/WatchForm';
 import { BulkEntry } from './components/BulkEntry';
 import { History } from './components/History';
 import { RecentPicks } from './components/RecentPicks';
+import { Browse } from './components/Browse';
 import { AdjustmentPanel } from './components/AdjustmentPanel';
 import { Settings } from './components/Settings';
 import { Ballot } from './components/Ballot';
 
-type Tab = 'tracker' | 'backfill' | 'history' | 'ballot' | 'settings';
+type Tab = 'tracker' | 'browse' | 'backfill' | 'history' | 'ballot' | 'settings';
 
 const CURRENT_FILM_YEAR = (() => {
   // Before the ceremony, the season still in progress is last year's.
@@ -35,16 +38,22 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [identity, setIdentity] = useState(0);
-  const [unsaved, setUnsaved] = useState(() => readyCount(loadDraft()));
+  const [unsaved, setUnsaved] = useState(() => totalUnsaved());
   const [added, setAdded] = useState<AddedMovie[]>([]);
+  const [marks, setMarks] = useState<Marks>({});
 
   const canEdit = Boolean(getToken());
   const whoami = getWhoAmI();
 
   const refresh = useCallback(async () => {
     try {
-      const [snapshot, addedMovies] = await Promise.all([loadSnapshot(), loadAdded()]);
+      const [snapshot, addedMovies, movieMarks] = await Promise.all([
+        loadSnapshot(),
+        loadAdded(),
+        loadMarks(),
+      ]);
       setAdded(addedMovies);
+      setMarks(movieMarks);
       setSnap(snapshot);
       setError(null);
     } catch (e) {
@@ -118,6 +127,30 @@ export default function App() {
       await saveAdded(m);
     });
 
+  const updateMarks = (changes: Marks) =>
+    mutate(async () => {
+      const n = Object.keys(changes).length;
+      await saveMarks(changes, `Update ${n} movie${n === 1 ? '' : 's'}`);
+    });
+
+  const setYearOverride = (movieId: string, year: number | null, note: string) =>
+    mutate(async () => {
+      if (year === null) {
+        await clearOverride(movieId, `Clear ballot-year override: ${movieId}`);
+      } else {
+        await saveOverride(
+          {
+            movieId,
+            eligibilityYear: year,
+            note: note.trim() || undefined,
+            at: new Date().toISOString(),
+            by: whoami ?? 'me',
+          },
+          `Set ballot year ${year}: ${movieId}`
+        );
+      }
+    });
+
   const deleteWatch = (w: Watch) => {
     if (!confirm(`Remove "${w.title}" from ${w.date}?`)) return;
     mutate(async () => {
@@ -155,6 +188,11 @@ export default function App() {
       <header className="top">
         <h1>Movie Nights</h1>
         <span className="small muted">
+          {unsaved > 0 && (
+            <>
+              <strong className="unsaved-marker">{unsaved} unsaved</strong> ·{' '}
+            </>
+          )}
           {whoami ? config.people[whoami] : 'Not identified'} ·{' '}
           {canEdit ? 'can save' : 'read-only'}
         </span>
@@ -164,8 +202,9 @@ export default function App() {
         {(
           [
             ['tracker', 'Tracker'],
+            ['browse', 'Browse'],
             ['backfill', 'Backfill'],
-            ['history', unsaved > 0 ? `History · ${unsaved} unsaved` : 'History'],
+            ['history', 'History'],
             ['ballot', 'Ballot'],
             ['settings', 'Settings'],
           ] as [Tab, string][]
@@ -205,6 +244,18 @@ export default function App() {
             busy={busy}
           />
         </>
+      )}
+
+      {tab === 'browse' && snap && (
+        <Browse
+          config={config}
+          overrides={snap.overrides}
+          marks={marks}
+          onSaveMarks={updateMarks}
+          onOverride={setYearOverride}
+          canEdit={canEdit}
+          busy={busy}
+        />
       )}
 
       {tab === 'backfill' && snap && (

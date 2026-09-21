@@ -46,6 +46,26 @@ export default function run() {
     check('October sits inside one', seasonsContaining('2026-10-10').join(','), '2026');
   });
 
+  suite('eligibility: the cases that need a person', () => {
+    const v = (m) => computeEligibility(m);
+
+    // A late-year limited run is undecidable until it expands or reaches home:
+    // which side of the ceremony that lands on decides the year.
+    check('a December limited run with no expansion is low confidence', v({ usLimitedDate: '2025-12-20' }).confidence, 'low');
+    check('and is flagged for review', v({ usLimitedDate: '2025-12-20' }).needsReview, true);
+    check('November counts as late too', v({ usLimitedDate: '2025-11-14' }).needsReview, true);
+    check('but a spring limited run does not', Boolean(v({ usLimitedDate: '2025-03-14' }).needsReview), false);
+    check('and it stays medium', v({ usLimitedDate: '2025-03-14' }).confidence, 'medium');
+    check('the reasoning names the ceremony it turns on', v({ usLimitedDate: '2025-12-20' }).evidence.join(' ').includes('Oscars'), true);
+
+    // Once the expansion date is known there is nothing to decide, though it
+    // is still worth marking as a cross-year call.
+    check('a resolved cross-year case is not flagged for review', Boolean(v({ usLimitedDate: '2025-12-20', usTheatricalDate: '2026-01-16' }).needsReview), false);
+    check('but is marked as cross-year', v({ usLimitedDate: '2025-12-20', usTheatricalDate: '2026-01-16' }).crossYear, true);
+    check('a plain release is neither', Boolean(v({ usTheatricalDate: '2026-06-12' }).crossYear), false);
+    check('and stays high confidence', v({ usTheatricalDate: '2026-06-12' }).confidence, 'high');
+  });
+
   suite('eligibility: a manual override always wins', () => {
     const movie = { usTheatricalDate: '2026-06-12' };
     check('a year override replaces the computed year', resolveEligibility(movie, { eligibilityYear: 2025 }).year, 2025);

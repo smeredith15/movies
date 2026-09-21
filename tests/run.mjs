@@ -18,6 +18,8 @@ import runCategories from './categories.test.mjs';
 import runEntryTypes from './entryTypes.test.mjs';
 import runDraft from './draft.test.mjs';
 import runAdded from './added.test.mjs';
+import runMarks from './marks.test.mjs';
+import runBrowse from './browse.test.mjs';
 import runTmdb from './tmdb.test.mjs';
 import runTitleSearch from './titleSearch.test.mjs';
 import runFirstShowing from './firstshowing.test.mjs';
@@ -34,9 +36,12 @@ execFileSync(
     'src/lib/catalogIndex.ts',
     'src/lib/draft.ts',
     'src/lib/added.ts',
+    'src/lib/marks.ts',
+    'src/components/Browse.tsx',
     'src/lib/titleSearch.ts',
     'src/lib/tmdbIndex.ts',
     '--rootDir', 'src',
+    '--jsx', 'react-jsx',
     '--outDir', BUILD,
     // CommonJS, because the source uses extensionless imports that Node's ESM
     // resolver rejects but its CJS resolver handles natively.
@@ -56,6 +61,8 @@ const turns = require(resolve(BUILD, 'lib/turns.js'));
 const catalogIndex = require(resolve(BUILD, 'lib/catalogIndex.js'));
 const draft = require(resolve(BUILD, 'lib/draft.js'));
 const added = require(resolve(BUILD, 'lib/added.js'));
+const marks = require(resolve(BUILD, 'lib/marks.js'));
+const browse = require(resolve(BUILD, 'components/Browse.js'));
 const titleSearch = require(resolve(BUILD, 'lib/titleSearch.js'));
 const tmdbIndex = require(resolve(BUILD, 'lib/tmdbIndex.js'));
 
@@ -67,6 +74,8 @@ runCategories();
 runEntryTypes();
 runDraft(draft);
 runAdded(added);
+runMarks(marks);
+runBrowse(browse);
 runTitleSearch(titleSearch, tmdbIndex);
 runFirstShowing(await import(pathToFileURL(resolve(ROOT, 'scripts/firstshowing.mjs')).href));
 await runTmdb(await import(pathToFileURL(resolve(ROOT, 'scripts/tmdb.mjs')).href));

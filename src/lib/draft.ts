@@ -1,46 +1,48 @@
-import type { StagedWatch } from './types';
-
-const KEY = 'movies.history.draft';
-
-export type Draft = Record<string, StagedWatch>;
-
 /**
- * Unsaved History edits, kept in this browser.
+ * Unsaved edits, kept in this browser.
  *
- * Dating hundreds of movies is a long session, and the edits only become
- * commits when you press Save. Without this, switching tabs unmounts the page
- * and silently throws the work away — which is exactly what happened.
+ * Both the History and Browse tabs stage a lot of small changes before saving
+ * them as one commit, and both unmount when you switch tabs — so what is
+ * staged has to outlive the component or the work is silently thrown away.
  */
-export function loadDraft(): Draft {
+
+export const HISTORY_DRAFT = 'movies.history.draft';
+export const BROWSE_DRAFT = 'movies.browse.draft';
+export const DRAFT_EVENT = 'movies:draft';
+
+export type Draft<T> = Record<string, T>;
+
+export function loadDraft<T>(key: string): Draft<T> {
   try {
-    const raw = localStorage.getItem(KEY);
+    const raw = localStorage.getItem(key);
     if (!raw) return {};
     const parsed = JSON.parse(raw);
-    return parsed && typeof parsed === 'object' ? (parsed as Draft) : {};
+    return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? (parsed as Draft<T>) : {};
   } catch {
     return {};
   }
 }
 
-export const DRAFT_EVENT = 'movies:draft';
-
-export function saveDraft(draft: Draft) {
+export function saveDraft<T>(key: string, draft: Draft<T>) {
   try {
-    if (Object.keys(draft).length === 0) localStorage.removeItem(KEY);
-    else localStorage.setItem(KEY, JSON.stringify(draft));
+    if (Object.keys(draft).length === 0) localStorage.removeItem(key);
+    else localStorage.setItem(key, JSON.stringify(draft));
   } catch {
     // Private browsing or a full quota. The edits still live in React state
     // for this visit; they just will not survive leaving the page.
   }
   if (typeof window !== 'undefined') {
-    window.dispatchEvent(new CustomEvent(DRAFT_EVENT, { detail: readyCount(draft) }));
+    window.dispatchEvent(new CustomEvent(DRAFT_EVENT, { detail: totalUnsaved() }));
   }
 }
 
-export function clearDraft() {
-  saveDraft({});
+export function clearDraft(key: string) {
+  saveDraft(key, {});
 }
 
-/** How many rows are filled in enough to save. */
-export const readyCount = (draft: Draft) =>
-  Object.values(draft).filter((d) => d.date).length;
+export const draftSize = <T,>(draft: Draft<T>) => Object.keys(draft).length;
+
+/** Everything staged anywhere, for the marker in the tab bar. */
+export function totalUnsaved(): number {
+  return draftSize(loadDraft(HISTORY_DRAFT)) + draftSize(loadDraft(BROWSE_DRAFT));
+}

@@ -283,6 +283,7 @@ function recompute(movies, year) {
     m.computedYear = verdict.year;
     m.confidence = verdict.confidence;
     m.evidence = verdict.evidence;
+    m.needsReview = Boolean(verdict.needsReview);
   }
   if (changed) {
     log(`  ${changed} title(s) moved year once TMDB supplied real dates`);
@@ -371,6 +372,7 @@ async function main() {
       computedYear: verdict.year,
       confidence: verdict.confidence,
       evidence: verdict.evidence,
+      needsReview: Boolean(verdict.needsReview),
       manual: false,
     });
     counts[verdict.confidence] += 1;

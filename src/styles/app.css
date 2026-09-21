@@ -271,3 +271,43 @@ ul.tmdb-results li {
 ul.tmdb-results li + li { border-top: 1px solid var(--line); }
 ul.tmdb-results .combo-title { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 ul.tmdb-results button { padding: 4px 12px; font-size: 12px; flex-shrink: 0; }
+
+/* Browse: a year's releases as a worklist */
+ul.browse { list-style: none; margin: 0; padding: 0; }
+ul.browse li { border-top: 1px solid var(--line); }
+ul.browse li:first-child { border-top: none; }
+ul.browse li.dirty { background: color-mix(in srgb, var(--accent) 8%, transparent); }
+
+.b-row { display: flex; align-items: center; gap: 10px; padding: 7px 0; }
+
+button.b-title {
+  flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 10px;
+  text-align: left; padding: 2px 0; border: none; background: none; color: var(--text);
+}
+button.b-title:hover .b-name { color: var(--accent); }
+.b-date {
+  color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums;
+  flex-shrink: 0; width: 84px;
+}
+.b-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.b-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+select.rate { width: 58px; padding: 4px 6px; font-size: 13px; }
+.b-actions button.chip-toggle { min-width: 76px; }
+
+.b-details {
+  padding: 4px 0 12px 84px;
+  display: flex; flex-direction: column; gap: 7px;
+}
+.b-meta, .b-dates { display: flex; gap: 12px; flex-wrap: wrap; }
+.b-override { gap: 6px; flex-wrap: wrap; }
+.b-override button { padding: 5px 12px; font-size: 12px; }
+
+@media (max-width: 680px) {
+  .b-row { flex-wrap: wrap; }
+  button.b-title { flex-basis: 100%; }
+  .b-actions { width: 100%; justify-content: flex-end; }
+  .b-details { padding-left: 0; }
+}
+
+.unsaved-marker { color: var(--warn); }
