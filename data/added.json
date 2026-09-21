@@ -75,5 +75,12 @@
     "year": 2007,
     "tmdbId": 285,
     "addedAt": "2026-09-21T20:20:10.344Z"
+  },
+  {
+    "id": "pirates-of-the-caribbean-dead-man-s-chest-2006",
+    "title": "Pirates of the Caribbean: Dead Man's Chest",
+    "year": 2006,
+    "tmdbId": 58,
+    "addedAt": "2026-09-21T20:20:19.370Z"
   }
 ]
