@@ -10,10 +10,13 @@ import {
   type Snapshot,
 } from './lib/store';
 import { getToken, getWhoAmI } from './lib/github';
+import { DRAFT_EVENT, loadDraft, readyCount } from './lib/draft';
+import { loadAdded, saveAdded, type AddedMovie } from './lib/added';
 import { TurnPanel } from './components/TurnPanel';
 import { WatchForm } from './components/WatchForm';
 import { BulkEntry } from './components/BulkEntry';
 import { History } from './components/History';
+import { RecentPicks } from './components/RecentPicks';
 import { AdjustmentPanel } from './components/AdjustmentPanel';
 import { Settings } from './components/Settings';
 import { Ballot } from './components/Ballot';
@@ -32,13 +35,17 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [identity, setIdentity] = useState(0);
+  const [unsaved, setUnsaved] = useState(() => readyCount(loadDraft()));
+  const [added, setAdded] = useState<AddedMovie[]>([]);
 
   const canEdit = Boolean(getToken());
   const whoami = getWhoAmI();
 
   const refresh = useCallback(async () => {
     try {
-      setSnap(await loadSnapshot());
+      const [snapshot, addedMovies] = await Promise.all([loadSnapshot(), loadAdded()]);
+      setAdded(addedMovies);
+      setSnap(snapshot);
       setError(null);
     } catch (e) {
       const raw = e instanceof Error ? e.message : String(e);
@@ -57,6 +64,18 @@ export default function App() {
   useEffect(() => {
     refresh();
   }, [refresh, identity]);
+
+  // Unsaved history edits are worth surfacing from every tab, not just the one
+  // they were made on — and they reserve room for the save bar.
+  useEffect(() => {
+    const onDraft = (e: Event) => setUnsaved((e as CustomEvent<number>).detail);
+    window.addEventListener(DRAFT_EVENT, onDraft);
+    return () => window.removeEventListener(DRAFT_EVENT, onDraft);
+  }, []);
+
+  useEffect(() => {
+    document.body.classList.toggle('has-unsaved', unsaved > 0);
+  }, [unsaved]);
 
   const config: Config = snap?.config ?? DEFAULT_CONFIG;
 
@@ -87,6 +106,16 @@ export default function App() {
   const addWatches = (ws: Watch[]) =>
     mutate(async () => {
       await saveWatches(ws, [], `Backfill ${ws.length} watch${ws.length === 1 ? '' : 'es'}`);
+    });
+
+  const updateWatch = (w: Watch) =>
+    mutate(async () => {
+      await saveWatches([w], [], `Correct pick: ${w.title}`);
+    });
+
+  const addMovie = (m: AddedMovie) =>
+    mutate(async () => {
+      await saveAdded(m);
     });
 
   const deleteWatch = (w: Watch) => {
@@ -136,7 +165,7 @@ export default function App() {
           [
             ['tracker', 'Tracker'],
             ['backfill', 'Backfill'],
-            ['history', 'History'],
+            ['history', unsaved > 0 ? `History · ${unsaved} unsaved` : 'History'],
             ['ballot', 'Ballot'],
             ['settings', 'Settings'],
           ] as [Tab, string][]
@@ -158,6 +187,15 @@ export default function App() {
         <>
           <TurnPanel state={turnState} config={config} />
           {canEdit && <WatchForm config={config} onAdd={addWatch} busy={busy} />}
+          <RecentPicks
+            watches={snap.watches}
+            config={config}
+            turnState={turnState}
+            onUpdate={updateWatch}
+            onDelete={deleteWatch}
+            canEdit={canEdit}
+            busy={busy}
+          />
           <AdjustmentPanel
             config={config}
             adjustments={snap.adjustments}
@@ -182,9 +220,11 @@ export default function App() {
       {tab === 'history' && snap && (
         <History
           watches={snap.watches}
+          added={added}
           config={config}
           onSaveMany={addWatches}
           onDelete={deleteWatch}
+          onAddMovie={addMovie}
           canEdit={canEdit}
           busy={busy}
         />

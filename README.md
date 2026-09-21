@@ -61,11 +61,53 @@ sources feed it:
   be dated*.
 - `data/watches.json` — anything logged through the app, with the full record.
 
-Setting a date on an imported row turns it into a real watch linked to that
-catalog entry, which is what makes it count toward the rotation. Edits stage up
+Setting anything on an imported row — a date, who picked it, where we watched
+it — turns it into a real watch linked to that catalog entry. A row saves as
+soon as any field is touched; a date is not required. A pick recorded without
+one still counts as watched and shows in the history, it just sits out of the
+rotation until a date arrives, and the Tracker says how many are waiting. Edits stage up
 locally and save together in one commit, so dating a year's worth of movies is
-one commit rather than sixty. Watches typed by hand that matched no catalog
+one commit rather than sixty.
+
+Because that is a long session, staged edits are written to `localStorage` on
+every keystroke and restored on the way back in. Switching tabs, reloading, or
+hitting back no longer costs you the work, and the tab label carries the
+unsaved count so it is visible from anywhere in the app. The save bar is
+anchored to the bottom of the window rather than the top, since the rows being
+filled in are usually at the foot of a long page. Watches typed by hand that matched no catalog
 entry get their own section rather than being silently filed under a year.
+
+**Add a movie** covers anything the workbook never listed. It searches TMDB by
+title and adds what you pick, recording the TMDB id; a title the index does not
+cover can still be typed by hand.
+
+The search runs against `data/tmdb-index.json`, built by the Action and
+committed to the repo. The page cannot query TMDB itself — the API key is a
+repository secret, and anything a static page can read is public — so the
+corpus is built where the key is safe and searched offline in the browser. It
+is fetched on first use rather than at startup, since it is only needed when
+adding a movie.
+
+Rebuild it from the **Build movie search index** action. `from_year` and
+`min_votes` control the size: the index takes films year by year, most-voted
+first, which keeps anything a person plausibly watched and drops the long tail.
+
+Either way the entry lands in `data/added.json` — a small file, rather than
+appending to a 300 KB year catalog — and the app merges it into the watched
+list. The importer folds those entries into the catalogs on its next run,
+marked `manual`, so they survive later re-imports.
+
+## Correcting a pick
+
+The Tracker lists the most recent picks with the two corrections that actually
+come up: **who picked it**, and **whether it used a turn**. Getting one of
+those wrong is the usual reason the rotation drifts, and fixing it there
+re-derives the turn immediately — no adjustment needed to paper over it.
+Switching a pick to "Both" frees the turn automatically, since joint picks
+never consume one.
+
+Use an adjustment for something that genuinely happened off-rotation — a bet, a
+deal, a forfeited pick. Use an override here when the record is simply wrong.
 
 ## Which year a movie counts for
 
@@ -164,10 +206,33 @@ or press **Refresh** in the app, which dispatches the same script as a GitHub
 Action. Sources are firstshowing.net for theatrical dates and the Wikipedia
 streaming lists for everything else; both are defined in `scripts/sources.mjs`.
 
-Ratings come from OMDb if `OMDB_API_KEY` is set as a repository secret — it is
-read by the Action, never shipped to the browser. OMDb provides IMDb,
-Metacritic and the RT critic score. **There is no free source for the RT
-audience score**, so that field stays manual.
+### TMDB
+
+`TMDB_API` is a repository secret, read by the Action and **never shipped to
+the browser** — anything the static page can read is public, so a secret cannot
+reach it.
+
+TMDB supplies what the scrapers cannot: US release dates *by type*, plus cast
+and characters. That typing is the whole game — a schedule page says a title
+appeared on some date, while TMDB says whether that was a festival premiere, a
+limited run, a wide run or a home release, which is exactly the distinction the
+eligibility rules turn on. TMDB dates therefore take precedence over scraped
+ones, and the rules are re-run afterwards; anything that changes year is
+reported rather than silently moved.
+
+The cast it returns is also what the ballot's actor and character categories
+need.
+
+Two modes:
+
+```bash
+npm run refresh-catalog -- --year 2026 --enrich-only   # dates and cast only
+npm run refresh-catalog -- --year 2026                 # also re-scrape
+```
+
+`--enrich-only` matters most right now: entries imported from the workbook have
+no release dates at all, so the rules engine cannot judge their year until TMDB
+fills them in.
 
 ## Setup
 

@@ -14,7 +14,8 @@ export function check(label, got, want) {
 
 export function suite(name, fn) {
   console.log(`\n${name}`);
-  fn();
+  // Returned so an async suite can be awaited; sync suites are unaffected.
+  return fn();
 }
 
 export function report() {

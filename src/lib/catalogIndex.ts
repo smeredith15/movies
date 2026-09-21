@@ -1,4 +1,5 @@
 import { REPO_BRANCH, REPO_NAME, REPO_OWNER } from './github';
+import { rankTitles } from './titleSearch';
 
 /** [id, title, year, seen] — kept as tuples to keep the payload small. */
 export type IndexRow = [string, string, number, 0 | 1];
@@ -37,47 +38,15 @@ export async function loadIndex(): Promise<IndexRow[]> {
   return inflight;
 }
 
-const normalize = (s: string) =>
-  s
-    .toLowerCase()
-    .normalize('NFKD')
-    .replace(/[̀-ͯ]/g, '')
-    .replace(/[^a-z0-9 ]+/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-
-/**
- * Rank titles for the autocomplete: a match at the start of the title beats one
- * at the start of a word, which beats one anywhere. Recent years and movies we
- * have already seen break ties, since those are what you are usually logging.
- */
 export function searchIndex(rows: IndexRow[], query: string, limit = 8): Suggestion[] {
-  const q = normalize(query);
-  if (q.length < 2) return [];
-
-  const scored: { row: IndexRow; score: number }[] = [];
-
-  for (const row of rows) {
-    const title = normalize(row[1]);
-    let score: number;
-
-    if (title === q) score = 0;
-    else if (title.startsWith(q)) score = 1;
-    else if (title.includes(` ${q}`)) score = 2;
-    else if (title.includes(q)) score = 3;
-    else continue;
-
-    // Later years first, and prefer titles already marked seen.
-    score = score * 1000 + (2100 - row[2]) - (row[3] ? 50 : 0);
-    scored.push({ row, score });
-  }
-
-  scored.sort((a, b) => a.score - b.score);
-
-  return scored.slice(0, limit).map(({ row }) => ({
-    id: row[0],
-    title: row[1],
-    year: row[2],
-    seen: row[3] === 1,
-  }));
+  // Movies we have already seen rank slightly higher, since those are what you
+  // are usually logging.
+  return rankTitles(
+    rows,
+    query,
+    (r) => ({ title: r[1], year: r[2] }),
+    (r) => (r[3] ? -50 : 0)
+  )
+    .slice(0, limit)
+    .map(({ item }) => ({ id: item[0], title: item[1], year: item[2], seen: item[3] === 1 }));
 }

@@ -5,7 +5,12 @@ export type Confidence = 'high' | 'medium' | 'low';
 
 export interface Watch {
   id: string;
-  date: string;            // YYYY-MM-DD
+  /**
+   * YYYY-MM-DD, or '' when we know we watched it but not when. An undated
+   * watch still records who picked it, but cannot take part in the rotation
+   * because there is no way to order it.
+   */
+  date: string;
   title: string;
   movieId: string | null;  // link into the catalog once matched
   venue: Venue;
@@ -84,4 +89,11 @@ export interface Config {
   oscarDates: Record<string, string>;
   /** Film years whose ballot pool has been frozen at the ceremony. */
   frozenYears: number[];
+}
+
+/** A history row that has been filled in but not yet committed. */
+export interface StagedWatch {
+  date: string;
+  picker: Picker;
+  venue: Venue;
 }

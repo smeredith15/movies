@@ -9,6 +9,14 @@ on:
         description: 'Film year to rebuild'
         required: true
         type: string
+      mode:
+        description: 'What to run'
+        required: true
+        type: choice
+        default: enrich
+        options:
+          - enrich
+          - full
       dry_run:
         description: 'Report only, do not commit'
         required: false
@@ -29,12 +37,15 @@ jobs:
           cache: npm
       - run: npm ci
 
-      - name: Rebuild catalog
+      # enrich fills release dates and cast from TMDB for the catalog we
+      # already have; full also re-scrapes the schedule and streaming lists.
+      - name: Refresh catalog
         env:
-          OMDB_API_KEY: ${{ secrets.OMDB_API_KEY }}
+          TMDB_API: ${{ secrets.TMDB_API }}
         run: |
           node scripts/refresh-catalog.mjs \
             --year "${{ inputs.year }}" \
+            ${{ inputs.mode == 'enrich' && '--enrich-only' || '' }} \
             ${{ inputs.dry_run && '--dry-run' || '' }}
 
       - name: Commit changes

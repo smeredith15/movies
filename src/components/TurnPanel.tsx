@@ -23,6 +23,13 @@ export function TurnPanel({ state, config }: { state: TurnState; config: Config 
         Picks so far — {config.people.me}: {state.used.me} · {config.people.her}: {state.used.her}
       </div>
 
+      {state.undatedPicks > 0 && (
+        <div className="small muted" style={{ marginTop: 10 }}>
+          {state.undatedPicks} {state.undatedPicks === 1 ? 'pick has' : 'picks have'} no date, so
+          {state.undatedPicks === 1 ? ' it is' : ' they are'} not counted toward the rotation yet.
+        </div>
+      )}
+
       {recentTrades.length > 0 && (
         <div className="small muted" style={{ marginTop: 10 }}>
           Recent out-of-turn picks:{' '}
