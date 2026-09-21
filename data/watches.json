@@ -421,5 +421,23 @@
     "venue": "theater",
     "picker": "joint",
     "consumesTurn": false
+  },
+  {
+    "id": "w_mubkccbwgnapq",
+    "date": "2026-01-04",
+    "title": "Marty Supreme",
+    "movieId": "marty-supreme-2025",
+    "venue": "home",
+    "picker": "me",
+    "consumesTurn": true
+  },
+  {
+    "id": "w_mubkccbw1w60b",
+    "date": "2026-01-03",
+    "title": "The Surfer",
+    "movieId": "the-surfer-2025",
+    "venue": "home",
+    "picker": "her",
+    "consumesTurn": true
   }
 ]
