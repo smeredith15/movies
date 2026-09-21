@@ -115,32 +115,60 @@ CATEGORY_TYPES = {
 }
 
 
+# Every category has the same shape: one winner and up to four honorable
+# mentions. Only the scoring varies — some categories pay nothing for their
+# honorable mentions, and some pay nothing at all.
+HONORABLE_MENTION_SLOTS = 4
+
+
 def read_categories(ws):
-    """Column A is the category, B the winner's points, C-F honorable mentions."""
+    """
+    Column A is the category, B the winner's points, C-F the honorable
+    mentions'. The unnamed rows at the bottom are the custom categories we each
+    invent on the day, so they are kept as slots with editable names.
+    """
     cats = []
+    custom = 0
+
     for row in ws.iter_rows(min_row=2, max_col=6, values_only=True):
-        name = row[0]
-        if not name or not str(name).strip():
-            continue
+        name = str(row[0]).strip() if row[0] else ""
         winner = num(row[1])
-        mentions = [num(v) for v in row[2:6] if num(v) is not None]
-        cid = slugify(name, None)
+        mentions = [num(v) or 0 for v in row[2:6]]
+        mentions += [0] * (HONORABLE_MENTION_SLOTS - len(mentions))
+        mentions = mentions[:HONORABLE_MENTION_SLOTS]
+
+        if not name and winner is None and not any(mentions):
+            continue  # a genuinely empty row
+
+        is_custom = not name
+        if is_custom:
+            custom += 1
+
+        cid = f"custom-{custom}" if is_custom else slugify(name, None)
         spec = CATEGORY_TYPES.get(cid, {})
+
         entry = {
             "id": cid,
-            "name": str(name).strip(),
+            "name": name,
             "type": spec.get("type", "movie"),
             "pool": spec.get("pool", "watched"),
-            "winnerPoints": winner,
-            "honorableMentionPoints": mentions,
-            # Unscored categories are still voted on and still appear in the
-            # reveal; they just contribute nothing to the totals.
+            # Structure is the same everywhere; scoring is what differs.
+            "slots": {"winner": 1, "honorableMentions": HONORABLE_MENTION_SLOTS},
+            "scoring": {"winner": winner or 0, "honorableMentions": mentions},
             "scored": winner is not None,
             "allowWriteIn": True,
         }
         if "textLabel" in spec:
             entry["textLabel"] = spec["textLabel"]
+        if is_custom:
+            # Made up separately on the day, so the name lives on each person's
+            # ballot rather than here — this is only the slot.
+            entry["custom"] = True
+            entry["nameEditable"] = True
+            entry["perPerson"] = True
+            entry["namePlaceholder"] = f"Your own category #{custom}"
         cats.append(entry)
+
     return cats
 
 

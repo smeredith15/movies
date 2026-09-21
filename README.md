@@ -92,22 +92,33 @@ also accepts a write-in.
 One category, Most Thought We'd See—But Didn't, draws from the movies we did
 *not* see (`pool: unwatched`).
 
+### Ballot shape
+
+Every category has the same structure: **one winner and up to four honorable
+mentions**, unranked and optional. That never varies — what varies is whether
+those slots are worth anything.
+
 ### Scoring
 
-A ballot is one winner plus up to four honorable mentions, unranked and
-optional. Points differ by category on purpose: Favorite pays 5 and 3, while
-Saddest and Scariest pay 2 for the winner and have no honorable mentions at
-all, and Strangest Role pays 1.
+Point values differ by category on purpose. Favorite pays 5 for the winner and
+3 per honorable mention; Saddest and Scariest pay 2 for the winner and nothing
+for mentions; Strangest Role pays 1. Six categories — Least Favorite, Least
+Favorite Character, Most Thought I'd Like More, Most Overrated, Probably Didn't
+Get It, and Most Thought We'd See—But Didn't — score nothing at all. All of
+them still offer the full five slots and still appear in the reveal.
 
 That asymmetry is deliberate, not a gap in the data. The points feed a rewatch
-day, so a category with more slots would pull the day toward its genre — the
-reason Saddest is capped is that we didn't want to flood the pool with sad
-movies.
+day, so a category worth more would pull the day toward its genre — the reason
+Saddest pays nothing for mentions is that we didn't want to flood the pool with
+sad movies.
 
-Six categories carry no points at all — Least Favorite, Least Favorite
-Character, Most Thought I'd Like More, Most Overrated, Probably Didn't Get It,
-and Most Thought We'd See—But Didn't. They are still voted on and still show up
-in the reveal; they just contribute nothing to the totals (`scored: false`).
+### The five custom categories
+
+The unnamed rows at the bottom of the `Awards` sheet are the categories we each
+invent on the day. They are stored as five slots (`custom-1` … `custom-5`) with
+empty names, marked `nameEditable` and `perPerson`: the name is typed at voting
+time and saved on that person's ballot, not in the shared category list, so you
+each make up your own without seeing the other's. Each pays 1 for the winner.
 
 ## Rebuilding the catalog
 

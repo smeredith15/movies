@@ -3,18 +3,25 @@ export function Ballot({ year }: { year: number }) {
     <div className="panel">
       <h2>
         {year} ballot
-        <span className="sub">waiting on the category list</span>
+        <span className="sub">not built yet</span>
       </h2>
       <p className="small muted">
-        The eligibility engine, the catalog, and the per-person ballot storage are already in
-        place. What is missing is the list of categories — how many there are, which take movies
-        vs. actors vs. characters vs. moments, and whether any are ranked rather than a single
-        pick. Drop that list in and this page fills itself in.
+        Everything underneath it is ready: the eligibility rules, the catalog,
+        the 30 categories in <code>data/categories.json</code>, and per-person
+        ballot storage. What is missing is the voting interface itself.
       </p>
       <p className="small muted">
-        Each ballot saves to <code>data/ballots/{year}.&lt;person&gt;.json</code>, so the two of
-        you write to separate files and never collide mid-vote. Neither ballot is shown in the UI
-        until both are submitted and one of you hits Reveal.
+        The shape it needs to take — every category offers one winner and up to
+        four honorable mentions, whether or not those slots score. Categories
+        are one of four kinds: pick a movie, pick an actor (the rows expand to
+        show cast), pick a character (the rows expand to show roles), or pick a
+        movie and type the answer. All of them take a write-in. The last five
+        are blank slots whose names you each fill in on the day.
+      </p>
+      <p className="small muted">
+        Each ballot saves to <code>data/ballots/{year}.&lt;person&gt;.json</code>,
+        so the two of you write to separate files and never collide mid-vote.
+        Neither is shown until both are submitted and one of you hits Reveal.
       </p>
     </div>
   );

@@ -4,13 +4,19 @@
     "name": "Favorite",
     "type": "movie",
     "pool": "watched",
-    "winnerPoints": 5,
-    "honorableMentionPoints": [
-      3,
-      3,
-      3,
-      3
-    ],
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 5,
+      "honorableMentions": [
+        3,
+        3,
+        3,
+        3
+      ]
+    },
     "scored": true,
     "allowWriteIn": true
   },
@@ -19,8 +25,19 @@
     "name": "Least Favorite",
     "type": "movie",
     "pool": "watched",
-    "winnerPoints": null,
-    "honorableMentionPoints": [],
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 0,
+      "honorableMentions": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
     "scored": false,
     "allowWriteIn": true
   },
@@ -29,13 +46,19 @@
     "name": "Best Actor",
     "type": "person",
     "pool": "watched",
-    "winnerPoints": 4,
-    "honorableMentionPoints": [
-      2,
-      2,
-      2,
-      2
-    ],
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 4,
+      "honorableMentions": [
+        2,
+        2,
+        2,
+        2
+      ]
+    },
     "scored": true,
     "allowWriteIn": true
   },
@@ -44,13 +67,19 @@
     "name": "Best Actress",
     "type": "person",
     "pool": "watched",
-    "winnerPoints": 4,
-    "honorableMentionPoints": [
-      2,
-      2,
-      2,
-      2
-    ],
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 4,
+      "honorableMentions": [
+        2,
+        2,
+        2,
+        2
+      ]
+    },
     "scored": true,
     "allowWriteIn": true
   },
@@ -59,8 +88,19 @@
     "name": "Strangest Role for a Familiar Actor",
     "type": "person",
     "pool": "watched",
-    "winnerPoints": 1,
-    "honorableMentionPoints": [],
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 1,
+      "honorableMentions": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
     "scored": true,
     "allowWriteIn": true
   },
@@ -69,13 +109,19 @@
     "name": "Best Kids' Movie",
     "type": "movie",
     "pool": "watched",
-    "winnerPoints": 3,
-    "honorableMentionPoints": [
-      1,
-      1,
-      1,
-      1
-    ],
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 3,
+      "honorableMentions": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
     "scored": true,
     "allowWriteIn": true
   },
@@ -84,13 +130,19 @@
     "name": "Funniest",
     "type": "movie",
     "pool": "watched",
-    "winnerPoints": 4,
-    "honorableMentionPoints": [
-      2,
-      2,
-      2,
-      2
-    ],
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 4,
+      "honorableMentions": [
+        2,
+        2,
+        2,
+        2
+      ]
+    },
     "scored": true,
     "allowWriteIn": true
   },
@@ -99,8 +151,19 @@
     "name": "Saddest",
     "type": "movie",
     "pool": "watched",
-    "winnerPoints": 2,
-    "honorableMentionPoints": [],
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 2,
+      "honorableMentions": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
     "scored": true,
     "allowWriteIn": true
   },
@@ -109,8 +172,19 @@
     "name": "Scariest",
     "type": "movie",
     "pool": "watched",
-    "winnerPoints": 2,
-    "honorableMentionPoints": [],
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 2,
+      "honorableMentions": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
     "scored": true,
     "allowWriteIn": true
   },
@@ -119,13 +193,19 @@
     "name": "Best Original Song",
     "type": "movieText",
     "pool": "watched",
-    "winnerPoints": 2,
-    "honorableMentionPoints": [
-      1,
-      1,
-      1,
-      1
-    ],
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 2,
+      "honorableMentions": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
     "scored": true,
     "allowWriteIn": true,
     "textLabel": "The song"
@@ -135,13 +215,19 @@
     "name": "Best Scene",
     "type": "movieText",
     "pool": "watched",
-    "winnerPoints": 3,
-    "honorableMentionPoints": [
-      1,
-      1,
-      1,
-      1
-    ],
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 3,
+      "honorableMentions": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
     "scored": true,
     "allowWriteIn": true,
     "textLabel": "The scene"
@@ -151,13 +237,19 @@
     "name": "Best Animal",
     "type": "movieText",
     "pool": "watched",
-    "winnerPoints": 3,
-    "honorableMentionPoints": [
-      1,
-      1,
-      1,
-      1
-    ],
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 3,
+      "honorableMentions": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
     "scored": true,
     "allowWriteIn": true,
     "textLabel": "The animal"
@@ -167,13 +259,19 @@
     "name": "Favorite Character",
     "type": "character",
     "pool": "watched",
-    "winnerPoints": 3,
-    "honorableMentionPoints": [
-      1,
-      1,
-      1,
-      1
-    ],
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 3,
+      "honorableMentions": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
     "scored": true,
     "allowWriteIn": true
   },
@@ -182,8 +280,19 @@
     "name": "Least Favorite Character",
     "type": "character",
     "pool": "watched",
-    "winnerPoints": null,
-    "honorableMentionPoints": [],
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 0,
+      "honorableMentions": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
     "scored": false,
     "allowWriteIn": true
   },
@@ -192,13 +301,19 @@
     "name": "Most Unique",
     "type": "movie",
     "pool": "watched",
-    "winnerPoints": 2,
-    "honorableMentionPoints": [
-      1,
-      1,
-      1,
-      1
-    ],
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 2,
+      "honorableMentions": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
     "scored": true,
     "allowWriteIn": true
   },
@@ -207,13 +322,19 @@
     "name": "Biggest Twist",
     "type": "movieText",
     "pool": "watched",
-    "winnerPoints": 3,
-    "honorableMentionPoints": [
-      1,
-      1,
-      1,
-      1
-    ],
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 3,
+      "honorableMentions": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
     "scored": true,
     "allowWriteIn": true,
     "textLabel": "The twist"
@@ -223,13 +344,19 @@
     "name": "Most Pleasantly Surprised By",
     "type": "movie",
     "pool": "watched",
-    "winnerPoints": 3,
-    "honorableMentionPoints": [
-      1,
-      1,
-      1,
-      1
-    ],
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 3,
+      "honorableMentions": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
     "scored": true,
     "allowWriteIn": true
   },
@@ -238,8 +365,19 @@
     "name": "Most Thought I'd Like More",
     "type": "movie",
     "pool": "watched",
-    "winnerPoints": null,
-    "honorableMentionPoints": [],
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 0,
+      "honorableMentions": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
     "scored": false,
     "allowWriteIn": true
   },
@@ -248,8 +386,19 @@
     "name": "Most Overrated",
     "type": "movie",
     "pool": "watched",
-    "winnerPoints": null,
-    "honorableMentionPoints": [],
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 0,
+      "honorableMentions": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
     "scored": false,
     "allowWriteIn": true
   },
@@ -258,13 +407,19 @@
     "name": "Most Underrated",
     "type": "movie",
     "pool": "watched",
-    "winnerPoints": 3,
-    "honorableMentionPoints": [
-      1,
-      1,
-      1,
-      1
-    ],
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 3,
+      "honorableMentions": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
     "scored": true,
     "allowWriteIn": true
   },
@@ -273,8 +428,19 @@
     "name": "Probably Didn't Get It",
     "type": "movie",
     "pool": "watched",
-    "winnerPoints": null,
-    "honorableMentionPoints": [],
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 0,
+      "honorableMentions": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
     "scored": false,
     "allowWriteIn": true
   },
@@ -283,13 +449,19 @@
     "name": "Most Want a Sequel",
     "type": "movie",
     "pool": "watched",
-    "winnerPoints": 3,
-    "honorableMentionPoints": [
-      1,
-      1,
-      1,
-      1
-    ],
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 3,
+      "honorableMentions": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
     "scored": true,
     "allowWriteIn": true
   },
@@ -298,13 +470,19 @@
     "name": "Most Want to Know More About",
     "type": "movie",
     "pool": "watched",
-    "winnerPoints": 2,
-    "honorableMentionPoints": [
-      1,
-      1,
-      1,
-      1
-    ],
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 2,
+      "honorableMentions": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
     "scored": true,
     "allowWriteIn": true
   },
@@ -313,13 +491,19 @@
     "name": "Most Want to Rewatch",
     "type": "movie",
     "pool": "watched",
-    "winnerPoints": 5,
-    "honorableMentionPoints": [
-      1,
-      1,
-      1,
-      1
-    ],
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 5,
+      "honorableMentions": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
     "scored": true,
     "allowWriteIn": true
   },
@@ -328,9 +512,145 @@
     "name": "Most Thought We'd See\u2014But Didn't",
     "type": "movie",
     "pool": "unwatched",
-    "winnerPoints": null,
-    "honorableMentionPoints": [],
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 0,
+      "honorableMentions": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
     "scored": false,
     "allowWriteIn": true
+  },
+  {
+    "id": "custom-1",
+    "name": "",
+    "type": "movie",
+    "pool": "watched",
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 1,
+      "honorableMentions": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "scored": true,
+    "allowWriteIn": true,
+    "custom": true,
+    "nameEditable": true,
+    "perPerson": true,
+    "namePlaceholder": "Your own category #1"
+  },
+  {
+    "id": "custom-2",
+    "name": "",
+    "type": "movie",
+    "pool": "watched",
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 1,
+      "honorableMentions": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "scored": true,
+    "allowWriteIn": true,
+    "custom": true,
+    "nameEditable": true,
+    "perPerson": true,
+    "namePlaceholder": "Your own category #2"
+  },
+  {
+    "id": "custom-3",
+    "name": "",
+    "type": "movie",
+    "pool": "watched",
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 1,
+      "honorableMentions": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "scored": true,
+    "allowWriteIn": true,
+    "custom": true,
+    "nameEditable": true,
+    "perPerson": true,
+    "namePlaceholder": "Your own category #3"
+  },
+  {
+    "id": "custom-4",
+    "name": "",
+    "type": "movie",
+    "pool": "watched",
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 1,
+      "honorableMentions": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "scored": true,
+    "allowWriteIn": true,
+    "custom": true,
+    "nameEditable": true,
+    "perPerson": true,
+    "namePlaceholder": "Your own category #4"
+  },
+  {
+    "id": "custom-5",
+    "name": "",
+    "type": "movie",
+    "pool": "watched",
+    "slots": {
+      "winner": 1,
+      "honorableMentions": 4
+    },
+    "scoring": {
+      "winner": 1,
+      "honorableMentions": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "scored": true,
+    "allowWriteIn": true,
+    "custom": true,
+    "nameEditable": true,
+    "perPerson": true,
+    "namePlaceholder": "Your own category #5"
   }
 ]
