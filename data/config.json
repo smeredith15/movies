@@ -1,0 +1,12 @@
+{
+  "people": {
+    "me": "Me",
+    "her": "Her"
+  },
+  "picksPerTurn": 2,
+  "rotationStart": "me",
+  "oscarDates": {},
+  "frozenYears": [
+    2024
+  ]
+}
