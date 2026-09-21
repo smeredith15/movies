@@ -65,7 +65,7 @@ async function yearSlice(tmdb, year) {
 async function main() {
   const key = process.env.TMDB_API;
   if (!key) {
-    console.error('TMDB_API is not set. This runs in the Action, where the secret is available.');
+    console.error('TMDB_API is not set. Run scripts/check-tmdb-secret.mjs for what to check.');
     process.exit(1);
   }
 

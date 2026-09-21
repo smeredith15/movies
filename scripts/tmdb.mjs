@@ -19,10 +19,25 @@ export const RELEASE_TYPE = {
   TV: 6,
 };
 
+/**
+ * TMDB issues two kinds of credential and they authenticate differently: a v3
+ * API key goes in the query string, a v4 read access token is a JWT and goes
+ * in an Authorization header. Mixing them up returns 401, so detect which one
+ * we were given rather than making the caller care.
+ */
+export function credentialKind(value) {
+  const v = String(value ?? '').trim();
+  if (!v) return 'missing';
+  if (v.startsWith('ey') && v.split('.').length === 3) return 'v4-token';
+  if (/^[0-9a-f]{32}$/i.test(v)) return 'v3-key';
+  return 'unknown';
+}
+
 export class Tmdb {
   constructor(apiKey, { fetchImpl = fetch, pauseMs = 60 } = {}) {
     if (!apiKey) throw new Error('TMDB api key is required');
-    this.apiKey = apiKey;
+    this.apiKey = String(apiKey).trim();
+    this.kind = credentialKind(this.apiKey);
     this.fetch = fetchImpl;
     this.pauseMs = pauseMs;
     this.calls = 0;
@@ -30,16 +45,25 @@ export class Tmdb {
 
   async get(path, params = {}) {
     const url = new URL(`${BASE}${path}`);
-    url.searchParams.set('api_key', this.apiKey);
+    // An unrecognised credential is tried as a v3 key, which is the common case.
+    if (this.kind !== 'v4-token') url.searchParams.set('api_key', this.apiKey);
     for (const [k, v] of Object.entries(params)) {
       if (v !== undefined && v !== null) url.searchParams.set(k, String(v));
     }
 
+    const headers = { Accept: 'application/json' };
+    if (this.kind === 'v4-token') headers.Authorization = `Bearer ${this.apiKey}`;
+
     for (let attempt = 0; attempt < 3; attempt++) {
-      const res = await this.fetch(url.toString(), {
-        headers: { Accept: 'application/json' },
-      });
+      const res = await this.fetch(url.toString(), { headers });
       this.calls += 1;
+
+      if (res.status === 401) {
+        throw new Error(
+          `TMDB rejected the credential (401). It was read as ${this.kind}. ` +
+            'A v3 API key is 32 hex characters; a v4 token starts with "ey" and has two dots.'
+        );
+      }
 
       if (res.status === 429) {
         const wait = Number(res.headers?.get?.('retry-after') ?? 2) * 1000;
