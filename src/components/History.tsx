@@ -3,7 +3,7 @@ import type { AddedMovie } from '../lib/added';
 import type { Config, Picker, StagedWatch, Venue, Watch } from '../lib/types';
 import { newId } from '../lib/store';
 import { loadSeen, type SeenMovie } from '../lib/seen';
-import { clearDraft, loadDraft, saveDraft } from '../lib/draft';
+import { HISTORY_DRAFT, clearDraft, loadDraft, saveDraft } from '../lib/draft';
 import { AddMovie } from './AddMovie';
 
 type Staged = StagedWatch;
@@ -51,7 +51,7 @@ export function History({
   busy: boolean;
 }) {
   const [seen, setSeen] = useState<SeenMovie[] | null>(null);
-  const [staged, setStaged] = useState<Record<string, Staged>>(loadDraft);
+  const [staged, setStaged] = useState<Record<string, Staged>>(() => loadDraft<Staged>(HISTORY_DRAFT));
   const [open, setOpen] = useState<Record<number, boolean>>({});
   const [filter, setFilter] = useState<Filter>('all');
   const [query, setQuery] = useState('');
@@ -69,7 +69,7 @@ export function History({
   // Persist on every keystroke so nothing is lost to a tab switch, a reload,
   // or the back button.
   useEffect(() => {
-    saveDraft(staged);
+    saveDraft(HISTORY_DRAFT, staged);
   }, [staged]);
 
   // And catch the case localStorage cannot: closing the tab outright.
@@ -178,7 +178,7 @@ export function History({
       })
     );
     setStaged({});
-    clearDraft();
+    clearDraft(HISTORY_DRAFT);
   }
 
   if (seen === null) {
@@ -250,7 +250,7 @@ export function History({
               onClick={() => {
                 if (confirm(`Discard ${ready.length} unsaved ${ready.length === 1 ? 'change' : 'changes'}?`)) {
                   setStaged({});
-                  clearDraft();
+                  clearDraft(HISTORY_DRAFT);
                 }
               }}
               disabled={busy}

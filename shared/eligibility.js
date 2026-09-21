@@ -104,16 +104,28 @@ export function computeEligibility(movie, opts = {}) {
 
   // Straightforward case: it became available the same year it first opened.
   if (availYear === null || availYear === firstYear) {
-    evidence.push(
-      availability
-        ? `Available in the US on ${availability}.`
-        : `First US release ${firstUSRelease}; no expanded or home date found yet.`
-    );
-    return {
-      year: firstYear,
-      confidence: availability ? 'high' : 'medium',
-      evidence,
-    };
+    if (availability) {
+      evidence.push(`Available in the US on ${availability}.`);
+      return { year: firstYear, confidence: 'high', evidence };
+    }
+
+    // Nothing but a limited run, and no sign yet of it expanding. A late-year
+    // one is the genuinely undecidable case: whether it counts for this year
+    // or the next depends on an expansion or home release that has not
+    // happened yet, so say so rather than guessing a year with confidence.
+    const openedLate = usLimitedDate && Number(usLimitedDate.slice(5, 7)) >= 11;
+    if (openedLate) {
+      evidence.push(
+        `Opened limited ${usLimitedDate} and has not expanded yet. Whether it counts ` +
+          `for ${firstYear} or ${firstYear + 1} depends on it reaching wide release or ` +
+          `home before the ${firstYear} Oscars on ${oscarDateForFilmYear(firstYear, oscarOverrides)} — ` +
+          `needs checking.`
+      );
+      return { year: firstYear, confidence: 'low', evidence, needsReview: true };
+    }
+
+    evidence.push(`First US release ${firstUSRelease}; no expanded or home date found yet.`);
+    return { year: firstYear, confidence: 'medium', evidence };
   }
 
   // Cross-year case: opened limited in firstYear, expanded/home in a later year.
@@ -122,13 +134,13 @@ export function computeEligibility(movie, opts = {}) {
     evidence.push(
       `Opened limited ${usLimitedDate || firstUSRelease} (${firstYear}) and expanded ${availability}, before the ${firstYear} Oscars on ${cutoff} — counts as ${firstYear}.`
     );
-    return { year: firstYear, confidence: 'medium', evidence };
+    return { year: firstYear, confidence: 'medium', evidence, crossYear: true };
   }
 
   evidence.push(
     `Opened limited ${usLimitedDate || firstUSRelease} (${firstYear}) but did not expand until ${availability}, after the ${firstYear} Oscars on ${cutoff} — rolls to ${availYear}.`
   );
-  return { year: availYear, confidence: 'medium', evidence };
+  return { year: availYear, confidence: 'medium', evidence, crossYear: true };
 }
 
 /**

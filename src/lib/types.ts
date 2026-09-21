@@ -61,10 +61,23 @@ export interface CatalogMovie {
   imdbId?: string | null;
   tmdbId?: number | null;
   sources: string[];
+  /** Streaming services carrying it, where a source named one. */
+  services?: string[];
+  /** Poster URL, which firstshowing supplies alongside each link. */
+  poster?: string | null;
   /** Cached result of the rules engine, recomputed on every refresh. */
   computedYear?: number | null;
   confidence?: Confidence;
   evidence?: string[];
+  /** True when the rules could not settle the year without a person looking. */
+  needsReview?: boolean;
+  /** Added by hand, so a rebuild must keep it. */
+  manual?: boolean;
+  /** What the source said. The app layers data/marks.json over these. */
+  seen?: boolean;
+  owned?: boolean;
+  wantToSee?: number | null;
+  onFrozenBallot?: boolean;
 }
 
 export interface EligibilityOverride {

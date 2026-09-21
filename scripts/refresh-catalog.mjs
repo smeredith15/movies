@@ -18,7 +18,8 @@ import { fileURLToPath } from 'node:url';
 
 import { computeEligibility } from '../shared/eligibility.js';
 import { firstShowingUrl, WIKIPEDIA_LISTS, netflixCandidates, isRerelease } from './sources.mjs';
-import { parseFirstShowing, parseWikipediaTables, titleKey, slugify } from './parse.mjs';
+import { parseWikipediaTables, titleKey, slugify } from './parse.mjs';
+import { parseFirstShowing } from './firstshowing.mjs';
 import { Tmdb, usReleaseDates, castFrom, factsFrom } from './tmdb.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -156,24 +157,36 @@ function mergeRows(theatrical, streaming) {
   };
 
   for (const row of theatrical) {
-    if (isRerelease(row.title, row.context)) {
+    if (row.revival) {
       upsert(row.title, () => ({ kind: 'rerelease' }), firstShowingUrl(row.date.slice(0, 4)));
       continue;
     }
+
     upsert(
       row.title,
       (cur) => {
-        const patch = { kind: cur.kind === 'rerelease' ? 'rerelease' : 'theatrical', hadUSTheatricalRelease: true };
-        if (row.limited) {
-          patch.usLimitedDate = !cur.usLimitedDate || row.date < cur.usLimitedDate ? row.date : cur.usLimitedDate;
-        } else {
-          patch.usTheatricalDate =
-            !cur.usTheatricalDate || row.date < cur.usTheatricalDate ? row.date : cur.usTheatricalDate;
+        const patch = { kind: cur.kind === 'rerelease' ? 'rerelease' : 'theatrical' };
+        const earlier = (a, b) => (!a || b < a ? b : a);
+
+        // The page's own legend: bold is a nationwide opening, everything
+        // else is a limited run or a streaming debut.
+        if (row.wide) {
+          patch.usTheatricalDate = earlier(cur.usTheatricalDate, row.date);
+          patch.hadUSTheatricalRelease = true;
+        } else if (row.theatrical) {
+          patch.usLimitedDate = earlier(cur.usLimitedDate, row.date);
+          patch.hadUSTheatricalRelease = true;
         }
+
+        if (row.home) patch.homeDate = earlier(cur.homeDate, row.date);
+        if (row.poster && !cur.poster) patch.poster = row.poster;
         return patch;
       },
       firstShowingUrl(row.date.slice(0, 4))
     );
+
+    const rec = byKey.get(titleKey(row.title));
+    if (rec) for (const svc of row.services) rec.services.add(svc);
   }
 
   for (const row of streaming) {
@@ -270,6 +283,7 @@ function recompute(movies, year) {
     m.computedYear = verdict.year;
     m.confidence = verdict.confidence;
     m.evidence = verdict.evidence;
+    m.needsReview = Boolean(verdict.needsReview);
   }
   if (changed) {
     log(`  ${changed} title(s) moved year once TMDB supplied real dates`);
@@ -348,6 +362,7 @@ async function main() {
       id,
       ...shape,
       services: [...(rec.services || [])],
+      poster: rec.poster ?? null,
       oscarNominated: prior?.oscarNominated ?? false,
       ratings: prior?.ratings ?? {},
       cast: prior?.cast ?? [],
@@ -357,6 +372,7 @@ async function main() {
       computedYear: verdict.year,
       confidence: verdict.confidence,
       evidence: verdict.evidence,
+      needsReview: Boolean(verdict.needsReview),
       manual: false,
     });
     counts[verdict.confidence] += 1;
