@@ -1,6 +1,6 @@
 import { check, suite } from './harness.mjs';
 
-export default function run({ carryOver }) {
+export default function run({ carryOver, needsVerification }) {
   suite('refresh: a rebuild keeps what we decided', () => {
     const prior = {
       id: 'dune-2021',
@@ -39,5 +39,21 @@ export default function run({ carryOver }) {
     // `||` would swallow these; the guarantee is that only absence defaults.
     check('seen false stays false', carryOver({ seen: false }).seen, false);
     check('wantToSee 0 is not turned into null', carryOver({ wantToSee: 0 }).wantToSee, 0);
+  });
+
+  suite('refresh: what still needs checking against TMDB', () => {
+    const verified = { title: 'Dune', tmdbId: 438631, tmdbVerified: true };
+
+    check('a confirmed entry is left alone', needsVerification(verified), false);
+
+    // The bug this exists to prevent: the loose matcher gave television and
+    // mis-parsed rows ids that were never confirmed. Skipping on the id alone
+    // meant those were never looked at again.
+    check('an id without a verification is not enough', needsVerification({ title: 'Crystal Lake', tmdbId: 111 }), true);
+    check('nor is one explicitly unverified', needsVerification({ title: 'x', tmdbId: 111, tmdbVerified: false }), true);
+    check('an entry with no id is checked', needsVerification({ title: 'x' }), true);
+    check('a verified entry that lost its id is checked again', needsVerification({ title: 'x', tmdbVerified: true }), true);
+    check('force re-checks even a confirmed one', needsVerification(verified, true), true);
+    check('a missing movie does not throw', needsVerification(undefined), true);
   });
 }

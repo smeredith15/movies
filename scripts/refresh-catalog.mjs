@@ -153,6 +153,16 @@ async function collectStreaming(year) {
  * and cannot be re-derived, so they are carried across explicitly rather than
  * left to whatever the scraper happens to produce.
  */
+/**
+ * Whether this entry still needs checking against TMDB.
+ *
+ * Holding an id is not evidence of having been checked: matches made by the
+ * older, looser matcher carry ids that were never confirmed to be the right
+ * film. Only an entry actually verified is skipped.
+ */
+export const needsVerification = (movie, force = false) =>
+  force || movie?.tmdbVerified !== true || !movie?.tmdbId;
+
 export function carryOver(prior) {
   return {
     oscarNominated: prior?.oscarNominated ?? false,
@@ -257,28 +267,41 @@ async function enrich(movies, apiKey, { force = false } = {}) {
   const missed = [];
 
   for (const m of movies) {
-    if (!force && m.tmdbId) continue;
+    // Having an id is not the same as having been checked. Matches made by
+    // the older, looser matcher carry ids that were never confirmed to be the
+    // right film, so anything unverified is looked at again.
+    if (!needsVerification(m, force)) continue;
 
     const { movie: hit, reason } = await tmdb.findBest(m.title, m.computedYear ?? undefined);
     if (!hit) {
       // Nothing downstream can tell a wrong match from a right one, so an
       // entry TMDB cannot confirm is marked rather than quietly enriched.
       m.tmdbVerified = false;
-      m.tmdbNote = reason;
-      missed.push(m.title);
-      continue;
-    }
-
-    const details = await tmdb.details(hit.id);
-    if (!details) {
-      m.tmdbVerified = false;
-      m.tmdbNote = 'TMDB matched the title but returned no detail.';
+      // The entry keeps whatever it already had, but that metadata came from
+      // a match nothing has confirmed — saying so beats leaving it looking
+      // as trustworthy as the rest.
+      m.tmdbNote = m.tmdbId
+        ? `${reason} Its dates and cast came from an earlier, unconfirmed match.`
+        : reason;
       missed.push(m.title);
       continue;
     }
 
     m.tmdbVerified = true;
     m.tmdbNote = reason;
+
+    const alreadyDetailed = m.tmdbId === hit.id && (m.cast?.length || m.overview);
+    if (alreadyDetailed && !force) {
+      matched += 1;
+      continue;
+    }
+
+    const details = await tmdb.details(hit.id);
+    if (!details) {
+      m.tmdbNote = `${reason} Detail lookup returned nothing.`;
+      matched += 1;
+      continue;
+    }
 
     const dates = usReleaseDates(details);
     const facts = factsFrom(details);
@@ -440,11 +463,13 @@ async function main() {
   log(`  confidence — high ${counts.high}, medium ${counts.medium}, low ${counts.low}`);
   log(`  ${counts.dropped} titles resolved to a different year or were re-releases`);
 
-  const lowConfidence = catalog.filter((m) => m.confidence !== 'high');
-  if (lowConfidence.length) {
-    log(`\n  ${lowConfidence.length} need a look in the app's review queue:`);
-    for (const m of lowConfidence.slice(0, 15)) log(`    · ${m.title} — ${m.evidence[0]}`);
-    if (lowConfidence.length > 15) log(`    … and ${lowConfidence.length - 15} more`);
+  // Only the undecidable ones reach Browse's review queue; a medium-confidence
+  // call is a judgement already made, not a question.
+  const needsReview = catalog.filter((m) => m.confidence === 'low' || m.needsReview);
+  if (needsReview.length) {
+    log(`\n  ${needsReview.length} reach the app's "Needs a year check" queue:`);
+    for (const m of needsReview.slice(0, 12)) log(`    · ${m.title} — ${m.evidence?.[0] ?? ''}`);
+    if (needsReview.length > 12) log(`    … and ${needsReview.length - 12} more`);
   }
 
   if (DRY) {
