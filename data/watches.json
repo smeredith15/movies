@@ -61,5 +61,14 @@
     "venue": "theater",
     "picker": "joint",
     "consumesTurn": false
+  },
+  {
+    "id": "w_mubjofnpoo2rf",
+    "date": "2026-08-16",
+    "title": "Super Troopers 2",
+    "movieId": "super-troopers-2-2018",
+    "venue": "home",
+    "picker": "me",
+    "consumesTurn": true
   }
 ]
