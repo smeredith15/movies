@@ -140,6 +140,28 @@ async function collectStreaming(year) {
   return rows;
 }
 
+/**
+ * Fields a rebuild must not destroy.
+ *
+ * A catalog is regenerated from scratch every full refresh. Ratings, ticks,
+ * and anything a person or the workbook decided did not come from a source
+ * and cannot be re-derived, so they are carried across explicitly rather than
+ * left to whatever the scraper happens to produce.
+ */
+export function carryOver(prior) {
+  return {
+    oscarNominated: prior?.oscarNominated ?? false,
+    ratings: prior?.ratings ?? {},
+    cast: prior?.cast ?? [],
+    imdbId: prior?.imdbId ?? null,
+    tmdbId: prior?.tmdbId ?? null,
+    seen: prior?.seen ?? false,
+    owned: prior?.owned ?? false,
+    wantToSee: prior?.wantToSee ?? null,
+    onFrozenBallot: prior?.onFrozenBallot ?? false,
+  };
+}
+
 /** Fold every source row for one movie into a single record. */
 function mergeRows(theatrical, streaming) {
   const byKey = new Map();
@@ -363,11 +385,7 @@ async function main() {
       ...shape,
       services: [...(rec.services || [])],
       poster: rec.poster ?? null,
-      oscarNominated: prior?.oscarNominated ?? false,
-      ratings: prior?.ratings ?? {},
-      cast: prior?.cast ?? [],
-      imdbId: prior?.imdbId ?? null,
-      tmdbId: prior?.tmdbId ?? null,
+      ...carryOver(prior),
       sources: [...rec.sources],
       computedYear: verdict.year,
       confidence: verdict.confidence,
@@ -391,6 +409,9 @@ async function main() {
 
   log('\nResult:');
   log(`  ${catalog.length} movies eligible for ${YEAR}`);
+  const kept = catalog.filter((m) => m.seen || m.wantToSee != null).length;
+  const fresh = catalog.filter((m) => !existingById.has(m.id)).length;
+  log(`  ${fresh} new since the last build, ${kept} carrying a tick or a rating`);
   log(`  confidence — high ${counts.high}, medium ${counts.medium}, low ${counts.low}`);
   log(`  ${counts.dropped} titles resolved to a different year or were re-releases`);
 
@@ -411,7 +432,9 @@ async function main() {
   log(`\nWrote ${outPath}`);
 }
 
-main().catch((err) => {
-  console.error('\nRefresh failed:', err.message);
-  process.exit(1);
-});
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch((err) => {
+    console.error('\nRefresh failed:', err.message);
+    process.exit(1);
+  });
+}

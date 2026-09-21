@@ -10,13 +10,13 @@ on:
         required: true
         type: string
       mode:
-        description: 'What to run'
+        description: 'full = scrape the sources and enrich; enrich = only fill in existing entries'
         required: true
         type: choice
-        default: enrich
+        default: full
         options:
-          - enrich
           - full
+          - enrich
       dry_run:
         description: 'Report only, do not commit'
         required: false

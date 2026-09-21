@@ -80,17 +80,29 @@ export default function run(turns) {
     );
   });
 
-  suite('turns: backfilled history stays quiet', () => {
+  suite('turns: the rotation starts at the anchor', () => {
     const anchored = { ...config, rotationAnchor: '2026-06-01' };
-    const ws = [w('2026-01-02','Old A','me'), w('2026-01-09','Old B','me'), w('2026-01-16','Old C','me')];
-    const before = computeTurnState(ws, [], anchored);
-    check('an out-of-turn pick before the anchor is not flagged', before.events.at(-1).traded, false);
-    check('but it still counts toward the totals', before.used.me, 3);
-    check('and it still moves the queue along', before.upNext, 'her');
+    const old = [w('2026-01-02','Old A','me'), w('2026-01-09','Old B','me'), w('2026-01-16','Old C','me')];
 
-    const after = computeTurnState([...ws, w('2026-07-01','New','me')], [], anchored);
-    check('an out-of-turn pick after the anchor is flagged', after.events.at(-1).traded, true);
-    check('with no anchor set, everything is checked', computeTurnState(ws, [], config).events.at(-1).traded, true);
+    // Three of my picks before the anchor must not mean she is owed three.
+    const fresh = computeTurnState(old, [], anchored);
+    check('earlier picks do not decide whose turn it is', fresh.upNext, 'me');
+    check('the rotation opens from the top', fresh.queue.slice(0, 4).join(','), 'me,me,her,her');
+    check('they are not counted as used', fresh.used.me, 0);
+    check('but they are reported, not hidden', fresh.beforeAnchor, 3);
+
+    const since = computeTurnState([...old, w('2026-06-05','New','me')], [], anchored);
+    check('a pick after the anchor counts', since.used.me, 1);
+    check('and advances the rotation', since.upNext, 'me');
+    check('earlier ones stay excluded', since.beforeAnchor, 3);
+
+    check('with no anchor the whole history counts', computeTurnState(old, [], config).used.me, 3);
+    check('and nothing is excluded', computeTurnState(old, [], config).beforeAnchor, 0);
+
+    // An adjustment from the old rotation should not follow us across.
+    const withAdj = computeTurnState([], [adj('2026-01-01','grant','her',2,'old deal')], anchored);
+    check('an adjustment before the anchor is left behind', withAdj.upNext, 'me');
+    check('one after it still applies', computeTurnState([], [adj('2026-07-01','grant','her',2,'new deal')], anchored).upNext, 'her');
   });
 
   suite('turns: a pick with no date sits out', () => {
