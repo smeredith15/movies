@@ -156,7 +156,7 @@ export function Settings({
             </select>
           </label>
           <label className="field">
-            <span>Rotation live from</span>
+            <span>Rotation starts</span>
             <input
               type="date"
               value={draft.rotationAnchor ?? ''}
@@ -165,8 +165,8 @@ export function Settings({
           </label>
           <div className="full row spread">
             <span className="small muted">
-              Picks before that date still count, but are not flagged as out of turn — set it so
-              backfilled history stays quiet. Changing any of this replays the whole history.
+              The two-and-two rotation begins on that date. Earlier picks stay in the history but
+              do not decide whose turn it is now. Changing any of this replays the whole history.
             </span>
             <button className="primary" onClick={() => onSaveConfig(draft)} disabled={busy}>
               {busy ? 'Saving…' : 'Save'}

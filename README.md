@@ -35,10 +35,11 @@ against the front of the queue:
 
 - **Theater trips** are decided together, so they default to joint and consume
   nobody's turn. Either default can be overridden per entry.
-- **Backfilled history is exempt.** Set "Rotation live from" in Settings and
-  picks before that date still count toward the queue and the totals, but are
-  not flagged as out of turn — so keying in years of past watches does not
-  litter the history with trade markers.
+- **The rotation starts where you say.** Set "Rotation starts" in Settings and
+  the two-and-two cycle begins there. Earlier picks stay in the history and in
+  the year's record, but they do not decide whose turn it is now — otherwise
+  years of backfilled picks, and any adjustment from before, drag the current
+  turn around. The Tracker says how many are being held back as history.
 - **Trading** needs no special handling. Pick out of turn to catch something
   before it leaves theaters and the slot comes out of your next block — the
   other person keeps their place in the queue, and neither of you ends up ahead.
@@ -327,9 +328,20 @@ need.
 Two modes:
 
 ```bash
-npm run refresh-catalog -- --year 2026 --enrich-only   # dates and cast only
-npm run refresh-catalog -- --year 2026                 # also re-scrape
+npm run refresh-catalog -- --year 2026                 # scrape sources, then enrich
+npm run refresh-catalog -- --year 2026 --enrich-only   # only fill in what is there
 ```
+
+The **Refresh catalog** action defaults to the full run. `enrich` is the
+narrower option: it fills in dates and cast for entries that already exist and
+adds nothing, so a catalog built only from the workbook stays only as complete
+as the workbook.
+
+A full rebuild regenerates every entry from its sources, which means anything
+that did *not* come from a source — a tick, a rating, an Oscar nomination, a
+frozen ballot place — has to be carried across explicitly. `carryOver()` is
+that guarantee, and it is tested, because losing it would be invisible until
+someone noticed a year of ratings had reset.
 
 `--enrich-only` matters most right now: entries imported from the workbook have
 no release dates at all, so the rules engine cannot judge their year until TMDB
