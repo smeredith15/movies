@@ -9,6 +9,18 @@
 
 const BASE = 'https://api.themoviedb.org/3';
 
+const normalizeTitle = (v) =>
+  String(v ?? '')
+    .toLowerCase()
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+
+/** True when `needle` appears in `hay` on word boundaries, not mid-word. */
+const containsWhole = (hay, needle) =>
+  needle.length >= 4 && ` ${hay} `.includes(` ${needle} `);
+
 /** TMDB release types. */
 export const RELEASE_TYPE = {
   PREMIERE: 1, // festival or premiere — never sets the year
@@ -95,32 +107,64 @@ export class Tmdb {
     return this.get(`/movie/${id}`, { append_to_response: 'release_dates,credits' });
   }
 
-  /** Best match for a title we already believe in, preferring the right year. */
-  async findBest(title, year) {
-    const exact = await this.search(title, year);
+  /**
+   * The one film this entry refers to, or nothing.
+   *
+   * Deliberately strict. The loose version took the most popular result for
+   * any query, which meant television series and mis-parsed rows were handed
+   * confident matches to unrelated films — worse than no match, because
+   * nothing downstream could tell. A candidate now has to look like the same
+   * title *and* land within a year of the one we expect.
+   */
+  async findBest(title, year, { window = 1 } = {}) {
+    const exact = year ? await this.search(title, year) : null;
     let results = exact?.results ?? [];
     if (results.length === 0) {
       const loose = await this.search(title);
       results = loose?.results ?? [];
     }
-    if (results.length === 0) return null;
+    if (results.length === 0) {
+      return { movie: null, reason: 'TMDB has nothing by that name.' };
+    }
 
-    const norm = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '');
-    const target = norm(title);
+    const target = normalizeTitle(title);
+    const scored = [];
 
-    const scored = results.map((r) => {
-      const released = r.release_date ? Number(r.release_date.slice(0, 4)) : null;
-      let score = 0;
-      if (norm(r.title) === target) score -= 100;
-      else if (norm(r.title).startsWith(target)) score -= 50;
-      if (year && released === year) score -= 40;
-      else if (year && released) score += Math.min(Math.abs(released - year), 10);
-      score -= Math.min(r.popularity ?? 0, 50) / 10;
-      return { r, score };
-    });
+    for (const r of results) {
+      if (!r.release_date) continue;
+      const released = Number(r.release_date.slice(0, 4));
+      const name = normalizeTitle(r.title);
+      const alt = normalizeTitle(r.original_title ?? '');
+
+      const titleOk = name === target || alt === target || containsWhole(name, target) || containsWhole(target, name);
+      if (!titleOk) continue;
+
+      const drift = year ? Math.abs(released - year) : 0;
+      if (year && drift > window) continue;
+
+      scored.push({ r, score: (name === target ? 0 : 10) + drift * 5 - Math.min(r.popularity ?? 0, 50) / 100 });
+    }
+
+    if (scored.length === 0) {
+      const near = results
+        .filter((r) => r.release_date)
+        .slice(0, 3)
+        .map((r) => `${r.title} (${r.release_date.slice(0, 4)})`)
+        .join(', ');
+      return {
+        movie: null,
+        reason: year
+          ? `No TMDB film matching "${title}" within a year of ${year}. Closest: ${near || 'none'}.`
+          : `No TMDB film matching "${title}".`,
+      };
+    }
 
     scored.sort((a, b) => a.score - b.score);
-    return scored[0].r;
+    const best = scored[0].r;
+    return {
+      movie: best,
+      reason: `Matched "${best.title}" (${best.release_date.slice(0, 4)}) on TMDB.`,
+    };
   }
 }
 
@@ -169,6 +213,7 @@ export function factsFrom(details) {
   return {
     tmdbId: details?.id ?? null,
     imdbId: details?.imdb_id ?? null,
+    overview: details?.overview || null,
     isDocumentary: genres.includes('Documentary'),
     isForeignLanguage: Boolean(details?.original_language) && details.original_language !== 'en',
     runtime: details?.runtime ?? null,

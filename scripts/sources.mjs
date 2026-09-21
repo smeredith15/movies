@@ -16,7 +16,9 @@ export const WIKIPEDIA_LISTS = [
   { service: 'Hulu', page: 'List_of_Hulu_original_films' },
   { service: 'HBO Max', page: 'List_of_HBO_Max_original_films' },
   { service: 'Apple TV+', page: 'List_of_Apple_TV_original_films' },
-  { service: 'Peacock', page: 'List_of_Peacock_original_programming' },
+  // This page covers Peacock's whole slate — series, specials and films — so
+  // only the film sections are read.
+  { service: 'Peacock', page: 'List_of_Peacock_original_programming', section: /film/i },
   { service: 'Disney+', page: 'List_of_Disney+_original_films' },
   { service: 'Prime Video', page: 'List_of_Amazon_Prime_Video_original_films' },
   { service: 'Paramount+', page: 'List_of_Paramount+_original_films' },

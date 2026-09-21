@@ -137,13 +137,33 @@ export function parseFirstShowing(html, year) {
   return found;
 }
 
-/** Pull rows out of every wikitable on a Wikipedia list page. */
-export function parseWikipediaTables(html, { service, year }) {
+/**
+ * Pull rows out of the wikitables on a Wikipedia list page.
+ *
+ * `section` restricts reading to tables under a matching heading. Some pages
+ * list a service's whole output — Peacock's covers series, specials and films
+ * alike — and taking every table there drags television into a film catalog.
+ */
+export function parseWikipediaTables(html, { service, year, section = null }) {
   const doc = parse(html);
-  const tables = doc.querySelectorAll('table.wikitable');
   const found = [];
 
-  for (const table of tables) {
+  // Walk headings and tables in document order so each table knows what it
+  // sits under.
+  let heading = '';
+  const nodes = doc.querySelectorAll('h1, h2, h3, h4, table.wikitable');
+  const tables = [];
+  for (const node of nodes) {
+    const tag = (node.rawTagName || '').toLowerCase();
+    if (tag !== 'table') {
+      heading = node.text.replace(/\[edit\]/gi, '').replace(/\s+/g, ' ').trim();
+      continue;
+    }
+    if (section && !section.test(heading)) continue;
+    tables.push({ table: node, heading });
+  }
+
+  for (const { table } of tables) {
     const rows = table.querySelectorAll('tr');
     if (rows.length < 2) continue;
 

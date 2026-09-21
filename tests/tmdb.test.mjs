@@ -98,35 +98,48 @@ export default async function run({ Tmdb, usReleaseDates, castFrom, factsFrom, R
     check('missing credits yield nothing', castFrom({}).length, 0);
   });
 
-  await suite('tmdb: picking the right match', () => {
+  await suite('tmdb: a match has to be the same film', () => {
     const results = (arr) => ({ '/3/search/movie': { results: arr } });
-
-    const run1 = new Tmdb('key', {
-      pauseMs: 0,
-      fetchImpl: stubFetch(results([
-        { title: 'Dune', release_date: '1984-12-14', popularity: 20 },
-        { title: 'Dune', release_date: '2021-10-22', popularity: 90 },
-      ])),
-    });
+    const find = (arr, title, year) =>
+      new Tmdb('0123456789abcdef0123456789abcdef', { pauseMs: 0, fetchImpl: stubFetch(results(arr)) })
+        .findBest(title, year);
 
     return Promise.all([
-      run1.findBest('Dune', 2021).then((r) =>
-        check('the right year wins over popularity', r.release_date.slice(0, 4), '2021')
-      ),
-      new Tmdb('key', {
-        pauseMs: 0,
-        fetchImpl: stubFetch(results([
-          { title: 'Dune: Part Two', release_date: '2024-03-01', popularity: 99 },
-          { title: 'Dune', release_date: '2021-10-22', popularity: 50 },
-        ])),
-      })
-        .findBest('Dune', 2021)
-        .then((r) => check('an exact title beats a popular near-match', r.title, 'Dune')),
-      new Tmdb('key', { pauseMs: 0, fetchImpl: stubFetch(results([])) })
-        .findBest('Nothing At All', 2020)
-        .then((r) => check('no results is null, not a throw', r, null)),
+      find([{ title: 'Dune', release_date: '1984-12-14', popularity: 20 }, { title: 'Dune', release_date: '2021-10-22', popularity: 90 }], 'Dune', 2021)
+        .then((r) => check('the right year wins', r.movie.release_date.slice(0, 4), '2021')),
+
+      find([{ title: 'Dune', release_date: '2020-11-01', popularity: 50 }], 'Dune', 2021)
+        .then((r) => check('a year either side is close enough', Boolean(r.movie), true)),
+
+      find([{ title: 'Dune', release_date: '1984-12-14', popularity: 90 }], 'Dune', 2021)
+        .then((r) => check('but not three years out', r.movie, null)),
+
+      // The old behaviour took the most popular result for any query, which
+      // handed television and mis-parsed rows confident matches to films they
+      // have nothing to do with.
+      find([{ title: 'Crystal Fairy', release_date: '2026-02-02', popularity: 99 }], 'Crystal Lake', 2026)
+        .then((r) => check('a popular unrelated film is refused', r.movie, null)),
+
+      find([{ title: 'The Villains', release_date: '2026-05-05', popularity: 70 }], 'House of Villains (season 3)', 2026)
+        .then((r) => check('a television series finds nothing', r.movie, null)),
+
+      find([{ title: 'Dune: Part Two', release_date: '2024-03-01', popularity: 80 }], 'Dune Part Two', 2024)
+        .then((r) => check('punctuation does not break a real match', r.movie.title, 'Dune: Part Two')),
+
+      find([], 'Nothing At All', 2020)
+        .then((r) => check('no results is a refusal, not a throw', r.movie, null)),
+
+      find([], 'Nothing At All', 2020)
+        .then((r) => check('and it says why', r.reason.includes('nothing by that name'), true)),
+
+      find([{ title: 'Some Other Film', release_date: '2019-01-01', popularity: 10 }], 'Missing Movie', 2026)
+        .then((r) => check('a refusal names what it did find', r.reason.includes('Some Other Film'), true)),
+
+      find([{ title: 'Untitled', popularity: 10 }], 'Untitled', 2026)
+        .then((r) => check('a result with no release date cannot confirm a year', r.movie, null)),
     ]);
   });
+
 
   await suite('tmdb: it survives a flaky API', () => {
     const tmdb = new Tmdb('key', {

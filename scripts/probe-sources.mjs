@@ -177,7 +177,11 @@ async function probeWikipedia(year) {
       console.log(`    table ${i}: ${t.querySelectorAll('tr').length - 1} rows | headers: ${headers.join(' | ').slice(0, 110)}`);
     });
 
-    const rows = parseWikipediaTables(found.html, { service: list.service, year });
+    const rows = parseWikipediaTables(found.html, {
+      service: list.service,
+      year,
+      section: list.section ?? null,
+    });
     const inYear = rows.filter((r) => r.date.startsWith(String(year)));
     console.log(`  parsed ${rows.length} dated rows, ${inYear.length} in ${year}`);
     for (const r of inYear.slice(0, 6)) console.log(`    ${r.date}  ${r.title}`);

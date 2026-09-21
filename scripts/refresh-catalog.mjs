@@ -133,7 +133,11 @@ async function collectStreaming(year) {
       warn(`could not read ${list.service} list (${used})`);
       continue;
     }
-    const parsed = parseWikipediaTables(html, { service: list.service, year });
+    const parsed = parseWikipediaTables(html, {
+      service: list.service,
+      year,
+      section: list.section ?? null,
+    });
     const inYear = parsed.filter((r) => r.date.startsWith(String(year)));
     log(`  ${list.service}: ${inYear.length} of ${parsed.length} rows in ${year}`);
     rows.push(...inYear);
@@ -158,6 +162,10 @@ export function carryOver(prior) {
     tmdbId: prior?.tmdbId ?? null,
     seen: prior?.seen ?? false,
     owned: prior?.owned ?? false,
+    overview: prior?.overview ?? null,
+    genres: prior?.genres ?? [],
+    tmdbVerified: prior?.tmdbVerified,
+    tmdbNote: prior?.tmdbNote,
     wantToSee: prior?.wantToSee ?? null,
     onFrozenBallot: prior?.onFrozenBallot ?? false,
   };
@@ -251,17 +259,26 @@ async function enrich(movies, apiKey, { force = false } = {}) {
   for (const m of movies) {
     if (!force && m.tmdbId) continue;
 
-    const hit = await tmdb.findBest(m.title, m.computedYear ?? undefined);
+    const { movie: hit, reason } = await tmdb.findBest(m.title, m.computedYear ?? undefined);
     if (!hit) {
+      // Nothing downstream can tell a wrong match from a right one, so an
+      // entry TMDB cannot confirm is marked rather than quietly enriched.
+      m.tmdbVerified = false;
+      m.tmdbNote = reason;
       missed.push(m.title);
       continue;
     }
 
     const details = await tmdb.details(hit.id);
     if (!details) {
+      m.tmdbVerified = false;
+      m.tmdbNote = 'TMDB matched the title but returned no detail.';
       missed.push(m.title);
       continue;
     }
+
+    m.tmdbVerified = true;
+    m.tmdbNote = reason;
 
     const dates = usReleaseDates(details);
     const facts = factsFrom(details);
@@ -273,6 +290,8 @@ async function enrich(movies, apiKey, { force = false } = {}) {
 
     m.tmdbId = facts.tmdbId;
     m.imdbId = facts.imdbId ?? m.imdbId;
+    m.overview = facts.overview ?? m.overview ?? null;
+    if (facts.genres.length) m.genres = facts.genres;
     m.isDocumentary = m.isDocumentary || facts.isDocumentary;
     m.isForeignLanguage = m.isForeignLanguage || facts.isForeignLanguage;
     m.hadUSTheatricalRelease =
@@ -286,7 +305,13 @@ async function enrich(movies, apiKey, { force = false } = {}) {
 
   log(`  matched ${matched} of ${movies.length} on TMDB (${tmdb.calls} API calls)`);
   if (missed.length) {
-    log(`  ${missed.length} not found: ${missed.slice(0, 8).join(', ')}${missed.length > 8 ? '…' : ''}`);
+    log(`\n  ${missed.length} could not be confirmed as a film of that year.`);
+    log('  These are usually television, a mis-parsed row, or a title TMDB spells');
+    log('  differently. They stay in the catalog, flagged, for Browse to review:');
+    for (const m of movies.filter((x) => x.tmdbVerified === false).slice(0, 15)) {
+      log(`    · ${m.title} — ${m.tmdbNote}`);
+    }
+    if (missed.length > 15) log(`    … and ${missed.length - 15} more`);
   }
   return { matched, missed };
 }
