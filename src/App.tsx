@@ -131,6 +131,11 @@ export default function App() {
       await saveAdded(m);
     });
 
+  const saveWatchSet = (add: Watch[], removeIds: string[]) =>
+    mutate(async () => {
+      await saveWatches(add, removeIds, `Mark ${add.length + removeIds.length} as watched`);
+    });
+
   const updateMarks = (changes: Marks) =>
     mutate(async () => {
       const n = Object.keys(changes).length;
@@ -260,7 +265,9 @@ export default function App() {
           config={config}
           overrides={snap.overrides}
           marks={marks}
+          watches={snap.watches}
           onSaveMarks={updateMarks}
+          onSaveWatches={saveWatchSet}
           onOverride={setYearOverride}
           canEdit={canEdit}
           busy={busy}

@@ -1,5 +1,10 @@
 export type Person = 'me' | 'her';
-export type Picker = Person | 'joint';
+/**
+ * 'unknown' is for a viewing we are sure of but cannot attribute — ticking a
+ * film as seen says we watched it, not who picked it. Guessing would quietly
+ * corrupt the rotation, so it says so instead.
+ */
+export type Picker = Person | 'joint' | 'unknown';
 export type Venue = 'home' | 'theater';
 export type Confidence = 'high' | 'medium' | 'low';
 

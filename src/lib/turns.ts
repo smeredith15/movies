@@ -77,7 +77,11 @@ export function computeTurnState(
     | ({ _kind: 'watch' } & Watch)
     | ({ _kind: 'adjustment' } & Adjustment);
 
-  const turnPicks = watches.filter((w) => w.consumesTurn && w.picker !== 'joint');
+  // Joint and unattributed viewings sit outside the rotation: neither can be
+  // charged to anyone's turn.
+  const turnPicks = watches.filter(
+    (w) => w.consumesTurn && (w.picker === 'me' || w.picker === 'her')
+  );
 
   // An undated pick has no place in the sequence — it is counted and reported
   // separately rather than being guessed into an order.

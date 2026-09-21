@@ -66,6 +66,19 @@ export default function run() {
     check('and stays high confidence', v({ usTheatricalDate: '2026-06-12' }).confidence, 'high');
   });
 
+  suite('eligibility: ticking a film as seen, today', () => {
+    // Ticking says we watched it at or before now. While the window is still
+    // open that settles it; once the ceremony has passed it does not.
+    const open = (today, filmYear) => watchFallsInSeason(today, filmYear);
+
+    check('mid-season, it is certainly on the ballot', open('2026-09-21', 2026), true);
+    check('right up to the ceremony', open('2027-03-14', 2026), true);
+    check('but not the day after', open('2027-03-15', 2026), false);
+    check('a prior year whose ceremony has passed is undecidable', open('2026-09-21', 2025), false);
+    check('while that ceremony was still ahead it was not', open('2026-03-01', 2025), true);
+    check('and a future year has not opened yet', open('2026-09-21', 2027), false);
+  });
+
   suite('eligibility: a manual override always wins', () => {
     const movie = { usTheatricalDate: '2026-06-12' };
     check('a year override replaces the computed year', resolveEligibility(movie, { eligibilityYear: 2025 }).year, 2025);

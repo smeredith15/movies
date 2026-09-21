@@ -105,6 +105,24 @@ export default function run(turns) {
     check('one after it still applies', computeTurnState([], [adj('2026-07-01','grant','her',2,'new deal')], anchored).upNext, 'her');
   });
 
+  suite('turns: a viewing nobody is credited with', () => {
+    const unattributed = (date, title) => ({ ...w(date, title, 'me'), picker: 'unknown', consumesTurn: false });
+
+    const s1 = state([w('2026-01-02','A','me'), unattributed('2026-01-09','Ticked in Browse')]);
+    check('it does not move the rotation', s1.upNext, 'me');
+    check('and is charged to nobody', `${s1.used.me}/${s1.used.her}`, '1/0');
+    check('nor counted as a missing date', s1.undatedPicks, 0);
+
+    // The same viewing with no date at all — what a Browse tick produces.
+    const s2 = state([{ ...w('', 'Ticked', 'me'), picker: 'unknown', consumesTurn: false }]);
+    check('a dateless one is equally harmless', s2.upNext, 'me');
+    check('and still not a pending pick', s2.undatedPicks, 0);
+
+    // But once someone is credited it counts like any other.
+    const s3 = state([{ ...w('2026-01-09', 'Ticked', 'her'), consumesTurn: true }]);
+    check('attributing it brings it into the rotation', s3.used.her, 1);
+  });
+
   suite('turns: a pick with no date sits out', () => {
     const undated = (title, picker) => w('', title, picker);
     const s1 = state([w('2026-01-02','A','me'), undated('Lost to time','me')]);

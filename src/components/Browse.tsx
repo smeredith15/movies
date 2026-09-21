@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
-import type { CatalogMovie, Config, EligibilityOverride } from '../lib/types';
-import { loadCatalog } from '../lib/store';
+import type { CatalogMovie, Config, EligibilityOverride, Watch } from '../lib/types';
+import { loadCatalog, newId } from '../lib/store';
 import { applyMark, type Mark, type Marks } from '../lib/marks';
 import { BROWSE_DRAFT, clearDraft, draftSize, loadDraft, saveDraft } from '../lib/draft';
+import { watchFallsInSeason } from '../../shared/eligibility.js';
 
 type Shown = 'released' | 'upcoming' | 'all';
 type Filter = 'all' | 'unseen' | 'seen' | 'rated' | 'review';
@@ -26,7 +27,9 @@ export function Browse({
   config,
   overrides,
   marks,
+  watches,
   onSaveMarks,
+  onSaveWatches,
   onOverride,
   canEdit,
   busy,
@@ -34,7 +37,9 @@ export function Browse({
   config: Config;
   overrides: EligibilityOverride[];
   marks: Marks;
+  watches: Watch[];
   onSaveMarks: (changes: Marks) => Promise<void>;
+  onSaveWatches: (add: Watch[], removeIds: string[]) => Promise<void>;
   onOverride: (movieId: string, year: number | null, note: string) => Promise<void>;
   canEdit: boolean;
   busy: boolean;
@@ -78,6 +83,12 @@ export function Browse({
     [overrides]
   );
 
+  const watchFor = useMemo(() => {
+    const map = new Map<string, Watch>();
+    for (const w of watches) if (w.movieId) map.set(w.movieId, w);
+    return map;
+  }, [watches]);
+
   const rows = useMemo(() => {
     if (!catalog) return [];
     const now = today();
@@ -87,7 +98,7 @@ export function Browse({
         const stage = staged[m.id];
         return {
           ...merged,
-          seen: stage?.seen ?? merged.seen,
+          seen: stage?.seen ?? (merged.seen || watchFor.has(m.id)),
           wantToSee: stage?.wantToSee !== undefined ? stage.wantToSee : merged.wantToSee,
           dirty: Boolean(stage),
           released: releaseDate(m),
@@ -105,7 +116,7 @@ export function Browse({
         if (a.released !== b.released) return a.released ? -1 : 1;
         return a.title.localeCompare(b.title);
       });
-  }, [catalog, marks, staged, shown]);
+  }, [catalog, marks, staged, shown, watchFor]);
 
   const visible = rows.filter((m) => {
     if (query && !m.title.toLowerCase().includes(query.toLowerCase())) return false;
@@ -122,10 +133,45 @@ export function Browse({
   async function save() {
     const now = new Date().toISOString();
     const changes: Marks = {};
+    const addWatches: Watch[] = [];
+    const dropWatches: string[] = [];
+
     for (const [id, patch] of Object.entries(staged)) {
       changes[id] = { ...patch, at: now, by: config.people.me };
+      if (patch.seen === undefined) continue;
+
+      const existing = watchFor.get(id);
+      if (patch.seen && !existing) {
+        // Ticking it now means we watched it at or before now. So if today is
+        // still inside the film year's window, the viewing was inside it too —
+        // that much is certain, and worth recording. Once the ceremony has
+        // passed there is no telling which side of it we watched on, so the
+        // answer is left open for History to settle.
+        const film = catalog?.find((m) => m.id === id);
+        const filmYear = film?.computedYear ?? year;
+        const stillOpen = watchFallsInSeason(today(), filmYear, config.oscarDates ?? {});
+
+        // A tick says we watched it, not who picked it or when. Recording it
+        // as a viewing keeps the ballot and the history from disagreeing.
+        addWatches.push({
+          id: newId('w'),
+          date: '',
+          title: film?.title ?? id,
+          movieId: id,
+          venue: 'home',
+          picker: 'unknown',
+          consumesTurn: false,
+          ...(stillOpen ? { onBallot: true } : {}),
+        });
+      } else if (!patch.seen && existing && !existing.date && existing.picker === 'unknown') {
+        // Only undo the stub this tick created. A viewing with a date or a
+        // picker was recorded deliberately and is not ours to delete.
+        dropWatches.push(existing.id);
+      }
     }
+
     await onSaveMarks(changes);
+    if (addWatches.length || dropWatches.length) await onSaveWatches(addWatches, dropWatches);
     setStaged({});
     clearDraft(BROWSE_DRAFT);
   }

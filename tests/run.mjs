@@ -23,6 +23,7 @@ import runBrowse from './browse.test.mjs';
 import runRefresh from './refresh.test.mjs';
 import runBrowseIndex from './browseIndex.test.mjs';
 import runBallot from './ballot.test.mjs';
+import runPeople from './people.test.mjs';
 import runTmdb from './tmdb.test.mjs';
 import runTitleSearch from './titleSearch.test.mjs';
 import runFirstShowing from './firstshowing.test.mjs';
@@ -42,6 +43,7 @@ execFileSync(
     'src/lib/marks.ts',
     'src/components/Browse.tsx',
     'src/lib/ballot.ts',
+    'src/lib/people.ts',
     'src/lib/titleSearch.ts',
     'src/lib/tmdbIndex.ts',
     '--rootDir', 'src',
@@ -68,6 +70,7 @@ const added = require(resolve(BUILD, 'lib/added.js'));
 const marks = require(resolve(BUILD, 'lib/marks.js'));
 const browse = require(resolve(BUILD, 'components/Browse.js'));
 const ballot = require(resolve(BUILD, 'lib/ballot.js'));
+const people = require(resolve(BUILD, 'lib/people.js'));
 const titleSearch = require(resolve(BUILD, 'lib/titleSearch.js'));
 const tmdbIndex = require(resolve(BUILD, 'lib/tmdbIndex.js'));
 
@@ -81,6 +84,7 @@ runDraft(draft);
 runAdded(added);
 runMarks(marks);
 runBrowse(browse);
+runPeople(people);
 runBallot(ballot, await import(pathToFileURL(resolve(ROOT, 'shared/eligibility.js')).href));
 runRefresh(await import(pathToFileURL(resolve(ROOT, 'scripts/refresh-catalog.mjs')).href));
 runBrowseIndex(await import(pathToFileURL(resolve(ROOT, 'scripts/browse-index.mjs')).href));
