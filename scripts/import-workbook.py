@@ -316,6 +316,23 @@ def main():
     if folded:
         print(f"  folded in {folded} hand-added movie(s)")
 
+    # The lean copy the Browse tab loads. A full catalog is mostly cast and
+    # runs past the 1 MB the GitHub contents API will return.
+    BROWSE_FIELDS = [
+        "id", "title", "kind", "usLimitedDate", "usTheatricalDate", "homeDate",
+        "festivalDate", "services", "poster", "ratings", "computedYear",
+        "confidence", "evidence", "needsReview", "isDocumentary",
+        "isForeignLanguage", "seen", "owned", "wantToSee", "onFrozenBallot",
+    ]
+    (ROOT / "data" / "browse").mkdir(parents=True, exist_ok=True)
+    for item in summary:
+        year = item["year"]
+        full = json.loads((ROOT / "data" / "catalog" / f"{year}.json").read_text())
+        lean = [{k: m[k] for k in BROWSE_FIELDS if k in m} for m in full]
+        (ROOT / "data" / "browse" / f"{year}.json").write_text(
+            json.dumps(lean, separators=(",", ":")) + "\n"
+        )
+
     # Everything we have watched, as a flat list. The History page needs this
     # and nothing else, and it is ~40 KB against 4.8 MB of full catalogs.
     seen_rows = []
