@@ -35,6 +35,11 @@ jobs:
           cache: npm
       - run: npm ci
 
+      - name: Check the TMDB credential
+        env:
+          TMDB_API: ${{ secrets.TMDB_API }}
+        run: node scripts/check-tmdb-secret.mjs
+
       - name: Build index
         env:
           TMDB_API: ${{ secrets.TMDB_API }}

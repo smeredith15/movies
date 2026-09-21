@@ -212,6 +212,16 @@ streaming lists for everything else; both are defined in `scripts/sources.mjs`.
 the browser** — anything the static page can read is public, so a secret cannot
 reach it.
 
+Add it under **Settings → Secrets and variables → Actions**, in the
+*Repository secrets* tab. Not Codespaces, not Dependabot, and not the
+*Variables* tab beside it — none of those reach `secrets.TMDB_API`. Either
+credential works: a v3 API key (32 hex characters, sent as a query parameter)
+or a v4 read access token (a JWT, sent as a bearer header). The workflows
+detect which one they were handed.
+
+Both TMDB workflows run `scripts/check-tmdb-secret.mjs` first, which fails with
+the list of things to check rather than leaving an empty variable behind.
+
 TMDB supplies what the scrapers cannot: US release dates *by type*, plus cast
 and characters. That typing is the whole game — a schedule page says a title
 appeared on some date, while TMDB says whether that was a festival premiere, a

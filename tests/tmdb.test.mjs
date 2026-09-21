@@ -54,7 +54,7 @@ const DUNE_DETAILS = {
   },
 };
 
-export default async function run({ Tmdb, usReleaseDates, castFrom, factsFrom, RELEASE_TYPE }) {
+export default async function run({ Tmdb, usReleaseDates, castFrom, factsFrom, RELEASE_TYPE, credentialKind }) {
   suite('tmdb: US release dates map onto the house rules', () => {
     const d = usReleaseDates(DUNE_DETAILS);
     check('a festival premiere is kept separate', d.festivalDate, '2021-09-03');
@@ -148,6 +148,51 @@ export default async function run({ Tmdb, usReleaseDates, castFrom, factsFrom, R
       limited.details(1).then((d) => check('a 429 waits and retries', d.id, 438631)),
       missing.details(999).then((d) => check('a 404 is null, not an error', d, null)),
     ]);
+  });
+
+  suite('tmdb: telling the two credential types apart', () => {
+    check('a v3 key is 32 hex characters', credentialKind('0123456789abcdef0123456789abcdef'), 'v3-key');
+    check('a v4 token is a JWT', credentialKind('eyJhbGciOi.eyJhdWQiOi.signature'), 'v4-token');
+    check('empty is missing', credentialKind(''), 'missing');
+    check('so is undefined', credentialKind(undefined), 'missing');
+    check('whitespace alone is missing', credentialKind('   '), 'missing');
+    check('anything else is unknown', credentialKind('not-a-real-key'), 'unknown');
+    check('surrounding whitespace is tolerated', credentialKind('  0123456789abcdef0123456789abcdef  '), 'v3-key');
+  });
+
+  await suite('tmdb: each credential authenticates its own way', () => {
+    const seen = [];
+    const spy = async (url, opts) => {
+      seen.push({ url, auth: opts?.headers?.Authorization ?? null });
+      return { status: 200, ok: true, headers: { get: () => null }, json: async () => ({ ok: true }) };
+    };
+
+    const v3 = new Tmdb('0123456789abcdef0123456789abcdef', { pauseMs: 0, fetchImpl: spy });
+    const v4 = new Tmdb('eyJhbGciOi.eyJhdWQiOi.signature', { pauseMs: 0, fetchImpl: spy });
+
+    return v3
+      .get('/movie/1')
+      .then(() => v4.get('/movie/1'))
+      .then(() => {
+        check('a v3 key goes in the query string', seen[0].url.includes('api_key=0123'), true);
+        check('and sends no Authorization header', seen[0].auth, null);
+        check('a v4 token goes in the header', seen[1].auth, 'Bearer eyJhbGciOi.eyJhdWQiOi.signature');
+        check('and is kept out of the URL', seen[1].url.includes('api_key'), false);
+      });
+  });
+
+  await suite('tmdb: a rejected credential says so plainly', () => {
+    const unauthorized = new Tmdb('0123456789abcdef0123456789abcdef', {
+      pauseMs: 0,
+      fetchImpl: async () => ({ status: 401, ok: false, headers: { get: () => null } }),
+    });
+    return unauthorized
+      .get('/movie/1')
+      .then(() => check('a 401 throws rather than retrying', false, true))
+      .catch((e) => {
+        check('a 401 throws rather than retrying', e.message.includes('401'), true);
+        check('and names which credential type it read', e.message.includes('v3-key'), true);
+      });
   });
 
   suite('tmdb: the key is required', () => {
