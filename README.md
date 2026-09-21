@@ -472,9 +472,35 @@ fills them in.
 ```bash
 npm install
 npm run dev     # local development
-npm test        # 71 assertions over the rules, the rotation and the parsers
+npm test        # 438 assertions over the rules, the rotation and the parsers
 npm run build
 ```
+
+## Installing it
+
+The site is a progressive web app, so it installs from itself — there is no
+store listing and nothing to sign. On an iPhone, open it in Safari and tap
+**Share → Add to Home Screen**; on Android, Chrome offers **Install app**; on a
+computer, Chrome and Edge show an install button in the address bar. It then
+launches full screen with its own icon, indistinguishable from a native app
+until you look for a native app's ability to do anything offline.
+
+Which it deliberately cannot, past the code itself. `public/sw.js` serves the
+hashed bundles from a cache — their names change whenever their contents do, so
+a cached one can never be wrong — and asks the network first for everything
+else, falling back to a cache only when there is no network. Nothing off this
+origin is touched at all: the ledgers read from `raw.githubusercontent.com` and
+every save goes to the Contents API, and both must reach the real thing. An app
+that answered a watch list out of a cache would show one of us a version the
+other had already changed, which is the failure the whole optimistic-concurrency
+dance exists to prevent.
+
+The token is browser storage, so an installed copy counts as a fresh browser and
+asks for one the first time.
+
+`tools/make_icons.py` draws the icons (a clapperboard, in the app's own accent
+and ink) and needs `pillow`. Run it again only if the shape or the colours
+change; the PNGs are committed.
 
 ## The imported workbook
 

@@ -137,6 +137,25 @@ export function Settings({
       </div>
 
       <div className="panel">
+        <h2>
+          Install it
+          <span className="sub">same app, off the home screen instead of a bookmark</span>
+        </h2>
+        <p className="small muted">
+          There is nothing to download from a store — the page installs itself. On an iPhone or
+          iPad, open it in Safari and tap <strong>Share → Add to Home Screen</strong>. On Android,
+          Chrome offers <strong>Install app</strong> in its menu. On a computer, Chrome and Edge
+          show an install button at the right of the address bar.
+        </p>
+        <p className="small muted" style={{ marginBottom: 0 }}>
+          It then opens full screen with its own icon, and the app itself keeps working without a
+          connection. The watch list and the ballots do not: those are read from GitHub every time,
+          on purpose, so neither of us is ever shown a version the other has already changed. Your
+          token is stored per browser, so the installed copy will ask for one the first time.
+        </p>
+      </div>
+
+      <div className="panel">
         <h2>Rotation</h2>
         <div className="grid">
           <label className="field">
