@@ -119,6 +119,24 @@ export function Settings({
       </div>
 
       <div className="panel">
+        <h2>
+          This build
+          <span className="sub">check here before suspecting a stale page</span>
+        </h2>
+        <p className="small muted" style={{ marginBottom: 0 }}>
+          Running <code>{__BUILD__}</code>. Compare it with the latest commit on{' '}
+          <a
+            href="https://github.com/smeredith15/movies/commits/main"
+            target="_blank"
+            rel="noreferrer"
+          >
+            main
+          </a>
+          . If it is behind, the deploy is still running or this page needs a hard reload.
+        </p>
+      </div>
+
+      <div className="panel">
         <h2>Rotation</h2>
         <div className="grid">
           <label className="field">

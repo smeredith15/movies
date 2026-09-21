@@ -1,4 +1,4 @@
-import { mergeById, readJson, writeJson } from './github';
+import { REPO_BRANCH, REPO_NAME, REPO_OWNER, mergeById, readJson, writeJson } from './github';
 import type {
   Adjustment,
   CatalogMovie,
@@ -13,6 +13,7 @@ export const PATHS = {
   adjustments: 'data/adjustments.json',
   overrides: 'data/overrides.json',
   catalog: (year: number) => `data/catalog/${year}.json`,
+  browse: (year: number) => `data/browse/${year}.json`,
   ballot: (year: number, who: string) => `data/ballots/${year}.${who}.json`,
 };
 
@@ -47,9 +48,29 @@ export async function loadSnapshot(): Promise<Snapshot> {
   };
 }
 
+/**
+ * A year's movies for browsing.
+ *
+ * Read over raw.githubusercontent rather than the contents API: a full
+ * catalog runs past 1 MB, which that API refuses outright, returning empty
+ * content that parses to nothing. Prefer the lean browse index, which is a
+ * third the size, and fall back to the full catalog for years that predate it.
+ */
 export async function loadCatalog(year: number): Promise<CatalogMovie[]> {
-  const file = await readJson<CatalogMovie[]>(PATHS.catalog(year), []);
-  return file.data;
+  const raw = (path: string) =>
+    `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${REPO_BRANCH}/${path}?t=${Date.now()}`;
+
+  for (const path of [PATHS.browse(year), PATHS.catalog(year)]) {
+    try {
+      const res = await fetch(raw(path), { cache: 'no-store' });
+      if (!res.ok) continue;
+      const data = (await res.json()) as CatalogMovie[];
+      if (Array.isArray(data)) return data;
+    } catch {
+      // Try the next path; a genuine failure surfaces as an empty year.
+    }
+  }
+  throw new Error(`Could not load the ${year} catalog.`);
 }
 
 export function newId(prefix: string) {

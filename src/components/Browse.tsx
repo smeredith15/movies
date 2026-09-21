@@ -46,12 +46,28 @@ export function Browse({
   const [filter, setFilter] = useState<Filter>('all');
   const [query, setQuery] = useState('');
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [attempt, setAttempt] = useState(0);
   const [staged, setStaged] = useState<Record<string, Partial<Mark>>>(() => loadDraft(BROWSE_DRAFT));
 
+  const [loadError, setLoadError] = useState<string | null>(null);
+
   useEffect(() => {
+    let current = true;
     setCatalog(null);
-    loadCatalog(year).then(setCatalog);
-  }, [year]);
+    setLoadError(null);
+    loadCatalog(year)
+      .then((c) => current && setCatalog(c))
+      .catch((e) => {
+        // Without this the page sits on "Loading" for ever, which is what a
+        // catalog too big for the contents API used to do.
+        if (!current) return;
+        setLoadError(e instanceof Error ? e.message : String(e));
+        setCatalog([]);
+      });
+    return () => {
+      current = false;
+    };
+  }, [year, attempt]);
 
   useEffect(() => {
     saveDraft(BROWSE_DRAFT, staged);
@@ -175,7 +191,16 @@ export function Browse({
           ))}
         </div>
 
-        {catalog !== null && datedCount === 0 && (
+        {loadError && (
+          <div className="banner error" style={{ marginTop: 12, marginBottom: 0 }}>
+            {loadError}{' '}
+            <button className="ghost" onClick={() => setAttempt((a) => a + 1)}>
+              Try again
+            </button>
+          </div>
+        )}
+
+        {catalog !== null && !loadError && datedCount === 0 && (
           <div className="banner warn" style={{ marginTop: 12, marginBottom: 0 }}>
             No release dates for {year} yet, so nothing can be filtered by what is out.
             Run <strong>Refresh catalog</strong> for this year, then reload. Showing

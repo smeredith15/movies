@@ -21,6 +21,7 @@ import { firstShowingUrl, WIKIPEDIA_LISTS, netflixCandidates, isRerelease } from
 import { parseWikipediaTables, titleKey, slugify } from './parse.mjs';
 import { parseFirstShowing } from './firstshowing.mjs';
 import { Tmdb, usReleaseDates, castFrom, factsFrom } from './tmdb.mjs';
+import { toBrowseIndex } from './browse-index.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const UA = 'movies-catalog/1.0 (personal watchlist tool)';
@@ -330,8 +331,7 @@ async function main() {
       log('\nDry run — nothing written.');
       return;
     }
-    await writeFile(outPath, `${JSON.stringify(catalog, null, 2)}\n`);
-    log(`\nWrote ${outPath}`);
+    await writeCatalog(outPath, catalog);
     return;
   }
 
@@ -427,9 +427,22 @@ async function main() {
     return;
   }
 
+  await writeCatalog(outPath, catalog);
+}
+
+/** The full catalog, plus the lean copy the app actually browses. */
+async function writeCatalog(outPath, catalog) {
   await mkdir(dirname(outPath), { recursive: true });
   await writeFile(outPath, `${JSON.stringify(catalog, null, 2)}\n`);
-  log(`\nWrote ${outPath}`);
+
+  const browsePath = resolve(ROOT, 'data', 'browse', `${YEAR}.json`);
+  await mkdir(dirname(browsePath), { recursive: true });
+  const lean = JSON.stringify(toBrowseIndex(catalog));
+  await writeFile(browsePath, `${lean}\n`);
+
+  const full = (await readFile(outPath, 'utf8')).length;
+  log(`\nWrote ${outPath} (${(full / 1024 / 1024).toFixed(2)} MB)`);
+  log(`Wrote ${browsePath} (${(lean.length / 1024).toFixed(0)} KB, what the app loads)`);
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
