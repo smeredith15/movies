@@ -5,6 +5,7 @@ import { newId } from '../lib/store';
 import { loadSeen, type SeenMovie } from '../lib/seen';
 import { HISTORY_DRAFT, clearDraft, loadDraft, saveDraft } from '../lib/draft';
 import { AddMovie } from './AddMovie';
+import { ballotStatus, defaultBallotChoice } from '../../shared/eligibility.js';
 
 type Staged = StagedWatch;
 type Filter = 'all' | 'undated' | 'dated';
@@ -16,6 +17,7 @@ interface Row {
   title: string;
   movieId: string | null;
   watch: Watch | null;
+  year: number;
   added?: boolean;
 }
 
@@ -101,7 +103,7 @@ export function History({
 
     for (const m of seen ?? []) {
       knownIds.add(m.id);
-      push(m.year, { key: m.id, title: m.title, movieId: m.id, watch: watchByMovie.get(m.id) ?? null });
+      push(m.year, { key: m.id, title: m.title, movieId: m.id, watch: watchByMovie.get(m.id) ?? null, year: m.year });
     }
 
     for (const m of added) {
@@ -112,6 +114,7 @@ export function History({
         title: m.title,
         movieId: m.id,
         watch: watchByMovie.get(m.id) ?? null,
+        year: m.year,
         added: true,
       });
     }
@@ -122,13 +125,13 @@ export function History({
       if (!w.movieId || knownIds.has(w.movieId)) continue;
       knownIds.add(w.movieId);
       const year = Number(w.movieId.slice(-4)) || Number(w.date.slice(0, 4)) || 0;
-      push(year, { key: w.movieId, title: w.title, movieId: w.movieId, watch: w });
+      push(year, { key: w.movieId, title: w.title, movieId: w.movieId, watch: w, year });
     }
 
     const unmatched: Row[] = watches
       .filter((w) => !w.movieId)
       .sort((a, b) => (a.date < b.date ? 1 : -1))
-      .map((w) => ({ key: w.id, title: w.title, movieId: null, watch: w }));
+      .map((w) => ({ key: w.id, title: w.title, movieId: null, watch: w, year: Number(w.date.slice(0, 4)) || 0 }));
     for (const r of unmatched) rowByKey.set(r.key, r);
 
     return {
@@ -152,7 +155,12 @@ export function History({
     setStaged((s) => {
       const row = rowByKey.get(key);
       const base: Staged = row?.watch
-        ? { date: row.watch.date, picker: row.watch.picker, venue: row.watch.venue }
+        ? {
+            date: row.watch.date,
+            picker: row.watch.picker,
+            venue: row.watch.venue,
+            onBallot: row.watch.onBallot,
+          }
         : STAGED_DEFAULTS;
       return { ...s, [key]: { ...base, ...s[key], ...patch } };
     });
@@ -173,6 +181,7 @@ export function History({
           venue: v.venue,
           picker: v.picker,
           consumesTurn: v.picker !== 'joint',
+          ...(v.onBallot === undefined ? {} : { onBallot: v.onBallot }),
           note: row.watch?.note,
         };
       })
@@ -373,6 +382,7 @@ function HistoryRow({
         <div className="w-main">
           <div className="w-title">{w.title}</div>
           <div className="w-meta row">
+            <BallotBadge row={row} config={config} />
             <span className={`badge ${w.picker}`}>
               {w.picker === 'joint' ? 'Both of us' : config.people[w.picker]}
             </span>
@@ -410,6 +420,7 @@ function HistoryRow({
       </div>
       {canEdit && (
         <div className="row date-entry">
+          <BallotChoice row={row} value={value} stage={stage} />
           <input
             type="date"
             value={value.date}
@@ -439,5 +450,77 @@ function HistoryRow({
         </div>
       )}
     </li>
+  );
+}
+
+/**
+ * Whether this viewing counts toward the year's ballot.
+ *
+ * Auto follows the date: on or before the ceremony that closes the film year
+ * and it counts. Yes and No state it outright, for the many older viewings
+ * where we know we saw something inside the window but not which day.
+ */
+function BallotChoice({
+  row,
+  value,
+  stage,
+}: {
+  row: Row;
+  value: Staged;
+  stage: (key: string, patch: Partial<Staged>) => void;
+}) {
+  const derived = defaultBallotChoice(value.date, row.year, {});
+  const current = value.onBallot === undefined ? 'auto' : value.onBallot ? 'yes' : 'no';
+  const autoLabel =
+    derived === null ? 'Auto' : derived ? 'Auto · yes' : 'Auto · no';
+
+  const set = (choice: 'auto' | 'yes' | 'no') =>
+    stage(row.key, { onBallot: choice === 'auto' ? undefined : choice === 'yes' });
+
+  return (
+    <div className="seg ballot-seg" role="group" aria-label={`Ballot for ${row.title}`}>
+      <button
+        className={current === 'auto' ? 'on' : ''}
+        onClick={() => set('auto')}
+        title={
+          derived === null
+            ? 'No date, so nothing to go on — choose Yes or No'
+            : 'Decided by the date watched'
+        }
+      >
+        {autoLabel}
+      </button>
+      <button className={current === 'yes' ? 'on' : ''} onClick={() => set('yes')} title="On the ballot">
+        Yes
+      </button>
+      <button className={current === 'no' ? 'on' : ''} onClick={() => set('no')} title="Not on the ballot">
+        No
+      </button>
+    </div>
+  );
+}
+
+function BallotBadge({ row, config }: { row: Row; config: Config }) {
+  if (!row.watch) return null;
+  const status = ballotStatus(row.watch, row.year, config.oscarDates ?? {});
+
+  if (status.source === 'unset') {
+    return (
+      <span className="badge traded" title="No date and no answer — say yes or no">
+        ballot?
+      </span>
+    );
+  }
+  if (!status.onBallot) {
+    return (
+      <span className="badge free" title={`Watched after the ${row.year} ceremony on ${status.closes}`}>
+        off ballot
+      </span>
+    );
+  }
+  return (
+    <span className="badge joint" title={`Counts toward the ${row.year} ballot${status.source === 'manual' ? ', set by hand' : ''}`}>
+      {row.year} ballot{status.source === 'manual' ? '*' : ''}
+    </span>
   );
 }

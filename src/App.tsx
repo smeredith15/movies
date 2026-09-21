@@ -23,8 +23,11 @@ import { Browse } from './components/Browse';
 import { AdjustmentPanel } from './components/AdjustmentPanel';
 import { Settings } from './components/Settings';
 import { Ballot } from './components/Ballot';
+import { saveBallot, type Ballot as BallotData } from './lib/ballot';
 
 type Tab = 'tracker' | 'browse' | 'backfill' | 'history' | 'ballot' | 'settings';
+
+const BALLOT_YEARS = [2026, 2025, 2024];
 
 const CURRENT_FILM_YEAR = (() => {
   // Before the ceremony, the season still in progress is last year's.
@@ -41,6 +44,7 @@ export default function App() {
   const [unsaved, setUnsaved] = useState(() => totalUnsaved());
   const [added, setAdded] = useState<AddedMovie[]>([]);
   const [marks, setMarks] = useState<Marks>({});
+  const [ballotYear, setBallotYear] = useState(CURRENT_FILM_YEAR);
 
   const canEdit = Boolean(getToken());
   const whoami = getWhoAmI();
@@ -131,6 +135,11 @@ export default function App() {
     mutate(async () => {
       const n = Object.keys(changes).length;
       await saveMarks(changes, `Update ${n} movie${n === 1 ? '' : 's'}`);
+    });
+
+  const storeBallot = (b: BallotData) =>
+    mutate(async () => {
+      await saveBallot(b);
     });
 
   const setYearOverride = (movieId: string, year: number | null, note: string) =>
@@ -281,7 +290,21 @@ export default function App() {
         />
       )}
 
-      {tab === 'ballot' && <Ballot year={CURRENT_FILM_YEAR} />}
+      {tab === 'ballot' && snap && (
+        <Ballot
+          year={ballotYear}
+          years={BALLOT_YEARS}
+          onYearChange={setBallotYear}
+          whoami={whoami}
+          config={config}
+          watches={snap.watches}
+          overrides={snap.overrides}
+          canEdit={canEdit}
+          busy={busy}
+          onSave={storeBallot}
+          onMutate={mutate}
+        />
+      )}
 
       {tab === 'settings' && (
         <Settings
