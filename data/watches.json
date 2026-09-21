@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "id": "w_mubjkckhwy1dq",
+    "date": "2026-09-14",
+    "title": "Buddy",
+    "movieId": "buddy-2026",
+    "venue": "theater",
+    "picker": "joint",
+    "consumesTurn": false
+  }
+]
