@@ -1,10 +1,11 @@
 {
   "people": {
-    "me": "Me",
-    "her": "Her"
+    "me": "Scotty",
+    "her": "Shelby"
   },
   "picksPerTurn": 2,
   "rotationStart": "me",
+  "rotationAnchor": "2026-09-21",
   "oscarDates": {},
   "frozenYears": [
     2024
