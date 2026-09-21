@@ -88,9 +88,23 @@ corpus is built where the key is safe and searched offline in the browser. It
 is fetched on first use rather than at startup, since it is only needed when
 adding a movie.
 
-Rebuild it from the **Build movie search index** action. `from_year` and
-`min_votes` control the size: the index takes films year by year, most-voted
-first, which keeps anything a person plausibly watched and drops the long tail.
+Rebuild it from the **Build movie search index** action. The index takes films
+year by year, most-voted first, which keeps anything a person plausibly watched
+and drops the long tail.
+
+Three inputs control it:
+
+| input | default | effect |
+| --- | --- | --- |
+| `from_year` | 1920 | earliest release year included |
+| `min_votes` | 50 | the real size lever — raise it to shrink the index |
+| `max_pages` | 100 | safety cap per year, 20 films a page |
+
+`max_pages` should not normally bind; `min_votes` is what should do the
+limiting. When a year does hit the cap the run says so and names the years, so
+a silently truncated index is not something you have to notice yourself — an
+earlier default of 8 pages quietly made the whole index a top-160-per-year
+list.
 
 Either way the entry lands in `data/added.json` — a small file, rather than
 appending to a 300 KB year catalog — and the app merges it into the watched

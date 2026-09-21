@@ -34,15 +34,25 @@ function parseArgs(argv) {
 }
 
 const args = parseArgs(process.argv.slice(2));
-const FROM = Number(args.from) || 1950;
+const FROM = Number(args.from) || 1920;
 const TO = Number(args.to) || new Date().getUTCFullYear();
 const MIN_VOTES = Number(args['min-votes'] ?? 50);
-const MAX_PAGES = Number(args['max-pages'] ?? 8);
+// TMDB refuses to page past 500. The default is high enough that the vote
+// threshold does the limiting, not this — an eight-page cap silently made the
+// whole index a top-160-per-year list.
+const MAX_PAGES = Math.min(Number(args['max-pages'] ?? 100), 500);
 const DRY = Boolean(args['dry-run']);
 
-/** One year of films, most-voted first. */
+/**
+ * One year of films, most-voted first. Reports whether the page cap cut the
+ * year short, since a silently truncated year is how the index ended up being
+ * a top-160 list rather than a corpus.
+ */
 async function yearSlice(tmdb, year) {
   const rows = [];
+  let available = 0;
+  let truncated = false;
+
   for (let page = 1; page <= MAX_PAGES; page++) {
     const data = await tmdb.get('/discover/movie', {
       primary_release_year: year,
@@ -51,15 +61,21 @@ async function yearSlice(tmdb, year) {
       include_adult: false,
       page,
     });
+
     const results = data?.results ?? [];
+    available = data?.total_results ?? available;
+
     for (const r of results) {
       if (!r.title || !r.release_date) continue;
       rows.push([r.id, r.title, Number(r.release_date.slice(0, 4))]);
     }
-    // Stop early rather than paging through empty results.
-    if (results.length === 0 || page >= (data?.total_pages ?? 1)) break;
+
+    const lastPage = Math.min(data?.total_pages ?? 1, 500);
+    if (results.length === 0 || page >= lastPage) break;
+    if (page === MAX_PAGES) truncated = true;
   }
-  return rows;
+
+  return { rows, available, truncated };
 }
 
 async function main() {
@@ -75,8 +91,10 @@ async function main() {
   const seen = new Set();
   const index = [];
 
+  const truncatedYears = [];
+
   for (let year = TO; year >= FROM; year--) {
-    const rows = await yearSlice(tmdb, year);
+    const { rows, available, truncated } = await yearSlice(tmdb, year);
     let added = 0;
     for (const row of rows) {
       if (seen.has(row[0])) continue;
@@ -84,7 +102,17 @@ async function main() {
       index.push(row);
       added += 1;
     }
-    if (added) console.log(`  ${year}: ${added}`);
+    if (truncated) truncatedYears.push(year);
+    if (added) {
+      const note = truncated ? `  (cut off — TMDB has ${available})` : '';
+      console.log(`  ${year}: ${added}${note}`);
+    }
+  }
+
+  if (truncatedYears.length) {
+    console.log(`\n  ! ${truncatedYears.length} year(s) hit the ${MAX_PAGES}-page cap and were cut short:`);
+    console.log(`    ${truncatedYears.join(', ')}`);
+    console.log('    Raise --max-pages, or --min-votes to keep the index smaller.');
   }
 
   index.sort((a, b) => (a[2] === b[2] ? a[1].localeCompare(b[1]) : b[2] - a[2]));

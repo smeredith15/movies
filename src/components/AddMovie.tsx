@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { AddedMovie } from '../lib/added';
 import { slugifyTitle } from '../lib/added';
-import { loadTmdbIndex, searchTmdb, type TmdbHit, type TmdbRow } from '../lib/tmdbIndex';
+import { indexCoverage, loadTmdbIndex, searchTmdb, type TmdbHit, type TmdbRow } from '../lib/tmdbIndex';
 
 const THIS_YEAR = new Date().getUTCFullYear();
 
@@ -29,17 +29,21 @@ export function AddMovie({
   const [hits, setHits] = useState<TmdbHit[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [manual, setManual] = useState(false);
-  const loading = useRef(false);
+  // One fetch per attempt. Without this, storing an empty result re-triggers
+  // the effect, which fetches again — an unbounded loop.
+  const [attempt, setAttempt] = useState(0);
+  const attempted = useRef(-1);
 
   // The index is only worth downloading once someone actually opens this.
+  // An empty result is not treated as final — opening again, or pressing
+  // Retry, starts a new attempt, so a freshly built index is picked up.
   useEffect(() => {
-    if (!open || rows || loading.current) return;
-    loading.current = true;
-    loadTmdbIndex().then((r) => {
-      setRows(r);
-      loading.current = false;
-    });
-  }, [open, rows]);
+    if (!open) return;
+    if (rows && rows.length > 0) return;
+    if (attempted.current === attempt) return;
+    attempted.current = attempt;
+    loadTmdbIndex().then(setRows);
+  }, [open, attempt, rows]);
 
   useEffect(() => {
     if (!rows) return;
@@ -74,7 +78,13 @@ export function AddMovie({
 
   if (!open) {
     return (
-      <button className="ghost" onClick={() => setOpen(true)}>
+      <button
+        className="ghost"
+        onClick={() => {
+          setOpen(true);
+          setAttempt((a) => a + 1);
+        }}
+      >
         + Add a movie
       </button>
     );
@@ -82,6 +92,7 @@ export function AddMovie({
 
   const indexEmpty = rows !== null && rows.length === 0;
   const searching = query.trim().length >= 2;
+  const coverage = indexCoverage(rows ?? []);
 
   return (
     <div className="add-movie">
@@ -109,9 +120,20 @@ export function AddMovie({
       </div>
 
       {indexEmpty && (
-        <div className="small muted" style={{ width: '100%' }}>
-          The search index has not been built yet — run the Refresh catalog
-          action. You can still add a movie by typing it below.
+        <div className="row small muted" style={{ width: '100%' }}>
+          <span>
+            No search index yet. Run the <strong>Build movie search index</strong>{' '}
+            action, or add a movie by hand below.
+          </span>
+          <button
+            className="ghost"
+            onClick={() => setAttempt((a) => a + 1)}
+          >
+            Retry
+          </button>
+          <button className="ghost" onClick={() => setManual(true)}>
+            Add by hand
+          </button>
         </div>
       )}
 
@@ -136,9 +158,12 @@ export function AddMovie({
         </ul>
       )}
 
-      {searching && rows !== null && hits.length === 0 && !manual && (
+      {searching && rows !== null && rows.length > 0 && hits.length === 0 && !manual && (
         <div className="row small muted" style={{ width: '100%' }}>
-          <span>No match for “{query.trim()}”.</span>
+          <span>
+            No match for “{query.trim()}” in the {coverage.count.toLocaleString()} titles
+            indexed{coverage.from ? ` from ${coverage.from} on` : ''}.
+          </span>
           <button className="ghost" onClick={() => setManual(true)}>
             Add it by hand
           </button>
