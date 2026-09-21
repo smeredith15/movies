@@ -124,5 +124,14 @@
     "venue": "theater",
     "picker": "joint",
     "consumesTurn": false
+  },
+  {
+    "id": "w_mubjrattucgbh",
+    "date": "2026-07-09",
+    "title": "La La Land",
+    "movieId": "la-la-land-2016",
+    "venue": "home",
+    "picker": "her",
+    "consumesTurn": true
   }
 ]
