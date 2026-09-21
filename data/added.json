@@ -110,5 +110,12 @@
     "year": 2003,
     "tmdbId": 2289,
     "addedAt": "2026-09-21T20:22:05.116Z"
+  },
+  {
+    "id": "the-goonies-1985",
+    "title": "The Goonies",
+    "year": 1985,
+    "tmdbId": 9340,
+    "addedAt": "2026-09-21T20:24:31.368Z"
   }
 ]
