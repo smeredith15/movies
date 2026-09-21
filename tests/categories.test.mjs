@@ -48,10 +48,14 @@ export default function run() {
     check('each carries a placeholder', custom.every((c) => c.namePlaceholder), true);
     check('each pays 1 for the winner', custom.every((c) => c.scoring.winner === 1), true);
     check('ids are stable', custom.map((c) => c.id).join(','), 'custom-1,custom-2,custom-3,custom-4,custom-5');
+    check('their type is editable too', custom.every((c) => c.typeEditable), true);
+    check('every kind is on the table', custom.every((c) => c.allowedTypes.length === 5), true);
+    check('including the one that skips the movie list', custom.every((c) => c.allowedTypes.includes('free')), true);
+    check('named categories keep a fixed type', cats.filter((c) => !c.custom).some((c) => c.typeEditable), false);
   });
 
   suite('categories: entry types', () => {
-    const valid = new Set(['movie', 'person', 'character', 'movieText']);
+    const valid = new Set(['movie', 'person', 'character', 'movieText', 'free']);
     check('every type is one we handle', cats.every((c) => valid.has(c.type)), true);
     check('movieText categories prompt their text field', cats.filter((c) => c.type === 'movieText').every((c) => c.textLabel), true);
     check('Best Animal takes free text', cats.find((c) => c.name === 'Best Animal').type, 'movieText');

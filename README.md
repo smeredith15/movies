@@ -77,12 +77,16 @@ scraper writes only to `data/catalog/` and never touches overrides.
 `data/categories.json` holds all 25 categories, imported from the workbook's
 `Awards` sheet. Each one records what it asks for and what it is worth:
 
-| type | what you pick |
-| --- | --- |
-| `movie` | a movie from the eligible pool |
-| `person` | an actor — the movie rows expand to show cast |
-| `character` | a character — the movie rows expand to show roles |
-| `movieText` | a movie, then type the answer, prompted by `textLabel` |
+| type | what you pick | needs a movie |
+| --- | --- | --- |
+| `movie` | a movie from the eligible pool | yes |
+| `person` | an actor — the movie rows expand to show cast | yes, unless custom |
+| `character` | a character — the movie rows expand to show roles | yes, unless custom |
+| `movieText` | a movie, then type the answer, prompted by `textLabel` | yes |
+| `free` | nothing from any list — just type it | no |
+
+The rules for each type live in `shared/entryTypes.js`, including
+`validateEntry`, which is what decides whether a filled-in slot is usable.
 
 Best Animal is `movieText` rather than `character` because cast lists rarely
 name the animals, so free text is the only thing that reliably works. Best
@@ -116,9 +120,19 @@ sad movies.
 
 The unnamed rows at the bottom of the `Awards` sheet are the categories we each
 invent on the day. They are stored as five slots (`custom-1` … `custom-5`) with
-empty names, marked `nameEditable` and `perPerson`: the name is typed at voting
-time and saved on that person's ballot, not in the shared category list, so you
-each make up your own without seeing the other's. Each pays 1 for the winner.
+empty names, marked `nameEditable`, `typeEditable` and `perPerson`: the name,
+the type and the picks are all chosen at voting time and saved on that person's
+ballot rather than in the shared list, so you each make up your own without
+seeing the other's. Each pays 1 for the winner.
+
+All five types are available to them, and two rules are relaxed because a
+made-up category does not behave like a fixed one:
+
+- An actor or character in a custom category only *optionally* names a movie,
+  since these are often about someone's whole year rather than one performance.
+- The `free` type bypasses the movie list altogether — no eligible-movie pool,
+  no cast expansion, just a typed answer. That is the escape hatch for a
+  category that is not about any particular movie.
 
 ## Rebuilding the catalog
 

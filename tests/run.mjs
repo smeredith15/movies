@@ -15,6 +15,7 @@ import runParse from './parse.test.mjs';
 import runTurns from './turns.test.mjs';
 import runIndex from './index.test.mjs';
 import runCategories from './categories.test.mjs';
+import runEntryTypes from './entryTypes.test.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const BUILD = resolve(ROOT, '.test-build');
@@ -50,6 +51,7 @@ runParse();
 runTurns(turns);
 runIndex(catalogIndex);
 runCategories();
+runEntryTypes();
 
 rmSync(BUILD, { recursive: true, force: true });
 process.exit(report() === 0 ? 0 : 1);

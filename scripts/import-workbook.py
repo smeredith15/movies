@@ -161,10 +161,16 @@ def read_categories(ws):
         if "textLabel" in spec:
             entry["textLabel"] = spec["textLabel"]
         if is_custom:
-            # Made up separately on the day, so the name lives on each person's
-            # ballot rather than here — this is only the slot.
+            # Made up separately on the day, so the name, the type and the
+            # entries all live on each person's ballot rather than here — this
+            # is only the slot. A custom category can be about a movie, a
+            # moment, an actor across several movies, or nothing on the list at
+            # all, so every type is on the table including the free-text one
+            # that skips the movie list entirely.
             entry["custom"] = True
             entry["nameEditable"] = True
+            entry["typeEditable"] = True
+            entry["allowedTypes"] = ["movie", "person", "character", "movieText", "free"]
             entry["perPerson"] = True
             entry["namePlaceholder"] = f"Your own category #{custom}"
         cats.append(entry)

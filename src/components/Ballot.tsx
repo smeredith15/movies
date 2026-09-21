@@ -13,10 +13,15 @@ export function Ballot({ year }: { year: number }) {
       <p className="small muted">
         The shape it needs to take — every category offers one winner and up to
         four honorable mentions, whether or not those slots score. Categories
-        are one of four kinds: pick a movie, pick an actor (the rows expand to
-        show cast), pick a character (the rows expand to show roles), or pick a
-        movie and type the answer. All of them take a write-in. The last five
-        are blank slots whose names you each fill in on the day.
+        are one of five kinds: pick a movie, pick an actor (the rows expand to
+        show cast), pick a character (the rows expand to show roles), pick a
+        movie and type the answer, or skip the lists entirely and just type
+        something. All of them take a write-in.
+      </p>
+      <p className="small muted">
+        The last five categories are blank slots you each fill in on the day —
+        name, type and picks all chosen at voting time, so neither of you sees
+        what the other invented.
       </p>
       <p className="small muted">
         Each ballot saves to <code>data/ballots/{year}.&lt;person&gt;.json</code>,
