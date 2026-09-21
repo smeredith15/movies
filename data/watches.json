@@ -439,5 +439,14 @@
     "venue": "home",
     "picker": "her",
     "consumesTurn": true
+  },
+  {
+    "id": "w_mubkh5tfcsts9",
+    "date": "2025-12-29",
+    "title": "Zootopia",
+    "movieId": "zootopia-2016",
+    "venue": "home",
+    "picker": "her",
+    "consumesTurn": true
   }
 ]
