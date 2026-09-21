@@ -375,6 +375,13 @@ row becomes a title that was never a film. The earlier matcher took the most
 popular result for any query, so those entries were handed confident matches to
 unrelated films — worse than no match, because nothing downstream could tell.
 
+Verification is not cached by the presence of an id. An entry that holds a
+TMDB id but has never been confirmed — everything matched by the earlier,
+looser matcher — is checked again, because an id is not evidence of having
+been checked. A failed check keeps whatever metadata the entry already had but
+says where it came from, since dates and cast derived from a wrong match are
+wrong in a way nothing else reveals.
+
 Entries that fail are kept rather than dropped. TMDB misses things too, and a
 wrong exclusion is harder to notice than a wrong inclusion sitting in a filter.
 
