@@ -34,5 +34,14 @@
     "venue": "home",
     "picker": "her",
     "consumesTurn": true
+  },
+  {
+    "id": "w_mubjmuzwnhjn3",
+    "date": "2026-08-30",
+    "title": "The Devil Wears Prada 2",
+    "movieId": "the-devil-wears-prada-2-2026",
+    "venue": "home",
+    "picker": "her",
+    "consumesTurn": true
   }
 ]
