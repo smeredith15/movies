@@ -1,9 +1,17 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { CatalogMovie, Config, EligibilityOverride, Watch } from '../lib/types';
+
 import { loadCatalog, newId } from '../lib/store';
 import { applyMark, type Mark, type Marks } from '../lib/marks';
 import { BROWSE_DRAFT, clearDraft, draftSize, loadDraft, saveDraft } from '../lib/draft';
 import { watchFallsInSeason } from '../../shared/eligibility.js';
+
+/** What the Set button sends back; null clears the corrections entirely. */
+export interface OverridePatch {
+  eligibilityYear: number | null;
+  tmdbId: number | null;
+  note: string;
+}
 
 type Shown = 'released' | 'upcoming' | 'all';
 type Filter = 'all' | 'unseen' | 'seen' | 'rated' | 'review' | 'unverified';
@@ -40,7 +48,7 @@ export function Browse({
   watches: Watch[];
   onSaveMarks: (changes: Marks) => Promise<void>;
   onSaveWatches: (add: Watch[], removeIds: string[]) => Promise<void>;
-  onOverride: (movieId: string, year: number | null, note: string) => Promise<void>;
+  onOverride: (movieId: string, patch: OverridePatch | null) => Promise<void>;
   canEdit: boolean;
   busy: boolean;
 }) {
@@ -368,11 +376,12 @@ function Details({
 }: {
   movie: CatalogMovie;
   override?: EligibilityOverride;
-  onOverride: (movieId: string, year: number | null, note: string) => Promise<void>;
+  onOverride: (movieId: string, patch: OverridePatch | null) => Promise<void>;
   canEdit: boolean;
   busy: boolean;
 }) {
   const [year, setYear] = useState(String(override?.eligibilityYear ?? movie.computedYear ?? ''));
+  const [tmdbId, setTmdbId] = useState(String(override?.tmdbId ?? movie.tmdbId ?? ''));
   const [note, setNote] = useState(override?.note ?? '');
   const r = movie.ratings ?? {};
   const scores = [
@@ -441,15 +450,47 @@ function Details({
           <button
             className="primary"
             disabled={busy}
-            onClick={() => onOverride(movie.id, year ? Number(year) : null, note)}
+            onClick={() =>
+              onOverride(movie.id, {
+                eligibilityYear: year ? Number(year) : null,
+                tmdbId: tmdbId ? Number(tmdbId) : null,
+                note,
+              })
+            }
           >
             Set
           </button>
           {override && (
-            <button className="ghost" disabled={busy} onClick={() => onOverride(movie.id, null, '')}>
+            <button className="ghost" disabled={busy} onClick={() => onOverride(movie.id, null)}>
               Clear
             </button>
           )}
+        </div>
+      )}
+
+      {canEdit && (
+        <div className="row b-override">
+          <span className="small muted">TMDB id</span>
+          <input
+            type="number"
+            value={tmdbId}
+            onChange={(e) => setTmdbId(e.target.value)}
+            placeholder="e.g. 438631"
+            style={{ width: 120 }}
+            aria-label={`TMDB id for ${movie.title}`}
+          />
+          <a
+            className="small"
+            href={`https://www.themoviedb.org/search?query=${encodeURIComponent(movie.title)}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            find it on TMDB
+          </a>
+          <span className="small muted">
+            {movie.tmdbId ? `currently ${movie.tmdbId}` : 'none matched'}
+            {movie.detailsUpdated ? ` · detail from ${movie.detailsUpdated.slice(0, 10)}` : ''}
+          </span>
         </div>
       )}
     </div>

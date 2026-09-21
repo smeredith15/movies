@@ -48,6 +48,17 @@ const args = parseArgs(process.argv.slice(2));
 const parsedYear = Number.parseInt(args.year, 10);
 const YEAR = Number.isInteger(parsedYear) && parsedYear > 1900 ? parsedYear : new Date().getUTCFullYear();
 const DRY = Boolean(args['dry-run']);
+// How long a TMDB detail stays good. --force ignores it entirely.
+const STALE_DAYS = Number.isFinite(Number(args['stale-days'])) ? Number(args['stale-days']) : 30;
+
+/** Manual corrections, which survive every rebuild. */
+async function readOverrides() {
+  try {
+    return JSON.parse(await readFile(resolve(ROOT, 'data', 'overrides.json'), 'utf8'));
+  } catch {
+    return [];
+  }
+}
 const DEBUG = Boolean(args.debug);
 
 const log = (...a) => console.log(...a);
@@ -163,6 +174,31 @@ async function collectStreaming(year) {
 export const needsVerification = (movie, force = false) =>
   force || movie?.tmdbVerified !== true || !movie?.tmdbId;
 
+/**
+ * Whether this entry's TMDB detail should be pulled again.
+ *
+ * Judged by when it was last fetched, not by which fields happen to be
+ * present. The previous version asked "does it have cast or an overview?",
+ * so adding a new field to collect could never backfill: every entry already
+ * had cast, the fetch was skipped, and the new field stayed empty for all of
+ * them. A timestamp does not care what we decided to collect this week.
+ */
+export function detailIsStale(movie, { staleDays = 30, force = false, now = Date.now() } = {}) {
+  if (force) return true;
+  if (!movie?.detailsUpdated) return true;
+  const age = (now - Date.parse(movie.detailsUpdated)) / 86400000;
+  return !Number.isFinite(age) || age >= staleDays;
+}
+
+/** Hand-set TMDB ids, keyed by movie, read from the overrides file. */
+export function pinnedIds(overrides) {
+  const pins = new Map();
+  for (const o of overrides ?? []) {
+    if (typeof o?.tmdbId === 'number' && o.movieId) pins.set(o.movieId, o.tmdbId);
+  }
+  return pins;
+}
+
 export function carryOver(prior) {
   return {
     oscarNominated: prior?.oscarNominated ?? false,
@@ -256,7 +292,45 @@ function mergeRows(theatrical, streaming) {
  * premiere, a limited run, a wide run or a home release — which is exactly the
  * distinction the eligibility rules turn on.
  */
-async function enrich(movies, apiKey, { force = false } = {}) {
+/**
+ * Pull one film's detail and write it onto the entry.
+ *
+ * Kept apart from the matching so a pinned id and a searched one take the
+ * identical path, and stamped so staleness can be judged by when it was last
+ * fetched rather than by which fields happen to be present.
+ */
+async function applyDetails(tmdb, m, tmdbId) {
+  const details = await tmdb.details(tmdbId);
+  if (!details) {
+    m.tmdbNote = `${m.tmdbNote ?? ''} Detail lookup returned nothing.`.trim();
+    return false;
+  }
+
+  const dates = usReleaseDates(details);
+  const facts = factsFrom(details);
+
+  // Only overwrite a date TMDB actually knows.
+  for (const key of ['festivalDate', 'usLimitedDate', 'usTheatricalDate', 'homeDate']) {
+    if (dates[key]) m[key] = dates[key];
+  }
+
+  m.tmdbId = facts.tmdbId ?? tmdbId;
+  m.imdbId = facts.imdbId ?? m.imdbId;
+  m.overview = facts.overview ?? m.overview ?? null;
+  if (facts.genres.length) m.genres = facts.genres;
+  m.isDocumentary = m.isDocumentary || facts.isDocumentary;
+  m.isForeignLanguage = m.isForeignLanguage || facts.isForeignLanguage;
+  m.hadUSTheatricalRelease =
+    m.hadUSTheatricalRelease || Boolean(dates.usTheatricalDate || dates.usLimitedDate);
+
+  const cast = castFrom(details);
+  if (cast.length) m.cast = cast;
+
+  m.detailsUpdated = new Date().toISOString();
+  return true;
+}
+
+async function enrich(movies, apiKey, { force = false, staleDays = 30, pins = new Map() } = {}) {
   if (!apiKey) {
     warn('no TMDB_API set — skipping release dates, cast and ratings');
     return { matched: 0, missed: [] };
@@ -264,22 +338,34 @@ async function enrich(movies, apiKey, { force = false } = {}) {
 
   const tmdb = new Tmdb(apiKey);
   let matched = 0;
+  let refreshed = 0;
   const missed = [];
 
   for (const m of movies) {
-    // Having an id is not the same as having been checked. Matches made by
-    // the older, looser matcher carry ids that were never confirmed to be the
-    // right film, so anything unverified is looked at again.
-    if (!needsVerification(m, force)) continue;
+    const pinned = pins.get(m.id);
+
+    // An id set by hand is an answer someone gave deliberately. Use it and
+    // skip the search entirely.
+    if (pinned) {
+      const changed = m.tmdbId !== pinned;
+      m.tmdbId = pinned;
+      m.tmdbVerified = true;
+      m.tmdbNote = `TMDB id ${pinned} set by hand.`;
+      if (changed || detailIsStale(m, { staleDays, force })) {
+        if (await applyDetails(tmdb, m, pinned)) refreshed += 1;
+      }
+      matched += 1;
+      continue;
+    }
+
+    const stale = detailIsStale(m, { staleDays, force });
+    if (!needsVerification(m, force) && !stale) continue;
 
     const { movie: hit, reason } = await tmdb.findBest(m.title, m.computedYear ?? undefined);
     if (!hit) {
       // Nothing downstream can tell a wrong match from a right one, so an
       // entry TMDB cannot confirm is marked rather than quietly enriched.
       m.tmdbVerified = false;
-      // The entry keeps whatever it already had, but that metadata came from
-      // a match nothing has confirmed — saying so beats leaving it looking
-      // as trustworthy as the rest.
       m.tmdbNote = m.tmdbId
         ? `${reason} Its dates and cast came from an earlier, unconfirmed match.`
         : reason;
@@ -289,48 +375,18 @@ async function enrich(movies, apiKey, { force = false } = {}) {
 
     m.tmdbVerified = true;
     m.tmdbNote = reason;
-
-    const alreadyDetailed = m.tmdbId === hit.id && (m.cast?.length || m.overview);
-    if (alreadyDetailed && !force) {
-      matched += 1;
-      continue;
-    }
-
-    const details = await tmdb.details(hit.id);
-    if (!details) {
-      m.tmdbNote = `${reason} Detail lookup returned nothing.`;
-      matched += 1;
-      continue;
-    }
-
-    const dates = usReleaseDates(details);
-    const facts = factsFrom(details);
-
-    // Only overwrite a date TMDB actually knows.
-    for (const key of ['festivalDate', 'usLimitedDate', 'usTheatricalDate', 'homeDate']) {
-      if (dates[key]) m[key] = dates[key];
-    }
-
-    m.tmdbId = facts.tmdbId;
-    m.imdbId = facts.imdbId ?? m.imdbId;
-    m.overview = facts.overview ?? m.overview ?? null;
-    if (facts.genres.length) m.genres = facts.genres;
-    m.isDocumentary = m.isDocumentary || facts.isDocumentary;
-    m.isForeignLanguage = m.isForeignLanguage || facts.isForeignLanguage;
-    m.hadUSTheatricalRelease =
-      m.hadUSTheatricalRelease || Boolean(dates.usTheatricalDate || dates.usLimitedDate);
-
-    const cast = castFrom(details);
-    if (cast.length) m.cast = cast;
-
     matched += 1;
+
+    if (m.tmdbId === hit.id && !stale) continue;
+    if (await applyDetails(tmdb, m, hit.id)) refreshed += 1;
   }
 
-  log(`  matched ${matched} of ${movies.length} on TMDB (${tmdb.calls} API calls)`);
+  log(`  confirmed ${matched} of ${movies.length} on TMDB, pulled detail for ${refreshed} (${tmdb.calls} API calls)`);
   if (missed.length) {
     log(`\n  ${missed.length} could not be confirmed as a film of that year.`);
-    log('  These are usually television, a mis-parsed row, or a title TMDB spells');
-    log('  differently. They stay in the catalog, flagged, for Browse to review:');
+    log('  These are usually television, a live event, or a title TMDB spells');
+    log('  differently. They stay in the catalog, flagged, for Browse to review');
+    log('  — where a TMDB id can be pasted in to settle one:');
     for (const m of movies.filter((x) => x.tmdbVerified === false).slice(0, 15)) {
       log(`    · ${m.title} — ${m.tmdbNote}`);
     }
@@ -373,7 +429,13 @@ async function main() {
   if (args['enrich-only']) {
     log(`Enriching the existing ${YEAR} catalog from TMDB\n`);
     const catalog = JSON.parse(await readFile(outPath, 'utf8'));
-    await enrich(catalog, process.env.TMDB_API, { force: Boolean(args.force) });
+    const pins = pinnedIds(await readOverrides());
+    if (pins.size) log(`  ${pins.size} TMDB id(s) set by hand will be used as given`);
+    await enrich(catalog, process.env.TMDB_API, {
+      force: Boolean(args.force),
+      staleDays: STALE_DAYS,
+      pins,
+    });
     recompute(catalog, YEAR);
     if (DRY) {
       log('\nDry run — nothing written.');
@@ -452,7 +514,9 @@ async function main() {
   catalog.sort((a, b) => a.title.localeCompare(b.title));
 
   log('\nEnriching from TMDB:');
-  await enrich(catalog, process.env.TMDB_API);
+  const pins = pinnedIds(await readOverrides());
+  if (pins.size) log(`  ${pins.size} TMDB id(s) set by hand will be used as given`);
+  await enrich(catalog, process.env.TMDB_API, { staleDays: STALE_DAYS, pins });
   recompute(catalog, YEAR);
 
   log('\nResult:');
