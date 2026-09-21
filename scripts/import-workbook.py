@@ -59,7 +59,9 @@ def read_year_sheet(ws):
                 "title": norm_title(title),
                 "seen": bool(row[1]),
                 "owned": bool(row[2]),
-                "wantToSee": bool(row[3]),
+                # 1-10, how much we want to see it. Older sheets use it as a
+                # flag and hold only 1s; 2025 onward uses the real scale.
+                "wantToSee": num(row[3]),
                 "where": str(row[4]).strip() if row[4] else None,
                 "imdb": num(row[5]),
                 "genre": str(row[6]).strip() if row[6] and len(str(row[6])) > 3 else None,
@@ -302,7 +304,7 @@ def main():
                 "manual": True,
                 "seen": True,
                 "owned": False,
-                "wantToSee": False,
+                "wantToSee": None,
                 "onFrozenBallot": False,
             }
         )

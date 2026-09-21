@@ -1,0 +1,40 @@
+name: Probe release sources
+
+# Diagnostic only. Fetches firstshowing.net and the Wikipedia streaming lists,
+# reports what is actually on the pages, and writes nothing to data/.
+# Run this before trusting the scrapers, and after either site changes layout.
+on:
+  workflow_dispatch:
+    inputs:
+      year:
+        description: 'Year to probe'
+        required: true
+        type: string
+        default: '2026'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+
+      - name: Probe
+        run: node scripts/probe-sources.mjs --year "${{ inputs.year }}"
+
+      # The raw HTML, the extracted lines and the parse output, for reading
+      # when the log summary is not enough.
+      - name: Upload dumps
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: probe-${{ inputs.year }}
+          path: probe-output/
+          retention-days: 14
