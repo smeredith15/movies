@@ -754,5 +754,14 @@
     "venue": "home",
     "picker": "her",
     "consumesTurn": true
+  },
+  {
+    "id": "w_mublx60jv50sx",
+    "date": "2025-10-13",
+    "title": "Rocky",
+    "movieId": "rocky-1976",
+    "venue": "home",
+    "picker": "me",
+    "consumesTurn": true
   }
 ]
