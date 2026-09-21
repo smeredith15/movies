@@ -2802,7 +2802,7 @@
       "Imported from the 2017 sheet of the original workbook."
     ],
     "manual": true,
-    "seen": false,
+    "seen": true,
     "owned": true,
     "wantToSee": false,
     "onFrozenBallot": false

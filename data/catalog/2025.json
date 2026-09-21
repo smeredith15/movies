@@ -1,128 +1,18 @@
 [
   {
-    "id": "weapons-2025",
-    "title": "Weapons",
-    "kind": "streaming",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": false,
-    "services": [
-      "Plex"
-    ],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 7.5,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": true,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "the-long-walk-2025",
-    "title": "The Long Walk",
-    "kind": "streaming",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": false,
-    "services": [
-      "Plex"
-    ],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.9,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": true,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "hamnet-2025",
-    "title": "Hamnet",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 8.1,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
     "id": "no-other-choice-2025",
     "title": "No Other Choice",
-    "kind": "theatrical",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "19.99"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 7.6,
@@ -148,82 +38,8 @@
     "onFrozenBallot": false
   },
   {
-    "id": "is-this-thing-on-2025",
-    "title": "Is This Thing On?",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 7.2,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "eephus-2025",
-    "title": "Eephus",
-    "kind": "streaming",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": false,
-    "services": [
-      "MUBI"
-    ],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.7,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "sketch-2025",
-    "title": "Sketch",
+    "id": "sentimental-value-2025",
+    "title": "Sentimental Value",
     "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
@@ -237,7 +53,7 @@
     ],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 6.7,
+      "imdb": 7.9,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -260,78 +76,6 @@
     "onFrozenBallot": false
   },
   {
-    "id": "sentimental-value-2025",
-    "title": "Sentimental Value",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 7.9,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "nuremberg-2025",
-    "title": "Nuremberg",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 7.5,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
     "id": "twinless-2025",
     "title": "Twinless",
     "kind": "streaming",
@@ -348,6 +92,44 @@
     "oscarNominated": false,
     "ratings": {
       "imdb": 7.5,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": true,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "the-smashing-machine-2025",
+    "title": "The Smashing Machine",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Hulu"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.7,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -408,168 +190,22 @@
     "onFrozenBallot": false
   },
   {
-    "id": "zootopia-2-2025",
-    "title": "Zootopia 2",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 7.5,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "train-dreams-2025",
-    "title": "Train Dreams",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 7.4,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
     "id": "blue-moon-2025",
     "title": "Blue Moon",
-    "kind": "theatrical",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "20.95"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 7.3,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "the-smashing-machine-2025",
-    "title": "The Smashing Machine",
-    "kind": "streaming",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": false,
-    "services": [
-      "Hulu"
-    ],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.7,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "the-thursday-murder-club-2025",
-    "title": "The Thursday Murder Club",
-    "kind": "streaming",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": false,
-    "services": [
-      "Netflix"
-    ],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.5,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -630,20 +266,22 @@
     "onFrozenBallot": false
   },
   {
-    "id": "the-secret-agent-2025",
-    "title": "The Secret Agent",
-    "kind": "theatrical",
+    "id": "i-m-still-here-2025",
+    "title": "I'm Still Here",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
     "oscarNominated": false,
     "ratings": {
-      "imdb": null,
+      "imdb": 8.1,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -661,7 +299,83 @@
     ],
     "manual": true,
     "seen": false,
-    "owned": false,
+    "owned": true,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "song-sung-blue-2025",
+    "title": "Song Sung Blue",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 7.5,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": true,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "if-i-had-legs-i-d-kick-you-2025",
+    "title": "If I Had Legs I'd Kick You",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 7.3,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": true,
     "wantToSee": true,
     "onFrozenBallot": false
   },
@@ -742,264 +456,6 @@
     "onFrozenBallot": false
   },
   {
-    "id": "i-m-still-here-2025",
-    "title": "I'm Still Here",
-    "kind": "streaming",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": false,
-    "services": [
-      "Netflix"
-    ],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 8.1,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "kpop-demon-hunters-2025",
-    "title": "KPop Demon Hunters",
-    "kind": "streaming",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": false,
-    "services": [
-      "Netflix"
-    ],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 7.6,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "song-sung-blue-2025",
-    "title": "Song Sung Blue",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 7.5,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "if-i-had-legs-i-d-kick-you-2025",
-    "title": "If I Had Legs I'd Kick You",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 7.3,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "the-lost-bus-2025",
-    "title": "The Lost Bus",
-    "kind": "streaming",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": false,
-    "services": [
-      "Apple"
-    ],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.9,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "don-t-let-s-go-to-the-dogs-tonight-2025",
-    "title": "Don't Let's Go to the Dogs Tonight",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.9,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "the-baltimorons-2025",
-    "title": "The Baltimorons",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.9,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
     "id": "good-boy-2025",
     "title": "Good Boy",
     "kind": "theatrical",
@@ -1031,25 +487,65 @@
     ],
     "manual": true,
     "seen": false,
-    "owned": false,
+    "owned": true,
     "wantToSee": true,
     "onFrozenBallot": false
   },
   {
-    "id": "anaconda-2025",
-    "title": "Anaconda",
-    "kind": "theatrical",
+    "id": "truth-treason-2025",
+    "title": "Truth & Treason",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 6,
+      "imdb": null,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": true,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "don-t-let-s-go-to-the-dogs-tonight-2025",
+    "title": "Don't Let's Go to the Dogs Tonight",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Netflix"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.9,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -1110,44 +606,6 @@
   {
     "id": "relay-2025",
     "title": "Relay",
-    "kind": "streaming",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": false,
-    "services": [
-      "Plex"
-    ],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 7,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": true,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "the-bad-guys-2-2025",
-    "title": "The Bad Guys 2",
     "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
@@ -1260,17 +718,19 @@
     "onFrozenBallot": false
   },
   {
-    "id": "clemente-2025",
-    "title": "Clemente",
-    "kind": "theatrical",
+    "id": "the-wilderness-2025",
+    "title": "The Wilderness",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "7.99"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 8.2,
@@ -1296,17 +756,19 @@
     "onFrozenBallot": false
   },
   {
-    "id": "the-wilderness-2025",
-    "title": "The Wilderness",
-    "kind": "theatrical",
+    "id": "clemente-2025",
+    "title": "Clemente",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "12.99"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 8.2,
@@ -1343,7 +805,7 @@
     "isDocumentary": false,
     "hadUSTheatricalRelease": false,
     "services": [
-      "MUBI"
+      "21.69"
     ],
     "oscarNominated": false,
     "ratings": {
@@ -1370,8 +832,46 @@
     "onFrozenBallot": false
   },
   {
-    "id": "sorry-baby-2025",
-    "title": "Sorry, Baby",
+    "id": "die-my-love-2025",
+    "title": "Die My Love",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "26.99"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.5,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "black-phone-2-2025",
+    "title": "Black Phone 2",
     "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
@@ -1385,7 +885,45 @@
     ],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 7.1,
+      "imdb": 6.6,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": true,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "dust-bunny-2025",
+    "title": "Dust Bunny",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": null,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -1448,15 +986,17 @@
   {
     "id": "re-election-2025",
     "title": "Re-Election",
-    "kind": "theatrical",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "7.99"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 7.9,
@@ -1484,15 +1024,17 @@
   {
     "id": "little-amelie-or-the-character-of-rain-2025",
     "title": "Little Am\u00e9lie or the Character of Rain",
-    "kind": "theatrical",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "22.99"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 7.6,
@@ -1605,7 +1147,7 @@
     "isDocumentary": false,
     "hadUSTheatricalRelease": false,
     "services": [
-      "MUBI"
+      "25.89"
     ],
     "oscarNominated": false,
     "ratings": {
@@ -1634,15 +1176,17 @@
   {
     "id": "waltzing-with-brando-2025",
     "title": "Waltzing with Brando",
-    "kind": "theatrical",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "14.99"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 6.7,
@@ -1668,20 +1212,22 @@
     "onFrozenBallot": false
   },
   {
-    "id": "black-phone-2-2025",
-    "title": "Black Phone 2",
-    "kind": "theatrical",
+    "id": "christy-2025",
+    "title": "Christy",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "19.98"
+    ],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 6.6,
+      "imdb": 6.2,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -1706,15 +1252,17 @@
   {
     "id": "the-luckiest-man-in-america-2025",
     "title": "The Luckiest Man in America",
-    "kind": "theatrical",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Hulu"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 6.2,
@@ -1742,15 +1290,17 @@
   {
     "id": "regretting-you-2025",
     "title": "Regretting You",
-    "kind": "theatrical",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Paramount"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 6.2,
@@ -1854,15 +1404,17 @@
   {
     "id": "extremely-unique-dynamic-2025",
     "title": "Extremely Unique Dynamic",
-    "kind": "theatrical",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "12.99"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 7.2,
@@ -1890,54 +1442,20 @@
   {
     "id": "splitsville-2025",
     "title": "Splitsville",
-    "kind": "theatrical",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "9.99"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 6.5,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "oh-hi-2025",
-    "title": "Oh, Hi!",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.2,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -2000,15 +1518,17 @@
   {
     "id": "the-spongebob-movie-search-for-squarepants-2025",
     "title": "The SpongeBob Movie: Search for SquarePants",
-    "kind": "theatrical",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "24.99"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 5.8,
@@ -2036,18 +1556,58 @@
   {
     "id": "anemone-2025",
     "title": "Anemone",
-    "kind": "theatrical",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Peacock"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 5.7,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "bunny-2025",
+    "title": "Bunny",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "14.99"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": null,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -2108,17 +1668,95 @@
     "onFrozenBallot": false
   },
   {
-    "id": "no-other-land-2025",
-    "title": "No Other Land",
-    "kind": "theatrical",
+    "id": "opus-2025",
+    "title": "Opus",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Max"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 5.7,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": true,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "adulthood-2025",
+    "title": "Adulthood",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 5.5,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": true,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "no-other-land-2025",
+    "title": "No Other Land",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "7.99"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 8.3,
@@ -2146,15 +1784,17 @@
   {
     "id": "are-we-good-2025",
     "title": "Are We Good?",
-    "kind": "theatrical",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "9.99"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 7.7,
@@ -2220,15 +1860,17 @@
   {
     "id": "thank-you-very-much-2025",
     "title": "Thank You Very Much",
-    "kind": "theatrical",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 7.3,
@@ -2368,42 +2010,6 @@
   {
     "id": "the-senior-2025",
     "title": "The Senior",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.6,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "opus-2025",
-    "title": "Opus",
     "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
@@ -2413,47 +2019,11 @@
     "isDocumentary": false,
     "hadUSTheatricalRelease": false,
     "services": [
-      "Max"
+      "14.99"
     ],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 5.7,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "adulthood-2025",
-    "title": "Adulthood",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 5.5,
+      "imdb": 6.6,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -2530,6 +2100,44 @@
     "oscarNominated": false,
     "ratings": {
       "imdb": 6.2,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": true,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "heart-eyes-2025",
+    "title": "Heart Eyes",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Netflix"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -2668,18 +2276,58 @@
   {
     "id": "universal-language-2025",
     "title": "Universal Language",
-    "kind": "theatrical",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "5"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 6.9,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "the-roses-2025",
+    "title": "The Roses",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Hulu"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.8,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -2715,42 +2363,6 @@
     "services": [
       "Netflix"
     ],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.8,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "the-roses-2025",
-    "title": "The Roses",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
     "oscarNominated": false,
     "ratings": {
       "imdb": 6.8,
@@ -2814,17 +2426,19 @@
     "onFrozenBallot": false
   },
   {
-    "id": "eleanor-the-great-2025",
-    "title": "Eleanor the Great",
-    "kind": "theatrical",
+    "id": "zodiac-killer-project-2025",
+    "title": "Zodiac Killer Project",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "12.99"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 6.6,
@@ -2850,17 +2464,19 @@
     "onFrozenBallot": false
   },
   {
-    "id": "zodiac-killer-project-2025",
-    "title": "Zodiac Killer Project",
-    "kind": "theatrical",
+    "id": "eleanor-the-great-2025",
+    "title": "Eleanor the Great",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Netflix"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 6.6,
@@ -2897,7 +2513,45 @@
     "isDocumentary": false,
     "hadUSTheatricalRelease": false,
     "services": [
-      "MUBI"
+      "14.99"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.5,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "freakier-friday-2025",
+    "title": "Freakier Friday",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Disney"
     ],
     "oscarNominated": false,
     "ratings": {
@@ -3000,42 +2654,6 @@
     "onFrozenBallot": false
   },
   {
-    "id": "freakier-friday-2025",
-    "title": "Freakier Friday",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.5,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
     "id": "the-choral-2025",
     "title": "The Choral",
     "kind": "theatrical",
@@ -3074,42 +2692,6 @@
   {
     "id": "the-threesome-2025",
     "title": "The Threesome",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.1,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "heart-eyes-2025",
-    "title": "Heart Eyes",
     "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
@@ -3123,7 +2705,7 @@
     ],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 6,
+      "imdb": 6.1,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -3162,6 +2744,44 @@
     "oscarNominated": false,
     "ratings": {
       "imdb": 5.6,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "ella-mccay-2025",
+    "title": "Ella McCay",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "19.99"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 5.1,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -3224,51 +2844,17 @@
   {
     "id": "him-2025",
     "title": "Him",
-    "kind": "theatrical",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 5.1,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Peacock"
     ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "ella-mccay-2025",
-    "title": "Ella McCay",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
     "oscarNominated": false,
     "ratings": {
       "imdb": 5.1,
@@ -3328,6 +2914,42 @@
     "manual": true,
     "seen": false,
     "owned": true,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "it-was-just-an-accident-2025",
+    "title": "It Was Just An Accident",
+    "kind": "theatrical",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": true,
+    "services": [],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 7.7,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
     "wantToSee": true,
     "onFrozenBallot": false
   },
@@ -3410,15 +3032,17 @@
   {
     "id": "tatami-2025",
     "title": "Tatami",
-    "kind": "theatrical",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "14.99"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 7.4,
@@ -3446,15 +3070,17 @@
   {
     "id": "downton-abbey-the-grand-finale-2025",
     "title": "Downton Abbey: The Grand Finale",
-    "kind": "theatrical",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Peacock"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 7.4,
@@ -3480,89 +3106,19 @@
     "onFrozenBallot": false
   },
   {
-    "id": "one-to-one-john-yoko-2025",
-    "title": "One to One: John & Yoko",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 7.3,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
     "id": "cheech-and-chong-s-last-movie-2025",
     "title": "Cheech and Chong's Last Movie",
-    "kind": "theatrical",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 7.3,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "9.99"
     ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "lilly-2025",
-    "title": "Lilly",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
     "oscarNominated": false,
     "ratings": {
       "imdb": 7.3,
@@ -3590,18 +3146,286 @@
   {
     "id": "to-a-land-unknown-2025",
     "title": "To a Land Unknown",
-    "kind": "theatrical",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "12.99"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 7.3,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "one-to-one-john-yoko-2025",
+    "title": "One to One: John & Yoko",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Max"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 7.3,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "lilly-2025",
+    "title": "Lilly",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Netflix"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 7.3,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "one-night-in-tokyo-2025",
+    "title": "One Night in Tokyo",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "5.99"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 7.1,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "pavements-2025",
+    "title": "Pavements",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "7.99"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 7.1,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "familiar-touch-2025",
+    "title": "Familiar Touch",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "7.99"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 7.1,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "a-little-prayer-2025",
+    "title": "A Little Prayer",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "12.99"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 7.1,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "plainclothes-2025",
+    "title": "Plainclothes",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "12.99"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 7.1,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -3662,201 +3486,19 @@
     "onFrozenBallot": false
   },
   {
-    "id": "pavements-2025",
-    "title": "Pavements",
-    "kind": "streaming",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": false,
-    "services": [
-      "MUBI"
-    ],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 7.1,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "familiar-touch-2025",
-    "title": "Familiar Touch",
-    "kind": "streaming",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": false,
-    "services": [
-      "MUBI"
-    ],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 7.1,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "one-night-in-tokyo-2025",
-    "title": "One Night in Tokyo",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 7.1,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "a-little-prayer-2025",
-    "title": "A Little Prayer",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 7.1,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "plainclothes-2025",
-    "title": "Plainclothes",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 7.1,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
     "id": "the-ugly-stepsister-2025",
     "title": "The Ugly Stepsister",
-    "kind": "theatrical",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Hulu"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 7,
@@ -3882,17 +3524,57 @@
     "onFrozenBallot": false
   },
   {
-    "id": "magazine-dreams-2025",
-    "title": "Magazine Dreams",
-    "kind": "theatrical",
+    "id": "violent-ends-2025",
+    "title": "Violent Ends",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "12.99"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.9,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "magazine-dreams-2025",
+    "title": "Magazine Dreams",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "14.99"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 6.9,
@@ -3920,51 +3602,17 @@
   {
     "id": "urchin-2025",
     "title": "Urchin",
-    "kind": "theatrical",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.9,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "14.99"
     ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "violent-ends-2025",
-    "title": "Violent Ends",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
     "oscarNominated": false,
     "ratings": {
       "imdb": 6.9,
@@ -4028,6 +3676,82 @@
     "onFrozenBallot": false
   },
   {
+    "id": "deathstalker-2025",
+    "title": "Deathstalker",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "5"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.7,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "sarah-s-oil-2025",
+    "title": "Sarah's Oil",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "19.99"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.7,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
     "id": "deep-cover-2025",
     "title": "Deep Cover",
     "kind": "streaming",
@@ -4066,78 +3790,6 @@
     "onFrozenBallot": false
   },
   {
-    "id": "deathstalker-2025",
-    "title": "Deathstalker",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.7,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "sarah-s-oil-2025",
-    "title": "Sarah's Oil",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.7,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
     "id": "the-assessment-2025",
     "title": "The Assessment",
     "kind": "streaming",
@@ -4150,6 +3802,44 @@
     "hadUSTheatricalRelease": false,
     "services": [
       "Hulu"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.6,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "spinal-tap-ii-the-end-continues-2025",
+    "title": "Spinal Tap II: The End Continues",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Max"
     ],
     "oscarNominated": false,
     "ratings": {
@@ -4292,90 +3982,20 @@
   {
     "id": "preparation-for-the-next-life-2025",
     "title": "Preparation for the Next Life",
-    "kind": "theatrical",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Prime"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 6.6,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "spinal-tap-ii-the-end-continues-2025",
-    "title": "Spinal Tap II: The End Continues",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.6,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "sovereign-2025",
-    "title": "Sovereign",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.5,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -4400,15 +4020,17 @@
   {
     "id": "the-mastermind-2025",
     "title": "The Mastermind",
-    "kind": "theatrical",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "14.99"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 6.5,
@@ -4434,20 +4056,60 @@
     "onFrozenBallot": false
   },
   {
-    "id": "die-my-love-2025",
-    "title": "Die My Love",
-    "kind": "theatrical",
+    "id": "sovereign-2025",
+    "title": "Sovereign",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Hulu"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 6.5,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "the-knife-2025",
+    "title": "The Knife",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "5"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.4,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -4548,15 +4210,17 @@
   {
     "id": "fight-or-flight-2025",
     "title": "Fight or Flight",
-    "kind": "theatrical",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Paramount"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 6.4,
@@ -4582,20 +4246,60 @@
     "onFrozenBallot": false
   },
   {
-    "id": "the-knife-2025",
-    "title": "The Knife",
-    "kind": "theatrical",
+    "id": "queen-of-the-ring-2025",
+    "title": "Queen of the Ring",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "9.99"
+    ],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 6.4,
+      "imdb": 6.3,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "east-of-wall-2025",
+    "title": "East of Wall",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "14.99"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.3,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -4656,53 +4360,19 @@
     "onFrozenBallot": false
   },
   {
-    "id": "queen-of-the-ring-2025",
-    "title": "Queen of the Ring",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.3,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
     "id": "salvable-2025",
     "title": "Salvable",
-    "kind": "theatrical",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Peacock"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 6.3,
@@ -4728,20 +4398,22 @@
     "onFrozenBallot": false
   },
   {
-    "id": "east-of-wall-2025",
-    "title": "East of Wall",
-    "kind": "theatrical",
+    "id": "kiss-of-the-spider-woman-2025",
+    "title": "Kiss of the Spider Woman",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "7.99"
+    ],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 6.3,
+      "imdb": 6.2,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -4840,56 +4512,22 @@
     "onFrozenBallot": false
   },
   {
-    "id": "kiss-of-the-spider-woman-2025",
-    "title": "Kiss of the Spider Woman",
-    "kind": "theatrical",
+    "id": "dead-of-winter-2025",
+    "title": "Dead of Winter",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "14.99"
+    ],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 6.2,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "christy-2025",
-    "title": "Christy",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.2,
+      "imdb": 6.1,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -4988,20 +4626,174 @@
     "onFrozenBallot": false
   },
   {
-    "id": "dead-of-winter-2025",
-    "title": "Dead of Winter",
-    "kind": "theatrical",
+    "id": "night-of-the-zoopocalypse-2025",
+    "title": "Night of the Zoopocalypse",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "1.99"
+    ],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 6.1,
+      "imdb": 6,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "the-old-woman-with-the-knife-2025",
+    "title": "The Old Woman with the Knife",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "9.99"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "hallow-road-2025",
+    "title": "Hallow Road",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "14.99"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "the-toxic-avenger-unrated-2025",
+    "title": "The Toxic Avenger Unrated",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Hulu"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "sew-torn-2025",
+    "title": "Sew Torn",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Netflix"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -5037,186 +4829,6 @@
     "services": [
       "Peacock"
     ],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "night-of-the-zoopocalypse-2025",
-    "title": "Night of the Zoopocalypse",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "sew-torn-2025",
-    "title": "Sew Torn",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "the-old-woman-with-the-knife-2025",
-    "title": "The Old Woman with the Knife",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "the-toxic-avenger-unrated-2025",
-    "title": "The Toxic Avenger Unrated",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "hallow-road-2025",
-    "title": "Hallow Road",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
     "oscarNominated": false,
     "ratings": {
       "imdb": 6,
@@ -5354,6 +4966,44 @@
     "onFrozenBallot": false
   },
   {
+    "id": "shelby-oaks-2025",
+    "title": "Shelby Oaks",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "19.99"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 5.8,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
     "id": "sister-midnight-2025",
     "title": "Sister Midnight",
     "kind": "streaming",
@@ -5392,20 +5042,60 @@
     "onFrozenBallot": false
   },
   {
-    "id": "shelby-oaks-2025",
-    "title": "Shelby Oaks",
-    "kind": "theatrical",
+    "id": "the-accidental-getaway-driver-2025",
+    "title": "The Accidental Getaway Driver",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "7.99"
+    ],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 5.8,
+      "imdb": 5.7,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "the-shrouds-2025",
+    "title": "The Shrouds",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "9.99"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 5.7,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -5656,78 +5346,6 @@
     "onFrozenBallot": false
   },
   {
-    "id": "the-accidental-getaway-driver-2025",
-    "title": "The Accidental Getaway Driver",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 5.7,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "the-shrouds-2025",
-    "title": "The Shrouds",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 5.7,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
     "id": "wolf-man-2025",
     "title": "Wolf Man",
     "kind": "streaming",
@@ -5918,6 +5536,44 @@
     "onFrozenBallot": false
   },
   {
+    "id": "old-guy-2025",
+    "title": "Old Guy",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "14.99"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 5.3,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
     "id": "california-king-2025",
     "title": "California King",
     "kind": "streaming",
@@ -5956,20 +5612,22 @@
     "onFrozenBallot": false
   },
   {
-    "id": "old-guy-2025",
-    "title": "Old Guy",
-    "kind": "theatrical",
+    "id": "flight-risk-2025",
+    "title": "Flight Risk",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Max"
+    ],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 5.3,
+      "imdb": 5.2,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -6005,42 +5663,6 @@
     "services": [
       "Netflix"
     ],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 5.2,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": true,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "flight-risk-2025",
-    "title": "Flight Risk",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
     "oscarNominated": false,
     "ratings": {
       "imdb": 5.2,
@@ -6142,8 +5764,8 @@
     "onFrozenBallot": false
   },
   {
-    "id": "mcveigh-2025",
-    "title": "McVeigh",
+    "id": "the-astronaut-2025",
+    "title": "The Astronaut",
     "kind": "theatrical",
     "festivalDate": null,
     "usLimitedDate": null,
@@ -6153,6 +5775,80 @@
     "isDocumentary": false,
     "hadUSTheatricalRelease": true,
     "services": [],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 4.7,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "afterburn-2025",
+    "title": "Afterburn",
+    "kind": "theatrical",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": true,
+    "services": [],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 4.5,
+      "metacritic": null,
+      "rtCritic": null,
+      "rtAudience": null
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
+    "onFrozenBallot": false
+  },
+  {
+    "id": "mcveigh-2025",
+    "title": "McVeigh",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "14.99"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 4.4,
@@ -6216,8 +5912,8 @@
     "onFrozenBallot": false
   },
   {
-    "id": "f1-the-movie-2025",
-    "title": "F1: The Movie",
+    "id": "rental-family-2025",
+    "title": "Rental Family",
     "kind": "theatrical",
     "festivalDate": null,
     "usLimitedDate": null,
@@ -6229,7 +5925,7 @@
     "services": [],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 7.7,
+      "imdb": null,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -6246,14 +5942,14 @@
       "Imported from the 2025 sheet of the original workbook."
     ],
     "manual": true,
-    "seen": true,
-    "owned": true,
-    "wantToSee": false,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
     "onFrozenBallot": false
   },
   {
-    "id": "sinners-2025",
-    "title": "Sinners",
+    "id": "sisu-2-road-to-revenge-2025",
+    "title": "Sisu 2: Road to Revenge",
     "kind": "theatrical",
     "festivalDate": null,
     "usLimitedDate": null,
@@ -6265,7 +5961,7 @@
     "services": [],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 7.6,
+      "imdb": null,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -6282,14 +5978,14 @@
       "Imported from the 2025 sheet of the original workbook."
     ],
     "manual": true,
-    "seen": true,
-    "owned": true,
-    "wantToSee": false,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
     "onFrozenBallot": false
   },
   {
-    "id": "code-3-2025",
-    "title": "Code 3",
+    "id": "merrily-we-roll-along-2025",
+    "title": "Merrily We Roll Along",
     "kind": "theatrical",
     "festivalDate": null,
     "usLimitedDate": null,
@@ -6301,7 +5997,7 @@
     "services": [],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 7.2,
+      "imdb": null,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -6318,14 +6014,14 @@
       "Imported from the 2025 sheet of the original workbook."
     ],
     "manual": true,
-    "seen": true,
-    "owned": true,
-    "wantToSee": false,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
     "onFrozenBallot": false
   },
   {
-    "id": "warfare-2025",
-    "title": "Warfare",
+    "id": "kokuho-2025",
+    "title": "Kokuho",
     "kind": "theatrical",
     "festivalDate": null,
     "usLimitedDate": null,
@@ -6337,7 +6033,7 @@
     "services": [],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 7.2,
+      "imdb": null,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -6354,14 +6050,14 @@
       "Imported from the 2025 sheet of the original workbook."
     ],
     "manual": true,
-    "seen": true,
-    "owned": true,
-    "wantToSee": false,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
     "onFrozenBallot": false
   },
   {
-    "id": "from-the-world-of-john-wick-ballerina-2025",
-    "title": "From the World of John Wick: Ballerina",
+    "id": "sirat-2025",
+    "title": "Sir\u00e2t",
     "kind": "theatrical",
     "festivalDate": null,
     "usLimitedDate": null,
@@ -6373,7 +6069,7 @@
     "services": [],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 6.9,
+      "imdb": null,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -6390,14 +6086,14 @@
       "Imported from the 2025 sheet of the original workbook."
     ],
     "manual": true,
-    "seen": true,
-    "owned": true,
-    "wantToSee": false,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
     "onFrozenBallot": false
   },
   {
-    "id": "good-fortune-2025",
-    "title": "Good Fortune",
+    "id": "the-voice-of-hind-rajab-2025",
+    "title": "The Voice of Hind Rajab",
     "kind": "theatrical",
     "festivalDate": null,
     "usLimitedDate": null,
@@ -6409,7 +6105,7 @@
     "services": [],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 6.9,
+      "imdb": null,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -6426,477 +6122,9 @@
       "Imported from the 2025 sheet of the original workbook."
     ],
     "manual": true,
-    "seen": true,
-    "owned": true,
-    "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "the-day-the-earth-blew-up-a-looney-tunes-movie-2025",
-    "title": "The Day The Earth Blew Up: A Looney Tunes Movie",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.8,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": true,
-    "owned": true,
-    "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "the-phoenician-scheme-2025",
-    "title": "The Phoenician Scheme",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.7,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": true,
-    "owned": true,
-    "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "friendship-2025",
-    "title": "Friendship",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.7,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": true,
-    "owned": true,
-    "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "eddington-2025",
-    "title": "Eddington",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.6,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": true,
-    "owned": true,
-    "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "novocaine-2025",
-    "title": "Novocaine",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.5,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": true,
-    "owned": true,
-    "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "she-rides-shotgun-2025",
-    "title": "She Rides Shotgun",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.5,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": true,
-    "owned": true,
-    "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "the-naked-gun-2025",
-    "title": "The Naked Gun",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.4,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": true,
-    "owned": true,
-    "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "dangerous-animals-2025",
-    "title": "Dangerous Animals",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.4,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": true,
-    "owned": true,
-    "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "psycho-therapy-2025",
-    "title": "Psycho Therapy",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.2,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": true,
-    "owned": true,
-    "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "the-surfer-2025",
-    "title": "The Surfer",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 5.9,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": true,
-    "owned": true,
-    "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "the-monkey-2025",
-    "title": "The Monkey",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 5.9,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": true,
-    "owned": true,
-    "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "honey-don-t-2025",
-    "title": "Honey Don't!",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 5.3,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": true,
-    "owned": true,
-    "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "love-hurts-2025",
-    "title": "Love Hurts",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 5.3,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": true,
-    "owned": true,
-    "wantToSee": false,
+    "seen": false,
+    "owned": false,
+    "wantToSee": true,
     "onFrozenBallot": false
   },
   {
@@ -6913,7 +6141,1525 @@
     "services": [],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 8.2,
+      "imdb": 7.7,
+      "metacritic": null,
+      "rtCritic": 94,
+      "rtAudience": 85
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "hamnet-2025",
+    "title": "Hamnet",
+    "kind": "theatrical",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": true,
+    "services": [],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 7.9,
+      "metacritic": null,
+      "rtCritic": 87,
+      "rtAudience": 93
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "f1-the-movie-2025",
+    "title": "F1: The Movie",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 7.6,
+      "metacritic": null,
+      "rtCritic": 82,
+      "rtAudience": 97
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "bugonia-2025",
+    "title": "Bugonia",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 7.4,
+      "metacritic": null,
+      "rtCritic": 87,
+      "rtAudience": 84
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "sinners-2025",
+    "title": "Sinners",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 7.5,
+      "metacritic": null,
+      "rtCritic": 97,
+      "rtAudience": 96
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "weapons-2025",
+    "title": "Weapons",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 7.4,
+      "metacritic": null,
+      "rtCritic": 93,
+      "rtAudience": 85
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "nuremberg-2025",
+    "title": "Nuremberg",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 7.4,
+      "metacritic": null,
+      "rtCritic": 71,
+      "rtAudience": 95
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "is-this-thing-on-2025",
+    "title": "Is This Thing On?",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.8,
+      "metacritic": null,
+      "rtCritic": 87,
+      "rtAudience": 83
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "code-3-2025",
+    "title": "Code 3",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 7.2,
+      "metacritic": null,
+      "rtCritic": 78,
+      "rtAudience": 96
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "warfare-2025",
+    "title": "Warfare",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 7.1,
+      "metacritic": null,
+      "rtCritic": 92,
+      "rtAudience": 93
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "roofman-2025",
+    "title": "Roofman",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 7,
+      "metacritic": null,
+      "rtCritic": 87,
+      "rtAudience": 85
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "sorry-baby-2025",
+    "title": "Sorry, Baby",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 7.1,
+      "metacritic": null,
+      "rtCritic": 97,
+      "rtAudience": 85
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "the-bad-guys-2-2025",
+    "title": "The Bad Guys 2",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 7,
+      "metacritic": null,
+      "rtCritic": 87,
+      "rtAudience": 94
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "caught-stealing-2025",
+    "title": "Caught Stealing",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.9,
+      "metacritic": null,
+      "rtCritic": 85,
+      "rtAudience": 83
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "the-housemaid-2025",
+    "title": "The Housemaid",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.8,
+      "metacritic": null,
+      "rtCritic": 73,
+      "rtAudience": 92
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "the-long-walk-2025",
+    "title": "The Long Walk",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.7,
+      "metacritic": null,
+      "rtCritic": 88,
+      "rtAudience": 85
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "the-baltimorons-2025",
+    "title": "The Baltimorons",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.9,
+      "metacritic": null,
+      "rtCritic": 93,
+      "rtAudience": 84
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "from-the-world-of-john-wick-ballerina-2025",
+    "title": "From the World of John Wick: Ballerina",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.8,
+      "metacritic": null,
+      "rtCritic": 75,
+      "rtAudience": 92
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "good-fortune-2025",
+    "title": "Good Fortune",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.5,
+      "metacritic": null,
+      "rtCritic": 78,
+      "rtAudience": 81
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "springsteen-deliver-me-from-nowhere-2025",
+    "title": "Springsteen: Deliver Me From Nowhere",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.6,
+      "metacritic": null,
+      "rtCritic": 61,
+      "rtAudience": 82
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "the-day-the-earth-blew-up-a-looney-tunes-movie-2025",
+    "title": "The Day The Earth Blew Up: A Looney Tunes Movie",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.8,
+      "metacritic": null,
+      "rtCritic": 86,
+      "rtAudience": 88
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "sketch-2025",
+    "title": "Sketch",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.6,
+      "metacritic": null,
+      "rtCritic": 95,
+      "rtAudience": 83
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "the-phoenician-scheme-2025",
+    "title": "The Phoenician Scheme",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.6,
+      "metacritic": null,
+      "rtCritic": 77,
+      "rtAudience": 70
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "friendship-2025",
+    "title": "Friendship",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.6,
+      "metacritic": null,
+      "rtCritic": 88,
+      "rtAudience": 73
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "eephus-2025",
+    "title": "Eephus",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.7,
+      "metacritic": null,
+      "rtCritic": 100,
+      "rtAudience": 64
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "eddington-2025",
+    "title": "Eddington",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.6,
+      "metacritic": null,
+      "rtCritic": 69,
+      "rtAudience": 66
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "novocaine-2025",
+    "title": "Novocaine",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.5,
+      "metacritic": null,
+      "rtCritic": 81,
+      "rtAudience": 84
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "she-rides-shotgun-2025",
+    "title": "She Rides Shotgun",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.5,
+      "metacritic": null,
+      "rtCritic": 88,
+      "rtAudience": 92
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "the-amateur-2025",
+    "title": "The Amateur",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.5,
+      "metacritic": null,
+      "rtCritic": 61,
+      "rtAudience": 87
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "the-naked-gun-2025",
+    "title": "The Naked Gun",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.3,
+      "metacritic": null,
+      "rtCritic": 87,
+      "rtAudience": 72
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "dangerous-animals-2025",
+    "title": "Dangerous Animals",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.4,
+      "metacritic": null,
+      "rtCritic": 87,
+      "rtAudience": 74
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "fackham-hall-2025",
+    "title": "Fackham Hall",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.4,
+      "metacritic": null,
+      "rtCritic": 75,
+      "rtAudience": 76
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "oh-hi-2025",
+    "title": "Oh, Hi!",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.2,
+      "metacritic": null,
+      "rtCritic": 64,
+      "rtAudience": 65
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "psycho-therapy-2025",
+    "title": "Psycho Therapy",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 6.2,
+      "metacritic": null,
+      "rtCritic": 84,
+      "rtAudience": 58
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "anaconda-2025",
+    "title": "Anaconda",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 5.6,
+      "metacritic": null,
+      "rtCritic": 48,
+      "rtAudience": 75
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "the-surfer-2025",
+    "title": "The Surfer",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 5.9,
+      "metacritic": null,
+      "rtCritic": 84,
+      "rtAudience": 46
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "the-monkey-2025",
+    "title": "The Monkey",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 5.9,
+      "metacritic": null,
+      "rtCritic": 77,
+      "rtAudience": 55
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "honey-don-t-2025",
+    "title": "Honey Don't!",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 5.2,
+      "metacritic": null,
+      "rtCritic": 45,
+      "rtAudience": 39
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "love-hurts-2025",
+    "title": "Love Hurts",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 5.3,
+      "metacritic": null,
+      "rtCritic": 18,
+      "rtAudience": 60
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "the-secret-agent-2025",
+    "title": "The Secret Agent",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 7.3,
+      "metacritic": null,
+      "rtCritic": 98,
+      "rtAudience": 82
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": true,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "bob-trevino-likes-it-2025",
+    "title": "Bob Trevino Likes It",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Plex"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": null,
       "metacritic": null,
       "rtCritic": null,
       "rtAudience": null
@@ -6931,7 +7677,7 @@
     ],
     "manual": true,
     "seen": true,
-    "owned": false,
+    "owned": true,
     "wantToSee": false,
     "onFrozenBallot": false
   },
@@ -6949,10 +7695,10 @@
     "services": [],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 8.2,
+      "imdb": 7.8,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 93,
+      "rtAudience": 82
     },
     "cast": [],
     "imdbId": null,
@@ -6969,7 +7715,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "frankenstein-2025",
@@ -6985,10 +7731,10 @@
     "services": [],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 7.8,
+      "imdb": 7.4,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 85,
+      "rtAudience": 94
     },
     "cast": [],
     "imdbId": null,
@@ -7005,7 +7751,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "how-to-train-your-dragon-2025",
@@ -7021,10 +7767,10 @@
     "services": [],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 7.8,
+      "imdb": 7.7,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 77,
+      "rtAudience": 97
     },
     "cast": [],
     "imdbId": null,
@@ -7041,11 +7787,11 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
-    "id": "bugonia-2025",
-    "title": "Bugonia",
+    "id": "kpop-demon-hunters-2025",
+    "title": "KPop Demon Hunters",
     "kind": "theatrical",
     "festivalDate": null,
     "usLimitedDate": null,
@@ -7057,10 +7803,10 @@
     "services": [],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 7.7,
+      "imdb": 7.4,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 91,
+      "rtAudience": 99
     },
     "cast": [],
     "imdbId": null,
@@ -7077,7 +7823,83 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
+  },
+  {
+    "id": "zootopia-2-2025",
+    "title": "Zootopia 2",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Disney"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 7.4,
+      "metacritic": null,
+      "rtCritic": 91,
+      "rtAudience": 95
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": false,
+    "wantToSee": false,
+    "onFrozenBallot": true
+  },
+  {
+    "id": "train-dreams-2025",
+    "title": "Train Dreams",
+    "kind": "streaming",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Netflix"
+    ],
+    "oscarNominated": false,
+    "ratings": {
+      "imdb": 7.5,
+      "metacritic": null,
+      "rtCritic": 94,
+      "rtAudience": 92
+    },
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "workbook"
+    ],
+    "computedYear": 2025,
+    "confidence": "medium",
+    "evidence": [
+      "Imported from the 2025 sheet of the original workbook."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": false,
+    "wantToSee": false,
+    "onFrozenBallot": true
   },
   {
     "id": "wake-up-dead-man-a-knives-out-mystery-2025",
@@ -7093,10 +7915,10 @@
     "services": [],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 7.4,
+      "imdb": 7.3,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 92,
+      "rtAudience": 94
     },
     "cast": [],
     "imdbId": null,
@@ -7113,7 +7935,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "avatar-fire-and-ash-2025",
@@ -7131,8 +7953,8 @@
     "ratings": {
       "imdb": 7.4,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 66,
+      "rtAudience": 90
     },
     "cast": [],
     "imdbId": null,
@@ -7149,7 +7971,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "all-of-you-2025",
@@ -7165,10 +7987,10 @@
     "services": [],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 7.2,
+      "imdb": 6.3,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 72,
+      "rtAudience": 65
     },
     "cast": [],
     "imdbId": null,
@@ -7185,43 +8007,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "roofman-2025",
-    "title": "Roofman",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 7.2,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": true,
-    "owned": false,
-    "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "thunderbolts-2025",
@@ -7239,8 +8025,8 @@
     "ratings": {
       "imdb": 7.1,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 88,
+      "rtAudience": 93
     },
     "cast": [],
     "imdbId": null,
@@ -7257,7 +8043,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "superman-2025",
@@ -7273,10 +8059,10 @@
     "services": [],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 7.1,
+      "imdb": 7,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 83,
+      "rtAudience": 90
     },
     "cast": [],
     "imdbId": null,
@@ -7293,7 +8079,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "the-fantastic-four-first-steps-2025",
@@ -7309,10 +8095,10 @@
     "services": [],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 7,
+      "imdb": 6.8,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 86,
+      "rtAudience": 90
     },
     "cast": [],
     "imdbId": null,
@@ -7329,7 +8115,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "shark-whisperer-2025",
@@ -7345,10 +8131,10 @@
     "services": [],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 7,
+      "imdb": 6.9,
       "metacritic": null,
       "rtCritic": null,
-      "rtAudience": null
+      "rtAudience": 78
     },
     "cast": [],
     "imdbId": null,
@@ -7365,26 +8151,28 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
-    "id": "caught-stealing-2025",
-    "title": "Caught Stealing",
-    "kind": "theatrical",
+    "id": "the-lost-bus-2025",
+    "title": "The Lost Bus",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Apple"
+    ],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 7,
+      "imdb": 6.8,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 88,
+      "rtAudience": 95
     },
     "cast": [],
     "imdbId": null,
@@ -7401,43 +8189,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "the-housemaid-2025",
-    "title": "The Housemaid",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 7,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": true,
-    "owned": false,
-    "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "companion-2025",
@@ -7455,8 +8207,8 @@
     "ratings": {
       "imdb": 6.9,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 93,
+      "rtAudience": 88
     },
     "cast": [],
     "imdbId": null,
@@ -7473,43 +8225,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "springsteen-deliver-me-from-nowhere-2025",
-    "title": "Springsteen: Deliver Me From Nowhere",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 6.9,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": true,
-    "owned": false,
-    "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "lilo-stitch-2025",
@@ -7527,8 +8243,8 @@
     "ratings": {
       "imdb": 6.7,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 72,
+      "rtAudience": 91
     },
     "cast": [],
     "imdbId": null,
@@ -7545,7 +8261,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "pixar-s-elio-2025",
@@ -7599,8 +8315,8 @@
     "ratings": {
       "imdb": 6.7,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 78,
+      "rtAudience": 73
     },
     "cast": [],
     "imdbId": null,
@@ -7617,7 +8333,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "black-bag-2025",
@@ -7635,8 +8351,8 @@
     "ratings": {
       "imdb": 6.7,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 96,
+      "rtAudience": 70
     },
     "cast": [],
     "imdbId": null,
@@ -7653,7 +8369,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "wicked-for-good-2025",
@@ -7671,8 +8387,8 @@
     "ratings": {
       "imdb": 6.7,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 66,
+      "rtAudience": 92
     },
     "cast": [],
     "imdbId": null,
@@ -7689,26 +8405,28 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
-    "id": "the-amateur-2025",
-    "title": "The Amateur",
-    "kind": "theatrical",
+    "id": "the-thursday-murder-club-2025",
+    "title": "The Thursday Murder Club",
+    "kind": "streaming",
     "festivalDate": null,
     "usLimitedDate": null,
     "usTheatricalDate": null,
     "homeDate": null,
     "isForeignLanguage": false,
     "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
+    "hadUSTheatricalRelease": false,
+    "services": [
+      "Netflix"
+    ],
     "oscarNominated": false,
     "ratings": {
       "imdb": 6.5,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 77,
+      "rtAudience": 54
     },
     "cast": [],
     "imdbId": null,
@@ -7725,7 +8443,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "a-house-of-dynamite-2025",
@@ -7743,8 +8461,8 @@
     "ratings": {
       "imdb": 6.4,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 75,
+      "rtAudience": 78
     },
     "cast": [],
     "imdbId": null,
@@ -7761,7 +8479,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "the-running-man-2025",
@@ -7779,8 +8497,8 @@
     "ratings": {
       "imdb": 6.4,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 62,
+      "rtAudience": 78
     },
     "cast": [],
     "imdbId": null,
@@ -7797,7 +8515,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "nobody-2-2025",
@@ -7815,8 +8533,8 @@
     "ratings": {
       "imdb": 6.3,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 76,
+      "rtAudience": 88
     },
     "cast": [],
     "imdbId": null,
@@ -7833,7 +8551,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "a-big-bold-beautiful-journey-2025",
@@ -7851,8 +8569,8 @@
     "ratings": {
       "imdb": 6,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 37,
+      "rtAudience": 58
     },
     "cast": [],
     "imdbId": null,
@@ -7869,7 +8587,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "now-you-see-me-now-you-don-t-2025",
@@ -7885,10 +8603,10 @@
     "services": [],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 6,
+      "imdb": 5.9,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 61,
+      "rtAudience": 79
     },
     "cast": [],
     "imdbId": null,
@@ -7905,7 +8623,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "death-of-a-unicorn-2025",
@@ -7921,10 +8639,10 @@
     "services": [],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 5.9,
+      "imdb": 5.8,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 52,
+      "rtAudience": 76
     },
     "cast": [],
     "imdbId": null,
@@ -7941,7 +8659,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "back-in-action-2025",
@@ -7959,8 +8677,8 @@
     "ratings": {
       "imdb": 5.9,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 31,
+      "rtAudience": 60
     },
     "cast": [],
     "imdbId": null,
@@ -7977,7 +8695,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "jurassic-world-rebirth-2025",
@@ -7993,10 +8711,10 @@
     "services": [],
     "oscarNominated": false,
     "ratings": {
-      "imdb": 5.9,
+      "imdb": 5.8,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 50,
+      "rtAudience": 70
     },
     "cast": [],
     "imdbId": null,
@@ -8013,7 +8731,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "the-woman-in-cabin-10-2025",
@@ -8031,8 +8749,8 @@
     "ratings": {
       "imdb": 5.8,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 29,
+      "rtAudience": 32
     },
     "cast": [],
     "imdbId": null,
@@ -8049,7 +8767,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "a-working-man-2025",
@@ -8067,8 +8785,8 @@
     "ratings": {
       "imdb": 5.7,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 47,
+      "rtAudience": 87
     },
     "cast": [],
     "imdbId": null,
@@ -8085,7 +8803,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "captain-america-brave-new-world-2025",
@@ -8103,8 +8821,8 @@
     "ratings": {
       "imdb": 5.6,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 46,
+      "rtAudience": 75
     },
     "cast": [],
     "imdbId": null,
@@ -8121,7 +8839,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "you-re-cordially-invited-2025",
@@ -8139,8 +8857,8 @@
     "ratings": {
       "imdb": 5.5,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 48,
+      "rtAudience": 33
     },
     "cast": [],
     "imdbId": null,
@@ -8157,7 +8875,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "mountainhead-2025",
@@ -8175,8 +8893,8 @@
     "ratings": {
       "imdb": 5.4,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 73,
+      "rtAudience": 27
     },
     "cast": [],
     "imdbId": null,
@@ -8193,7 +8911,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "another-simple-favor-2025",
@@ -8211,8 +8929,8 @@
     "ratings": {
       "imdb": 5.3,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 58,
+      "rtAudience": 35
     },
     "cast": [],
     "imdbId": null,
@@ -8229,7 +8947,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "i-know-what-you-did-last-summer-2025",
@@ -8247,8 +8965,8 @@
     "ratings": {
       "imdb": 5.1,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 46,
+      "rtAudience": 67
     },
     "cast": [],
     "imdbId": null,
@@ -8265,7 +8983,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "snow-white-2025",
@@ -8283,8 +9001,8 @@
     "ratings": {
       "imdb": 2.2,
       "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
+      "rtCritic": 39,
+      "rtAudience": 69
     },
     "cast": [],
     "imdbId": null,
@@ -8301,7 +9019,7 @@
     "seen": true,
     "owned": false,
     "wantToSee": false,
-    "onFrozenBallot": false
+    "onFrozenBallot": true
   },
   {
     "id": "rose-2025",
@@ -9648,42 +10366,6 @@
   {
     "id": "the-family-mcmullen-2025",
     "title": "The Family McMullen",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 7.7,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "it-was-just-an-accident-2025",
-    "title": "It Was Just An Accident",
     "kind": "theatrical",
     "festivalDate": null,
     "usLimitedDate": null,
@@ -17970,42 +18652,6 @@
     "onFrozenBallot": false
   },
   {
-    "id": "the-astronaut-2025",
-    "title": "The Astronaut",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 4.7,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
     "id": "saint-clare-2025",
     "title": "Saint Clare",
     "kind": "streaming",
@@ -18300,42 +18946,6 @@
   {
     "id": "red-sonja-2025",
     "title": "Red Sonja",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": 4.5,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "afterburn-2025",
-    "title": "Afterburn",
     "kind": "theatrical",
     "festivalDate": null,
     "usLimitedDate": null,
@@ -19722,42 +20332,6 @@
     "onFrozenBallot": false
   },
   {
-    "id": "bunny-2025",
-    "title": "Bunny",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": null,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
     "id": "the-carpenter-s-son-2025",
     "title": "The Carpenter's Son",
     "kind": "theatrical",
@@ -19938,42 +20512,6 @@
     "onFrozenBallot": false
   },
   {
-    "id": "kokuho-2025",
-    "title": "Kokuho",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": null,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
     "id": "left-handed-girl-2025",
     "title": "Left-Handed Girl",
     "kind": "theatrical",
@@ -20048,42 +20586,6 @@
   {
     "id": "rebuilding-2025",
     "title": "Rebuilding",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": null,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "sirat-2025",
-    "title": "Sir\u00e2t",
     "kind": "theatrical",
     "festivalDate": null,
     "usLimitedDate": null,
@@ -20372,78 +20874,6 @@
   {
     "id": "the-son-of-a-thousand-men-2025",
     "title": "The Son of a Thousand Men",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": null,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "rental-family-2025",
-    "title": "Rental Family",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": null,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "sisu-2-road-to-revenge-2025",
-    "title": "Sisu 2: Road to Revenge",
     "kind": "theatrical",
     "festivalDate": null,
     "usLimitedDate": null,
@@ -21090,42 +21520,6 @@
     "onFrozenBallot": false
   },
   {
-    "id": "fackham-hall-2025",
-    "title": "Fackham Hall",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": null,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
     "id": "five-nights-at-freddy-s-2-2025",
     "title": "Five Nights at Freddy's 2",
     "kind": "theatrical",
@@ -21164,42 +21558,6 @@
   {
     "id": "jujutsu-kaisen-execution-2025",
     "title": "Jujutsu Kaisen: Execution",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": null,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "merrily-we-roll-along-2025",
-    "title": "Merrily We Roll Along",
     "kind": "theatrical",
     "festivalDate": null,
     "usLimitedDate": null,
@@ -21596,42 +21954,6 @@
   {
     "id": "atropia-2025",
     "title": "Atropia",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": null,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "dust-bunny-2025",
-    "title": "Dust Bunny",
     "kind": "theatrical",
     "festivalDate": null,
     "usLimitedDate": null,
@@ -22100,42 +22422,6 @@
   {
     "id": "father-mother-sister-brother-2025",
     "title": "Father Mother Sister Brother",
-    "kind": "theatrical",
-    "festivalDate": null,
-    "usLimitedDate": null,
-    "usTheatricalDate": null,
-    "homeDate": null,
-    "isForeignLanguage": false,
-    "isDocumentary": false,
-    "hadUSTheatricalRelease": true,
-    "services": [],
-    "oscarNominated": false,
-    "ratings": {
-      "imdb": null,
-      "metacritic": null,
-      "rtCritic": null,
-      "rtAudience": null
-    },
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
-    "sources": [
-      "workbook"
-    ],
-    "computedYear": 2025,
-    "confidence": "medium",
-    "evidence": [
-      "Imported from the 2025 sheet of the original workbook."
-    ],
-    "manual": true,
-    "seen": false,
-    "owned": false,
-    "wantToSee": false,
-    "onFrozenBallot": false
-  },
-  {
-    "id": "the-voice-of-hind-rajab-2025",
-    "title": "The Voice of Hind Rajab",
     "kind": "theatrical",
     "festivalDate": null,
     "usLimitedDate": null,

@@ -3581,7 +3581,7 @@
     ],
     "manual": true,
     "seen": false,
-    "owned": false,
+    "owned": true,
     "wantToSee": true,
     "onFrozenBallot": false
   },
@@ -6473,7 +6473,7 @@
     ],
     "manual": true,
     "seen": false,
-    "owned": false,
+    "owned": true,
     "wantToSee": true,
     "onFrozenBallot": false
   },
@@ -6905,7 +6905,7 @@
     ],
     "manual": true,
     "seen": false,
-    "owned": false,
+    "owned": true,
     "wantToSee": true,
     "onFrozenBallot": false
   },
@@ -6941,7 +6941,7 @@
     ],
     "manual": true,
     "seen": false,
-    "owned": false,
+    "owned": true,
     "wantToSee": true,
     "onFrozenBallot": false
   },

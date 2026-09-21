@@ -265,6 +265,29 @@ def main():
     (ROOT / "data" / "index.json").write_text(json.dumps(index, separators=(",", ":")) + "\n")
     print(f"  index: {len(index)} titles")
 
+    # Everything we have watched, as a flat list. The History page needs this
+    # and nothing else, and it is ~40 KB against 4.8 MB of full catalogs.
+    seen_rows = []
+    for item in summary:
+        year = item["year"]
+        for m in json.loads((ROOT / "data" / "catalog" / f"{year}.json").read_text()):
+            if m["seen"]:
+                seen_rows.append([m["id"], m["title"], year])
+    seen_rows.sort(key=lambda r: (-r[2], r[1]))
+    (ROOT / "data" / "seen.json").write_text(json.dumps(seen_rows, separators=(",", ":")) + "\n")
+    print(f"  seen index: {len(seen_rows)} movies")
+
+    # Which years have been benchmarked at a ceremony. Derived from the Awards
+    # sheets rather than hardcoded, and merged into the config so the names and
+    # rotation settings edited in the app survive a re-import.
+    config_path = ROOT / "data" / "config.json"
+    config = json.loads(config_path.read_text()) if config_path.exists() else {}
+    frozen = sorted(set(config.get("frozenYears", [])) | set(frozen_pools))
+    if frozen != config.get("frozenYears"):
+        config["frozenYears"] = frozen
+        config_path.write_text(json.dumps(config, indent=2) + "\n")
+    print(f"  frozen years: {', '.join(str(y) for y in frozen) or 'none'}")
+
     cats = read_categories(wb["Awards"])
     (ROOT / "data" / "categories.json").write_text(json.dumps(cats, indent=2) + "\n")
 

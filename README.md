@@ -46,9 +46,26 @@ against the front of the queue:
 - **Bets and deals** are an adjustment: an extra pick jumps the queue, a skip
   removes that person's next slot. Both take a free-text reason.
 
-Titles autocomplete against a 290 KB index of all 5,408 catalogued movies, so
-logging a watch links it to that year's list. The **Backfill** tab takes many
-rows at once and saves them as a single commit.
+Titles autocomplete against an index of every catalogued movie, so logging a
+watch links it to that year's list. The **Backfill** tab takes many rows at
+once and saves them as a single commit.
+
+## History
+
+The **History** tab is the imported watch list, grouped by release year. Two
+sources feed it:
+
+- `data/seen.json` — every movie the workbook marked as watched (729 of them,
+  about 40 KB, so the page never pulls the 4.8 MB of full catalogs). The
+  workbook had no date or picker columns, so these arrive as rows *waiting to
+  be dated*.
+- `data/watches.json` — anything logged through the app, with the full record.
+
+Setting a date on an imported row turns it into a real watch linked to that
+catalog entry, which is what makes it count toward the rotation. Edits stage up
+locally and save together in one commit, so dating a year's worth of movies is
+one commit rather than sixty. Watches typed by hand that matched no catalog
+entry get their own section rather than being silently filed under a year.
 
 ## Which year a movie counts for
 

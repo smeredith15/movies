@@ -180,3 +180,33 @@ code { background: var(--panel-2); padding: 1px 5px; border-radius: 4px; font-si
   .bulk-row > :nth-child(4) { grid-area: venue; }
   .bulk-row > :nth-child(5) { grid-area: remove; }
 }
+
+/* History: dating imported entries */
+.save-bar {
+  position: sticky; top: 8px; z-index: 30;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  background: color-mix(in srgb, var(--accent) 16%, var(--panel));
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line));
+  border-radius: var(--radius); padding: 10px 14px; margin-bottom: 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+button.year-toggle {
+  padding: 0; font-size: 16px; font-weight: 600; color: var(--text);
+  border: none; background: none;
+}
+button.year-toggle:hover { color: var(--accent); }
+
+ul.watches li.undated { align-items: center; }
+ul.watches li.undated .w-title { color: var(--muted); }
+.date-entry { gap: 6px; flex-shrink: 0; }
+.date-entry input[type="date"] { width: 142px; }
+.date-entry select { width: 104px; }
+
+@media (max-width: 680px) {
+  ul.watches li.undated { flex-direction: column; align-items: stretch; gap: 8px; }
+  .date-entry { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .date-entry input[type="date"] { grid-column: 1 / -1; width: 100%; }
+  .date-entry select { width: 100%; }
+  .save-bar { flex-direction: column; align-items: stretch; gap: 8px; }
+}
