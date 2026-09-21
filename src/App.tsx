@@ -41,7 +41,16 @@ export default function App() {
       setSnap(await loadSnapshot());
       setError(null);
     } catch (e) {
-      setError(e instanceof Error ? e.message : String(e));
+      const raw = e instanceof Error ? e.message : String(e);
+      // "Failed to fetch" tells nobody anything; say what to do about it.
+      setError(
+        /failed to fetch|networkerror|load failed/i.test(raw)
+          ? "Could not reach GitHub. You are seeing an empty page rather than your data — check your connection and reload."
+          : raw
+      );
+      // Fall back to an empty dataset rather than a blank page: offline or
+      // rate-limited, the shell should still render so Settings is reachable.
+      setSnap((prev) => prev ?? { config: DEFAULT_CONFIG, watches: [], adjustments: [], overrides: [] });
     }
   }, []);
 
