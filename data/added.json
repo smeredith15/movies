@@ -96,5 +96,12 @@
     "year": 1989,
     "tmdbId": 5825,
     "addedAt": "2026-09-21T20:21:05.353Z"
+  },
+  {
+    "id": "gladiator-2000",
+    "title": "Gladiator",
+    "year": 2000,
+    "tmdbId": 98,
+    "addedAt": "2026-09-21T20:21:26.867Z"
   }
 ]
