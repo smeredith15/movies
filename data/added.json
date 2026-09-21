@@ -131,5 +131,12 @@
     "year": 2015,
     "tmdbId": 150540,
     "addedAt": "2026-09-21T20:29:35.284Z"
+  },
+  {
+    "id": "in-bruges-2008",
+    "title": "In Bruges",
+    "year": 2008,
+    "tmdbId": 8321,
+    "addedAt": "2026-09-21T20:32:38.546Z"
   }
 ]
