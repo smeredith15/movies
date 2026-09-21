@@ -1924,5 +1924,41 @@
     "venue": "home",
     "picker": "me",
     "consumesTurn": true
+  },
+  {
+    "id": "w_mubprbqvjdw1x",
+    "date": "2025-12-24",
+    "title": "Avatar: Fire and Ash",
+    "movieId": "avatar-fire-and-ash-2025",
+    "venue": "theater",
+    "picker": "joint",
+    "consumesTurn": false
+  },
+  {
+    "id": "w_mubprbqv820ww",
+    "date": "2025-12-07",
+    "title": "Now You See Me: Now You Don't",
+    "movieId": "now-you-see-me-now-you-don-t-2025",
+    "venue": "theater",
+    "picker": "joint",
+    "consumesTurn": false
+  },
+  {
+    "id": "w_mubprbqvmciel",
+    "date": "2025-12-28",
+    "title": "The Housemaid",
+    "movieId": "the-housemaid-2025",
+    "venue": "theater",
+    "picker": "joint",
+    "consumesTurn": false
+  },
+  {
+    "id": "w_mubprbqv30k9r",
+    "date": "2025-12-17",
+    "title": "Wake Up Dead Man: A Knives Out Mystery",
+    "movieId": "wake-up-dead-man-a-knives-out-mystery-2025",
+    "venue": "home",
+    "picker": "me",
+    "consumesTurn": true
   }
 ]
