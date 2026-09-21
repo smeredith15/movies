@@ -565,5 +565,23 @@
     "venue": "home",
     "picker": "her",
     "consumesTurn": true
+  },
+  {
+    "id": "w_mubkpi29kplen",
+    "date": "2025-11-01",
+    "title": "I Know What You Did Last Summer",
+    "movieId": "i-know-what-you-did-last-summer-2025",
+    "venue": "home",
+    "picker": "her",
+    "consumesTurn": true
+  },
+  {
+    "id": "w_mubkpi291qrta",
+    "date": "2025-11-01",
+    "title": "The Bay",
+    "movieId": "the-bay-2012",
+    "venue": "home",
+    "picker": "her",
+    "consumesTurn": true
   }
 ]
