@@ -375,6 +375,28 @@ row becomes a title that was never a film. The earlier matcher took the most
 popular result for any query, so those entries were handed confident matches to
 unrelated films — worse than no match, because nothing downstream could tell.
 
+### Fixing a match by hand
+
+When TMDB cannot find a film — or finds the wrong one — paste its id into the
+**TMDB id** field on the expanded Browse row. There is a link beside it to look
+the film up. The id is stored in `data/overrides.json` alongside any ballot-year
+correction, so it survives every rebuild, and the refresh **uses it directly
+without searching**.
+
+This is the same arrangement as the tv_votes repo, which leaves an unmatched
+show alone for a human to paste the right id into.
+
+### When a detail is pulled again
+
+Staleness is a timestamp — `detailsUpdated` — not a question about which fields
+are present. `--stale-days` sets the window, 30 by default, and `--force`
+ignores it.
+
+The earlier version asked "does it already have cast or an overview?", which
+meant a newly collected field could never backfill: every entry already had
+cast, so the fetch was skipped and `overview` stayed empty for 691 of 718
+films. A timestamp does not care what we decided to collect this week.
+
 Verification is not cached by the presence of an id. An entry that holds a
 TMDB id but has never been confirmed — everything matched by the earlier,
 looser matcher — is checked again, because an id is not evidence of having

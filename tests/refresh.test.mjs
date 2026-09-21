@@ -1,6 +1,6 @@
 import { check, suite } from './harness.mjs';
 
-export default function run({ carryOver, needsVerification }) {
+export default function run({ carryOver, needsVerification, detailIsStale, pinnedIds }) {
   suite('refresh: a rebuild keeps what we decided', () => {
     const prior = {
       id: 'dune-2021',
@@ -55,5 +55,41 @@ export default function run({ carryOver, needsVerification }) {
     check('a verified entry that lost its id is checked again', needsVerification({ title: 'x', tmdbVerified: true }), true);
     check('force re-checks even a confirmed one', needsVerification(verified, true), true);
     check('a missing movie does not throw', needsVerification(undefined), true);
+  });
+
+  suite('refresh: when a TMDB detail goes stale', () => {
+    const now = Date.parse('2026-09-21T00:00:00Z');
+    const daysAgo = (n) => new Date(now - n * 86400000).toISOString();
+    const stale = (movie, opts) => detailIsStale(movie, { now, ...opts });
+
+    check('never fetched is stale', stale({}), true);
+    check('fetched today is not', stale({ detailsUpdated: daysAgo(0) }), false);
+    check('ten days old is not', stale({ detailsUpdated: daysAgo(10) }), false);
+    check('forty days old is', stale({ detailsUpdated: daysAgo(40) }), true);
+    check('the window is adjustable', stale({ detailsUpdated: daysAgo(10) }, { staleDays: 7 }), true);
+    check('force ignores the window', stale({ detailsUpdated: daysAgo(0) }, { force: true }), true);
+    check('an unreadable timestamp is treated as stale', stale({ detailsUpdated: 'nonsense' }), true);
+    check('a missing movie does not throw', stale(undefined), true);
+
+    // The bug this replaced: asking which fields are present meant a newly
+    // collected field could never backfill, because every entry already had
+    // cast and so the fetch was skipped.
+    check('having cast is no longer evidence of freshness', stale({ cast: [{ name: 'Someone' }] }), true);
+  });
+
+  suite('refresh: ids set by hand', () => {
+    const pins = pinnedIds([
+      { movieId: 'hoppers-2026', tmdbId: 123456 },
+      { movieId: 'year-only-2026', eligibilityYear: 2025 },
+      { movieId: 'cleared-2026', tmdbId: null },
+      { movieId: 'bad-2026', tmdbId: 'not a number' },
+    ]);
+
+    check('a pinned id is picked up', pins.get('hoppers-2026'), 123456);
+    check('an override with only a year contributes none', pins.has('year-only-2026'), false);
+    check('a cleared id is not a pin', pins.has('cleared-2026'), false);
+    check('nor is a non-numeric one', pins.has('bad-2026'), false);
+    check('so only the real pin is counted', pins.size, 1);
+    check('no overrides at all is empty, not a throw', pinnedIds(undefined).size, 0);
   });
 }

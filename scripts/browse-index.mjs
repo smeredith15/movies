@@ -31,6 +31,8 @@ export const BROWSE_FIELDS = [
   'genres',
   'tmdbVerified',
   'tmdbNote',
+  'tmdbId',
+  'detailsUpdated',
 ];
 
 export function toBrowseRow(movie) {

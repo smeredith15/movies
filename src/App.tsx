@@ -19,7 +19,7 @@ import { WatchForm } from './components/WatchForm';
 import { BulkEntry } from './components/BulkEntry';
 import { History } from './components/History';
 import { RecentPicks } from './components/RecentPicks';
-import { Browse } from './components/Browse';
+import { Browse, type OverridePatch } from './components/Browse';
 import { AdjustmentPanel } from './components/AdjustmentPanel';
 import { Settings } from './components/Settings';
 import { Ballot } from './components/Ballot';
@@ -147,22 +147,29 @@ export default function App() {
       await saveBallot(b);
     });
 
-  const setYearOverride = (movieId: string, year: number | null, note: string) =>
+  const setYearOverride = (movieId: string, patch: OverridePatch | null) =>
     mutate(async () => {
-      if (year === null) {
-        await clearOverride(movieId, `Clear ballot-year override: ${movieId}`);
-      } else {
-        await saveOverride(
-          {
-            movieId,
-            eligibilityYear: year,
-            note: note.trim() || undefined,
-            at: new Date().toISOString(),
-            by: whoami ?? 'me',
-          },
-          `Set ballot year ${year}: ${movieId}`
-        );
+      if (patch === null) {
+        await clearOverride(movieId, `Clear corrections: ${movieId}`);
+        return;
       }
+      const what = [
+        patch.eligibilityYear ? `year ${patch.eligibilityYear}` : null,
+        patch.tmdbId ? `TMDB ${patch.tmdbId}` : null,
+      ]
+        .filter(Boolean)
+        .join(', ');
+      await saveOverride(
+        {
+          movieId,
+          eligibilityYear: patch.eligibilityYear,
+          tmdbId: patch.tmdbId,
+          note: patch.note.trim() || undefined,
+          at: new Date().toISOString(),
+          by: whoami ?? 'me',
+        },
+        `Correct ${what || 'entry'}: ${movieId}`
+      );
     });
 
   const deleteWatch = (w: Watch) => {

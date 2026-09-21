@@ -91,6 +91,8 @@ export interface CatalogMovie {
    */
   tmdbVerified?: boolean;
   tmdbNote?: string;
+  /** When the TMDB detail was last pulled, which is what decides staleness. */
+  detailsUpdated?: string | null;
   /** Added by hand, so a rebuild must keep it. */
   manual?: boolean;
   /** What the source said. The app layers data/marks.json over these. */
@@ -100,10 +102,16 @@ export interface CatalogMovie {
   onFrozenBallot?: boolean;
 }
 
+/** Manual corrections to what the sources said, keyed by movie. */
 export interface EligibilityOverride {
   movieId: string;
   eligibilityYear?: number | null;
   excluded?: boolean;
+  /**
+   * Pinned by hand when the matcher cannot find the film, or found the wrong
+   * one. The refresh uses it directly instead of searching.
+   */
+  tmdbId?: number | null;
   note?: string;
   at: string;
   by: string;
