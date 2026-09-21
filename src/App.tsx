@@ -13,7 +13,7 @@ import { getToken, getWhoAmI } from './lib/github';
 import { TurnPanel } from './components/TurnPanel';
 import { WatchForm } from './components/WatchForm';
 import { BulkEntry } from './components/BulkEntry';
-import { WatchList } from './components/WatchList';
+import { History } from './components/History';
 import { AdjustmentPanel } from './components/AdjustmentPanel';
 import { Settings } from './components/Settings';
 import { Ballot } from './components/Ballot';
@@ -180,12 +180,13 @@ export default function App() {
       )}
 
       {tab === 'history' && snap && (
-        <WatchList
+        <History
           watches={snap.watches}
           config={config}
-          turnState={turnState}
+          onSaveMany={addWatches}
           onDelete={deleteWatch}
           canEdit={canEdit}
+          busy={busy}
         />
       )}
 
