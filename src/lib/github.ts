@@ -163,14 +163,14 @@ export async function verifyToken(): Promise<{ login: string } | null> {
   return res.json();
 }
 
-/** Kick off the catalog scraper workflow from the page. */
-export async function dispatchCatalogRefresh(year: number) {
+/** Kick off the catalog workflow from the page. */
+export async function dispatchCatalogRefresh(year: number, mode: 'enrich' | 'full' = 'enrich') {
   const res = await fetch(
     `${API}/repos/${REPO_OWNER}/${REPO_NAME}/actions/workflows/refresh-catalog.yml/dispatches`,
     {
       method: 'POST',
       headers: headers({ 'Content-Type': 'application/json' }),
-      body: JSON.stringify({ ref: REPO_BRANCH, inputs: { year: String(year) } }),
+      body: JSON.stringify({ ref: REPO_BRANCH, inputs: { year: String(year), mode } }),
     }
   );
   if (!res.ok) {

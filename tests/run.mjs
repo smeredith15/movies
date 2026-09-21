@@ -7,7 +7,7 @@ import { execFileSync } from 'node:child_process';
 import { rmSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { resolve, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { report } from './harness.mjs';
 import runEligibility from './eligibility.test.mjs';
@@ -18,6 +18,7 @@ import runCategories from './categories.test.mjs';
 import runEntryTypes from './entryTypes.test.mjs';
 import runDraft from './draft.test.mjs';
 import runAdded from './added.test.mjs';
+import runTmdb from './tmdb.test.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const BUILD = resolve(ROOT, '.test-build');
@@ -60,6 +61,7 @@ runCategories();
 runEntryTypes();
 runDraft(draft);
 runAdded(added);
+await runTmdb(await import(pathToFileURL(resolve(ROOT, 'scripts/tmdb.mjs')).href));
 
 rmSync(BUILD, { recursive: true, force: true });
 process.exit(report() === 0 ? 0 : 1);

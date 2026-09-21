@@ -19,6 +19,7 @@ import { fileURLToPath } from 'node:url';
 import { computeEligibility } from '../shared/eligibility.js';
 import { firstShowingUrl, WIKIPEDIA_LISTS, netflixCandidates, isRerelease } from './sources.mjs';
 import { parseFirstShowing, parseWikipediaTables, titleKey, slugify } from './parse.mjs';
+import { Tmdb, usReleaseDates, castFrom, factsFrom } from './tmdb.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const UA = 'movies-catalog/1.0 (personal watchlist tool)';
@@ -192,50 +193,112 @@ function mergeRows(theatrical, streaming) {
   return byKey;
 }
 
-async function enrich(movies, apiKey) {
+/**
+ * Fill in what the scrapers cannot know: real US release dates by type, cast,
+ * and whether a film is foreign-language or a documentary.
+ *
+ * TMDB dates take precedence over the scraped ones. A schedule page tells us a
+ * title appeared on some date; TMDB tells us whether that was a festival
+ * premiere, a limited run, a wide run or a home release — which is exactly the
+ * distinction the eligibility rules turn on.
+ */
+async function enrich(movies, apiKey, { force = false } = {}) {
   if (!apiKey) {
-    log('  no OMDB_API_KEY set — skipping ratings (they can be filled in by hand)');
-    return;
+    warn('no TMDB_API set — skipping release dates, cast and ratings');
+    return { matched: 0, missed: [] };
   }
-  let fetched = 0;
+
+  const tmdb = new Tmdb(apiKey);
+  let matched = 0;
+  const missed = [];
+
   for (const m of movies) {
-    // Already have ratings from a previous run? Leave them alone.
-    if (m.ratings && (m.ratings.imdb != null || m.ratings.metacritic != null)) continue;
+    if (!force && m.tmdbId) continue;
 
-    const url = `https://www.omdbapi.com/?apikey=${apiKey}&t=${encodeURIComponent(m.title)}&y=${m.computedYear ?? ''}`;
-    const raw = await fetchText(url, { optional: true });
-    if (!raw) continue;
-
-    let data;
-    try {
-      data = JSON.parse(raw);
-    } catch {
+    const hit = await tmdb.findBest(m.title, m.computedYear ?? undefined);
+    if (!hit) {
+      missed.push(m.title);
       continue;
     }
-    if (data.Response !== 'True') continue;
 
-    const rt = (data.Ratings || []).find((r) => r.Source === 'Rotten Tomatoes');
-    m.imdbId = data.imdbID || null;
-    m.ratings = {
-      imdb: data.imdbRating && data.imdbRating !== 'N/A' ? Number(data.imdbRating) : null,
-      metacritic: data.Metascore && data.Metascore !== 'N/A' ? Number(data.Metascore) : null,
-      rtCritic: rt ? Number(rt.Value.replace('%', '')) : null,
-      // OMDb does not expose the RT audience score; it stays manual.
-      rtAudience: m.ratings?.rtAudience ?? null,
-    };
-    if (data.Actors && data.Actors !== 'N/A') {
-      m.cast = data.Actors.split(',').map((name, order) => ({ name: name.trim(), order }));
+    const details = await tmdb.details(hit.id);
+    if (!details) {
+      missed.push(m.title);
+      continue;
     }
-    if (data.Language && !/english/i.test(data.Language)) m.isForeignLanguage = true;
-    if (data.Genre && /document/i.test(data.Genre)) m.isDocumentary = true;
 
-    fetched += 1;
-    await new Promise((r) => setTimeout(r, 120)); // stay under the free-tier rate
+    const dates = usReleaseDates(details);
+    const facts = factsFrom(details);
+
+    // Only overwrite a date TMDB actually knows.
+    for (const key of ['festivalDate', 'usLimitedDate', 'usTheatricalDate', 'homeDate']) {
+      if (dates[key]) m[key] = dates[key];
+    }
+
+    m.tmdbId = facts.tmdbId;
+    m.imdbId = facts.imdbId ?? m.imdbId;
+    m.isDocumentary = m.isDocumentary || facts.isDocumentary;
+    m.isForeignLanguage = m.isForeignLanguage || facts.isForeignLanguage;
+    m.hadUSTheatricalRelease =
+      m.hadUSTheatricalRelease || Boolean(dates.usTheatricalDate || dates.usLimitedDate);
+
+    const cast = castFrom(details);
+    if (cast.length) m.cast = cast;
+
+    matched += 1;
   }
-  log(`  enriched ${fetched} titles from OMDb`);
+
+  log(`  matched ${matched} of ${movies.length} on TMDB (${tmdb.calls} API calls)`);
+  if (missed.length) {
+    log(`  ${missed.length} not found: ${missed.slice(0, 8).join(', ')}${missed.length > 8 ? '…' : ''}`);
+  }
+  return { matched, missed };
+}
+
+/**
+ * Re-run the rules now that TMDB has supplied real dates. Entries imported
+ * from the workbook arrive with no dates at all, so this is what lets the
+ * engine actually decide their year instead of trusting the sheet.
+ */
+function recompute(movies, year) {
+  let changed = 0;
+  for (const m of movies) {
+    if (!m.tmdbId) continue; // nothing new to go on
+    const verdict = computeEligibility(m);
+    if (verdict.year === null) continue;
+    if (verdict.year !== m.computedYear) changed += 1;
+    m.computedYear = verdict.year;
+    m.confidence = verdict.confidence;
+    m.evidence = verdict.evidence;
+  }
+  if (changed) {
+    log(`  ${changed} title(s) moved year once TMDB supplied real dates`);
+    const moved = movies.filter((m) => m.computedYear !== year);
+    if (moved.length) {
+      log(`  ${moved.length} no longer belong to ${year} — review before removing:`);
+      for (const m of moved.slice(0, 10)) log(`    · ${m.title} → ${m.computedYear}`);
+    }
+  }
+  return changed;
 }
 
 async function main() {
+  const outPath = resolve(ROOT, 'data', 'catalog', `${YEAR}.json`);
+
+  if (args['enrich-only']) {
+    log(`Enriching the existing ${YEAR} catalog from TMDB\n`);
+    const catalog = JSON.parse(await readFile(outPath, 'utf8'));
+    await enrich(catalog, process.env.TMDB_API, { force: Boolean(args.force) });
+    recompute(catalog, YEAR);
+    if (DRY) {
+      log('\nDry run — nothing written.');
+      return;
+    }
+    await writeFile(outPath, `${JSON.stringify(catalog, null, 2)}\n`);
+    log(`\nWrote ${outPath}`);
+    return;
+  }
+
   log(`Rebuilding catalog for ${YEAR}\n`);
 
   log('Theatrical releases:');
@@ -248,7 +311,6 @@ async function main() {
   const merged = mergeRows(theatrical, streaming);
   log(`  ${merged.size} distinct titles across all sources`);
 
-  const outPath = resolve(ROOT, 'data', 'catalog', `${YEAR}.json`);
   let existing = [];
   try {
     existing = JSON.parse(await readFile(outPath, 'utf8'));
@@ -307,8 +369,9 @@ async function main() {
 
   catalog.sort((a, b) => a.title.localeCompare(b.title));
 
-  log('\nEnriching ratings:');
-  await enrich(catalog, process.env.OMDB_API_KEY);
+  log('\nEnriching from TMDB:');
+  await enrich(catalog, process.env.TMDB_API);
+  recompute(catalog, YEAR);
 
   log('\nResult:');
   log(`  ${catalog.length} movies eligible for ${YEAR}`);

@@ -192,10 +192,33 @@ or press **Refresh** in the app, which dispatches the same script as a GitHub
 Action. Sources are firstshowing.net for theatrical dates and the Wikipedia
 streaming lists for everything else; both are defined in `scripts/sources.mjs`.
 
-Ratings come from OMDb if `OMDB_API_KEY` is set as a repository secret — it is
-read by the Action, never shipped to the browser. OMDb provides IMDb,
-Metacritic and the RT critic score. **There is no free source for the RT
-audience score**, so that field stays manual.
+### TMDB
+
+`TMDB_API` is a repository secret, read by the Action and **never shipped to
+the browser** — anything the static page can read is public, so a secret cannot
+reach it.
+
+TMDB supplies what the scrapers cannot: US release dates *by type*, plus cast
+and characters. That typing is the whole game — a schedule page says a title
+appeared on some date, while TMDB says whether that was a festival premiere, a
+limited run, a wide run or a home release, which is exactly the distinction the
+eligibility rules turn on. TMDB dates therefore take precedence over scraped
+ones, and the rules are re-run afterwards; anything that changes year is
+reported rather than silently moved.
+
+The cast it returns is also what the ballot's actor and character categories
+need.
+
+Two modes:
+
+```bash
+npm run refresh-catalog -- --year 2026 --enrich-only   # dates and cast only
+npm run refresh-catalog -- --year 2026                 # also re-scrape
+```
+
+`--enrich-only` matters most right now: entries imported from the workbook have
+no release dates at all, so the rules engine cannot judge their year until TMDB
+fills them in.
 
 ## Setup
 
