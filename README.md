@@ -297,6 +297,40 @@ Poster art comes along for free in each link's `data-url`.
 Run **Probe release sources** after either site changes layout. It reports
 structure, the qualifier census and duplicates, and writes nothing to `data/`.
 
+## The ballot
+
+Pick a year and vote: one winner and up to four honorable mentions per
+category, saved to `data/ballots/<year>.<person>.json`. The two ballots are
+separate files and are never shown side by side.
+
+### What is eligible
+
+A **frozen** year is settled — its pool is whatever was on the ballot at the
+ceremony, taken from that year's Awards sheet. 2024 and 2025 are frozen, with
+68 and 76 films.
+
+An **open** year fills as you watch. A film joins once a viewing puts it inside
+the window, and a viewing decides that in one of two ways:
+
+- **By its date** — watched on or before the ceremony that closes the film
+  year, and it counts. `KNOWN_OSCAR_DATES` has every ceremony back to 2012.
+- **By saying so.** Much of the old history records only that we saw
+  something, not which day. The Ballot toggle on each History row overrides
+  the date: Auto follows it, Yes and No state it outright.
+
+With neither a date nor an answer there is nothing to go on. That reads as
+`unset` and shows a **ballot?** badge rather than quietly resolving to "no".
+
+### Filling gaps
+
+The Awards sheets have holes — a film watched in the window that nobody wrote
+down. **Add a movie to this ballot** puts one back, recorded in
+`data/ballot-extras.json`, which also holds removals. That is a gap in the
+record being fixed, not a rule being broken, so it wins over everything else.
+
+A ballot-year override on the Browse tab moves a film between years, and the
+pool follows it.
+
 ## Rebuilding the catalog
 
 On demand, never on a schedule:

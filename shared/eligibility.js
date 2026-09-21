@@ -7,6 +7,14 @@
  * Override any of these in data/config.json -> oscarDates.
  */
 export const KNOWN_OSCAR_DATES = {
+  2012: '2012-02-26',
+  2013: '2013-02-24',
+  2014: '2014-03-02',
+  2015: '2015-02-22',
+  2016: '2016-02-28',
+  2017: '2017-02-26',
+  2018: '2018-03-04',
+  2019: '2019-02-24',
   2020: '2020-02-09',
   2021: '2021-04-25',
   2022: '2022-03-27',
@@ -223,4 +231,35 @@ export function resolveEligibility(movie, override, opts = {}) {
     };
   }
   return { ...computed, source: 'computed', overridden: false };
+}
+
+/**
+ * Whether a viewing puts a film on its year's ballot.
+ *
+ * The date decides it: watched on or before the ceremony that closes the film
+ * year, and it counts. But the old history often records only that we saw
+ * something, not when — so a viewing can say so outright, and that answer
+ * wins. With neither a date nor an answer there is nothing to go on, which is
+ * reported as `unset` rather than quietly resolved to "no".
+ */
+export function ballotStatus(watch, filmYear, oscarOverrides = {}) {
+  const closes = oscarDateForFilmYear(filmYear, oscarOverrides);
+
+  if (typeof watch?.onBallot === 'boolean') {
+    return { onBallot: watch.onBallot, source: 'manual', closes };
+  }
+  if (watch?.date) {
+    return {
+      onBallot: watchFallsInSeason(watch.date, filmYear, oscarOverrides),
+      source: 'date',
+      closes,
+    };
+  }
+  return { onBallot: false, source: 'unset', closes };
+}
+
+/** What the toggle should read when nobody has set it. */
+export function defaultBallotChoice(watchDate, filmYear, oscarOverrides = {}) {
+  if (!watchDate) return null;
+  return watchFallsInSeason(watchDate, filmYear, oscarOverrides);
 }

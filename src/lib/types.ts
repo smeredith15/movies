@@ -17,6 +17,12 @@ export interface Watch {
   picker: Picker;
   /** Whether this viewing consumed one of the picker's turns. */
   consumesTurn: boolean;
+  /**
+   * Whether this viewing puts the film on its year's ballot. Left unset the
+   * date decides; set, it wins. The old history often records only that we
+   * saw something, not when, so the answer has to be stateable directly.
+   */
+  onBallot?: boolean;
   note?: string;
 }
 
@@ -109,4 +115,6 @@ export interface StagedWatch {
   date: string;
   picker: Picker;
   venue: Venue;
+  /** undefined leaves it to the date; a boolean overrides. */
+  onBallot?: boolean;
 }
