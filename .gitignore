@@ -4,3 +4,4 @@ dist/
 *.local
 .test-build/
 tsconfig.tsbuildinfo
+probe-output/

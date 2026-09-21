@@ -1,0 +1,33 @@
+[
+  {
+    "id": "casper-1995",
+    "title": "Casper",
+    "kind": "theatrical",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [],
+    "oscarNominated": false,
+    "ratings": {},
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "added-by-hand"
+    ],
+    "computedYear": 1995,
+    "confidence": "high",
+    "evidence": [
+      "Added by hand in the app."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": false,
+    "wantToSee": null,
+    "onFrozenBallot": false
+  }
+]

@@ -1,0 +1,33 @@
+[
+  {
+    "id": "the-devil-wears-prada-2006",
+    "title": "The Devil Wears Prada",
+    "kind": "theatrical",
+    "festivalDate": null,
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [],
+    "oscarNominated": false,
+    "ratings": {},
+    "cast": [],
+    "imdbId": null,
+    "tmdbId": null,
+    "sources": [
+      "added-by-hand"
+    ],
+    "computedYear": 2006,
+    "confidence": "high",
+    "evidence": [
+      "Added by hand in the app."
+    ],
+    "manual": true,
+    "seen": true,
+    "owned": false,
+    "wantToSee": null,
+    "onFrozenBallot": false
+  }
+]
