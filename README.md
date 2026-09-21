@@ -207,6 +207,44 @@ made-up category does not behave like a fixed one:
   no cast expansion, just a typed answer. That is the escape hatch for a
   category that is not about any particular movie.
 
+## Reading the release schedule
+
+firstshowing.net carries the wide/limited distinction in its **markup**, not
+its text. Its own legend says:
+
+> Bold = Nationwide Release — (Non-Bold = Limited or Streaming)
+
+Each film is an `<a class="showTip">`, wrapped in `<strong>` when it is a
+nationwide opening, followed by a qualifier in `<em>` brackets:
+
+```html
+<h4>January 9</h4>
+<p class="sched">
+  <a ...><strong>All That's Left of You</strong></a> (<em>Expands</em>)<br />
+  <a ...>Dead Man's Wire</a> (<em>Theaters</em>)<br />
+```
+
+Reading that page as flattened text loses both signals, which is exactly what
+the eligibility rules depend on — so `scripts/firstshowing.mjs` parses the DOM.
+The qualifiers, taken from a census of a full year:
+
+| qualifier | meaning |
+| --- | --- |
+| *(none)*, bold | nationwide opening |
+| *(Expands)* | widening from an earlier limited run — this is rule 4 |
+| *(Theaters)* | limited theatrical |
+| *(VOD)*, *(Theaters + VOD)* | home release, possibly alongside theaters |
+| *(Netflix)*, *(Prime Video)*, *(Hulu)*, … | streaming debut on that service |
+| *(Re-Release)*, *(IMAX Re-Release)*, *(Fathom)* | a revival, excluded |
+| *(IMAX Only)*, *(Dolby Cinema Only)*, *(+ IMAX)* | format only — still theatrical |
+| *(until February 1)* | limited engagement, still theatrical |
+| *(Friday)*, *(Wednesday)* | weekday marker, not a film |
+
+Poster art comes along for free in each link's `data-url`.
+
+Run **Probe release sources** after either site changes layout. It reports
+structure, the qualifier census and duplicates, and writes nothing to `data/`.
+
 ## Rebuilding the catalog
 
 On demand, never on a schedule:

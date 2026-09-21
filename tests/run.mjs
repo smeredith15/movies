@@ -20,6 +20,7 @@ import runDraft from './draft.test.mjs';
 import runAdded from './added.test.mjs';
 import runTmdb from './tmdb.test.mjs';
 import runTitleSearch from './titleSearch.test.mjs';
+import runFirstShowing from './firstshowing.test.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const BUILD = resolve(ROOT, '.test-build');
@@ -67,6 +68,7 @@ runEntryTypes();
 runDraft(draft);
 runAdded(added);
 runTitleSearch(titleSearch, tmdbIndex);
+runFirstShowing(await import(pathToFileURL(resolve(ROOT, 'scripts/firstshowing.mjs')).href));
 await runTmdb(await import(pathToFileURL(resolve(ROOT, 'scripts/tmdb.mjs')).href));
 
 rmSync(BUILD, { recursive: true, force: true });
