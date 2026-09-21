@@ -736,5 +736,23 @@
     "venue": "theater",
     "picker": "joint",
     "consumesTurn": false
+  },
+  {
+    "id": "w_mublwkgbnnwxx",
+    "date": "2026-05-02",
+    "title": "The Devil Wears Prada",
+    "movieId": "the-devil-wears-prada-2006",
+    "venue": "home",
+    "picker": "her",
+    "consumesTurn": true
+  },
+  {
+    "id": "w_mublwkgb6ive2",
+    "date": "2025-11-01",
+    "title": "Casper",
+    "movieId": "casper-1995",
+    "venue": "home",
+    "picker": "her",
+    "consumesTurn": true
   }
 ]
