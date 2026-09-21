@@ -1960,5 +1960,15 @@
     "venue": "home",
     "picker": "me",
     "consumesTurn": true
+  },
+  {
+    "id": "w_mubqioht2p75h",
+    "date": "",
+    "title": "Wicked Little Letters",
+    "movieId": "wicked-little-letters-2024",
+    "venue": "home",
+    "picker": "me",
+    "consumesTurn": true,
+    "onBallot": true
   }
 ]
