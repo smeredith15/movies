@@ -43,5 +43,14 @@
     "venue": "home",
     "picker": "her",
     "consumesTurn": true
+  },
+  {
+    "id": "w_mubjn70i2d73i",
+    "date": "2026-08-29",
+    "title": "Coyote vs. Acme",
+    "movieId": "coyote-vs-acme-2026",
+    "venue": "theater",
+    "picker": "joint",
+    "consumesTurn": false
   }
 ]
