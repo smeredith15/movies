@@ -61,8 +61,11 @@ sources feed it:
   be dated*.
 - `data/watches.json` — anything logged through the app, with the full record.
 
-Setting a date on an imported row turns it into a real watch linked to that
-catalog entry, which is what makes it count toward the rotation. Edits stage up
+Setting anything on an imported row — a date, who picked it, where we watched
+it — turns it into a real watch linked to that catalog entry. A row saves as
+soon as any field is touched; a date is not required. A pick recorded without
+one still counts as watched and shows in the history, it just sits out of the
+rotation until a date arrives, and the Tracker says how many are waiting. Edits stage up
 locally and save together in one commit, so dating a year's worth of movies is
 one commit rather than sixty.
 
@@ -73,6 +76,24 @@ unsaved count so it is visible from anywhere in the app. The save bar is
 anchored to the bottom of the window rather than the top, since the rows being
 filled in are usually at the foot of a long page. Watches typed by hand that matched no catalog
 entry get their own section rather than being silently filed under a year.
+
+**Add a movie** covers anything the workbook never listed. It writes to
+`data/added.json` — a small file, rather than appending to a 300 KB year
+catalog — and the app merges it into the watched list. The importer folds those
+entries into the catalogs on its next run, marked `manual`, so they survive
+later re-imports.
+
+## Correcting a pick
+
+The Tracker lists the most recent picks with the two corrections that actually
+come up: **who picked it**, and **whether it used a turn**. Getting one of
+those wrong is the usual reason the rotation drifts, and fixing it there
+re-derives the turn immediately — no adjustment needed to paper over it.
+Switching a pick to "Both" frees the turn automatically, since joint picks
+never consume one.
+
+Use an adjustment for something that genuinely happened off-rotation — a bet, a
+deal, a forfeited pick. Use an override here when the record is simply wrong.
 
 ## Which year a movie counts for
 

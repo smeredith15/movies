@@ -22,6 +22,8 @@ export interface TurnState {
   used: Record<Person, number>;
   /** Picks each person is currently owed beyond the plain rotation. */
   owed: Record<Person, number>;
+  /** Picks recorded without a date, which cannot be placed in the sequence. */
+  undatedPicks: number;
   events: TurnEvent[];
 }
 
@@ -73,10 +75,15 @@ export function computeTurnState(
     | ({ _kind: 'watch' } & Watch)
     | ({ _kind: 'adjustment' } & Adjustment);
 
+  // An undated pick has no place in the sequence — it is counted and reported
+  // separately rather than being guessed into an order.
+  const datedPicks = watches.filter((w) => w.consumesTurn && w.picker !== 'joint' && w.date);
+  const undatedPicks = watches.filter(
+    (w) => w.consumesTurn && w.picker !== 'joint' && !w.date
+  ).length;
+
   const timeline: Item[] = chronological([
-    ...watches
-      .filter((w) => w.consumesTurn && w.picker !== 'joint')
-      .map((w) => ({ ...w, _kind: 'watch' as const })),
+    ...datedPicks.map((w) => ({ ...w, _kind: 'watch' as const })),
     ...adjustments.map((a) => ({ ...a, _kind: 'adjustment' as const })),
   ] as Item[]);
 
@@ -152,7 +159,7 @@ export function computeTurnState(
   const lookahead = queue.slice(0, 4);
   for (const p of lookahead) owed[p] += 1;
 
-  return { upNext: queue[0], queue: queue.slice(0, 6), used, owed, events };
+  return { upNext: queue[0], queue: queue.slice(0, 6), used, owed, undatedPicks, events };
 }
 
 /** One-line summary for the top of the tracker. */

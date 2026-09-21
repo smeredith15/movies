@@ -265,6 +265,55 @@ def main():
     (ROOT / "data" / "index.json").write_text(json.dumps(index, separators=(",", ":")) + "\n")
     print(f"  index: {len(index)} titles")
 
+    # Movies added by hand in the app live in their own small file. Fold them
+    # into the catalogs so a re-import does not lose them; they are marked
+    # manual, which the loop below already preserves.
+    added_path = ROOT / "data" / "added.json"
+    added = json.loads(added_path.read_text()) if added_path.exists() else []
+    folded = 0
+    for movie in added:
+        year = movie.get("year")
+        path = ROOT / "data" / "catalog" / f"{year}.json"
+        catalog = json.loads(path.read_text()) if path.exists() else []
+        if any(c["id"] == movie["id"] for c in catalog):
+            continue
+        catalog.append(
+            {
+                "id": movie["id"],
+                "title": movie["title"],
+                "kind": "theatrical",
+                "festivalDate": None,
+                "usLimitedDate": None,
+                "usTheatricalDate": None,
+                "homeDate": None,
+                "isForeignLanguage": False,
+                "isDocumentary": False,
+                "hadUSTheatricalRelease": False,
+                "services": [],
+                "oscarNominated": False,
+                "ratings": {},
+                "cast": [],
+                "imdbId": None,
+                "tmdbId": None,
+                "sources": ["added-by-hand"],
+                "computedYear": year,
+                "confidence": "high",
+                "evidence": ["Added by hand in the app."],
+                "manual": True,
+                "seen": True,
+                "owned": False,
+                "wantToSee": False,
+                "onFrozenBallot": False,
+            }
+        )
+        catalog.sort(key=lambda c: c["title"])
+        path.write_text(json.dumps(catalog, indent=2) + "\n")
+        if not any(item["year"] == year for item in summary):
+            summary.append({"year": year, "titles": len(catalog), "seen": 1, "frozen": 0})
+        folded += 1
+    if folded:
+        print(f"  folded in {folded} hand-added movie(s)")
+
     # Everything we have watched, as a flat list. The History page needs this
     # and nothing else, and it is ~40 KB against 4.8 MB of full catalogs.
     seen_rows = []

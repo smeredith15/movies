@@ -93,6 +93,22 @@ export default function run(turns) {
     check('with no anchor set, everything is checked', computeTurnState(ws, [], config).events.at(-1).traded, true);
   });
 
+  suite('turns: a pick with no date sits out', () => {
+    const undated = (title, picker) => w('', title, picker);
+    const s1 = state([w('2026-01-02','A','me'), undated('Lost to time','me')]);
+    check('it does not advance the rotation', s1.upNext, 'me');
+    check('it is not counted as used', s1.used.me, 1);
+    check('but it is reported, not silently dropped', s1.undatedPicks, 1);
+    check('a fully dated history reports none', state([w('2026-01-02','A','me')]).undatedPicks, 0);
+
+    const s2 = state([undated('X','me'), undated('Y','her')]);
+    check('several are counted', s2.undatedPicks, 2);
+    check('and the rotation is untouched', s2.upNext, 'me');
+
+    const joint = { ...w('', 'Theater', 'joint'), venue: 'theater', consumesTurn: false };
+    check('a dateless joint watch is not a pending pick', state([joint]).undatedPicks, 0);
+  });
+
   suite('turns: a different household arrangement', () => {
     const oneEach = { ...config, picksPerTurn: 1, rotationStart: 'her' };
     check('one pick each, starting with her', computeTurnState([], [], oneEach).queue.slice(0, 4).join(','), 'her,me,her,me');

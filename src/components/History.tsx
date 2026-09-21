@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
+import type { AddedMovie } from '../lib/added';
 import type { Config, Picker, StagedWatch, Venue, Watch } from '../lib/types';
 import { newId } from '../lib/store';
 import { loadSeen, type SeenMovie } from '../lib/seen';
 import { clearDraft, loadDraft, saveDraft } from '../lib/draft';
+import { AddMovie } from './AddMovie';
 
 type Staged = StagedWatch;
-
 type Filter = 'all' | 'undated' | 'dated';
 
 const STAGED_DEFAULTS: Staged = { date: '', picker: 'me', venue: 'home' };
@@ -15,28 +16,37 @@ interface Row {
   title: string;
   movieId: string | null;
   watch: Watch | null;
+  added?: boolean;
 }
+
+const isDated = (row: Row) => Boolean(row.watch?.date);
 
 /**
  * The watched history, per release year.
  *
  * Two sources feed this. The workbook import knows *what* we watched in each
  * year but never *when* or *who picked it* — it had no such columns — so those
- * arrive as rows waiting to be dated. Anything logged through the app has the
- * full record. Filling in a date here turns an imported row into a real watch.
+ * arrive as rows to fill in. Anything logged through the app has the full
+ * record. A row can be saved as soon as any field is set: a pick whose date we
+ * cannot remember is still worth recording, it just sits out of the rotation
+ * until a date arrives.
  */
 export function History({
   watches,
+  added,
   config,
   onSaveMany,
   onDelete,
+  onAddMovie,
   canEdit,
   busy,
 }: {
   watches: Watch[];
+  added: AddedMovie[];
   config: Config;
   onSaveMany: (ws: Watch[]) => Promise<void>;
   onDelete: (w: Watch) => void;
+  onAddMovie: (m: AddedMovie) => Promise<void>;
   canEdit: boolean;
   busy: boolean;
 }) {
@@ -45,6 +55,12 @@ export function History({
   const [open, setOpen] = useState<Record<number, boolean>>({});
   const [filter, setFilter] = useState<Filter>('all');
   const [query, setQuery] = useState('');
+
+  const narrow = (next: { filter?: Filter; query?: string }) => {
+    if (next.filter !== undefined) setFilter(next.filter);
+    if (next.query !== undefined) setQuery(next.query);
+    setOpen({});
+  };
 
   useEffect(() => {
     loadSeen().then(setSeen);
@@ -59,7 +75,7 @@ export function History({
   // And catch the case localStorage cannot: closing the tab outright.
   useEffect(() => {
     const warn = (e: BeforeUnloadEvent) => {
-      if (Object.values(staged).some((d) => d.date)) e.preventDefault();
+      if (Object.keys(staged).length) e.preventDefault();
     };
     window.addEventListener('beforeunload', warn);
     return () => window.removeEventListener('beforeunload', warn);
@@ -72,68 +88,94 @@ export function History({
   }, [watches]);
 
   /** Release-year sections, plus one for watches that matched no catalog entry. */
-  const { years, unmatched } = useMemo(() => {
+  const { years, unmatched, rowByKey, knownIds } = useMemo(() => {
     const byYear = new Map<number, Row[]>();
+    const rowByKey = new Map<string, Row>();
+    const knownIds = new Set<string>();
+
+    const push = (year: number, row: Row) => {
+      if (!byYear.has(year)) byYear.set(year, []);
+      byYear.get(year)!.push(row);
+      rowByKey.set(row.key, row);
+    };
 
     for (const m of seen ?? []) {
-      if (!byYear.has(m.year)) byYear.set(m.year, []);
-      byYear.get(m.year)!.push({
+      knownIds.add(m.id);
+      push(m.year, { key: m.id, title: m.title, movieId: m.id, watch: watchByMovie.get(m.id) ?? null });
+    }
+
+    for (const m of added) {
+      if (knownIds.has(m.id)) continue;
+      knownIds.add(m.id);
+      push(m.year, {
         key: m.id,
         title: m.title,
         movieId: m.id,
         watch: watchByMovie.get(m.id) ?? null,
+        added: true,
       });
     }
 
-    // A watch logged against a catalog movie that the workbook never marked
-    // seen still belongs in that movie's year.
+    // A watch logged against a catalog movie the workbook never marked seen
+    // still belongs in that movie's year.
     for (const w of watches) {
-      if (!w.movieId) continue;
-      const already = (seen ?? []).some((m) => m.id === w.movieId);
-      if (already) continue;
-      const year = Number(w.movieId.slice(-4)) || Number(w.date.slice(0, 4));
-      if (!byYear.has(year)) byYear.set(year, []);
-      byYear.get(year)!.push({ key: w.id, title: w.title, movieId: w.movieId, watch: w });
+      if (!w.movieId || knownIds.has(w.movieId)) continue;
+      knownIds.add(w.movieId);
+      const year = Number(w.movieId.slice(-4)) || Number(w.date.slice(0, 4)) || 0;
+      push(year, { key: w.movieId, title: w.title, movieId: w.movieId, watch: w });
     }
+
+    const unmatched: Row[] = watches
+      .filter((w) => !w.movieId)
+      .sort((a, b) => (a.date < b.date ? 1 : -1))
+      .map((w) => ({ key: w.id, title: w.title, movieId: null, watch: w }));
+    for (const r of unmatched) rowByKey.set(r.key, r);
 
     return {
       years: [...byYear.entries()]
         .sort((a, b) => b[0] - a[0])
-        .map(([year, rows]) => ({
-          year,
-          rows: rows.sort((a, b) => a.title.localeCompare(b.title)),
-        })),
-      unmatched: watches
-        .filter((w) => !w.movieId)
-        .sort((a, b) => (a.date < b.date ? 1 : -1))
-        .map((w) => ({ key: w.id, title: w.title, movieId: null, watch: w })),
+        .map(([year, rows]) => ({ year, rows: rows.sort((a, b) => a.title.localeCompare(b.title)) })),
+      unmatched,
+      rowByKey,
+      knownIds,
     };
-  }, [seen, watches, watchByMovie]);
+  }, [seen, added, watches, watchByMovie]);
 
   const matches = (row: Row) => {
     if (query && !row.title.toLowerCase().includes(query.toLowerCase())) return false;
-    if (filter === 'undated') return !row.watch;
-    if (filter === 'dated') return Boolean(row.watch);
+    if (filter === 'undated') return !isDated(row);
+    if (filter === 'dated') return isDated(row);
     return true;
   };
 
   const stage = (key: string, patch: Partial<Staged>) =>
-    setStaged((s) => ({ ...s, [key]: { ...STAGED_DEFAULTS, ...s[key], ...patch } }));
+    setStaged((s) => {
+      const row = rowByKey.get(key);
+      const base: Staged = row?.watch
+        ? { date: row.watch.date, picker: row.watch.picker, venue: row.watch.venue }
+        : STAGED_DEFAULTS;
+      return { ...s, [key]: { ...base, ...s[key], ...patch } };
+    });
 
-  const ready = Object.entries(staged).filter(([, v]) => v.date);
+  // Anything touched is saveable. A date is no longer the price of admission —
+  // that requirement is what made the Save button seem to be missing.
+  const ready = Object.entries(staged).filter(([key]) => rowByKey.has(key));
 
   async function save() {
-    const titleOf = new Map((seen ?? []).map((m) => [m.id, m.title]));
     await onSaveMany(
-      ready.map(([movieId, v]) => ({
-        id: newId('w'),
-        date: v.date,
-        title: titleOf.get(movieId) ?? movieId,
-        movieId,
-        venue: v.venue,
-        picker: v.picker,
-        consumesTurn: v.picker !== 'joint',
-      }))
+      ready.map(([key, v]) => {
+        const row = rowByKey.get(key)!;
+        return {
+          id: row.watch?.id ?? newId('w'),
+          date: v.date,
+          title: row.title,
+          movieId: row.movieId,
+          venue: v.venue,
+          picker: v.picker,
+          consumesTurn: v.picker !== 'joint',
+          note: row.watch?.note,
+        };
+      })
     );
     setStaged({});
     clearDraft();
@@ -147,8 +189,9 @@ export function History({
     );
   }
 
-  const totalSeen = seen.length;
-  const totalDated = seen.filter((m) => watchByMovie.has(m.id)).length;
+  const allRows = [...years.flatMap((y) => y.rows), ...unmatched];
+  const totalDated = allRows.filter(isDated).length;
+  const undatedWatches = allRows.filter((r) => r.watch && !r.watch.date).length;
 
   return (
     <>
@@ -156,7 +199,8 @@ export function History({
         <h2>
           History
           <span className="sub">
-            {totalSeen} watched · {totalDated} dated · {totalSeen - totalDated} still need a date
+            {allRows.length} watched · {totalDated} dated
+            {undatedWatches > 0 && ` · ${undatedWatches} saved without a date`}
           </span>
         </h2>
 
@@ -169,23 +213,29 @@ export function History({
                 ['dated', 'Dated'],
               ] as [Filter, string][]
             ).map(([id, label]) => (
-              <button key={id} className={filter === id ? 'primary' : 'ghost'} onClick={() => setFilter(id)}>
+              <button key={id} className={filter === id ? 'primary' : 'ghost'} onClick={() => narrow({ filter: id })}>
                 {label}
               </button>
             ))}
           </div>
           <input
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => narrow({ query: e.target.value })}
             placeholder="Find a title…"
             style={{ maxWidth: 220 }}
           />
         </div>
 
+        {canEdit && (
+          <div className="row" style={{ marginTop: 10 }}>
+            <AddMovie existingIds={knownIds} onAdd={onAddMovie} busy={busy} />
+          </div>
+        )}
+
         <p className="small muted" style={{ marginBottom: 0 }}>
           The imported workbook recorded what we watched each year but not when
-          or who picked it. Set a date here and the entry becomes a real watch
-          that counts toward the rotation.
+          or who picked it. Set whatever you know — a pick saved without a date
+          still counts as watched, it just sits out of the rotation until dated.
         </p>
       </div>
 
@@ -198,7 +248,7 @@ export function History({
             <button
               className="ghost"
               onClick={() => {
-                if (confirm(`Discard ${ready.length} unsaved ${ready.length === 1 ? 'date' : 'dates'}?`)) {
+                if (confirm(`Discard ${ready.length} unsaved ${ready.length === 1 ? 'change' : 'changes'}?`)) {
                   setStaged({});
                   clearDraft();
                 }
@@ -214,70 +264,86 @@ export function History({
         </div>
       )}
 
-      {unmatched.length > 0 && filter !== 'undated' && (
-        <div>
-          <div className="season-head">
-            <h3>Not in the catalog</h3>
-            <span className="range">{unmatched.length} logged by hand</span>
-          </div>
-          <div className="panel">
-            <ul className="watches">
-              {unmatched.filter(matches).map((row) => (
-                <HistoryRow
-                  key={row.key}
-                  row={row}
-                  config={config}
-                  staged={staged[row.key]}
-                  stage={stage}
-                  onDelete={onDelete}
-                  canEdit={canEdit}
-                />
-              ))}
-            </ul>
-          </div>
-        </div>
+      {unmatched.length > 0 && (
+        <Section
+          title="Not in the catalog"
+          meta={`${unmatched.length} logged by hand`}
+          rows={unmatched.filter(matches)}
+          {...{ config, staged, stage, onDelete, canEdit }}
+        />
       )}
 
       {years.map(({ year, rows }, i) => {
         const shown = rows.filter(matches);
         if (!shown.length) return null;
-        const dated = rows.filter((r) => r.watch).length;
-        const expanded = open[year] ?? i === 0;
-
+        // Searching or filtering means you are looking for something specific,
+        // so matching sections open themselves — otherwise a hit inside a
+        // collapsed year looks like no hit at all.
+        const narrowed = query.trim() !== '' || filter !== 'all';
+        const expanded = open[year] ?? (narrowed || i === 0);
         return (
-          <div key={year}>
-            <div className="season-head">
-              <h3>
-                <button className="ghost year-toggle" onClick={() => setOpen((o) => ({ ...o, [year]: !expanded }))}>
-                  {expanded ? '▾' : '▸'} {year}
-                </button>
-              </h3>
-              <span className="range">
-                {rows.length} watched · {dated} dated
-                {config.frozenYears?.includes(year) && ' · ballot frozen'}
-              </span>
-            </div>
-            {expanded && (
-              <div className="panel">
-                <ul className="watches">
-                  {shown.map((row) => (
-                    <HistoryRow
-                      key={row.key}
-                      row={row}
-                      config={config}
-                      staged={staged[row.key]}
-                      stage={stage}
-                      onDelete={onDelete}
-                      canEdit={canEdit}
-                    />
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
+          <Section
+            key={year}
+            title={
+              <button className="ghost year-toggle" onClick={() => setOpen((o) => ({ ...o, [year]: !expanded }))}>
+                {expanded ? '▾' : '▸'} {year || 'Unknown year'}
+              </button>
+            }
+            meta={`${rows.length} watched · ${rows.filter(isDated).length} dated${
+              config.frozenYears?.includes(year) ? ' · ballot frozen' : ''
+            }`}
+            rows={expanded ? shown : []}
+            {...{ config, staged, stage, onDelete, canEdit }}
+          />
         );
       })}
     </>
+  );
+}
+
+function Section({
+  title,
+  meta,
+  rows,
+  config,
+  staged,
+  stage,
+  onDelete,
+  canEdit,
+}: {
+  title: React.ReactNode;
+  meta: string;
+  rows: Row[];
+  config: Config;
+  staged: Record<string, Staged>;
+  stage: (key: string, patch: Partial<Staged>) => void;
+  onDelete: (w: Watch) => void;
+  canEdit: boolean;
+}) {
+  return (
+    <div>
+      <div className="season-head">
+        <h3>{title}</h3>
+        <span className="range">{meta}</span>
+      </div>
+      {rows.length > 0 && (
+        <div className="panel">
+          <ul className="watches">
+            {rows.map((row) => (
+              <HistoryRow
+                key={row.key}
+                row={row}
+                config={config}
+                staged={staged[row.key]}
+                stage={stage}
+                onDelete={onDelete}
+                canEdit={canEdit}
+              />
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -298,7 +364,9 @@ function HistoryRow({
 }) {
   const w = row.watch;
 
-  if (w) {
+  // A fully recorded watch reads back; anything else stays editable so the
+  // missing pieces can be filled in later.
+  if (w && w.date && !staged) {
     return (
       <li>
         <div className="w-date">{w.date}</div>
@@ -310,11 +378,15 @@ function HistoryRow({
             </span>
             {w.venue === 'theater' && <span className="badge theater">Theater</span>}
             {!w.consumesTurn && <span className="badge free">No turn used</span>}
+            {row.added && <span className="badge free">Added by hand</span>}
           </div>
           {w.note && <div className="note">{w.note}</div>}
         </div>
         {canEdit && (
           <div className="w-actions">
+            <button className="ghost" onClick={() => stage(row.key, {})}>
+              Edit
+            </button>
             <button className="danger" onClick={() => onDelete(w)}>
               Delete
             </button>
@@ -324,22 +396,28 @@ function HistoryRow({
     );
   }
 
+  const value: Staged = staged ?? (w ? { date: w.date, picker: w.picker, venue: w.venue } : STAGED_DEFAULTS);
+
   return (
-    <li className="undated">
+    <li className={`undated${staged ? ' editing' : ''}`}>
       <div className="w-main">
         <div className="w-title">{row.title}</div>
-        {!canEdit && <div className="w-meta muted small">No date yet</div>}
+        <div className="w-meta row">
+          {w && !w.date && <span className="badge traded">No date yet</span>}
+          {row.added && <span className="badge free">Added by hand</span>}
+          {!canEdit && !w && <span className="muted small">Not recorded</span>}
+        </div>
       </div>
       {canEdit && (
         <div className="row date-entry">
           <input
             type="date"
-            value={staged?.date ?? ''}
+            value={value.date}
             onChange={(e) => stage(row.key, { date: e.target.value })}
             aria-label={`Date watched for ${row.title}`}
           />
           <select
-            value={staged?.picker ?? 'me'}
+            value={value.picker}
             onChange={(e) => stage(row.key, { picker: e.target.value as Picker })}
             aria-label={`Who picked ${row.title}`}
           >
@@ -348,7 +426,7 @@ function HistoryRow({
             <option value="joint">Both</option>
           </select>
           <select
-            value={staged?.venue ?? 'home'}
+            value={value.venue}
             onChange={(e) => {
               const venue = e.target.value as Venue;
               stage(row.key, venue === 'theater' ? { venue, picker: 'joint' } : { venue });
