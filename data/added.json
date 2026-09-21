@@ -103,5 +103,12 @@
     "year": 2000,
     "tmdbId": 98,
     "addedAt": "2026-09-21T20:21:26.867Z"
+  },
+  {
+    "id": "cold-mountain-2003",
+    "title": "Cold Mountain",
+    "year": 2003,
+    "tmdbId": 2289,
+    "addedAt": "2026-09-21T20:22:05.116Z"
   }
 ]
