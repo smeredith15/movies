@@ -82,5 +82,12 @@
     "year": 2006,
     "tmdbId": 58,
     "addedAt": "2026-09-21T20:20:19.370Z"
+  },
+  {
+    "id": "pirates-of-the-caribbean-the-curse-of-the-black-pearl-2003",
+    "title": "Pirates of the Caribbean: The Curse of the Black Pearl",
+    "year": 2003,
+    "tmdbId": 22,
+    "addedAt": "2026-09-21T20:20:25.168Z"
   }
 ]
