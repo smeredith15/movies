@@ -57,17 +57,32 @@ export async function loadSnapshot(): Promise<Snapshot> {
  * third the size, and fall back to the full catalog for years that predate it.
  */
 export async function loadCatalog(year: number): Promise<CatalogMovie[]> {
+  return fetchFirst(year, [PATHS.browse(year), PATHS.catalog(year)]);
+}
+
+/**
+ * The same year with cast attached.
+ *
+ * Deliberately not `loadCatalog`: that prefers the browse index, which drops
+ * cast to stay small, so routing through it returned films with no cast no
+ * matter how well the enrichment had run.
+ */
+export async function loadCatalogWithCast(year: number): Promise<CatalogMovie[]> {
+  return fetchFirst(year, [PATHS.catalog(year)]);
+}
+
+async function fetchFirst(year: number, paths: string[]): Promise<CatalogMovie[]> {
   const raw = (path: string) =>
     `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${REPO_BRANCH}/${path}?t=${Date.now()}`;
 
-  for (const path of [PATHS.browse(year), PATHS.catalog(year)]) {
+  for (const path of paths) {
     try {
       const res = await fetch(raw(path), { cache: 'no-store' });
       if (!res.ok) continue;
       const data = (await res.json()) as CatalogMovie[];
       if (Array.isArray(data)) return data;
     } catch {
-      // Try the next path; a genuine failure surfaces as an empty year.
+      // Try the next path; a genuine failure surfaces below.
     }
   }
   throw new Error(`Could not load the ${year} catalog.`);

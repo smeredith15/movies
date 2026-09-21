@@ -6,6 +6,7 @@ import { loadSeen, type SeenMovie } from '../lib/seen';
 import { HISTORY_DRAFT, clearDraft, loadDraft, saveDraft } from '../lib/draft';
 import { AddMovie } from './AddMovie';
 import { ballotStatus, defaultBallotChoice } from '../../shared/eligibility.js';
+import { isAttributed, pickerLabel } from '../lib/people';
 
 type Staged = StagedWatch;
 type Filter = 'all' | 'undated' | 'dated';
@@ -180,7 +181,7 @@ export function History({
           movieId: row.movieId,
           venue: v.venue,
           picker: v.picker,
-          consumesTurn: v.picker !== 'joint',
+          consumesTurn: isAttributed(v.picker),
           ...(v.onBallot === undefined ? {} : { onBallot: v.onBallot }),
           note: row.watch?.note,
         };
@@ -384,7 +385,7 @@ function HistoryRow({
           <div className="w-meta row">
             <BallotBadge row={row} config={config} />
             <span className={`badge ${w.picker}`}>
-              {w.picker === 'joint' ? 'Both of us' : config.people[w.picker]}
+              {pickerLabel(w.picker, config)}
             </span>
             {w.venue === 'theater' && <span className="badge theater">Theater</span>}
             {!w.consumesTurn && <span className="badge free">No turn used</span>}
@@ -435,6 +436,7 @@ function HistoryRow({
             <option value="me">{config.people.me}</option>
             <option value="her">{config.people.her}</option>
             <option value="joint">Both</option>
+            <option value="unknown">Not sure</option>
           </select>
           <select
             value={value.venue}

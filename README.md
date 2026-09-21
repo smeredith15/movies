@@ -68,7 +68,9 @@ survive leaving the page.
 ### What the page actually downloads
 
 `data/catalog/<year>.json` is the full record and runs past a megabyte, most of
-it cast. The GitHub contents API refuses anything over 1 MB — it returns empty
+it cast. Anything needing cast — the ballot's actor and character categories —
+must call `loadCatalogWithCast`, **not** `loadCatalog`, which prefers the
+browse index and so returns films with no cast however well the enrichment ran. The GitHub contents API refuses anything over 1 MB — it returns empty
 content rather than an error — so the app reads `data/browse/<year>.json`
 instead, a projection holding only the fields browsing uses, at about a third
 the size. It comes over raw.githubusercontent, which has no such limit, and
@@ -76,6 +78,22 @@ falls back to the full catalog for years that predate the index.
 
 Both the importer and the refresh write it, so it never drifts from its
 catalog.
+
+### Ticking a film as seen
+
+The tick on a Browse row records a **viewing**, not just a flag. The ballot
+pool is built from viewings, so a tick that only set a flag would leave the
+two disagreeing about what we had watched.
+
+It cannot know who picked the film or on what day, so it says so: the viewing
+is `picker: 'unknown'` with no date, and uses nobody's turn. It appears on
+History as a row waiting to be filled in.
+
+One thing it *can* know. Ticking a film means we watched it at or before now,
+so while the film year's window is still open the viewing was certainly inside
+it, and the ballot answer is set to yes. Once that ceremony has passed there is
+no telling which side of it we watched on, and the answer is left for History
+to settle.
 
 ### Where a rating lives
 

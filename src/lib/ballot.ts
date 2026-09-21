@@ -1,5 +1,5 @@
 import { readJson, writeJson } from './github';
-import { loadCatalog } from './store';
+import { loadCatalogWithCast } from './store';
 import type { CatalogMovie, Config, EligibilityOverride, Person, Watch } from './types';
 import { ballotStatus } from '../../shared/eligibility.js';
 
@@ -179,7 +179,7 @@ export function buildUnwatchedPool(
     .sort((a, b) => a.title.localeCompare(b.title));
 }
 
-export const loadFullCatalog = (year: number) => loadCatalog(year);
+export const loadFullCatalog = (year: number) => loadCatalogWithCast(year);
 
 /** A filled slot, for counting progress without judging content. */
 export const isFilled = (entry?: Entry) =>

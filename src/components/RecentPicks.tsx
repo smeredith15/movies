@@ -1,4 +1,5 @@
-import type { Config, Person, Picker, Watch } from '../lib/types';
+import type { Config, Picker, Watch } from '../lib/types';
+import { pickerLabel } from '../lib/people';
 import type { TurnState } from '../lib/turns';
 
 /**
@@ -63,7 +64,7 @@ export function RecentPicks({
         {recent.map((w) => {
           const traded =
             w.picker !== 'joint' &&
-            tradedIds.has(`${w.date}|${w.title} — picked by ${config.people[w.picker as Person]}`);
+            tradedIds.has(`${w.date}|${w.title} — picked by ${pickerLabel(w.picker, config)}`);
 
           return (
             <li key={w.id}>
@@ -81,7 +82,7 @@ export function RecentPicks({
               {canEdit && (
                 <div className="overrides">
                   <div className="seg" role="group" aria-label={`Who picked ${w.title}`}>
-                    {(['me', 'her', 'joint'] as Picker[]).map((p) => (
+                    {(['me', 'her', 'joint', 'unknown'] as Picker[]).map((p) => (
                       <button
                         key={p}
                         className={w.picker === p ? 'on' : ''}
@@ -92,21 +93,21 @@ export function RecentPicks({
                             picker: p,
                             // A joint pick never uses a turn; switching away
                             // from joint restores one.
-                            consumesTurn: p !== 'joint',
+                            consumesTurn: p === 'me' || p === 'her',
                           })
                         }
                       >
-                        {p === 'joint' ? 'Both' : config.people[p]}
+                        {p === 'joint' ? 'Both' : p === 'unknown' ? '?' : config.people[p]}
                       </button>
                     ))}
                   </div>
 
                   <button
                     className={`chip-toggle ${w.consumesTurn ? 'on' : ''}`}
-                    disabled={busy || w.picker === 'joint'}
+                    disabled={busy || w.picker === 'joint' || w.picker === 'unknown'}
                     title={
-                      w.picker === 'joint'
-                        ? 'Joint picks never use a turn'
+                      w.picker === 'joint' || w.picker === 'unknown'
+                        ? 'Only an attributed pick can use a turn'
                         : w.consumesTurn
                           ? 'Counts toward the rotation'
                           : 'Does not count toward the rotation'
