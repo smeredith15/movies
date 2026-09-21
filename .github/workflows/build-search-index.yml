@@ -9,12 +9,17 @@ on:
         description: 'Earliest release year to include'
         required: false
         type: string
-        default: '1950'
+        default: '1920'
       min_votes:
         description: 'Minimum TMDB vote count (higher = smaller index)'
         required: false
         type: string
         default: '50'
+      max_pages:
+        description: 'Page cap per year — 20 films per page. Low values silently truncate.'
+        required: false
+        type: string
+        default: '100'
       dry_run:
         description: 'Report the size, do not commit'
         required: false
@@ -47,6 +52,7 @@ jobs:
           node scripts/build-search-index.mjs \
             --from "${{ inputs.from_year }}" \
             --min-votes "${{ inputs.min_votes }}" \
+            --max-pages "${{ inputs.max_pages }}" \
             ${{ inputs.dry_run && '--dry-run' || '' }}
 
       - name: Commit index

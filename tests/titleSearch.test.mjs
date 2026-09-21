@@ -1,6 +1,6 @@
 import { check, suite } from './harness.mjs';
 
-export default function run({ matchRank, normalizeTitle, rankTitles }) {
+export default function run({ matchRank, normalizeTitle, rankTitles }, { indexCoverage } = {}) {
   const get = (r) => ({ title: r[1], year: r[2] });
 
   suite('title search: how well a title matches', () => {
@@ -34,4 +34,14 @@ export default function run({ matchRank, normalizeTitle, rankTitles }) {
     check('an empty query matches nothing', rankTitles(rows, '', get).length, 0);
     check('a boost can override recency', rankTitles(rows, 'dune', get, (r) => (r[2] === 1984 ? -500 : 0))[0].item[2], 1984);
   });
+
+  if (indexCoverage) {
+    suite('tmdb index: describing what it covers', () => {
+      const rows = [[1, 'Dune', 2021], [2, 'Casablanca', 1942], [3, 'Clueless', 1995]];
+      check('it counts the titles', indexCoverage(rows).count, 3);
+      check('and finds the earliest year', indexCoverage(rows).from, 1942);
+      check('an empty index reports nothing', indexCoverage([]).count, 0);
+      check('with no year to quote', indexCoverage([]).from, null);
+    });
+  }
 }

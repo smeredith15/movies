@@ -28,18 +28,32 @@ export async function loadTmdbIndex(): Promise<TmdbRow[]> {
   if (inflight) return inflight;
 
   inflight = (async () => {
-    const url = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${REPO_BRANCH}/data/tmdb-index.json`;
+    // raw.githubusercontent caches for several minutes, so a freshly built
+    // index would otherwise keep reading as the old empty one.
+    const url = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${REPO_BRANCH}/data/tmdb-index.json?t=${Date.now()}`;
+    let rows: TmdbRow[] = [];
     try {
-      const res = await fetch(url);
-      cache = res.ok ? ((await res.json()) as TmdbRow[]) : [];
+      const res = await fetch(url, { cache: 'no-store' });
+      if (res.ok) rows = (await res.json()) as TmdbRow[];
     } catch {
-      cache = [];
+      rows = [];
     }
+    // Only an actual result is worth keeping. Caching an empty one would make
+    // a transient failure permanent for the rest of the visit.
+    if (rows.length > 0) cache = rows;
     inflight = null;
-    return cache;
+    return rows;
   })();
 
   return inflight;
+}
+
+/** The span the index covers, for telling someone why a search found nothing. */
+export function indexCoverage(rows: TmdbRow[]): { count: number; from: number | null } {
+  if (rows.length === 0) return { count: 0, from: null };
+  let from = rows[0][2];
+  for (const r of rows) if (r[2] < from) from = r[2];
+  return { count: rows.length, from };
 }
 
 export function searchTmdb(rows: TmdbRow[], query: string, limit = 10): TmdbHit[] {
