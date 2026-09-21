@@ -99,13 +99,35 @@ npm test        # 71 assertions over the rules, the rotation and the parsers
 npm run build
 ```
 
+## The imported workbook
+
+`scripts/import-workbook.py` is a one-time import of the original
+`2023 movies.xlsx`. It produced `data/catalog/2011.json` through
+`data/catalog/2025.json` — 5,408 titles, 685 of them marked seen — plus
+`data/categories.json`, the 25 award categories and their scoring.
+
+The workbook is a watchlist, not a pick log: it records *which* movies exist in
+each release year and which ones we saw, but never *when* we saw them or *who
+picked them*. Turn history therefore cannot be backfilled and starts fresh.
+What is preserved is the per-year record of what we watched, which is what the
+ballot needs.
+
+`data/catalog/2024.json` also carries RT critic and audience scores recovered
+from the `2024 Awards` sheet, and marks the 68 titles that were on that frozen
+ballot. It is the only year with a frozen pool in the workbook.
+
+Imported rows have no release dates, so the rules engine cannot re-derive their
+year — the sheet they came from is the authority until a catalog refresh fills
+the dates in. They are marked `confidence: medium` for that reason.
+
 ## Not built yet
 
-- **The ballot itself.** Storage, eligibility and the catalog are done; the
-  categories are not, because the category list has not been supplied. See
-  `src/components/Ballot.tsx`.
-- **Historical backfill.** The watch history for prior years has not been
-  imported.
+- **The ballot UI.** Storage, eligibility, the catalog and the categories are
+  all in place; the voting interface is not. See `src/components/Ballot.tsx`.
+- **Category entry types are guesses.** The workbook records each category's
+  name and points but not whether it takes a movie, an actor, a character or a
+  moment. The mapping in `scripts/import-workbook.py` is inferred from the
+  names and flagged `typeInferred: true` — it needs a once-over.
 - **Live parser validation.** The scrapers are unit-tested against fixtures but
   have never run against the live pages, because the machine they were written
   on had no outbound network. The first real run will report what it found and

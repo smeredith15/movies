@@ -1,0 +1,357 @@
+[
+  {
+    "id": "favorite",
+    "name": "Favorite",
+    "type": "movie",
+    "pool": "watched",
+    "winnerPoints": 5,
+    "honorableMentionPoints": [
+      3,
+      3,
+      3,
+      3
+    ],
+    "scored": true,
+    "allowWriteIn": true,
+    "typeInferred": true
+  },
+  {
+    "id": "least-favorite",
+    "name": "Least Favorite",
+    "type": "movie",
+    "pool": "watched",
+    "winnerPoints": null,
+    "honorableMentionPoints": [],
+    "scored": false,
+    "allowWriteIn": true,
+    "typeInferred": true
+  },
+  {
+    "id": "best-actor",
+    "name": "Best Actor",
+    "type": "person",
+    "pool": "watched",
+    "winnerPoints": 4,
+    "honorableMentionPoints": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "scored": true,
+    "allowWriteIn": true,
+    "typeInferred": true
+  },
+  {
+    "id": "best-actress",
+    "name": "Best Actress",
+    "type": "person",
+    "pool": "watched",
+    "winnerPoints": 4,
+    "honorableMentionPoints": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "scored": true,
+    "allowWriteIn": true,
+    "typeInferred": true
+  },
+  {
+    "id": "strangest-role-for-a-familiar-actor",
+    "name": "Strangest Role for a Familiar Actor",
+    "type": "person",
+    "pool": "watched",
+    "winnerPoints": 1,
+    "honorableMentionPoints": [],
+    "scored": true,
+    "allowWriteIn": true,
+    "typeInferred": true
+  },
+  {
+    "id": "best-kids-movie",
+    "name": "Best Kids' Movie",
+    "type": "movie",
+    "pool": "watched",
+    "winnerPoints": 3,
+    "honorableMentionPoints": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "scored": true,
+    "allowWriteIn": true,
+    "typeInferred": true
+  },
+  {
+    "id": "funniest",
+    "name": "Funniest",
+    "type": "movie",
+    "pool": "watched",
+    "winnerPoints": 4,
+    "honorableMentionPoints": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "scored": true,
+    "allowWriteIn": true,
+    "typeInferred": true
+  },
+  {
+    "id": "saddest",
+    "name": "Saddest",
+    "type": "movie",
+    "pool": "watched",
+    "winnerPoints": 2,
+    "honorableMentionPoints": [],
+    "scored": true,
+    "allowWriteIn": true,
+    "typeInferred": true
+  },
+  {
+    "id": "scariest",
+    "name": "Scariest",
+    "type": "movie",
+    "pool": "watched",
+    "winnerPoints": 2,
+    "honorableMentionPoints": [],
+    "scored": true,
+    "allowWriteIn": true,
+    "typeInferred": true
+  },
+  {
+    "id": "best-original-song",
+    "name": "Best Original Song",
+    "type": "song",
+    "pool": "watched",
+    "winnerPoints": 2,
+    "honorableMentionPoints": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "scored": true,
+    "allowWriteIn": true,
+    "typeInferred": true
+  },
+  {
+    "id": "best-scene",
+    "name": "Best Scene",
+    "type": "moment",
+    "pool": "watched",
+    "winnerPoints": 3,
+    "honorableMentionPoints": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "scored": true,
+    "allowWriteIn": true,
+    "typeInferred": true
+  },
+  {
+    "id": "best-animal",
+    "name": "Best Animal",
+    "type": "character",
+    "pool": "watched",
+    "winnerPoints": 3,
+    "honorableMentionPoints": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "scored": true,
+    "allowWriteIn": true,
+    "typeInferred": true
+  },
+  {
+    "id": "favorite-character",
+    "name": "Favorite Character",
+    "type": "character",
+    "pool": "watched",
+    "winnerPoints": 3,
+    "honorableMentionPoints": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "scored": true,
+    "allowWriteIn": true,
+    "typeInferred": true
+  },
+  {
+    "id": "least-favorite-character",
+    "name": "Least Favorite Character",
+    "type": "character",
+    "pool": "watched",
+    "winnerPoints": null,
+    "honorableMentionPoints": [],
+    "scored": false,
+    "allowWriteIn": true,
+    "typeInferred": true
+  },
+  {
+    "id": "most-unique",
+    "name": "Most Unique",
+    "type": "movie",
+    "pool": "watched",
+    "winnerPoints": 2,
+    "honorableMentionPoints": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "scored": true,
+    "allowWriteIn": true,
+    "typeInferred": true
+  },
+  {
+    "id": "biggest-twist",
+    "name": "Biggest Twist",
+    "type": "moment",
+    "pool": "watched",
+    "winnerPoints": 3,
+    "honorableMentionPoints": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "scored": true,
+    "allowWriteIn": true,
+    "typeInferred": true
+  },
+  {
+    "id": "most-pleasantly-surprised-by",
+    "name": "Most Pleasantly Surprised By",
+    "type": "movie",
+    "pool": "watched",
+    "winnerPoints": 3,
+    "honorableMentionPoints": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "scored": true,
+    "allowWriteIn": true,
+    "typeInferred": true
+  },
+  {
+    "id": "most-thought-i-d-like-more",
+    "name": "Most Thought I'd Like More",
+    "type": "movie",
+    "pool": "watched",
+    "winnerPoints": null,
+    "honorableMentionPoints": [],
+    "scored": false,
+    "allowWriteIn": true,
+    "typeInferred": true
+  },
+  {
+    "id": "most-overrated",
+    "name": "Most Overrated",
+    "type": "movie",
+    "pool": "watched",
+    "winnerPoints": null,
+    "honorableMentionPoints": [],
+    "scored": false,
+    "allowWriteIn": true,
+    "typeInferred": true
+  },
+  {
+    "id": "most-underrated",
+    "name": "Most Underrated",
+    "type": "movie",
+    "pool": "watched",
+    "winnerPoints": 3,
+    "honorableMentionPoints": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "scored": true,
+    "allowWriteIn": true,
+    "typeInferred": true
+  },
+  {
+    "id": "probably-didn-t-get-it",
+    "name": "Probably Didn't Get It",
+    "type": "movie",
+    "pool": "watched",
+    "winnerPoints": null,
+    "honorableMentionPoints": [],
+    "scored": false,
+    "allowWriteIn": true,
+    "typeInferred": true
+  },
+  {
+    "id": "most-want-a-sequel",
+    "name": "Most Want a Sequel",
+    "type": "movie",
+    "pool": "watched",
+    "winnerPoints": 3,
+    "honorableMentionPoints": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "scored": true,
+    "allowWriteIn": true,
+    "typeInferred": true
+  },
+  {
+    "id": "most-want-to-know-more-about",
+    "name": "Most Want to Know More About",
+    "type": "movie",
+    "pool": "watched",
+    "winnerPoints": 2,
+    "honorableMentionPoints": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "scored": true,
+    "allowWriteIn": true,
+    "typeInferred": true
+  },
+  {
+    "id": "most-want-to-rewatch",
+    "name": "Most Want to Rewatch",
+    "type": "movie",
+    "pool": "watched",
+    "winnerPoints": 5,
+    "honorableMentionPoints": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "scored": true,
+    "allowWriteIn": true,
+    "typeInferred": true
+  },
+  {
+    "id": "most-thought-we-d-seebut-didn-t",
+    "name": "Most Thought We'd See\u2014But Didn't",
+    "type": "movie",
+    "pool": "unwatched",
+    "winnerPoints": null,
+    "honorableMentionPoints": [],
+    "scored": false,
+    "allowWriteIn": true,
+    "typeInferred": true
+  }
+]
