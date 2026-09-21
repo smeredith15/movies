@@ -35,12 +35,20 @@ against the front of the queue:
 
 - **Theater trips** are decided together, so they default to joint and consume
   nobody's turn. Either default can be overridden per entry.
+- **Backfilled history is exempt.** Set "Rotation live from" in Settings and
+  picks before that date still count toward the queue and the totals, but are
+  not flagged as out of turn — so keying in years of past watches does not
+  litter the history with trade markers.
 - **Trading** needs no special handling. Pick out of turn to catch something
   before it leaves theaters and the slot comes out of your next block — the
   other person keeps their place in the queue, and neither of you ends up ahead.
   The history marks the pick "out of turn".
 - **Bets and deals** are an adjustment: an extra pick jumps the queue, a skip
   removes that person's next slot. Both take a free-text reason.
+
+Titles autocomplete against a 290 KB index of all 5,408 catalogued movies, so
+logging a watch links it to that year's list. The **Backfill** tab takes many
+rows at once and saves them as a single commit.
 
 ## Which year a movie counts for
 
@@ -124,6 +132,10 @@ the dates in. They are marked `confidence: medium` for that reason.
 
 - **The ballot UI.** Storage, eligibility, the catalog and the categories are
   all in place; the voting interface is not. See `src/components/Ballot.tsx`.
+  The agreed shape: one winner plus up to four unranked, optional honorable
+  mentions per category. The six categories with no points stay on the ballot
+  and appear in the reveal, but contribute nothing to the totals
+  (`scored: false`).
 - **Category entry types are guesses.** The workbook records each category's
   name and points but not whether it takes a movie, an actor, a character or a
   moment. The mapping in `scripts/import-workbook.py` is inferred from the

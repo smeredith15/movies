@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { Config, Picker, Venue, Watch } from '../lib/types';
 import { newId } from '../lib/store';
+import { TitleInput } from './TitleInput';
 
 const today = () => new Date().toISOString().slice(0, 10);
 
@@ -15,6 +16,7 @@ export function WatchForm({
 }) {
   const [date, setDate] = useState(today);
   const [title, setTitle] = useState('');
+  const [movieId, setMovieId] = useState<string | null>(null);
   const [venue, setVenue] = useState<Venue>('home');
   const [picker, setPicker] = useState<Picker>('me');
   const [consumes, setConsumes] = useState(true);
@@ -47,13 +49,14 @@ export function WatchForm({
       id: newId('w'),
       date,
       title: title.trim(),
-      movieId: null,
+      movieId,
       venue,
       picker,
       consumesTurn: picker === 'joint' ? false : consumes,
       note: note.trim() || undefined,
     });
     setTitle('');
+    setMovieId(null);
     setNote('');
     setTouchedConsumes(false);
   }
@@ -69,11 +72,13 @@ export function WatchForm({
 
         <label className="field" style={{ gridColumn: 'span 2' }}>
           <span>Title</span>
-          <input
+          <TitleInput
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Movie title"
-            required
+            onChange={setTitle}
+            onPick={(s) => {
+              setMovieId(s?.id ?? null);
+              if (s) setTitle(s.title);
+            }}
           />
         </label>
 

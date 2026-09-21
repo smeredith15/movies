@@ -80,6 +80,19 @@ export default function run(turns) {
     );
   });
 
+  suite('turns: backfilled history stays quiet', () => {
+    const anchored = { ...config, rotationAnchor: '2026-06-01' };
+    const ws = [w('2026-01-02','Old A','me'), w('2026-01-09','Old B','me'), w('2026-01-16','Old C','me')];
+    const before = computeTurnState(ws, [], anchored);
+    check('an out-of-turn pick before the anchor is not flagged', before.events.at(-1).traded, false);
+    check('but it still counts toward the totals', before.used.me, 3);
+    check('and it still moves the queue along', before.upNext, 'her');
+
+    const after = computeTurnState([...ws, w('2026-07-01','New','me')], [], anchored);
+    check('an out-of-turn pick after the anchor is flagged', after.events.at(-1).traded, true);
+    check('with no anchor set, everything is checked', computeTurnState(ws, [], config).events.at(-1).traded, true);
+  });
+
   suite('turns: a different household arrangement', () => {
     const oneEach = { ...config, picksPerTurn: 1, rotationStart: 'her' };
     check('one pick each, starting with her', computeTurnState([], [], oneEach).queue.slice(0, 4).join(','), 'her,me,her,me');

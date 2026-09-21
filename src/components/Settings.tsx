@@ -155,9 +155,18 @@ export function Settings({
               <option value="her">{draft.people.her}</option>
             </select>
           </label>
+          <label className="field">
+            <span>Rotation live from</span>
+            <input
+              type="date"
+              value={draft.rotationAnchor ?? ''}
+              onChange={(e) => setDraft({ ...draft, rotationAnchor: e.target.value || null })}
+            />
+          </label>
           <div className="full row spread">
             <span className="small muted">
-              Changing these replays the whole history, so the turn indicator updates everywhere.
+              Picks before that date still count, but are not flagged as out of turn — set it so
+              backfilled history stays quiet. Changing any of this replays the whole history.
             </span>
             <button className="primary" onClick={() => onSaveConfig(draft)} disabled={busy}>
               {busy ? 'Saving…' : 'Save'}

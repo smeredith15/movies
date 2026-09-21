@@ -75,6 +75,11 @@ export interface Config {
   people: Record<Person, string>;
   picksPerTurn: number;
   rotationStart: Person;
+  /**
+   * Picks before this date are recorded but not checked against the rotation,
+   * so backfilled history does not get flagged as a string of trades.
+   */
+  rotationAnchor?: string | null;
   /** Keyed by ceremony year, overrides the built-in table. */
   oscarDates: Record<string, string>;
   /** Film years whose ballot pool has been frozen at the ceremony. */

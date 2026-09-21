@@ -12,12 +12,13 @@ import {
 import { getToken, getWhoAmI } from './lib/github';
 import { TurnPanel } from './components/TurnPanel';
 import { WatchForm } from './components/WatchForm';
+import { BulkEntry } from './components/BulkEntry';
 import { WatchList } from './components/WatchList';
 import { AdjustmentPanel } from './components/AdjustmentPanel';
 import { Settings } from './components/Settings';
 import { Ballot } from './components/Ballot';
 
-type Tab = 'tracker' | 'history' | 'ballot' | 'settings';
+type Tab = 'tracker' | 'backfill' | 'history' | 'ballot' | 'settings';
 
 const CURRENT_FILM_YEAR = (() => {
   // Before the ceremony, the season still in progress is last year's.
@@ -74,6 +75,11 @@ export default function App() {
       await saveWatches([w], [], `Log watch: ${w.title}`);
     });
 
+  const addWatches = (ws: Watch[]) =>
+    mutate(async () => {
+      await saveWatches(ws, [], `Backfill ${ws.length} watch${ws.length === 1 ? '' : 'es'}`);
+    });
+
   const deleteWatch = (w: Watch) => {
     if (!confirm(`Remove "${w.title}" from ${w.date}?`)) return;
     mutate(async () => {
@@ -120,6 +126,7 @@ export default function App() {
         {(
           [
             ['tracker', 'Tracker'],
+            ['backfill', 'Backfill'],
             ['history', 'History'],
             ['ballot', 'Ballot'],
             ['settings', 'Settings'],
@@ -151,6 +158,16 @@ export default function App() {
             busy={busy}
           />
         </>
+      )}
+
+      {tab === 'backfill' && snap && (
+        canEdit ? (
+          <BulkEntry config={config} onSave={addWatches} busy={busy} />
+        ) : (
+          <div className="panel">
+            <div className="empty">Add a GitHub token under Settings to enter history.</div>
+          </div>
+        )
       )}
 
       {tab === 'history' && snap && (

@@ -104,7 +104,7 @@ export function computeTurnState(
         description: `${item.title} — picked by ${config.people[actual]}`,
         expected,
         actual,
-        traded: expected !== actual,
+        traded: expected !== actual && (!config.rotationAnchor || item.date >= config.rotationAnchor),
         note: item.note,
       });
     } else if (item.type === 'grant') {

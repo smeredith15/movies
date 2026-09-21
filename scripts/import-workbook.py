@@ -216,6 +216,17 @@ def main():
             }
         )
 
+    # A lightweight index for title autocomplete. The full catalogs are ~5 MB
+    # in total, far too much to pull into the browser just to search titles.
+    index = []
+    for s in summary:
+        year = s["year"]
+        for m in json.loads((ROOT / "data" / "catalog" / f"{year}.json").read_text()):
+            index.append([m["id"], m["title"], year, 1 if m["seen"] else 0])
+    index.sort(key=lambda r: (-r[2], r[1]))
+    (ROOT / "data" / "index.json").write_text(json.dumps(index, separators=(",", ":")) + "\n")
+    print(f"  index: {len(index)} titles")
+
     cats = read_categories(wb["Awards"])
     (ROOT / "data" / "categories.json").write_text(json.dumps(cats, indent=2) + "\n")
 

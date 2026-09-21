@@ -20,6 +20,7 @@ export const DEFAULT_CONFIG: Config = {
   people: { me: 'Me', her: 'Her' },
   picksPerTurn: 2,
   rotationStart: 'me',
+  rotationAnchor: null,
   oscarDates: {},
   frozenYears: [],
 };
