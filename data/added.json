@@ -5,5 +5,12 @@
     "year": 2006,
     "tmdbId": 350,
     "addedAt": "2026-09-21T18:55:19.626Z"
+  },
+  {
+    "id": "casper-1995",
+    "title": "Casper",
+    "year": 1995,
+    "tmdbId": 8839,
+    "addedAt": "2026-09-21T18:56:10.555Z"
   }
 ]
