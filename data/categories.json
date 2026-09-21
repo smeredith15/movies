@@ -12,8 +12,7 @@
       3
     ],
     "scored": true,
-    "allowWriteIn": true,
-    "typeInferred": true
+    "allowWriteIn": true
   },
   {
     "id": "least-favorite",
@@ -23,8 +22,7 @@
     "winnerPoints": null,
     "honorableMentionPoints": [],
     "scored": false,
-    "allowWriteIn": true,
-    "typeInferred": true
+    "allowWriteIn": true
   },
   {
     "id": "best-actor",
@@ -39,8 +37,7 @@
       2
     ],
     "scored": true,
-    "allowWriteIn": true,
-    "typeInferred": true
+    "allowWriteIn": true
   },
   {
     "id": "best-actress",
@@ -55,8 +52,7 @@
       2
     ],
     "scored": true,
-    "allowWriteIn": true,
-    "typeInferred": true
+    "allowWriteIn": true
   },
   {
     "id": "strangest-role-for-a-familiar-actor",
@@ -66,8 +62,7 @@
     "winnerPoints": 1,
     "honorableMentionPoints": [],
     "scored": true,
-    "allowWriteIn": true,
-    "typeInferred": true
+    "allowWriteIn": true
   },
   {
     "id": "best-kids-movie",
@@ -82,8 +77,7 @@
       1
     ],
     "scored": true,
-    "allowWriteIn": true,
-    "typeInferred": true
+    "allowWriteIn": true
   },
   {
     "id": "funniest",
@@ -98,8 +92,7 @@
       2
     ],
     "scored": true,
-    "allowWriteIn": true,
-    "typeInferred": true
+    "allowWriteIn": true
   },
   {
     "id": "saddest",
@@ -109,8 +102,7 @@
     "winnerPoints": 2,
     "honorableMentionPoints": [],
     "scored": true,
-    "allowWriteIn": true,
-    "typeInferred": true
+    "allowWriteIn": true
   },
   {
     "id": "scariest",
@@ -120,13 +112,12 @@
     "winnerPoints": 2,
     "honorableMentionPoints": [],
     "scored": true,
-    "allowWriteIn": true,
-    "typeInferred": true
+    "allowWriteIn": true
   },
   {
     "id": "best-original-song",
     "name": "Best Original Song",
-    "type": "song",
+    "type": "movieText",
     "pool": "watched",
     "winnerPoints": 2,
     "honorableMentionPoints": [
@@ -137,12 +128,12 @@
     ],
     "scored": true,
     "allowWriteIn": true,
-    "typeInferred": true
+    "textLabel": "The song"
   },
   {
     "id": "best-scene",
     "name": "Best Scene",
-    "type": "moment",
+    "type": "movieText",
     "pool": "watched",
     "winnerPoints": 3,
     "honorableMentionPoints": [
@@ -153,12 +144,12 @@
     ],
     "scored": true,
     "allowWriteIn": true,
-    "typeInferred": true
+    "textLabel": "The scene"
   },
   {
     "id": "best-animal",
     "name": "Best Animal",
-    "type": "character",
+    "type": "movieText",
     "pool": "watched",
     "winnerPoints": 3,
     "honorableMentionPoints": [
@@ -169,7 +160,7 @@
     ],
     "scored": true,
     "allowWriteIn": true,
-    "typeInferred": true
+    "textLabel": "The animal"
   },
   {
     "id": "favorite-character",
@@ -184,8 +175,7 @@
       1
     ],
     "scored": true,
-    "allowWriteIn": true,
-    "typeInferred": true
+    "allowWriteIn": true
   },
   {
     "id": "least-favorite-character",
@@ -195,8 +185,7 @@
     "winnerPoints": null,
     "honorableMentionPoints": [],
     "scored": false,
-    "allowWriteIn": true,
-    "typeInferred": true
+    "allowWriteIn": true
   },
   {
     "id": "most-unique",
@@ -211,13 +200,12 @@
       1
     ],
     "scored": true,
-    "allowWriteIn": true,
-    "typeInferred": true
+    "allowWriteIn": true
   },
   {
     "id": "biggest-twist",
     "name": "Biggest Twist",
-    "type": "moment",
+    "type": "movieText",
     "pool": "watched",
     "winnerPoints": 3,
     "honorableMentionPoints": [
@@ -228,7 +216,7 @@
     ],
     "scored": true,
     "allowWriteIn": true,
-    "typeInferred": true
+    "textLabel": "The twist"
   },
   {
     "id": "most-pleasantly-surprised-by",
@@ -243,8 +231,7 @@
       1
     ],
     "scored": true,
-    "allowWriteIn": true,
-    "typeInferred": true
+    "allowWriteIn": true
   },
   {
     "id": "most-thought-i-d-like-more",
@@ -254,8 +241,7 @@
     "winnerPoints": null,
     "honorableMentionPoints": [],
     "scored": false,
-    "allowWriteIn": true,
-    "typeInferred": true
+    "allowWriteIn": true
   },
   {
     "id": "most-overrated",
@@ -265,8 +251,7 @@
     "winnerPoints": null,
     "honorableMentionPoints": [],
     "scored": false,
-    "allowWriteIn": true,
-    "typeInferred": true
+    "allowWriteIn": true
   },
   {
     "id": "most-underrated",
@@ -281,8 +266,7 @@
       1
     ],
     "scored": true,
-    "allowWriteIn": true,
-    "typeInferred": true
+    "allowWriteIn": true
   },
   {
     "id": "probably-didn-t-get-it",
@@ -292,8 +276,7 @@
     "winnerPoints": null,
     "honorableMentionPoints": [],
     "scored": false,
-    "allowWriteIn": true,
-    "typeInferred": true
+    "allowWriteIn": true
   },
   {
     "id": "most-want-a-sequel",
@@ -308,8 +291,7 @@
       1
     ],
     "scored": true,
-    "allowWriteIn": true,
-    "typeInferred": true
+    "allowWriteIn": true
   },
   {
     "id": "most-want-to-know-more-about",
@@ -324,8 +306,7 @@
       1
     ],
     "scored": true,
-    "allowWriteIn": true,
-    "typeInferred": true
+    "allowWriteIn": true
   },
   {
     "id": "most-want-to-rewatch",
@@ -340,8 +321,7 @@
       1
     ],
     "scored": true,
-    "allowWriteIn": true,
-    "typeInferred": true
+    "allowWriteIn": true
   },
   {
     "id": "most-thought-we-d-seebut-didn-t",
@@ -351,7 +331,6 @@
     "winnerPoints": null,
     "honorableMentionPoints": [],
     "scored": false,
-    "allowWriteIn": true,
-    "typeInferred": true
+    "allowWriteIn": true
   }
 ]

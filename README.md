@@ -72,6 +72,43 @@ Anything below high confidence lands in a review queue. A manual override in
 `data/overrides.json` always wins and survives every re-scrape, because the
 scraper writes only to `data/catalog/` and never touches overrides.
 
+## The award categories
+
+`data/categories.json` holds all 25 categories, imported from the workbook's
+`Awards` sheet. Each one records what it asks for and what it is worth:
+
+| type | what you pick |
+| --- | --- |
+| `movie` | a movie from the eligible pool |
+| `person` | an actor — the movie rows expand to show cast |
+| `character` | a character — the movie rows expand to show roles |
+| `movieText` | a movie, then type the answer, prompted by `textLabel` |
+
+Best Animal is `movieText` rather than `character` because cast lists rarely
+name the animals, so free text is the only thing that reliably works. Best
+Scene, Biggest Twist and Best Original Song work the same way. Every category
+also accepts a write-in.
+
+One category, Most Thought We'd See—But Didn't, draws from the movies we did
+*not* see (`pool: unwatched`).
+
+### Scoring
+
+A ballot is one winner plus up to four honorable mentions, unranked and
+optional. Points differ by category on purpose: Favorite pays 5 and 3, while
+Saddest and Scariest pay 2 for the winner and have no honorable mentions at
+all, and Strangest Role pays 1.
+
+That asymmetry is deliberate, not a gap in the data. The points feed a rewatch
+day, so a category with more slots would pull the day toward its genre — the
+reason Saddest is capped is that we didn't want to flood the pool with sad
+movies.
+
+Six categories carry no points at all — Least Favorite, Least Favorite
+Character, Most Thought I'd Like More, Most Overrated, Probably Didn't Get It,
+and Most Thought We'd See—But Didn't. They are still voted on and still show up
+in the reveal; they just contribute nothing to the totals (`scored: false`).
+
 ## Rebuilding the catalog
 
 On demand, never on a schedule:
@@ -132,14 +169,10 @@ the dates in. They are marked `confidence: medium` for that reason.
 
 - **The ballot UI.** Storage, eligibility, the catalog and the categories are
   all in place; the voting interface is not. See `src/components/Ballot.tsx`.
-  The agreed shape: one winner plus up to four unranked, optional honorable
-  mentions per category. The six categories with no points stay on the ballot
-  and appear in the reveal, but contribute nothing to the totals
-  (`scored: false`).
-- **Category entry types are guesses.** The workbook records each category's
-  name and points but not whether it takes a movie, an actor, a character or a
-  moment. The mapping in `scripts/import-workbook.py` is inferred from the
-  names and flagged `typeInferred: true` — it needs a once-over.
+  See **The award categories** above for the agreed shape.
+- **The rewatch day.** The point totals are meant to drive a rewatch day, which
+  nothing builds yet. Once the ballot exists, this is the natural next piece:
+  tally both ballots, apply the per-category weights, and produce the lineup.
 - **Live parser validation.** The scrapers are unit-tested against fixtures but
   have never run against the live pages, because the machine they were written
   on had no outbound network. The first real run will report what it found and

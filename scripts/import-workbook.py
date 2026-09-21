@@ -91,25 +91,27 @@ def read_awards_pool(ws):
     return pool
 
 
-# What each category asks for. The workbook does not record this, so these are
-# inferred from the category names and are meant to be corrected by hand.
+# What each category asks for. The workbook records a category's name and its
+# points but never its entry type, so these are set by hand.
 #   movie     — pick from the eligible pool
 #   person    — an actor, so the movie rows expand to show cast
 #   character — a character, so the movie rows expand to show roles
-#   moment    — pick a movie, then type the moment
-#   song      — pick a movie, then type the song
+#   movieText — pick a movie, then type the answer; textLabel prompts the field
 # `pool: unwatched` flips the list to movies we did NOT see.
+#
+# Best Animal is movieText rather than character on purpose: cast lists rarely
+# name the animals, so free text is the only thing that reliably works.
 CATEGORY_TYPES = {
-    "best-actor": ("person", "watched"),
-    "best-actress": ("person", "watched"),
-    "strangest-role-for-a-familiar-actor": ("person", "watched"),
-    "favorite-character": ("character", "watched"),
-    "least-favorite-character": ("character", "watched"),
-    "best-animal": ("character", "watched"),
-    "best-scene": ("moment", "watched"),
-    "biggest-twist": ("moment", "watched"),
-    "best-original-song": ("song", "watched"),
-    "most-thought-we-d-seebut-didn-t": ("movie", "unwatched"),
+    "best-actor": {"type": "person"},
+    "best-actress": {"type": "person"},
+    "strangest-role-for-a-familiar-actor": {"type": "person"},
+    "favorite-character": {"type": "character"},
+    "least-favorite-character": {"type": "character"},
+    "best-animal": {"type": "movieText", "textLabel": "The animal"},
+    "best-scene": {"type": "movieText", "textLabel": "The scene"},
+    "biggest-twist": {"type": "movieText", "textLabel": "The twist"},
+    "best-original-song": {"type": "movieText", "textLabel": "The song"},
+    "most-thought-we-d-seebut-didn-t": {"type": "movie", "pool": "unwatched"},
 }
 
 
@@ -123,20 +125,22 @@ def read_categories(ws):
         winner = num(row[1])
         mentions = [num(v) for v in row[2:6] if num(v) is not None]
         cid = slugify(name, None)
-        kind, pool = CATEGORY_TYPES.get(cid, ("movie", "watched"))
-        cats.append(
-            {
-                "id": cid,
-                "name": str(name).strip(),
-                "type": kind,
-                "pool": pool,
-                "winnerPoints": winner,
-                "honorableMentionPoints": mentions,
-                "scored": winner is not None,
-                "allowWriteIn": True,
-                "typeInferred": True,
-            }
-        )
+        spec = CATEGORY_TYPES.get(cid, {})
+        entry = {
+            "id": cid,
+            "name": str(name).strip(),
+            "type": spec.get("type", "movie"),
+            "pool": spec.get("pool", "watched"),
+            "winnerPoints": winner,
+            "honorableMentionPoints": mentions,
+            # Unscored categories are still voted on and still appear in the
+            # reveal; they just contribute nothing to the totals.
+            "scored": winner is not None,
+            "allowWriteIn": True,
+        }
+        if "textLabel" in spec:
+            entry["textLabel"] = spec["textLabel"]
+        cats.append(entry)
     return cats
 
 
