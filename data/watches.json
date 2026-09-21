@@ -556,5 +556,14 @@
     "venue": "home",
     "picker": "me",
     "consumesTurn": true
+  },
+  {
+    "id": "w_mubknh9wzkom7",
+    "date": "2025-11-02",
+    "title": "Freaky",
+    "movieId": "freaky-2020",
+    "venue": "home",
+    "picker": "her",
+    "consumesTurn": true
   }
 ]
