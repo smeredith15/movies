@@ -85,3 +85,10 @@ export interface Config {
   /** Film years whose ballot pool has been frozen at the ceremony. */
   frozenYears: number[];
 }
+
+/** A history row that has been filled in but not yet committed. */
+export interface StagedWatch {
+  date: string;
+  picker: Picker;
+  venue: Venue;
+}

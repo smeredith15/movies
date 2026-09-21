@@ -1,13 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
-import type { Config, Picker, Venue, Watch } from '../lib/types';
+import type { Config, Picker, StagedWatch, Venue, Watch } from '../lib/types';
 import { newId } from '../lib/store';
 import { loadSeen, type SeenMovie } from '../lib/seen';
+import { clearDraft, loadDraft, saveDraft } from '../lib/draft';
 
-interface Staged {
-  date: string;
-  picker: Picker;
-  venue: Venue;
-}
+type Staged = StagedWatch;
 
 type Filter = 'all' | 'undated' | 'dated';
 
@@ -44,7 +41,7 @@ export function History({
   busy: boolean;
 }) {
   const [seen, setSeen] = useState<SeenMovie[] | null>(null);
-  const [staged, setStaged] = useState<Record<string, Staged>>({});
+  const [staged, setStaged] = useState<Record<string, Staged>>(loadDraft);
   const [open, setOpen] = useState<Record<number, boolean>>({});
   const [filter, setFilter] = useState<Filter>('all');
   const [query, setQuery] = useState('');
@@ -52,6 +49,21 @@ export function History({
   useEffect(() => {
     loadSeen().then(setSeen);
   }, []);
+
+  // Persist on every keystroke so nothing is lost to a tab switch, a reload,
+  // or the back button.
+  useEffect(() => {
+    saveDraft(staged);
+  }, [staged]);
+
+  // And catch the case localStorage cannot: closing the tab outright.
+  useEffect(() => {
+    const warn = (e: BeforeUnloadEvent) => {
+      if (Object.values(staged).some((d) => d.date)) e.preventDefault();
+    };
+    window.addEventListener('beforeunload', warn);
+    return () => window.removeEventListener('beforeunload', warn);
+  }, [staged]);
 
   const watchByMovie = useMemo(() => {
     const map = new Map<string, Watch>();
@@ -124,6 +136,7 @@ export function History({
       }))
     );
     setStaged({});
+    clearDraft();
   }
 
   if (seen === null) {
@@ -182,7 +195,16 @@ export function History({
             {ready.length} {ready.length === 1 ? 'entry' : 'entries'} ready to save
           </span>
           <div className="row">
-            <button className="ghost" onClick={() => setStaged({})} disabled={busy}>
+            <button
+              className="ghost"
+              onClick={() => {
+                if (confirm(`Discard ${ready.length} unsaved ${ready.length === 1 ? 'date' : 'dates'}?`)) {
+                  setStaged({});
+                  clearDraft();
+                }
+              }}
+              disabled={busy}
+            >
               Discard
             </button>
             <button className="primary" onClick={save} disabled={busy}>

@@ -64,7 +64,14 @@ sources feed it:
 Setting a date on an imported row turns it into a real watch linked to that
 catalog entry, which is what makes it count toward the rotation. Edits stage up
 locally and save together in one commit, so dating a year's worth of movies is
-one commit rather than sixty. Watches typed by hand that matched no catalog
+one commit rather than sixty.
+
+Because that is a long session, staged edits are written to `localStorage` on
+every keystroke and restored on the way back in. Switching tabs, reloading, or
+hitting back no longer costs you the work, and the tab label carries the
+unsaved count so it is visible from anywhere in the app. The save bar is
+anchored to the bottom of the window rather than the top, since the rows being
+filled in are usually at the foot of a long page. Watches typed by hand that matched no catalog
 entry get their own section rather than being silently filed under a year.
 
 ## Which year a movie counts for

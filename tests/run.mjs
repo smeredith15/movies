@@ -16,6 +16,7 @@ import runTurns from './turns.test.mjs';
 import runIndex from './index.test.mjs';
 import runCategories from './categories.test.mjs';
 import runEntryTypes from './entryTypes.test.mjs';
+import runDraft from './draft.test.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const BUILD = resolve(ROOT, '.test-build');
@@ -27,6 +28,7 @@ execFileSync(
     'tsc',
     'src/lib/turns.ts',
     'src/lib/catalogIndex.ts',
+    'src/lib/draft.ts',
     '--rootDir', 'src',
     '--outDir', BUILD,
     // CommonJS, because the source uses extensionless imports that Node's ESM
@@ -45,6 +47,7 @@ writeFileSync(resolve(BUILD, 'package.json'), '{"type":"commonjs"}');
 const require = createRequire(import.meta.url);
 const turns = require(resolve(BUILD, 'lib/turns.js'));
 const catalogIndex = require(resolve(BUILD, 'lib/catalogIndex.js'));
+const draft = require(resolve(BUILD, 'lib/draft.js'));
 
 runEligibility();
 runParse();
@@ -52,6 +55,7 @@ runTurns(turns);
 runIndex(catalogIndex);
 runCategories();
 runEntryTypes();
+runDraft(draft);
 
 rmSync(BUILD, { recursive: true, force: true });
 process.exit(report() === 0 ? 0 : 1);

@@ -10,6 +10,7 @@ import {
   type Snapshot,
 } from './lib/store';
 import { getToken, getWhoAmI } from './lib/github';
+import { DRAFT_EVENT, loadDraft, readyCount } from './lib/draft';
 import { TurnPanel } from './components/TurnPanel';
 import { WatchForm } from './components/WatchForm';
 import { BulkEntry } from './components/BulkEntry';
@@ -32,6 +33,7 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [identity, setIdentity] = useState(0);
+  const [unsaved, setUnsaved] = useState(() => readyCount(loadDraft()));
 
   const canEdit = Boolean(getToken());
   const whoami = getWhoAmI();
@@ -57,6 +59,18 @@ export default function App() {
   useEffect(() => {
     refresh();
   }, [refresh, identity]);
+
+  // Unsaved history edits are worth surfacing from every tab, not just the one
+  // they were made on — and they reserve room for the save bar.
+  useEffect(() => {
+    const onDraft = (e: Event) => setUnsaved((e as CustomEvent<number>).detail);
+    window.addEventListener(DRAFT_EVENT, onDraft);
+    return () => window.removeEventListener(DRAFT_EVENT, onDraft);
+  }, []);
+
+  useEffect(() => {
+    document.body.classList.toggle('has-unsaved', unsaved > 0);
+  }, [unsaved]);
 
   const config: Config = snap?.config ?? DEFAULT_CONFIG;
 
@@ -136,7 +150,7 @@ export default function App() {
           [
             ['tracker', 'Tracker'],
             ['backfill', 'Backfill'],
-            ['history', 'History'],
+            ['history', unsaved > 0 ? `History · ${unsaved} unsaved` : 'History'],
             ['ballot', 'Ballot'],
             ['settings', 'Settings'],
           ] as [Tab, string][]
