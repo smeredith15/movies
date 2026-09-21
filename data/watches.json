@@ -70,5 +70,14 @@
     "venue": "home",
     "picker": "me",
     "consumesTurn": true
+  },
+  {
+    "id": "w_mubjouele46vm",
+    "date": "2026-08-08",
+    "title": "Thrash",
+    "movieId": "thrash-2026",
+    "venue": "home",
+    "picker": "her",
+    "consumesTurn": true
   }
 ]
