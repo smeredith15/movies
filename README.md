@@ -77,11 +77,25 @@ anchored to the bottom of the window rather than the top, since the rows being
 filled in are usually at the foot of a long page. Watches typed by hand that matched no catalog
 entry get their own section rather than being silently filed under a year.
 
-**Add a movie** covers anything the workbook never listed. It writes to
-`data/added.json` — a small file, rather than appending to a 300 KB year
-catalog — and the app merges it into the watched list. The importer folds those
-entries into the catalogs on its next run, marked `manual`, so they survive
-later re-imports.
+**Add a movie** covers anything the workbook never listed. It searches TMDB by
+title and adds what you pick, recording the TMDB id; a title the index does not
+cover can still be typed by hand.
+
+The search runs against `data/tmdb-index.json`, built by the Action and
+committed to the repo. The page cannot query TMDB itself — the API key is a
+repository secret, and anything a static page can read is public — so the
+corpus is built where the key is safe and searched offline in the browser. It
+is fetched on first use rather than at startup, since it is only needed when
+adding a movie.
+
+Rebuild it from the **Build movie search index** action. `from_year` and
+`min_votes` control the size: the index takes films year by year, most-voted
+first, which keeps anything a person plausibly watched and drops the long tail.
+
+Either way the entry lands in `data/added.json` — a small file, rather than
+appending to a 300 KB year catalog — and the app merges it into the watched
+list. The importer folds those entries into the catalogs on its next run,
+marked `manual`, so they survive later re-imports.
 
 ## Correcting a pick
 

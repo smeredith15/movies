@@ -19,6 +19,7 @@ import runEntryTypes from './entryTypes.test.mjs';
 import runDraft from './draft.test.mjs';
 import runAdded from './added.test.mjs';
 import runTmdb from './tmdb.test.mjs';
+import runTitleSearch from './titleSearch.test.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const BUILD = resolve(ROOT, '.test-build');
@@ -32,6 +33,7 @@ execFileSync(
     'src/lib/catalogIndex.ts',
     'src/lib/draft.ts',
     'src/lib/added.ts',
+    'src/lib/titleSearch.ts',
     '--rootDir', 'src',
     '--outDir', BUILD,
     // CommonJS, because the source uses extensionless imports that Node's ESM
@@ -52,6 +54,7 @@ const turns = require(resolve(BUILD, 'lib/turns.js'));
 const catalogIndex = require(resolve(BUILD, 'lib/catalogIndex.js'));
 const draft = require(resolve(BUILD, 'lib/draft.js'));
 const added = require(resolve(BUILD, 'lib/added.js'));
+const titleSearch = require(resolve(BUILD, 'lib/titleSearch.js'));
 
 runEligibility();
 runParse();
@@ -61,6 +64,7 @@ runCategories();
 runEntryTypes();
 runDraft(draft);
 runAdded(added);
+runTitleSearch(titleSearch);
 await runTmdb(await import(pathToFileURL(resolve(ROOT, 'scripts/tmdb.mjs')).href));
 
 rmSync(BUILD, { recursive: true, force: true });

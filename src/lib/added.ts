@@ -6,6 +6,8 @@ export interface AddedMovie {
   title: string;
   year: number;
   addedAt: string;
+  /** Set when the movie came from the TMDB search rather than being typed. */
+  tmdbId?: number;
 }
 
 export const ADDED_PATH = 'data/added.json';

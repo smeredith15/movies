@@ -1,0 +1,63 @@
+name: Build movie search index
+
+# On demand. The index only needs rebuilding when you want newer films in the
+# "add a movie" search — it is not part of the normal catalog refresh.
+on:
+  workflow_dispatch:
+    inputs:
+      from_year:
+        description: 'Earliest release year to include'
+        required: false
+        type: string
+        default: '1950'
+      min_votes:
+        description: 'Minimum TMDB vote count (higher = smaller index)'
+        required: false
+        type: string
+        default: '50'
+      dry_run:
+        description: 'Report the size, do not commit'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+
+      - name: Build index
+        env:
+          TMDB_API: ${{ secrets.TMDB_API }}
+        run: |
+          node scripts/build-search-index.mjs \
+            --from "${{ inputs.from_year }}" \
+            --min-votes "${{ inputs.min_votes }}" \
+            ${{ inputs.dry_run && '--dry-run' || '' }}
+
+      - name: Commit index
+        if: ${{ !inputs.dry_run }}
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- data/tmdb-index.json; then
+            echo "Index unchanged."
+            exit 0
+          fi
+          git add data/tmdb-index.json
+          git commit -m "Rebuild movie search index"
+          for i in 1 2 3 4; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep $((2 ** i))
+          done
+          echo "Could not push after 4 attempts" >&2
+          exit 1
