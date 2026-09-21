@@ -68,5 +68,12 @@
     "year": 1972,
     "tmdbId": 238,
     "addedAt": "2026-09-21T19:02:49.965Z"
+  },
+  {
+    "id": "pirates-of-the-caribbean-at-world-s-end-2007",
+    "title": "Pirates of the Caribbean: At World's End",
+    "year": 2007,
+    "tmdbId": 285,
+    "addedAt": "2026-09-21T20:20:10.344Z"
   }
 ]
