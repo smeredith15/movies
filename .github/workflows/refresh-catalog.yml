@@ -1,0 +1,56 @@
+name: Refresh catalog
+
+# Triggered on demand — from the Refresh button in the app, or from the
+# Actions tab. There is deliberately no schedule.
+on:
+  workflow_dispatch:
+    inputs:
+      year:
+        description: 'Film year to rebuild'
+        required: true
+        type: string
+      dry_run:
+        description: 'Report only, do not commit'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+
+      - name: Rebuild catalog
+        env:
+          OMDB_API_KEY: ${{ secrets.OMDB_API_KEY }}
+        run: |
+          node scripts/refresh-catalog.mjs \
+            --year "${{ inputs.year }}" \
+            ${{ inputs.dry_run && '--dry-run' || '' }}
+
+      - name: Commit changes
+        if: ${{ !inputs.dry_run }}
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- data/catalog; then
+            echo "Catalog unchanged."
+            exit 0
+          fi
+          git add data/catalog
+          git commit -m "Refresh ${{ inputs.year }} catalog"
+          for i in 1 2 3 4; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep $((2 ** i))
+          done
+          echo "Could not push after 4 attempts" >&2
+          exit 1
