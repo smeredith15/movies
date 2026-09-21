@@ -889,5 +889,14 @@
     "venue": "home",
     "picker": "me",
     "consumesTurn": true
+  },
+  {
+    "id": "w_mubm321jh920t",
+    "date": "2026-07-17",
+    "title": "The Odyssey",
+    "movieId": "the-odyssey-2026",
+    "venue": "theater",
+    "picker": "joint",
+    "consumesTurn": false
   }
 ]
