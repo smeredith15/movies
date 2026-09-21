@@ -412,5 +412,14 @@
     "venue": "home",
     "picker": "me",
     "consumesTurn": true
+  },
+  {
+    "id": "w_mubkbo4o9mhem",
+    "date": "2026-01-19",
+    "title": "Greenland 2: Migration",
+    "movieId": "greenland-2-migration-2026",
+    "venue": "theater",
+    "picker": "joint",
+    "consumesTurn": false
   }
 ]
