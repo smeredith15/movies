@@ -47,5 +47,12 @@
     "year": 1974,
     "tmdbId": 240,
     "addedAt": "2026-09-21T18:58:15.445Z"
+  },
+  {
+    "id": "a-knight-s-tale-2001",
+    "title": "A Knight's Tale",
+    "year": 2001,
+    "tmdbId": 9476,
+    "addedAt": "2026-09-21T18:59:18.677Z"
   }
 ]
