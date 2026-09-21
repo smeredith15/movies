@@ -89,5 +89,12 @@
     "year": 2003,
     "tmdbId": 22,
     "addedAt": "2026-09-21T20:20:25.168Z"
+  },
+  {
+    "id": "national-lampoon-s-christmas-vacation-1989",
+    "title": "National Lampoon's Christmas Vacation",
+    "year": 1989,
+    "tmdbId": 5825,
+    "addedAt": "2026-09-21T20:21:05.353Z"
   }
 ]
