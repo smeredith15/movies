@@ -362,6 +362,25 @@ or press **Refresh** in the app, which dispatches the same script as a GitHub
 Action. Sources are firstshowing.net for theatrical dates and the Wikipedia
 streaming lists for everything else; both are defined in `scripts/sources.mjs`.
 
+### TMDB as a check, not just a source
+
+Every entry is looked up on TMDB and must come back as a **film of the right
+title within a year of the one we think it is**. Anything else is recorded as
+`tmdbVerified: false` with the reason, and shows in Browse under **Not
+confirmed**.
+
+This matters because the scrapers read pages written for people. A Wikipedia
+article covering a service's whole slate mixes series with films; a mis-parsed
+row becomes a title that was never a film. The earlier matcher took the most
+popular result for any query, so those entries were handed confident matches to
+unrelated films — worse than no match, because nothing downstream could tell.
+
+Entries that fail are kept rather than dropped. TMDB misses things too, and a
+wrong exclusion is harder to notice than a wrong inclusion sitting in a filter.
+
+`section` on a source in `scripts/sources.mjs` restricts reading to tables
+under a matching heading, which is how Peacock's page is kept to its films.
+
 ### TMDB
 
 `TMDB_API` is a repository secret, read by the Action and **never shipped to

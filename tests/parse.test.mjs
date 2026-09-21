@@ -51,6 +51,38 @@ export default function run() {
     check('non-English is flagged', rows[0].isForeignLanguage, true);
   });
 
+  suite('parsing: pages that mix television with film', () => {
+    // Peacock's article covers its whole slate. Reading every table there
+    // drags series into a film catalog.
+    const mixed = `
+      <h2>Original series</h2>
+      <table class="wikitable"><tr><th>Release date</th><th>Title</th></tr>
+        <tr><td>January 5, 2026</td><td>Some Series</td></tr></table>
+      <h2>Original films</h2>
+      <table class="wikitable"><tr><th>Release date</th><th>Title</th></tr>
+        <tr><td>March 3, 2026</td><td>An Actual Movie</td></tr></table>
+      <h2>Upcoming original films</h2>
+      <table class="wikitable"><tr><th>Release date</th><th>Title</th></tr>
+        <tr><td>July 7, 2026</td><td>Another Movie</td></tr></table>`;
+
+    const all = parseWikipediaTables(mixed, { service: 'Peacock', year: 2026 });
+    check('without a filter everything is taken', all.length, 3);
+    check('including the series', all.some((r) => r.title === 'Some Series'), true);
+
+    const films = parseWikipediaTables(mixed, { service: 'Peacock', year: 2026, section: /film/i });
+    check('a section filter keeps only the film tables', films.length, 2);
+    check('the series is dropped', films.some((r) => r.title === 'Some Series'), false);
+    check('both film sections are kept', films.map((r) => r.title).sort().join(','), 'An Actual Movie,Another Movie');
+
+    const none = parseWikipediaTables(mixed, { service: 'Peacock', year: 2026, section: /podcast/i });
+    check('a filter matching nothing yields nothing', none.length, 0);
+
+    const noHeadings = `<table class="wikitable"><tr><th>Release date</th><th>Title</th></tr>
+      <tr><td>March 3, 2026</td><td>Orphan Table</td></tr></table>`;
+    check('a table under no heading is skipped when filtering', parseWikipediaTables(noHeadings, { service: 'X', year: 2026, section: /film/i }).length, 0);
+    check('but read when not', parseWikipediaTables(noHeadings, { service: 'X', year: 2026 }).length, 1);
+  });
+
   suite('parsing: matching the same movie across sources', () => {
     check('a leading article is ignored', titleKey('The Batman'), titleKey('Batman'));
     check('punctuation is ignored', titleKey('Spider-Man: No Way Home'), titleKey('Spider Man No Way Home'));

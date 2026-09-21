@@ -337,3 +337,5 @@ input.slot { flex: 1; min-width: 0; }
   .slot-row { flex-direction: column; }
   button.cat-head { flex-direction: column; gap: 4px; }
 }
+
+.badge.danger-badge { color: var(--danger); border-color: color-mix(in srgb, var(--danger) 45%, var(--line)); }

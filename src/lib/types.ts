@@ -82,6 +82,15 @@ export interface CatalogMovie {
   evidence?: string[];
   /** True when the rules could not settle the year without a person looking. */
   needsReview?: boolean;
+  /** What TMDB says it is about, and what kind of film it is. */
+  overview?: string | null;
+  genres?: string[];
+  /**
+   * Whether TMDB confirmed a film of this title within a year of the one we
+   * think it is. False means the entry is probably television or a bad parse.
+   */
+  tmdbVerified?: boolean;
+  tmdbNote?: string;
   /** Added by hand, so a rebuild must keep it. */
   manual?: boolean;
   /** What the source said. The app layers data/marks.json over these. */

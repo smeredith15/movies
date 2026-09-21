@@ -6,7 +6,7 @@ import { BROWSE_DRAFT, clearDraft, draftSize, loadDraft, saveDraft } from '../li
 import { watchFallsInSeason } from '../../shared/eligibility.js';
 
 type Shown = 'released' | 'upcoming' | 'all';
-type Filter = 'all' | 'unseen' | 'seen' | 'rated' | 'review';
+type Filter = 'all' | 'unseen' | 'seen' | 'rated' | 'review' | 'unverified';
 
 const today = () => new Date().toISOString().slice(0, 10);
 
@@ -124,6 +124,7 @@ export function Browse({
     if (filter === 'seen') return m.seen;
     if (filter === 'rated') return m.wantToSee != null;
     if (filter === 'review') return m.confidence === 'low' || Boolean(overrideFor.get(m.id));
+    if (filter === 'unverified') return m.tmdbVerified === false;
     return true;
   });
 
@@ -229,6 +230,7 @@ export function Browse({
               ['seen', 'Seen'],
               ['rated', 'Rated'],
               ['review', 'Needs a year check'],
+              ['unverified', 'Not confirmed'],
             ] as [Filter, string][]
           ).map(([id, label]) => (
             <button key={id} className={filter === id ? 'primary' : 'ghost'} onClick={() => setFilter(id)}>
@@ -308,6 +310,11 @@ export function Browse({
                       {m.confidence === 'low' && !override && (
                         <span className="badge traded">year?</span>
                       )}
+                      {m.tmdbVerified === false && (
+                        <span className="badge danger-badge" title={m.tmdbNote}>
+                          unconfirmed
+                        </span>
+                      )}
                       {override && <span className="badge me">{override.eligibilityYear ?? 'excluded'}</span>}
                     </button>
 
@@ -377,7 +384,10 @@ function Details({
 
   return (
     <div className="b-details">
+      {movie.overview && <div className="small">{movie.overview}</div>}
+
       <div className="b-meta small muted">
+        {movie.genres?.length ? <span>{movie.genres.join(', ')}</span> : null}
         {movie.kind && <span>{movie.kind}</span>}
         {movie.isDocumentary && <span>documentary</span>}
         {movie.isForeignLanguage && <span>foreign language</span>}
@@ -403,6 +413,12 @@ function Details({
       </div>
 
       {movie.evidence?.length ? <div className="note">{movie.evidence.join(' ')}</div> : null}
+      {movie.tmdbVerified === false && (
+        <div className="note" style={{ color: 'var(--danger)' }}>
+          {movie.tmdbNote} Probably television or a bad parse — exclude it with the
+          ballot-year control below if so.
+        </div>
+      )}
 
       {canEdit && (
         <div className="row b-override">

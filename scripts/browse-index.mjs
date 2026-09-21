@@ -27,6 +27,10 @@ export const BROWSE_FIELDS = [
   'owned',
   'wantToSee',
   'onFrozenBallot',
+  'overview',
+  'genres',
+  'tmdbVerified',
+  'tmdbNote',
 ];
 
 export function toBrowseRow(movie) {
