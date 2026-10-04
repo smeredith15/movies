@@ -1970,5 +1970,14 @@
     "picker": "me",
     "consumesTurn": true,
     "onBallot": true
+  },
+  {
+    "id": "w_mut8gi1xqveko",
+    "date": "2026-10-04",
+    "title": "Gail Daughtry and the Celebrity Sex Pass",
+    "movieId": "gail-daughtry-and-the-celebrity-sex-pass-2026",
+    "venue": "home",
+    "picker": "me",
+    "consumesTurn": true
   }
 ]
