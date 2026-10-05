@@ -29851,7 +29851,7 @@
   },
   {
     "id": "inarritu-s-digger-2026",
-    "title": "Iñárritu's Digger",
+    "title": "Digger",
     "kind": "theatrical",
     "festivalDate": null,
     "usLimitedDate": null,
@@ -29864,15 +29864,118 @@
     "poster": "//media2.firstshowing.net/firstshowing/img/posters2/digger26rls6b.jpg",
     "oscarNominated": false,
     "ratings": {},
-    "cast": [],
-    "imdbId": null,
-    "tmdbId": null,
+    "cast": [
+      {
+        "name": "Tom Cruise",
+        "character": "Rockwell",
+        "order": 0
+      },
+      {
+        "name": "Riz Ahmed",
+        "character": "Ganesh",
+        "order": 1
+      },
+      {
+        "name": "John Goodman",
+        "character": "President Compson",
+        "order": 2
+      },
+      {
+        "name": "Sandra Hüller",
+        "character": "Emma",
+        "order": 3
+      },
+      {
+        "name": "Michael Stuhlbarg",
+        "character": "Vice President",
+        "order": 4
+      },
+      {
+        "name": "Jesse Plemons",
+        "character": "Kenny",
+        "order": 5
+      },
+      {
+        "name": "Robert John Burke",
+        "character": "General Fitzgerald",
+        "order": 6
+      },
+      {
+        "name": "Emma D'Arcy",
+        "character": "Lina",
+        "order": 7
+      },
+      {
+        "name": "Burn Gorman",
+        "character": "Defense Secretary Amos",
+        "order": 8
+      },
+      {
+        "name": "Sophie Wilde",
+        "character": "Hannah",
+        "order": 9
+      },
+      {
+        "name": "Danny Kirrane",
+        "character": "Clarkson",
+        "order": 10
+      },
+      {
+        "name": "Ross Hatt",
+        "character": "Dr. Berg / Reader",
+        "order": 11
+      },
+      {
+        "name": "Mercedes Hernández",
+        "character": "Adelia",
+        "order": 12
+      },
+      {
+        "name": "James Dryden",
+        "character": "Brad",
+        "order": 13
+      },
+      {
+        "name": "Pip Torrens",
+        "character": "AG Schumer",
+        "order": 14
+      },
+      {
+        "name": "Corey Johnson",
+        "character": "Admiral Jacobs",
+        "order": 15
+      },
+      {
+        "name": "Teddy Hawley",
+        "character": "Kyle",
+        "order": 16
+      },
+      {
+        "name": "Aetheria Angel",
+        "order": 17
+      },
+      {
+        "name": "Tom Bell",
+        "character": "Deputy NSA Flower",
+        "order": 18
+      },
+      {
+        "name": "Kenton Craig",
+        "character": "Cabinet Member",
+        "order": 19
+      }
+    ],
+    "imdbId": "tt31450459",
+    "tmdbId": 1248832,
     "seen": false,
     "owned": false,
-    "overview": null,
-    "genres": [],
-    "tmdbVerified": false,
-    "tmdbNote": "TMDB has nothing by that name.",
+    "overview": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he's unleashed destroys everything.",
+    "genres": [
+      "Comedy",
+      "Drama"
+    ],
+    "tmdbVerified": true,
+    "tmdbNote": "TMDB id 1248832 set by hand.",
     "wantToSee": null,
     "onFrozenBallot": false,
     "sources": [
@@ -29884,7 +29987,9 @@
       "Available in the US on 2026-10-02."
     ],
     "needsReview": false,
-    "manual": false
+    "manual": false,
+    "titleWas": "Iñárritu's Digger",
+    "detailsUpdated": "2026-10-05T02:57:46.272Z"
   },
   {
     "id": "ink-2026",
