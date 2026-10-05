@@ -501,7 +501,7 @@ fills them in.
 ```bash
 npm install
 npm run dev     # local development
-npm test        # 470 assertions over the rules, the rotation and the parsers
+npm test        # 477 assertions over the rules, the rotation and the parsers
 npm run build
 ```
 
@@ -526,6 +526,15 @@ dance exists to prevent.
 
 The token is browser storage, so an installed copy counts as a fresh browser and
 asks for one the first time.
+
+The manifest carries an explicit `id`. Without one an app's identity is its
+resolved `start_url`, and Chrome keeps a registration under that key which
+survives both uninstalling the app and clearing the site's data — leaving an
+install button that insists the app is already installed, next to an Open that
+cannot open anything. Changing the `id` mints a new identity and gets past it.
+It also decouples identity from `start_url`, so that can move later without
+orphaning an installed copy. Changing it again would orphan the copies
+installed under the old one, which then need removing by hand.
 
 `tools/make_icons.py` draws the icons (a clapperboard, in the app's own accent
 and ink) and needs `pillow`. Run it again only if the shape or the colours
