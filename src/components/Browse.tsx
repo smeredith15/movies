@@ -14,6 +14,20 @@ export interface OverridePatch {
   note: string;
 }
 
+/**
+ * Whether the catalog we just read is the one the run wrote.
+ *
+ * A successful run is not the same as readable data: GitHub's raw endpoint
+ * goes on serving the previous file for a while after a push, so reloading the
+ * moment a run reports success gets the file as it was before it ran. The id
+ * we pinned is the thing to look for, because it is the one field we know the
+ * answer to in advance.
+ */
+export function carriesPin(row: { tmdbId?: number | null } | undefined, pinned: number | null) {
+  if (pinned === null) return false;
+  return row?.tmdbId === pinned;
+}
+
 /** A pasted TMDB id on its way through the workflow and back. */
 interface Resolve {
   movieId: string;
@@ -243,10 +257,7 @@ export function Browse({
         const { done, ok, note } = runProgress(run);
         if (done) {
           if (!ok) return say(note, { url: run?.url, failed: true });
-          say('Done — reloading.', { url: run?.url });
-          setAttempt((a) => a + 1);
-          setTimeout(() => alive.current && setResolving(null), 2500);
-          return;
+          return waitForData(movie, patch.tmdbId, say, run?.url);
         }
         if (Date.now() > deadline) {
           return say('Still running after five minutes.', { url: run?.url, failed: true });
@@ -255,6 +266,43 @@ export function Browse({
       }
     } catch (e) {
       say(e instanceof Error ? e.message : String(e), { failed: true });
+    }
+  }
+
+  /**
+   * Wait until the file GitHub serves is the one the run wrote.
+   *
+   * The run pushes its commit and finishes seconds later, while raw.github
+   * can still be handing out the previous version — so the obvious thing,
+   * reloading as soon as the run goes green, reliably reloads the old data and
+   * then clears its own banner, which looks exactly like a button that does
+   * nothing. Read until the pinned id comes back, then show what arrived.
+   */
+  async function waitForData(
+    movie: CatalogMovie,
+    pinned: number | null,
+    say: (note: string, extra?: Partial<Resolve>) => void,
+    url?: string
+  ) {
+    const deadline = Date.now() + 3 * 60_000;
+    for (;;) {
+      const fresh = await loadCatalog(year).catch(() => null);
+      const row = fresh?.find((m) => m.id === movie.id);
+      if (fresh && carriesPin(row, pinned)) {
+        setCatalog(fresh);
+        say(`Resolved — now “${row?.title}”.`, { url });
+        setTimeout(() => alive.current && setResolving(null), 5000);
+        return;
+      }
+      if (Date.now() > deadline) {
+        return say('Resolved, but GitHub is still serving the old file. Reload in a minute.', {
+          url,
+          failed: true,
+        });
+      }
+      say('Resolved — waiting for GitHub to serve the new file…', { url });
+      await new Promise((r) => setTimeout(r, 5000));
+      if (!alive.current) return;
     }
   }
 

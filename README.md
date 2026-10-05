@@ -383,6 +383,12 @@ link beside it to look the film up. The id is stored in `data/overrides.json`
 alongside any ballot-year correction, so it survives every rebuild, and the
 refresh **uses it directly without searching**.
 
+Apply waits for the data, not for the run. A run pushes its commit and reports
+success seconds later, while `raw.githubusercontent.com` can still be serving
+the previous file — so reloading the moment the run goes green reliably reloads
+the old data, and a button that worked perfectly looks like one that does
+nothing. It reads until the pinned id comes back, then shows the new title.
+
 Apply does the whole round trip rather than only storing the number. The TMDB
 key is a repository secret, so nothing in the browser can fetch a film: the
 page saves the id, dispatches the refresh workflow for that one entry, follows
@@ -508,7 +514,7 @@ fills them in.
 ```bash
 npm install
 npm run dev     # local development
-npm test        # 489 assertions over the rules, the rotation and the parsers
+npm test        # 495 assertions over the rules, the rotation and the parsers
 npm run build
 ```
 
