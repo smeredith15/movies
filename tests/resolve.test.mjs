@@ -23,7 +23,10 @@ const DIGGER = {
   credits: { cast: [{ name: 'Someone', character: 'Him', order: 0 }] },
 };
 
-export default async function run({ parseOnly, applyDetails }, { newestSince, runProgress }) {
+export default async function run(
+  { parseOnly, applyDetails },
+  { newestSince, runProgress, dispatchFailure }
+) {
   suite('--only: naming the entries to resolve', () => {
     check('a single id', [...parseOnly('digger-2026')].join(), 'digger-2026');
     check('commas', [...parseOnly('a-2026,b-2026')].join(), 'a-2026,b-2026');
@@ -63,6 +66,30 @@ export default async function run({ parseOnly, applyDetails }, { newestSince, ru
     const missing = { id: 'ghost-2026', title: 'Ghost' };
     check('an id TMDB does not know fails', await applyDetails(tmdb, missing, 42, { rename: true }), false);
     check('and the title is left alone', missing.title, 'Ghost');
+  });
+
+  await suite('a refused dispatch says what to change', async () => {
+    const res = (status, body = '{}') => ({ status, text: async () => body });
+
+    // The one that actually happened: a token that saves watches perfectly well
+    // and is refused here, because repository access and repository permissions
+    // are separate and every permission starts at No access.
+    const forbidden = await dispatchFailure(res(403, '{"message":"Resource not accessible"}'));
+    check('403 names the permission', forbidden.includes('Actions'), true);
+    check('and says where to set it', forbidden.includes('Read and write'), true);
+    check('and why everything else still works', forbidden.includes('Contents'), true);
+    check('without dumping the JSON', forbidden.includes('Resource not accessible'), false);
+
+    const unauthorized = await dispatchFailure(res(401));
+    check('401 is about the token itself', unauthorized.includes('rejected the token'), true);
+
+    const missing = await dispatchFailure(res(404));
+    check('404 is about access to the repository', missing.includes('repository'), true);
+
+    // Anything unrecognised must still carry its body, or it cannot be debugged.
+    const odd = await dispatchFailure(res(500, 'upstream exploded'));
+    check('an unknown status keeps the detail', odd.includes('upstream exploded'), true);
+    check('and the status', odd.includes('500'), true);
   });
 
   suite('finding the run a dispatch created', () => {

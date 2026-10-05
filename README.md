@@ -496,12 +496,19 @@ fills them in.
    scoped to this repository, with **Contents: read & write** and
    **Actions: read & write**. Paste it into the app's Settings tab. Each of you
    does this once per device; it is stored in browser localStorage only.
+
+   Repository *access* and repository *permissions* are separate sections, and
+   every permission starts at No access — picking the repository grants nothing
+   by itself. A token with only Contents saves watches, ballots and overrides
+   perfectly well and is refused the moment you press **Apply** on a TMDB id,
+   which looks like a broken token rather than a missing checkbox. Settings
+   checks for it when the token is pasted and says so.
 3. Optionally add `OMDB_API_KEY` under Settings → Secrets → Actions.
 
 ```bash
 npm install
 npm run dev     # local development
-npm test        # 481 assertions over the rules, the rotation and the parsers
+npm test        # 489 assertions over the rules, the rotation and the parsers
 npm run build
 ```
 

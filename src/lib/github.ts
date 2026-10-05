@@ -187,7 +187,54 @@ export async function dispatchCatalogRefresh(
     }
   );
   if (!res.ok) {
-    throw new GitHubError(`Could not start the refresh: ${res.status} ${await res.text()}`, res.status);
+    throw new GitHubError(await dispatchFailure(res), res.status);
+  }
+}
+
+/**
+ * Say what a refused dispatch actually needs.
+ *
+ * A fine-grained token's repository *access* and its *permissions* are two
+ * separate things, and every permission starts at No access — so a token that
+ * saves watches perfectly well is refused here, with GitHub naming neither the
+ * permission nor the fact that there is one to grant. Printing its JSON at
+ * someone mid-task leaves them regenerating a token that was never wrong.
+ */
+export async function dispatchFailure(res: { status: number; text: () => Promise<string> }) {
+  const body = await res.text().catch(() => '');
+  if (res.status === 403) {
+    return (
+      'GitHub refused the refresh: the token needs the Actions permission. ' +
+      'Edit it at github.com/settings/personal-access-tokens, and under Repository ' +
+      'permissions set Actions to "Read and write" — picking the repository alone ' +
+      'does not grant it. Saving watches and ballots needs only Contents, which is ' +
+      'why everything else still works.'
+    );
+  }
+  if (res.status === 401) return 'GitHub rejected the token. Paste a new one in Settings.';
+  if (res.status === 404) {
+    return 'GitHub cannot see the workflow — the token may not have access to this repository.';
+  }
+  return `Could not start the refresh: ${res.status} ${body}`;
+}
+
+/**
+ * Whether the token can see Actions at all.
+ *
+ * Checked when a token is pasted rather than when a refresh is pressed, so the
+ * missing permission is found while someone is still on the page that fixes
+ * it. Read access is all this can prove — nothing short of starting a run
+ * proves write — but a token with neither is the usual case by far.
+ */
+export async function canReadActions(): Promise<boolean> {
+  try {
+    const res = await fetch(
+      `${API}/repos/${REPO_OWNER}/${REPO_NAME}/actions/workflows?per_page=1`,
+      { headers: headers(), cache: 'no-store' }
+    );
+    return res.ok;
+  } catch {
+    return false;
   }
 }
 
