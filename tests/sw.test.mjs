@@ -56,6 +56,8 @@ const MANIFEST = JSON.parse(
   readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), '..', 'public', 'manifest.webmanifest'), 'utf8')
 );
 
+const MANIFEST_URL = 'https://smeredith15.github.io/movies/manifest.webmanifest';
+
 const APP = 'https://smeredith15.github.io/movies';
 
 export default function run() {
@@ -70,8 +72,14 @@ export default function run() {
 
     // Relative, so they resolve against the manifest's own URL and the app
     // keeps working under /movies/ without the base path being written out.
+    // Relative, so the app keeps working under /movies/ without the base path
+    // being written out. Where they actually land is the part worth asserting:
+    // an edit here moves the app's launch URL, and under a browser that goes by
+    // start_url rather than id, its identity with it.
     check('start_url is relative', MANIFEST.start_url, '.');
+    check('and lands on the app', new URL(MANIFEST.start_url, MANIFEST_URL).href, `${APP}/`);
     check('scope is relative', MANIFEST.scope, '.');
+    check('and covers the app', new URL(MANIFEST.scope, MANIFEST_URL).href, `${APP}/`);
     check('it can be installed', MANIFEST.display, 'standalone');
 
     const purposes = MANIFEST.icons.map((i) => `${i.sizes}/${i.purpose}`);
