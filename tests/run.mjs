@@ -29,6 +29,7 @@ import runTitleSearch from './titleSearch.test.mjs';
 import runFirstShowing from './firstshowing.test.mjs';
 import runSw from './sw.test.mjs';
 import runResolve from './resolve.test.mjs';
+import runSearchIndex from './searchIndex.test.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const BUILD = resolve(ROOT, '.test-build');
@@ -91,6 +92,7 @@ runBrowse(browse);
 runPeople(people);
 runBallot(ballot, await import(pathToFileURL(resolve(ROOT, 'shared/eligibility.js')).href));
 runRefresh(await import(pathToFileURL(resolve(ROOT, 'scripts/refresh-catalog.mjs')).href));
+runSearchIndex(await import(pathToFileURL(resolve(ROOT, 'scripts/search-index.mjs')).href));
 runBrowseIndex(await import(pathToFileURL(resolve(ROOT, 'scripts/browse-index.mjs')).href));
 runTitleSearch(titleSearch, tmdbIndex);
 runSw();

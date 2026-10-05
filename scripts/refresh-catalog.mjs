@@ -17,6 +17,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { computeEligibility } from '../shared/eligibility.js';
+import { writeSearchIndex } from './search-index.mjs';
 import { firstShowingUrl, WIKIPEDIA_LISTS, netflixCandidates, isRerelease } from './sources.mjs';
 import { parseWikipediaTables, titleKey, slugify } from './parse.mjs';
 import { parseFirstShowing } from './firstshowing.mjs';
@@ -505,6 +506,7 @@ async function main() {
       return;
     }
     await writeCatalog(outPath, catalog);
+    await rebuildSearchIndex();
     return;
   }
 
@@ -605,9 +607,21 @@ async function main() {
   }
 
   await writeCatalog(outPath, catalog);
+  await rebuildSearchIndex();
 }
 
 /** The full catalog, plus the lean copy the app actually browses. */
+/**
+ * The Tracker's autocomplete reads data/index.json, which is a reshape of the
+ * catalogs and nothing more — so it is rebuilt here rather than by a workflow
+ * of its own. Left to drift it does not look broken: the box simply goes on
+ * offering a snapshot of the catalog from whenever it was last built.
+ */
+async function rebuildSearchIndex() {
+  const count = await writeSearchIndex(ROOT);
+  log(`  search index: ${count} titles`);
+}
+
 async function writeCatalog(outPath, catalog) {
   await mkdir(dirname(outPath), { recursive: true });
   await writeFile(outPath, `${JSON.stringify(catalog, null, 2)}\n`);

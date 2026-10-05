@@ -21,6 +21,8 @@ data/watches.json       every movie watched, with who picked it and where
 data/adjustments.json   bonus picks and skips, with an optional reason
 data/overrides.json     manual eligibility-year decisions — these always win
 data/catalog/<year>.json  the eligible-movie pool, rebuilt by the scraper
+data/index.json         title autocomplete, rebuilt with the catalog
+data/tmdb-index.json    the add-a-movie corpus, built by its own Action
 data/ballots/<year>.<person>.json   one file per person per year
 ```
 
@@ -421,6 +423,21 @@ keyed on it, so the slug has to outlive the name it was derived from.
 This is the same arrangement as the tv_votes repo, which leaves an unmatched
 show alone for a human to paste the right id into.
 
+### The two search indexes
+
+The Tracker's title box searches `data/index.json`, which is nothing but a
+reshape of the catalogs — id, title, year, seen — so the refresh rebuilds it
+every run. It has to: it was originally written once by the workbook import and
+nothing rebuilt it afterwards, so a year gained four hundred films while the box
+that searches them went on offering a snapshot from the day of the import. A
+film resolved by hand minutes earlier could not be found under any name, and
+nothing about that looked broken.
+
+**Add a movie** searches `data/tmdb-index.json` instead, which is a different
+thing for a different job: films TMDB knows about that our catalogs do not. It
+costs API calls, so it keeps its own Action — run **Build movie search index**
+when it needs refreshing.
+
 ### When a detail is pulled again
 
 Staleness is a timestamp — `detailsUpdated` — not a question about which fields
@@ -514,7 +531,7 @@ fills them in.
 ```bash
 npm install
 npm run dev     # local development
-npm test        # 495 assertions over the rules, the rotation and the parsers
+npm test        # 508 assertions over the rules, the rotation and the parsers
 npm run build
 ```
 
