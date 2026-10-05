@@ -72,13 +72,14 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # The script writes the catalog and its browse index. Staging only
-          # one leaves the other unstaged, which makes the rebase below refuse.
-          if git diff --quiet -- data/catalog data/browse; then
+          # The script writes the catalog, its browse index and the title index
+          # the Tracker's autocomplete reads. Staging only some of them leaves
+          # the rest unstaged, which makes the rebase below refuse.
+          if git diff --quiet -- data/catalog data/browse data/index.json; then
             echo "Catalog unchanged."
             exit 0
           fi
-          git add data/catalog data/browse
+          git add data/catalog data/browse data/index.json
           if [ -n "$ONLY" ]; then
             git commit -m "Resolve $ONLY"
           else
