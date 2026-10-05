@@ -52,9 +52,33 @@ function handles(listeners, url, method = 'GET') {
   return claimed;
 }
 
+const MANIFEST = JSON.parse(
+  readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), '..', 'public', 'manifest.webmanifest'), 'utf8')
+);
+
 const APP = 'https://smeredith15.github.io/movies';
 
 export default function run() {
+  suite('manifest: the app says who it is', () => {
+    // Without this the identity is the resolved start_url, and Chrome keeps a
+    // registration under it that survives an uninstall and a site-data wipe —
+    // leaving an install button that insists the app is already installed and
+    // an Open that cannot open anything. An explicit id is also what lets
+    // start_url move later without orphaning everyone's installed copy.
+    check('the id is explicit', MANIFEST.id, '/movies/app');
+    check('and is not the start url', MANIFEST.id === MANIFEST.start_url, false);
+
+    // Relative, so they resolve against the manifest's own URL and the app
+    // keeps working under /movies/ without the base path being written out.
+    check('start_url is relative', MANIFEST.start_url, '.');
+    check('scope is relative', MANIFEST.scope, '.');
+    check('it can be installed', MANIFEST.display, 'standalone');
+
+    const purposes = MANIFEST.icons.map((i) => `${i.sizes}/${i.purpose}`);
+    check('a maskable 192 exists', purposes.includes('192x192/maskable'), true);
+    check('and a maskable 512', purposes.includes('512x512/maskable'), true);
+  });
+
   suite('service worker: the app itself is cached', () => {
     const sw = loadWorker();
     check('the page', handles(sw, `${APP}/`), true);

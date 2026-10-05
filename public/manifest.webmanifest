@@ -1,4 +1,5 @@
 {
+  "id": "/movies/app",
   "name": "Movie Nights",
   "short_name": "Movies",
   "description": "Whose turn it is, what we have watched, and the ballot.",
