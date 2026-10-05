@@ -83,6 +83,11 @@ self.addEventListener('fetch', (event) => {
   // reason.
   if (url.origin !== self.location.origin) return;
 
+  // The manifest carries the app's identity, and a cached identity is how an
+  // install button ends up arguing with the browser about whether the app is
+  // installed. It is small and fetched rarely; it goes to the network.
+  if (url.pathname.endsWith('manifest.webmanifest')) return;
+
   // Vite fingerprints these, so a given name always means the same bytes.
   if (url.pathname.includes('/assets/')) {
     event.respondWith(cacheFirst(request));
