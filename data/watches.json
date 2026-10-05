@@ -1979,14 +1979,5 @@
     "venue": "home",
     "picker": "me",
     "consumesTurn": true
-  },
-  {
-    "id": "w_muuqi9937mtcs",
-    "date": "2026-10-04",
-    "title": "digger",
-    "movieId": null,
-    "venue": "home",
-    "picker": "me",
-    "consumesTurn": true
   }
 ]
