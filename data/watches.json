@@ -1982,11 +1982,11 @@
   },
   {
     "id": "w_muuqiyh33ar54",
-    "date": "",
+    "date": "2026-10-04",
     "title": "Digger",
     "movieId": "inarritu-s-digger-2026",
-    "venue": "home",
-    "picker": "unknown",
+    "venue": "theater",
+    "picker": "joint",
     "consumesTurn": false,
     "onBallot": true
   }
