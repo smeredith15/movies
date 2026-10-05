@@ -147,30 +147,52 @@ export default function App() {
       await saveBallot(b);
     });
 
+  async function writeOverride(movieId: string, patch: OverridePatch) {
+    const what = [
+      patch.eligibilityYear ? `year ${patch.eligibilityYear}` : null,
+      patch.tmdbId ? `TMDB ${patch.tmdbId}` : null,
+    ]
+      .filter(Boolean)
+      .join(', ');
+    await saveOverride(
+      {
+        movieId,
+        eligibilityYear: patch.eligibilityYear,
+        tmdbId: patch.tmdbId,
+        note: patch.note.trim() || undefined,
+        at: new Date().toISOString(),
+        by: whoami ?? 'me',
+      },
+      `Correct ${what || 'entry'}: ${movieId}`
+    );
+  }
+
   const setYearOverride = (movieId: string, patch: OverridePatch | null) =>
     mutate(async () => {
       if (patch === null) {
         await clearOverride(movieId, `Clear corrections: ${movieId}`);
         return;
       }
-      const what = [
-        patch.eligibilityYear ? `year ${patch.eligibilityYear}` : null,
-        patch.tmdbId ? `TMDB ${patch.tmdbId}` : null,
-      ]
-        .filter(Boolean)
-        .join(', ');
-      await saveOverride(
-        {
-          movieId,
-          eligibilityYear: patch.eligibilityYear,
-          tmdbId: patch.tmdbId,
-          note: patch.note.trim() || undefined,
-          at: new Date().toISOString(),
-          by: whoami ?? 'me',
-        },
-        `Correct ${what || 'entry'}: ${movieId}`
-      );
+      await writeOverride(movieId, patch);
     });
+
+  /**
+   * The same write, but it throws.
+   *
+   * Browse pins a TMDB id and then asks a workflow to go and use it, so it has
+   * to know whether the id actually landed. Routed through `mutate` the save
+   * would turn its own failure into a banner and resolve anyway — and the run
+   * would come back green having read an overrides file that never changed.
+   */
+  const pinTmdbId = async (movieId: string, patch: OverridePatch) => {
+    setBusy(true);
+    try {
+      await writeOverride(movieId, patch);
+      await refresh();
+    } finally {
+      setBusy(false);
+    }
+  };
 
   const deleteWatch = (w: Watch) => {
     if (!confirm(`Remove "${w.title}" from ${w.date}?`)) return;
@@ -276,6 +298,7 @@ export default function App() {
           onSaveMarks={updateMarks}
           onSaveWatches={saveWatchSet}
           onOverride={setYearOverride}
+          onPin={pinTmdbId}
           canEdit={canEdit}
           busy={busy}
         />

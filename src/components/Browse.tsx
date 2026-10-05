@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type { CatalogMovie, Config, EligibilityOverride, Watch } from '../lib/types';
 
+import { dispatchCatalogRefresh, latestCatalogRun, runProgress } from '../lib/github';
 import { loadCatalog, newId } from '../lib/store';
 import { applyMark, type Mark, type Marks } from '../lib/marks';
 import { BROWSE_DRAFT, clearDraft, draftSize, loadDraft, saveDraft } from '../lib/draft';
@@ -11,6 +12,15 @@ export interface OverridePatch {
   eligibilityYear: number | null;
   tmdbId: number | null;
   note: string;
+}
+
+/** A pasted TMDB id on its way through the workflow and back. */
+interface Resolve {
+  movieId: string;
+  title: string;
+  note: string;
+  url?: string;
+  failed?: boolean;
 }
 
 type Shown = 'released' | 'upcoming' | 'all';
@@ -39,6 +49,7 @@ export function Browse({
   onSaveMarks,
   onSaveWatches,
   onOverride,
+  onPin,
   canEdit,
   busy,
 }: {
@@ -49,6 +60,7 @@ export function Browse({
   onSaveMarks: (changes: Marks) => Promise<void>;
   onSaveWatches: (add: Watch[], removeIds: string[]) => Promise<void>;
   onOverride: (movieId: string, patch: OverridePatch | null) => Promise<void>;
+  onPin: (movieId: string, patch: OverridePatch) => Promise<void>;
   canEdit: boolean;
   busy: boolean;
 }) {
@@ -61,6 +73,17 @@ export function Browse({
   const [expanded, setExpanded] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
   const [staged, setStaged] = useState<Record<string, Partial<Mark>>>(() => loadDraft(BROWSE_DRAFT));
+  const [resolving, setResolving] = useState<Resolve | null>(null);
+  const alive = useRef(true);
+  useEffect(() => {
+    // Set on mount as well as cleared on unmount: in development StrictMode
+    // runs the effect, cleans it up and runs it again, which would otherwise
+    // leave this false on a component that is very much still here.
+    alive.current = true;
+    return () => {
+      alive.current = false;
+    };
+  }, []);
 
   const [loadError, setLoadError] = useState<string | null>(null);
 
@@ -185,6 +208,56 @@ export function Browse({
     clearDraft(BROWSE_DRAFT);
   }
 
+  /**
+   * Save a pasted TMDB id and then actually go and use it.
+   *
+   * Writing the id to overrides.json is only half an answer: the title, the
+   * dates and the cast all come from a catalog file that nothing in the
+   * browser can rebuild, because the TMDB key is a repository secret and a
+   * static page cannot keep one. So the id goes to the file, the workflow is
+   * asked to resolve that one entry, and the row is reloaded when it lands —
+   * which is the whole round trip, visible, rather than a field that silently
+   * stores a number for a refresh someone has to remember to run.
+   */
+  async function resolve(movie: CatalogMovie, patch: OverridePatch) {
+    const base = { movieId: movie.id, title: movie.title };
+    const say = (note: string, extra: Partial<Resolve> = {}) => {
+      if (alive.current) setResolving({ ...base, note, ...extra });
+    };
+
+    try {
+      say('Saving the id…');
+      await onPin(movie.id, patch);
+
+      // Before the dispatch, so a run created in the same second still counts.
+      const since = new Date().toISOString();
+      say('Starting the lookup…');
+      await dispatchCatalogRefresh(year, 'enrich', [movie.id]);
+
+      const deadline = Date.now() + 5 * 60_000;
+      for (;;) {
+        await new Promise((r) => setTimeout(r, 4000));
+        if (!alive.current) return;
+
+        const run = await latestCatalogRun(since);
+        const { done, ok, note } = runProgress(run);
+        if (done) {
+          if (!ok) return say(note, { url: run?.url, failed: true });
+          say('Done — reloading.', { url: run?.url });
+          setAttempt((a) => a + 1);
+          setTimeout(() => alive.current && setResolving(null), 2500);
+          return;
+        }
+        if (Date.now() > deadline) {
+          return say('Still running after five minutes.', { url: run?.url, failed: true });
+        }
+        say(note, { url: run?.url });
+      }
+    } catch (e) {
+      say(e instanceof Error ? e.message : String(e), { failed: true });
+    }
+  }
+
   const datedCount = catalog?.filter((m) => releaseDate(m)).length ?? 0;
   const years = Array.from({ length: thisYear - 2010 + 1 }, (_, i) => thisYear - i);
   const pending = draftSize(staged);
@@ -253,6 +326,25 @@ export function Browse({
             <button className="ghost" onClick={() => setAttempt((a) => a + 1)}>
               Try again
             </button>
+          </div>
+        )}
+
+        {resolving && (
+          <div
+            className={`banner ${resolving.failed ? 'error' : 'warn'}`}
+            style={{ marginTop: 12, marginBottom: 0 }}
+          >
+            <strong>{resolving.title}</strong> — {resolving.note}{' '}
+            {resolving.url && (
+              <a href={resolving.url} target="_blank" rel="noreferrer">
+                see the run
+              </a>
+            )}{' '}
+            {resolving.failed && (
+              <button className="ghost" onClick={() => setResolving(null)}>
+                Dismiss
+              </button>
+            )}
           </div>
         )}
 
@@ -355,7 +447,15 @@ export function Browse({
                   </div>
 
                   {isOpen && (
-                    <Details movie={m} override={override} onOverride={onOverride} canEdit={canEdit} busy={busy} />
+                    <Details
+                      movie={m}
+                      override={override}
+                      onOverride={onOverride}
+                      onResolve={resolve}
+                      resolving={resolving?.movieId === m.id && !resolving.failed}
+                      canEdit={canEdit}
+                      busy={busy}
+                    />
                   )}
                 </li>
               );
@@ -371,18 +471,27 @@ function Details({
   movie,
   override,
   onOverride,
+  onResolve,
+  resolving,
   canEdit,
   busy,
 }: {
   movie: CatalogMovie;
   override?: EligibilityOverride;
   onOverride: (movieId: string, patch: OverridePatch | null) => Promise<void>;
+  onResolve: (movie: CatalogMovie, patch: OverridePatch) => Promise<void>;
+  resolving: boolean;
   canEdit: boolean;
   busy: boolean;
 }) {
   const [year, setYear] = useState(String(override?.eligibilityYear ?? movie.computedYear ?? ''));
   const [tmdbId, setTmdbId] = useState(String(override?.tmdbId ?? movie.tmdbId ?? ''));
   const [note, setNote] = useState(override?.note ?? '');
+  const patch = (): OverridePatch => ({
+    eligibilityYear: year ? Number(year) : null,
+    tmdbId: tmdbId ? Number(tmdbId) : null,
+    note,
+  });
   const r = movie.ratings ?? {};
   const scores = [
     ['IMDb', r.imdb],
@@ -447,17 +556,7 @@ function Details({
             placeholder="why (optional)"
             style={{ flex: 1, minWidth: 120 }}
           />
-          <button
-            className="primary"
-            disabled={busy}
-            onClick={() =>
-              onOverride(movie.id, {
-                eligibilityYear: year ? Number(year) : null,
-                tmdbId: tmdbId ? Number(tmdbId) : null,
-                note,
-              })
-            }
-          >
+          <button className="primary" disabled={busy} onClick={() => onOverride(movie.id, patch())}>
             Set
           </button>
           {override && (
@@ -469,29 +568,45 @@ function Details({
       )}
 
       {canEdit && (
-        <div className="row b-override">
-          <span className="small muted">TMDB id</span>
-          <input
-            type="number"
-            value={tmdbId}
-            onChange={(e) => setTmdbId(e.target.value)}
-            placeholder="e.g. 438631"
-            style={{ width: 120 }}
-            aria-label={`TMDB id for ${movie.title}`}
-          />
-          <a
-            className="small"
-            href={`https://www.themoviedb.org/search?query=${encodeURIComponent(movie.title)}`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            find it on TMDB
-          </a>
-          <span className="small muted">
-            {movie.tmdbId ? `currently ${movie.tmdbId}` : 'none matched'}
-            {movie.detailsUpdated ? ` · detail from ${movie.detailsUpdated.slice(0, 10)}` : ''}
-          </span>
-        </div>
+        <>
+          <div className="row b-override">
+            <span className="small muted">TMDB id</span>
+            <input
+              type="number"
+              value={tmdbId}
+              onChange={(e) => setTmdbId(e.target.value)}
+              placeholder="e.g. 438631"
+              style={{ width: 120 }}
+              aria-label={`TMDB id for ${movie.title}`}
+            />
+            <button
+              className="primary"
+              disabled={busy || resolving || !tmdbId.trim()}
+              onClick={() => onResolve(movie, patch())}
+            >
+              {resolving ? 'Looking it up…' : 'Apply'}
+            </button>
+            <a
+              className="small"
+              href={`https://www.themoviedb.org/search?query=${encodeURIComponent(movie.title)}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              find it on TMDB
+            </a>
+            <span className="small muted">
+              {movie.tmdbId ? `currently ${movie.tmdbId}` : 'none matched'}
+              {movie.detailsUpdated ? ` · detail from ${movie.detailsUpdated.slice(0, 10)}` : ''}
+            </span>
+          </div>
+          <div className="small muted">
+            Apply saves the id and runs the lookup for this film alone — about a
+            minute, after which the title, dates, cast and description here are
+            whatever TMDB holds. The key lives in the repository, so the page
+            cannot do it without the workflow.
+            {movie.titleWas ? ` Listed by the schedule as “${movie.titleWas}”.` : ''}
+          </div>
+        </>
       )}
     </div>
   );

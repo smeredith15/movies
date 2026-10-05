@@ -9,6 +9,7 @@
 export const BROWSE_FIELDS = [
   'id',
   'title',
+  'titleWas',
   'kind',
   'usLimitedDate',
   'usTheatricalDate',

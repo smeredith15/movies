@@ -28,6 +28,7 @@ import runTmdb from './tmdb.test.mjs';
 import runTitleSearch from './titleSearch.test.mjs';
 import runFirstShowing from './firstshowing.test.mjs';
 import runSw from './sw.test.mjs';
+import runResolve from './resolve.test.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const BUILD = resolve(ROOT, '.test-build');
@@ -47,6 +48,7 @@ execFileSync(
     'src/lib/people.ts',
     'src/lib/titleSearch.ts',
     'src/lib/tmdbIndex.ts',
+    'src/lib/github.ts',
     '--rootDir', 'src',
     '--jsx', 'react-jsx',
     '--outDir', BUILD,
@@ -74,6 +76,7 @@ const ballot = require(resolve(BUILD, 'lib/ballot.js'));
 const people = require(resolve(BUILD, 'lib/people.js'));
 const titleSearch = require(resolve(BUILD, 'lib/titleSearch.js'));
 const tmdbIndex = require(resolve(BUILD, 'lib/tmdbIndex.js'));
+const github = require(resolve(BUILD, 'lib/github.js'));
 
 runEligibility();
 runParse();
@@ -91,6 +94,10 @@ runRefresh(await import(pathToFileURL(resolve(ROOT, 'scripts/refresh-catalog.mjs
 runBrowseIndex(await import(pathToFileURL(resolve(ROOT, 'scripts/browse-index.mjs')).href));
 runTitleSearch(titleSearch, tmdbIndex);
 runSw();
+await runResolve(
+  await import(pathToFileURL(resolve(ROOT, 'scripts/refresh-catalog.mjs')).href),
+  github
+);
 runFirstShowing(await import(pathToFileURL(resolve(ROOT, 'scripts/firstshowing.mjs')).href));
 await runTmdb(await import(pathToFileURL(resolve(ROOT, 'scripts/tmdb.mjs')).href));
 

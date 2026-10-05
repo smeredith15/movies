@@ -358,8 +358,8 @@ npm run refresh-catalog -- --year 2026            # writes data/catalog/2026.jso
 npm run refresh-catalog -- --year 2026 --dry-run  # report only
 ```
 
-or press **Refresh** in the app, which dispatches the same script as a GitHub
-Action. Sources are firstshowing.net for theatrical dates and the Wikipedia
+The same script runs as a GitHub Action, which is how the app triggers it —
+the TMDB key is a repository secret and a static page cannot hold one. Sources are firstshowing.net for theatrical dates and the Wikipedia
 streaming lists for everything else; both are defined in `scripts/sources.mjs`.
 
 ### TMDB as a check, not just a source
@@ -378,10 +378,39 @@ unrelated films — worse than no match, because nothing downstream could tell.
 ### Fixing a match by hand
 
 When TMDB cannot find a film — or finds the wrong one — paste its id into the
-**TMDB id** field on the expanded Browse row. There is a link beside it to look
-the film up. The id is stored in `data/overrides.json` alongside any ballot-year
-correction, so it survives every rebuild, and the refresh **uses it directly
-without searching**.
+**TMDB id** field on the expanded Browse row and press **Apply**. There is a
+link beside it to look the film up. The id is stored in `data/overrides.json`
+alongside any ballot-year correction, so it survives every rebuild, and the
+refresh **uses it directly without searching**.
+
+Apply does the whole round trip rather than only storing the number. The TMDB
+key is a repository secret, so nothing in the browser can fetch a film: the
+page saves the id, dispatches the refresh workflow for that one entry, follows
+the run, and reloads the row when it lands — about a minute. Storing the id and
+leaving it to a refresh someone has to remember to run looks, from the row,
+exactly like a field that does nothing.
+
+The id is what makes a one-entry run possible:
+
+```bash
+npm run refresh-catalog -- --year 2026 --only inarritu-s-digger-2026
+```
+
+`--only` names catalog ids, skips the scrape entirely, and ignores
+`detailsUpdated` for the entries named — asking about an entry is itself the
+reason to go and look again. Two API calls rather than seven hundred.
+
+A pinned id also **corrects the title**. The schedule pages bill films the way
+a trailer does — "Iñárritu's Digger", "Pixar's Hoppers" — which is both why the
+search failed and why the row would otherwise keep the wrong name after being
+resolved. The previous title is kept as `titleWas` so a row that renames itself
+is still recognisable. A searched match is never renamed: the search already
+required the titles to agree, so every near-miss would start rewriting the
+catalog.
+
+The `id` never changes, whatever happens to the title. Everything that points
+at an entry — the override itself, a seen tick, a watch, a ballot vote — is
+keyed on it, so the slug has to outlive the name it was derived from.
 
 This is the same arrangement as the tv_votes repo, which leaves an unmatched
 show alone for a human to paste the right id into.
@@ -472,7 +501,7 @@ fills them in.
 ```bash
 npm install
 npm run dev     # local development
-npm test        # 438 assertions over the rules, the rotation and the parsers
+npm test        # 470 assertions over the rules, the rotation and the parsers
 npm run build
 ```
 
