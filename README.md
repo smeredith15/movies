@@ -501,7 +501,7 @@ fills them in.
 ```bash
 npm install
 npm run dev     # local development
-npm test        # 477 assertions over the rules, the rotation and the parsers
+npm test        # 479 assertions over the rules, the rotation and the parsers
 npm run build
 ```
 
@@ -526,6 +526,12 @@ dance exists to prevent.
 
 The token is browser storage, so an installed copy counts as a fresh browser and
 asks for one the first time.
+
+`index.html` links the manifest with a version query, and the worker refuses to
+answer for it at all. Both exist because a cached manifest describes an app that
+may no longer be the one here — and the symptom is not a stale name or icon but
+an install button insisting the app is already installed, beside an Open that
+cannot open anything. Bump the query whenever the manifest's identity changes.
 
 The manifest carries an explicit `id`. Without one an app's identity is its
 resolved `start_url`, and Chrome keeps a registration under that key which

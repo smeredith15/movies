@@ -84,7 +84,7 @@ export default function run() {
     check('the page', handles(sw, `${APP}/`), true);
     check('a hashed bundle', handles(sw, `${APP}/assets/index-ABC123.js`), true);
     check('the icons', handles(sw, `${APP}/icons/icon-192.png`), true);
-    check('the manifest', handles(sw, `${APP}/manifest.webmanifest`), true);
+    check('the icons again, hashed or not', handles(sw, `${APP}/icons/icon-512.png`), true);
   });
 
   suite('service worker: nothing we read or write is', () => {
@@ -101,6 +101,15 @@ export default function run() {
     );
     check('a TMDB lookup', handles(sw, 'https://api.themoviedb.org/3/movie/550'), false);
     check('a poster', handles(sw, 'https://image.tmdb.org/t/p/w185/poster.jpg'), false);
+  });
+
+  suite('service worker: the manifest always goes to the network', () => {
+    // Served from a cache it can describe an app that no longer exists, which
+    // is an install button insisting the app is already installed next to an
+    // Open that cannot open anything.
+    const sw = loadWorker();
+    check('the manifest is not claimed', handles(sw, `${APP}/manifest.webmanifest`), false);
+    check('nor with a cache-busting query', handles(sw, `${APP}/manifest.webmanifest?v=2`), false);
   });
 
   suite('service worker: only reads are handled', () => {
