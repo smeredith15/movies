@@ -163,14 +163,27 @@ export async function verifyToken(): Promise<{ login: string } | null> {
   return res.json();
 }
 
-/** Kick off the catalog workflow from the page. */
-export async function dispatchCatalogRefresh(year: number, mode: 'enrich' | 'full' = 'enrich') {
+/**
+ * Kick off the catalog workflow from the page.
+ *
+ * `only` names catalog ids, which makes the run skip the scrape and look at
+ * those entries alone — two API calls rather than seven hundred, so settling a
+ * pasted TMDB id finishes while you are still looking at the row.
+ */
+export async function dispatchCatalogRefresh(
+  year: number,
+  mode: 'enrich' | 'full' = 'enrich',
+  only: string[] = []
+) {
   const res = await fetch(
     `${API}/repos/${REPO_OWNER}/${REPO_NAME}/actions/workflows/refresh-catalog.yml/dispatches`,
     {
       method: 'POST',
       headers: headers({ 'Content-Type': 'application/json' }),
-      body: JSON.stringify({ ref: REPO_BRANCH, inputs: { year: String(year), mode } }),
+      body: JSON.stringify({
+        ref: REPO_BRANCH,
+        inputs: { year: String(year), mode, only: only.join(',') },
+      }),
     }
   );
   if (!res.ok) {
@@ -178,19 +191,30 @@ export async function dispatchCatalogRefresh(year: number, mode: 'enrich' | 'ful
   }
 }
 
-export async function latestCatalogRun(): Promise<{
+export interface CatalogRun {
   status: string;
   conclusion: string | null;
   url: string;
   startedAt: string;
-} | null> {
+}
+
+/**
+ * The newest catalog run, optionally only if it started after `since`.
+ *
+ * A dispatch does not tell you which run it created, so the run has to be
+ * found by time. Until one appears that is newer than the moment we asked,
+ * this returns null rather than the previous run — reporting the last run's
+ * success as this one's would be worse than reporting nothing.
+ */
+export async function latestCatalogRun(since?: string): Promise<CatalogRun | null> {
   const res = await fetch(
-    `${API}/repos/${REPO_OWNER}/${REPO_NAME}/actions/workflows/refresh-catalog.yml/runs?per_page=1`,
+    `${API}/repos/${REPO_OWNER}/${REPO_NAME}/actions/workflows/refresh-catalog.yml/runs?per_page=5`,
     { headers: headers(), cache: 'no-store' }
   );
   if (!res.ok) return null;
   const body = await res.json();
-  const run = body.workflow_runs?.[0];
+  const runs: RawRun[] = body.workflow_runs ?? [];
+  const run = since ? newestSince(runs, since) : runs[0];
   if (!run) return null;
   return {
     status: run.status,
@@ -198,4 +222,36 @@ export async function latestCatalogRun(): Promise<{
     url: run.html_url,
     startedAt: run.created_at,
   };
+}
+
+/**
+ * What to say about a run, and whether there is any point asking again.
+ *
+ * Separated from the polling so the thing worth getting right — never calling
+ * a failed run done — can be tested without a timer or a network.
+ */
+export function runProgress(run: CatalogRun | null): { done: boolean; ok: boolean; note: string } {
+  if (!run) return { done: false, ok: false, note: 'Waiting for the run to start…' };
+  if (run.status !== 'completed') return { done: false, ok: false, note: 'Looking it up on TMDB…' };
+  if (run.conclusion === 'success') return { done: true, ok: true, note: 'Done.' };
+  return { done: true, ok: false, note: `The run ${run.conclusion ?? 'stopped'}.` };
+}
+
+interface RawRun {
+  status: string;
+  conclusion: string | null;
+  html_url: string;
+  created_at: string;
+}
+
+/**
+ * GitHub stamps `created_at` to the second, so a run dispatched within the
+ * same second as the request reads as equal rather than later. Hence `>=`,
+ * and a second of slack for clocks that disagree.
+ */
+export function newestSince<T extends { created_at: string }>(runs: T[], since: string): T | null {
+  const floor = Date.parse(since) - 1000;
+  const after = runs.filter((r) => Date.parse(r.created_at) >= floor);
+  if (!after.length) return null;
+  return after.reduce((a, b) => (Date.parse(a.created_at) >= Date.parse(b.created_at) ? a : b));
 }

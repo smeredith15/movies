@@ -58,6 +58,12 @@ export interface CastMember {
 export interface CatalogMovie {
   id: string;
   title: string;
+  /**
+   * What the schedule page called it, kept when a pinned TMDB id corrected the
+   * title — so a row that suddenly renames itself can still be recognised as
+   * the one you were looking at.
+   */
+  titleWas?: string | null;
   kind: 'theatrical' | 'streaming' | 'rerelease' | 'event';
   festivalDate?: string | null;
   usLimitedDate?: string | null;

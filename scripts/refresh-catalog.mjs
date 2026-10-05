@@ -51,6 +51,21 @@ const DRY = Boolean(args['dry-run']);
 // How long a TMDB detail stays good. --force ignores it entirely.
 const STALE_DAYS = Number.isFinite(Number(args['stale-days'])) ? Number(args['stale-days']) : 30;
 
+/**
+ * `--only a-film-2026,another-2026` — the entries someone just asked about.
+ *
+ * Settling one hand-pasted id should not cost a full rebuild and seven hundred
+ * API calls. Naming the entries makes it two, which is the difference between
+ * a button that answers while you are looking at it and one you come back to.
+ */
+export function parseOnly(arg) {
+  if (typeof arg !== 'string') return null;
+  const ids = arg.split(/[,\s]+/).map((x) => x.trim()).filter(Boolean);
+  return ids.length ? new Set(ids) : null;
+}
+
+const ONLY = parseOnly(args.only);
+
 /** Manual corrections, which survive every rebuild. */
 async function readOverrides() {
   try {
@@ -209,6 +224,7 @@ export function carryOver(prior) {
     seen: prior?.seen ?? false,
     owned: prior?.owned ?? false,
     overview: prior?.overview ?? null,
+    titleWas: prior?.titleWas ?? null,
     genres: prior?.genres ?? [],
     tmdbVerified: prior?.tmdbVerified,
     tmdbNote: prior?.tmdbNote,
@@ -298,12 +314,27 @@ function mergeRows(theatrical, streaming) {
  * Kept apart from the matching so a pinned id and a searched one take the
  * identical path, and stamped so staleness can be judged by when it was last
  * fetched rather than by which fields happen to be present.
+ *
+ * `rename` is for a pinned id only. The schedule pages write titles the way a
+ * trailer does — "Inarritu's Digger", "Pixar's Hoppers" — and those are what
+ * the search choked on in the first place, so leaving them in place would mean
+ * pasting an id, waiting, and seeing the same wrong name. A searched match is
+ * not renamed: the search already required the titles to agree, so there would
+ * be nothing to correct and every near-miss would start rewriting the catalog.
  */
-async function applyDetails(tmdb, m, tmdbId) {
+export async function applyDetails(tmdb, m, tmdbId, { rename = false } = {}) {
   const details = await tmdb.details(tmdbId);
   if (!details) {
     m.tmdbNote = `${m.tmdbNote ?? ''} Detail lookup returned nothing.`.trim();
     return false;
+  }
+
+  // The id is deliberately left alone. Everything that points at this entry —
+  // the override itself, a seen tick, a watch, a ballot vote — is keyed on it,
+  // so a slug derived from yesterday's title has to outlive the title.
+  if (rename && details.title && details.title !== m.title) {
+    m.titleWas = m.title;
+    m.title = details.title;
   }
 
   const dates = usReleaseDates(details);
@@ -330,7 +361,11 @@ async function applyDetails(tmdb, m, tmdbId) {
   return true;
 }
 
-async function enrich(movies, apiKey, { force = false, staleDays = 30, pins = new Map() } = {}) {
+async function enrich(
+  movies,
+  apiKey,
+  { force = false, staleDays = 30, pins = new Map(), only = null } = {}
+) {
   if (!apiKey) {
     warn('no TMDB_API set — skipping release dates, cast and ratings');
     return { matched: 0, missed: [] };
@@ -342,6 +377,11 @@ async function enrich(movies, apiKey, { force = false, staleDays = 30, pins = ne
   const missed = [];
 
   for (const m of movies) {
+    if (only && !only.has(m.id)) continue;
+    // Naming an entry is itself the request to go and look again, so its
+    // timestamp does not get a vote. Otherwise re-pasting an id to correct a
+    // title would do nothing for thirty days.
+    const forceThis = force || Boolean(only);
     const pinned = pins.get(m.id);
 
     // An id set by hand is an answer someone gave deliberately. Use it and
@@ -351,15 +391,19 @@ async function enrich(movies, apiKey, { force = false, staleDays = 30, pins = ne
       m.tmdbId = pinned;
       m.tmdbVerified = true;
       m.tmdbNote = `TMDB id ${pinned} set by hand.`;
-      if (changed || detailIsStale(m, { staleDays, force })) {
-        if (await applyDetails(tmdb, m, pinned)) refreshed += 1;
+      if (changed || detailIsStale(m, { staleDays, force: forceThis })) {
+        const was = m.title;
+        if (await applyDetails(tmdb, m, pinned, { rename: true })) {
+          refreshed += 1;
+          if (m.title !== was) log(`  renamed "${was}" to "${m.title}"`);
+        }
       }
       matched += 1;
       continue;
     }
 
-    const stale = detailIsStale(m, { staleDays, force });
-    if (!needsVerification(m, force) && !stale) continue;
+    const stale = detailIsStale(m, { staleDays, force: forceThis });
+    if (!needsVerification(m, forceThis) && !stale) continue;
 
     const { movie: hit, reason } = await tmdb.findBest(m.title, m.computedYear ?? undefined);
     if (!hit) {
@@ -381,7 +425,8 @@ async function enrich(movies, apiKey, { force = false, staleDays = 30, pins = ne
     if (await applyDetails(tmdb, m, hit.id)) refreshed += 1;
   }
 
-  log(`  confirmed ${matched} of ${movies.length} on TMDB, pulled detail for ${refreshed} (${tmdb.calls} API calls)`);
+  const considered = only ? [...only].length : movies.length;
+  log(`  confirmed ${matched} of ${considered} on TMDB, pulled detail for ${refreshed} (${tmdb.calls} API calls)`);
   if (missed.length) {
     log(`\n  ${missed.length} could not be confirmed as a film of that year.`);
     log('  These are usually television, a live event, or a title TMDB spells');
@@ -426,17 +471,35 @@ function recompute(movies, year) {
 async function main() {
   const outPath = resolve(ROOT, 'data', 'catalog', `${YEAR}.json`);
 
-  if (args['enrich-only']) {
-    log(`Enriching the existing ${YEAR} catalog from TMDB\n`);
+  // Naming entries is a request about those entries, so it never re-scrapes:
+  // the point of --only is that settling one pasted id costs two API calls.
+  if (args['enrich-only'] || ONLY) {
+    log(
+      ONLY
+        ? `Resolving ${ONLY.size} entr${ONLY.size === 1 ? 'y' : 'ies'} in the ${YEAR} catalog\n`
+        : `Enriching the existing ${YEAR} catalog from TMDB\n`
+    );
     const catalog = JSON.parse(await readFile(outPath, 'utf8'));
+    if (ONLY) {
+      const unknown = [...ONLY].filter((id) => !catalog.some((m) => m.id === id));
+      // Silence here would look exactly like a pin that did not take, and that
+      // is the bug this whole path exists to make visible.
+      if (unknown.length) warn(`not in the ${YEAR} catalog: ${unknown.join(', ')}`);
+    }
     const pins = pinnedIds(await readOverrides());
     if (pins.size) log(`  ${pins.size} TMDB id(s) set by hand will be used as given`);
     await enrich(catalog, process.env.TMDB_API, {
       force: Boolean(args.force),
       staleDays: STALE_DAYS,
       pins,
+      only: ONLY,
     });
     recompute(catalog, YEAR);
+    if (ONLY) {
+      for (const m of catalog.filter((x) => ONLY.has(x.id))) {
+        log(`  ${m.id} → "${m.title}" (TMDB ${m.tmdbId ?? 'none'}, ${m.computedYear ?? '?'})`);
+      }
+    }
     if (DRY) {
       log('\nDry run — nothing written.');
       return;

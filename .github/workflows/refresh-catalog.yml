@@ -17,6 +17,11 @@ on:
         options:
           - full
           - enrich
+      only:
+        description: 'Catalog ids to resolve, comma separated — skips the scrape entirely'
+        required: false
+        type: string
+        default: ''
       dry_run:
         description: 'Report only, do not commit'
         required: false
@@ -44,17 +49,26 @@ jobs:
 
       # enrich fills release dates and cast from TMDB for the catalog we
       # already have; full also re-scrapes the schedule and streaming lists.
+      # year and only are free text, so they go in through the environment
+      # rather than being pasted into the script: an expression expanded inline
+      # is expanded before any shell quoting can apply to it.
       - name: Refresh catalog
         env:
           TMDB_API: ${{ secrets.TMDB_API }}
+          YEAR: ${{ inputs.year }}
+          ONLY: ${{ inputs.only }}
         run: |
           node scripts/refresh-catalog.mjs \
-            --year "${{ inputs.year }}" \
+            --year "$YEAR" \
+            ${ONLY:+--only "$ONLY"} \
             ${{ inputs.mode == 'enrich' && '--enrich-only' || '' }} \
             ${{ inputs.dry_run && '--dry-run' || '' }}
 
       - name: Commit changes
         if: ${{ !inputs.dry_run }}
+        env:
+          YEAR: ${{ inputs.year }}
+          ONLY: ${{ inputs.only }}
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -65,7 +79,11 @@ jobs:
             exit 0
           fi
           git add data/catalog data/browse
-          git commit -m "Refresh ${{ inputs.year }} catalog"
+          if [ -n "$ONLY" ]; then
+            git commit -m "Resolve $ONLY"
+          else
+            git commit -m "Refresh $YEAR catalog"
+          fi
 
           # Anything still uncommitted would break the rebase, so say which.
           if ! git diff --quiet; then
