@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { Config, Person } from '../lib/types';
-import { getToken, getWhoAmI, setToken, setWhoAmI, verifyToken } from '../lib/github';
+import { canReadActions, getToken, getWhoAmI, setToken, setWhoAmI, verifyToken } from '../lib/github';
 
 export function Settings({
   config,
@@ -16,6 +16,7 @@ export function Settings({
   const [tokenInput, setTokenInput] = useState('');
   const [login, setLogin] = useState<string | null>(null);
   const [checking, setChecking] = useState(false);
+  const [actions, setActions] = useState<boolean | null>(null);
   const [draft, setDraft] = useState<Config>(config);
 
   useEffect(() => setDraft(config), [config]);
@@ -23,6 +24,7 @@ export function Settings({
   useEffect(() => {
     if (!getToken()) return;
     verifyToken().then((u) => setLogin(u?.login ?? null));
+    canReadActions().then(setActions);
   }, []);
 
   async function saveToken() {
@@ -31,6 +33,10 @@ export function Settings({
     const user = await verifyToken();
     setLogin(user?.login ?? null);
     if (!user) setToken(null);
+    // Checked here rather than when a refresh is pressed: the permission is
+    // separate from the repository, starts at No access, and is missed often
+    // enough that finding out mid-task costs a regenerated token.
+    setActions(user ? await canReadActions() : null);
     setTokenInput('');
     setChecking(false);
     onIdentityChange();
@@ -39,6 +45,7 @@ export function Settings({
   function signOut() {
     setToken(null);
     setLogin(null);
+    setActions(null);
     onIdentityChange();
   }
 
@@ -76,14 +83,26 @@ export function Settings({
           <span className="sub">needed to save changes</span>
         </h2>
         {login ? (
-          <div className="row spread">
-            <span className="small">
-              Signed in as <code>{login}</code> — changes will save.
-            </span>
-            <button className="ghost" onClick={signOut}>
-              Sign out
-            </button>
-          </div>
+          <>
+            <div className="row spread">
+              <span className="small">
+                Signed in as <code>{login}</code> — changes will save.
+              </span>
+              <button className="ghost" onClick={signOut}>
+                Sign out
+              </button>
+            </div>
+            {actions === false && (
+              <div className="banner warn" style={{ marginBottom: 0 }}>
+                This token cannot see Actions, so <strong>Apply</strong> on a TMDB id and any
+                catalog refresh will be refused. Edit the token and set{' '}
+                <strong>Actions: Read and write</strong> under Repository permissions — choosing
+                the repository does not grant it, and every permission starts at No access.
+                Everything else saves through Contents, which is why it all works until you press
+                Apply.
+              </div>
+            )}
+          </>
         ) : (
           <>
             <div className="banner warn">
