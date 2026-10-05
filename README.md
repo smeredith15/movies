@@ -501,7 +501,7 @@ fills them in.
 ```bash
 npm install
 npm run dev     # local development
-npm test        # 479 assertions over the rules, the rotation and the parsers
+npm test        # 481 assertions over the rules, the rotation and the parsers
 npm run build
 ```
 
