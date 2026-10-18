@@ -1980,5 +1980,14 @@
     "picker": "joint",
     "consumesTurn": false,
     "onBallot": true
+  },
+  {
+    "id": "w_mvdzi8fa58w0r",
+    "date": "2026-09-21",
+    "title": "Obsession",
+    "movieId": "obsession-2026",
+    "venue": "home",
+    "picker": "me",
+    "consumesTurn": true
   }
 ]
