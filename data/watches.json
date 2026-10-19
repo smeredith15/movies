@@ -1989,5 +1989,14 @@
     "venue": "home",
     "picker": "me",
     "consumesTurn": true
+  },
+  {
+    "id": "w_mvfu8r32mlif9",
+    "date": "2026-10-18",
+    "title": "Backrooms",
+    "movieId": "backrooms-2026",
+    "venue": "home",
+    "picker": "me",
+    "consumesTurn": true
   }
 ]
