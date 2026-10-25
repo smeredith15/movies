@@ -6,5 +6,13 @@
     "who": "me",
     "count": 1,
     "note": "birthday"
+  },
+  {
+    "id": "a_mvo8ywrpuxoia",
+    "date": "2026-10-25",
+    "type": "skip",
+    "who": "her",
+    "count": 2,
+    "note": "below"
   }
 ]
