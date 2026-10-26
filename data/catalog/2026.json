@@ -52455,10 +52455,10 @@
     "id": "redux-redux-2026",
     "title": "Redux Redux",
     "kind": "theatrical",
-    "festivalDate": null,
+    "festivalDate": "2025-03-08",
     "usLimitedDate": "2026-02-20",
     "usTheatricalDate": null,
-    "homeDate": null,
+    "homeDate": "2026-03-24",
     "isForeignLanguage": false,
     "isDocumentary": false,
     "hadUSTheatricalRelease": true,
@@ -52473,126 +52473,126 @@
     },
     "cast": [
       {
-        "name": "Amy Reed",
-        "character": "Self",
+        "name": "Michaela McManus",
+        "character": "Irene Kelly",
         "order": 0
       },
       {
-        "name": "Jimmy Hough",
-        "character": "Self",
+        "name": "Stella Marcus",
+        "character": "Mia",
         "order": 1
       },
       {
-        "name": "Micah Babbit",
-        "character": "Self",
+        "name": "Jeremy Holm",
+        "character": "Neville",
         "order": 2
       },
       {
-        "name": "Jay Babbitt",
-        "character": "Self",
+        "name": "Jim Cummings",
+        "character": "Jonathan",
         "order": 3
       },
       {
-        "name": "Jonas Nicholson",
-        "character": "Self",
+        "name": "Taylor Misiak",
+        "character": "Billie",
         "order": 4
       },
       {
-        "name": "Finley Reed",
-        "character": "Self",
+        "name": "Dendrie Taylor",
+        "character": "Darla",
         "order": 5
       },
       {
-        "name": "Rocky Eastman",
-        "character": "Self",
+        "name": "Derick Alexander",
+        "character": "Cashier",
         "order": 6
       },
       {
-        "name": "Andrew Reed",
-        "character": "Self",
+        "name": "Raphael Chestang",
+        "character": "Officer Connor",
         "order": 7
       },
       {
-        "name": "Tony Martinelli",
-        "character": "Self",
+        "name": "Debra Christofferson",
+        "character": "Deb",
         "order": 8
       },
       {
-        "name": "Brian Taylor",
-        "character": "Self",
+        "name": "Minita Gandhi",
+        "character": "Jennifer",
         "order": 9
       },
       {
-        "name": "Basil Reed",
-        "character": "Self",
+        "name": "London Garcia",
+        "character": "Hotel Clerk",
         "order": 10
       },
       {
-        "name": "Julian Reed",
-        "character": "Self",
+        "name": "Clinton Lowe",
+        "character": "Officer Dyson",
         "order": 11
       },
       {
-        "name": "Molly Babbitt",
-        "character": "Self",
+        "name": "Michael Manuel",
+        "character": "Travis",
         "order": 12
       },
       {
-        "name": "Kevin Dyerly",
-        "character": "Self",
+        "name": "Remy Ortiz",
+        "character": "Manager Walton",
         "order": 13
       },
       {
-        "name": "Jack Babbitt",
-        "character": "Self",
+        "name": "Dan Perrault",
+        "character": "Officer Hurd",
         "order": 14
       },
       {
-        "name": "Peter Allen",
-        "character": "Self",
+        "name": "Tamika Simpkins",
+        "character": "Rest Stop Woman",
         "order": 15
       },
       {
-        "name": "John Hough",
-        "character": "Self",
+        "name": "Grace Van Dien",
+        "character": "Anna",
         "order": 16
       },
       {
-        "name": "Jennie Dyerly",
-        "character": "Self",
+        "name": "Juan Francisco Villa",
+        "character": "Officer Silberman",
         "order": 17
       },
       {
-        "name": "Ben Spencer",
-        "character": "Self",
+        "name": "PJ McCabe",
+        "character": "Cop Five",
         "order": 18
-      },
-      {
-        "name": "Josh Karp",
-        "character": "Self",
-        "order": 19
       }
     ],
-    "imdbId": "tt43640045",
-    "tmdbId": 1769341,
+    "imdbId": "tt33295741",
+    "tmdbId": 1340110,
     "seen": false,
     "owned": true,
-    "overview": null,
-    "genres": [],
-    "tmdbVerified": false,
-    "tmdbNote": "No TMDB film matching \"Redux Redux\" within a year of 2026. Closest: Redux entity (2026), Walla Walla Wiffle Redux (2026). Its dates and cast came from an earlier, unconfirmed match.",
+    "overview": "In an attempt to avenge her daughter’s death, Irene Kelly travels through parallel universes, killing her daughter’s murderer again and again. As she becomes consumed by vengeance, her humanity begins to slip away—until the cycle is disrupted when she rescues Mia, a sharp-witted teenager already marked by the killer.",
+    "genres": [
+      "Science Fiction",
+      "Thriller"
+    ],
+    "tmdbVerified": true,
+    "tmdbNote": "TMDB id 1340110 set by hand.",
     "wantToSee": 1,
     "onFrozenBallot": false,
     "sources": [
       "https://www.firstshowing.net/schedule2026/"
     ],
     "computedYear": 2026,
-    "confidence": "medium",
+    "confidence": "high",
     "evidence": [
-      "First US release 2026-02-20; no expanded or home date found yet."
+      "Premiered at a festival in 2025, but festival dates do not anchor the year.",
+      "Available in the US on 2026-03-24."
     ],
     "needsReview": false,
-    "manual": false
+    "manual": false,
+    "detailsUpdated": "2026-10-26T22:13:49.677Z"
   },
   {
     "id": "refuge-2026",
