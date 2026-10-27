@@ -1998,5 +1998,14 @@
     "venue": "home",
     "picker": "me",
     "consumesTurn": true
+  },
+  {
+    "id": "w_mvq1mvlu9h6wf",
+    "date": "2026-10-27",
+    "title": "Hokum",
+    "movieId": "hokum-2026",
+    "venue": "home",
+    "picker": "me",
+    "consumesTurn": true
   }
 ]
