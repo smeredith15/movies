@@ -4,18 +4,22 @@ import { check, suite } from './harness.mjs';
 const w = (id, date, seq) => ({ id, date, ...(seq === undefined ? {} : { seq }) });
 const ids = (list) => list.map((x) => x.id).join(',');
 
-export default function run({ withinDay, oldestFirst, newestDayFirst, moveWithinDay, sharesItsDay, dayPosition, ordinal }) {
-  suite('same day: oldest first, by when it was logged', () => {
-    // The whole bug: two films on one evening came out newest-first, because
-    // the comparator never returned 0 and the engine was free to reverse them.
+export default function run({ withinDay, oldestFirst, newestFirst, moveWithinDay, sharesItsDay, dayPosition, ordinal }) {
+  suite('same day: the replay goes forward, the list goes back', () => {
+    // Two films on one evening. The rotation has to replay them in the order
+    // they happened; the list has to show the most recent one at the top, the
+    // same as it does for days. Those are opposite directions, and the comparator
+    // the lists used could not express either — it never returned 0 for equals,
+    // so the engine was free to order an evening however it liked.
     const evening = [w('w_c', '2026-10-31'), w('w_a', '2026-10-31'), w('w_b', '2026-10-31')];
-    check('ascending by id', ids(oldestFirst(evening)), 'w_a,w_b,w_c');
-    check('and within a newest-first list too', ids(newestDayFirst(evening)), 'w_a,w_b,w_c');
+    check('the replay runs oldest first', ids(oldestFirst(evening)), 'w_a,w_b,w_c');
+    check('the list runs newest first', ids(newestFirst(evening)), 'w_c,w_b,w_a');
   });
 
   suite('same day: a hand-set order wins', () => {
     const evening = [w('w_a', '2026-10-31', 1), w('w_b', '2026-10-31', 0)];
     check('seq beats the id', ids(oldestFirst(evening)), 'w_b,w_a');
+    check('and the list still shows the later one on top', ids(newestFirst(evening)), 'w_a,w_b');
 
     // A day is numbered all at once, so anything without a number arrived after
     // the numbering did.
@@ -28,17 +32,19 @@ export default function run({ withinDay, oldestFirst, newestDayFirst, moveWithin
   suite('across days', () => {
     const days = [w('w_a', '2026-10-30'), w('w_b', '2026-10-31')];
     check('oldest first climbs', ids(oldestFirst(days)), 'w_a,w_b');
-    check('newest day first descends', ids(newestDayFirst(days)), 'w_b,w_a');
+    check('newest first descends', ids(newestFirst(days)), 'w_b,w_a');
 
-    // Newest evening first, oldest film within it — how a list of evenings reads.
+    // The direction must not reverse halfway down: top is the most recent
+    // thing, inside a day as much as across them. An evening went in backwards
+    // when it did reverse, because its top row was read as the latest film.
     const mixed = [w('w_c', '2026-10-31'), w('w_a', '2026-10-30'), w('w_b', '2026-10-31')];
-    check('both at once', ids(newestDayFirst(mixed)), 'w_b,w_c,w_a');
+    check('one direction throughout', ids(newestFirst(mixed)), 'w_c,w_b,w_a');
   });
 
   suite('undated entries have no place in the order', () => {
     const some = [w('w_b', ''), w('w_a', '2026-10-31')];
-    check('they trail the dated ones', ids(newestDayFirst(some)), 'w_a,w_b');
-    check('and fall back to id among themselves', ids(newestDayFirst([w('w_z', ''), w('w_y', '')])), 'w_y,w_z');
+    check('they trail the dated ones', ids(newestFirst(some)), 'w_a,w_b');
+    check('and fall back to id among themselves', ids(newestFirst([w('w_z', ''), w('w_y', '')])), 'w_y,w_z');
   });
 
   suite('moving one entry within its day', () => {

@@ -1,7 +1,7 @@
 import type { Config, Picker, Watch } from '../lib/types';
 import { pickerLabel } from '../lib/people';
 import type { TurnState } from '../lib/turns';
-import { dayPosition, moveWithinDay, newestDayFirst, ordinal } from '../lib/watchOrder';
+import { dayPosition, moveWithinDay, newestFirst, ordinal } from '../lib/watchOrder';
 
 /**
  * The last few picks, with the corrections we actually need in practice:
@@ -31,8 +31,9 @@ export function RecentPicks({
   busy: boolean;
   limit?: number;
 }) {
-  // Newest evening first, but oldest film first within an evening.
-  const recent = newestDayFirst(watches).slice(0, limit);
+  // Newest first throughout, so the top of the list is always the most recent
+  // thing — within an evening as much as across them.
+  const recent = newestFirst(watches).slice(0, limit);
 
   const tradedIds = new Set(
     turnState.events
@@ -125,14 +126,14 @@ export function RecentPicks({
                     <div className="seg" role="group" aria-label={`When ${w.title} was watched that day`}>
                       <button
                         disabled={busy || !moveWithinDay(watches, w.id, -1).length}
-                        title={`Watched earlier on ${w.date} than it says here`}
+                        title={`Watched earlier on ${w.date} — moves it down`}
                         onClick={() => void onReorder(moveWithinDay(watches, w.id, -1))}
                       >
                         Earlier
                       </button>
                       <button
                         disabled={busy || !moveWithinDay(watches, w.id, 1).length}
-                        title={`Watched later on ${w.date} than it says here`}
+                        title={`Watched later on ${w.date} — moves it up`}
                         onClick={() => void onReorder(moveWithinDay(watches, w.id, 1))}
                       >
                         Later
