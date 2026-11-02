@@ -1,4 +1,5 @@
 import type { Adjustment, Config, Person, Watch } from './types';
+import { oldestFirst } from './watchOrder';
 
 export interface TurnEvent {
   date: string;
@@ -44,10 +45,14 @@ function makeRotation(config: Config) {
   return () => block[i++ % block.length];
 }
 
-/** Chronological order, with a stable tiebreak so same-day events replay consistently. */
-function chronological<T extends { date: string; id: string }>(items: T[]): T[] {
-  return [...items].sort((a, b) => (a.date === b.date ? a.id.localeCompare(b.id) : a.date < b.date ? -1 : 1));
-}
+/**
+ * Chronological order, shared with every list that displays these.
+ *
+ * It has to be the same comparator: two films on one evening replay in the
+ * order the list shows them, so putting that evening in order by hand is what
+ * decides which of the two was the pick that used a turn.
+ */
+const chronological = oldestFirst;
 
 /**
  * Replay the whole history to derive whose turn it is.

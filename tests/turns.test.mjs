@@ -19,6 +19,25 @@ export default function run(turns) {
   const adj = (date, type, who, count, note) => ({ id: `a${String(++n).padStart(3, '0')}`, date, type, who, count, note });
   const state = (ws, as = []) => computeTurnState(ws, as, config);
 
+  suite('turns: a day put in order by hand replays that way', () => {
+    // Two films on one evening. Which of them the rotation sees first decides
+    // who was picking out of turn, so the replay has to use the same order the
+    // list shows — otherwise reordering a day would fix the display and leave
+    // the turn indicator disagreeing with it.
+    const hers = w('2026-01-02', 'Hers', 'her');
+    const mine = w('2026-01-02', 'Mine', 'me');
+
+    const asLogged = state([hers, mine]);
+    check('logged order replays by id', asLogged.events.map((e) => e.actual).join(','), 'her,me');
+
+    const reordered = state([{ ...hers, seq: 1 }, { ...mine, seq: 0 }]);
+    check('a hand-set order replays that way', reordered.events.map((e) => e.actual).join(','), 'me,her');
+
+    // Me starts the rotation, so whoever went first that evening was in turn.
+    check('and it changes who was out of turn', asLogged.events[0].traded, true);
+    check('the other way round, nobody was', reordered.events[0].traded, false);
+  });
+
   suite('turns: the plain two-and-two rotation', () => {
     check('an empty history opens with the configured starter', state([]).upNext, 'me');
     check('it reads naturally', describeTurn(state([]), config), 'Me is up — 2 picks in a row');

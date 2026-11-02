@@ -28,6 +28,11 @@ export interface Watch {
    * saw something, not when, so the answer has to be stateable directly.
    */
   onBallot?: boolean;
+  /**
+   * Position within its own day, set only on a day someone has put in order by
+   * hand. Unset, the id decides, which is the order it was logged in.
+   */
+  seq?: number | null;
   note?: string;
 }
 

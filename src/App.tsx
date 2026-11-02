@@ -126,6 +126,16 @@ export default function App() {
       await saveWatches([w], [], `Correct pick: ${w.title}`);
     });
 
+  /**
+   * Put one day's watches in order. A move renumbers the whole day, not the
+   * pair that swapped, so every record in it is written at once.
+   */
+  const reorderWatches = (ws: Watch[]) =>
+    mutate(async () => {
+      if (!ws.length) return;
+      await saveWatches(ws, [], `Reorder ${ws[0].date}`);
+    });
+
   const addMovie = (m: AddedMovie) =>
     mutate(async () => {
       await saveAdded(m);
@@ -275,6 +285,7 @@ export default function App() {
             turnState={turnState}
             onUpdate={updateWatch}
             onDelete={deleteWatch}
+            onReorder={reorderWatches}
             canEdit={canEdit}
             busy={busy}
           />

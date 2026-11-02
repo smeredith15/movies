@@ -7,6 +7,7 @@ import { HISTORY_DRAFT, clearDraft, loadDraft, saveDraft } from '../lib/draft';
 import { AddMovie } from './AddMovie';
 import { ballotStatus, defaultBallotChoice } from '../../shared/eligibility.js';
 import { isAttributed, pickerLabel } from '../lib/people';
+import { newestDayFirst } from '../lib/watchOrder';
 
 type Staged = StagedWatch;
 type Filter = 'all' | 'undated' | 'dated';
@@ -129,9 +130,7 @@ export function History({
       push(year, { key: w.movieId, title: w.title, movieId: w.movieId, watch: w, year });
     }
 
-    const unmatched: Row[] = watches
-      .filter((w) => !w.movieId)
-      .sort((a, b) => (a.date < b.date ? 1 : -1))
+    const unmatched: Row[] = newestDayFirst(watches.filter((w) => !w.movieId))
       .map((w) => ({ key: w.id, title: w.title, movieId: null, watch: w, year: Number(w.date.slice(0, 4)) || 0 }));
     for (const r of unmatched) rowByKey.set(r.key, r);
 

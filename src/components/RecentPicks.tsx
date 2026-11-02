@@ -1,6 +1,7 @@
 import type { Config, Picker, Watch } from '../lib/types';
 import { pickerLabel } from '../lib/people';
 import type { TurnState } from '../lib/turns';
+import { moveWithinDay, newestDayFirst, sharesItsDay } from '../lib/watchOrder';
 
 /**
  * The last few picks, with the corrections we actually need in practice:
@@ -14,6 +15,7 @@ export function RecentPicks({
   turnState,
   onUpdate,
   onDelete,
+  onReorder,
   canEdit,
   busy,
   limit = 8,
@@ -23,20 +25,14 @@ export function RecentPicks({
   turnState: TurnState;
   onUpdate: (w: Watch) => void;
   onDelete: (w: Watch) => void;
+  /** Renumbers a whole day, so it saves several records rather than one. */
+  onReorder: (ws: Watch[]) => Promise<void>;
   canEdit: boolean;
   busy: boolean;
   limit?: number;
 }) {
-  // Dated picks newest first; undated ones trail behind, since they have no
-  // place in the order.
-  const recent = [...watches]
-    .sort((a, b) => {
-      if (!a.date && !b.date) return 0;
-      if (!a.date) return 1;
-      if (!b.date) return -1;
-      return a.date < b.date ? 1 : -1;
-    })
-    .slice(0, limit);
+  // Newest evening first, but oldest film first within an evening.
+  const recent = newestDayFirst(watches).slice(0, limit);
 
   const tradedIds = new Set(
     turnState.events
@@ -116,6 +112,25 @@ export function RecentPicks({
                   >
                     {w.consumesTurn ? 'Uses a turn' : 'Free'}
                   </button>
+
+                  {sharesItsDay(watches, w) && (
+                    <div className="seg" role="group" aria-label={`Order of ${w.title} that day`}>
+                      <button
+                        disabled={busy || !moveWithinDay(watches, w.id, -1).length}
+                        title="Watched earlier that day"
+                        onClick={() => void onReorder(moveWithinDay(watches, w.id, -1))}
+                      >
+                        ↑
+                      </button>
+                      <button
+                        disabled={busy || !moveWithinDay(watches, w.id, 1).length}
+                        title="Watched later that day"
+                        onClick={() => void onReorder(moveWithinDay(watches, w.id, 1))}
+                      >
+                        ↓
+                      </button>
+                    </div>
+                  )}
 
                   <button className="danger" disabled={busy} onClick={() => onDelete(w)}>
                     ×
