@@ -2016,5 +2016,14 @@
     "venue": "home",
     "picker": "me",
     "consumesTurn": true
+  },
+  {
+    "id": "w_mvymj2kdblv6e",
+    "date": "2026-11-01",
+    "title": "Minions & Monsters",
+    "movieId": "minions-monsters-2026",
+    "venue": "home",
+    "picker": "me",
+    "consumesTurn": true
   }
 ]
