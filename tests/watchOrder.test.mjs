@@ -4,7 +4,7 @@ import { check, suite } from './harness.mjs';
 const w = (id, date, seq) => ({ id, date, ...(seq === undefined ? {} : { seq }) });
 const ids = (list) => list.map((x) => x.id).join(',');
 
-export default function run({ withinDay, oldestFirst, newestDayFirst, moveWithinDay, sharesItsDay }) {
+export default function run({ withinDay, oldestFirst, newestDayFirst, moveWithinDay, sharesItsDay, dayPosition, ordinal }) {
   suite('same day: oldest first, by when it was logged', () => {
     // The whole bug: two films on one evening came out newest-first, because
     // the comparator never returned 0 and the engine was free to reverse them.
@@ -66,6 +66,28 @@ export default function run({ withinDay, oldestFirst, newestDayFirst, moveWithin
     const back = moveWithinDay(once, 'w_a', -1);
     check('order restored', ids(oldestFirst(back)), 'w_a,w_b');
     check('and still fully numbered', back.every((x) => typeof x.seq === 'number'), true);
+  });
+
+  suite('a row states which film of its evening it was', () => {
+    // The list runs newest day first while a day runs oldest film first, so the
+    // direction of time reverses inside a day. A real evening went in backwards
+    // because its top row was read as the latest film; a row that says "1st of
+    // 2 that day" cannot be read that way.
+    const list = [w('w_a', '2026-11-01'), w('w_b', '2026-11-01'), w('w_c', '2026-10-27')];
+    check('the first film says so', JSON.stringify(dayPosition(list, list[0])), '{"nth":1,"of":2}');
+    check('the second too', JSON.stringify(dayPosition(list, list[1])), '{"nth":2,"of":2}');
+    check('a day of one says nothing', dayPosition(list, list[2]), null);
+    check('nor does an undated entry', dayPosition(list, w('w_d', '')), null);
+
+    // A hand-set order is what the badge has to report, or it would contradict
+    // the very move that was just made.
+    const fixed = [w('w_a', '2026-11-01', 1), w('w_b', '2026-11-01', 0)];
+    check('seq decides the number', JSON.stringify(dayPosition(fixed, fixed[0])), '{"nth":2,"of":2}');
+
+    check('1st', ordinal(1), '1st');
+    check('2nd', ordinal(2), '2nd');
+    check('3rd', ordinal(3), '3rd');
+    check('4th', ordinal(4), '4th');
   });
 
   suite('which rows get the controls', () => {

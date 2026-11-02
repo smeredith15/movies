@@ -79,3 +79,24 @@ export function moveWithinDay<T extends Ordered>(items: T[], id: string, delta: 
 export function sharesItsDay(items: Ordered[], w: Ordered): boolean {
   return Boolean(w.date) && items.filter((x) => x.date === w.date).length > 1;
 }
+
+/**
+ * Which film of its evening this was, 1-based, and how many there were.
+ *
+ * Shown on the row, because the list runs newest day first while a day runs
+ * oldest film first — the direction of time reverses inside a day, and reading
+ * the top of a day as the latest film put a real evening in backwards. A row
+ * that states its own position cannot be read the wrong way round.
+ */
+export function dayPosition(items: Ordered[], w: Ordered): { nth: number; of: number } | null {
+  if (!w.date) return null;
+  const day = oldestFirst(items.filter((x) => x.date === w.date));
+  if (day.length < 2) return null;
+  return { nth: day.findIndex((x) => x.id === w.id) + 1, of: day.length };
+}
+
+/** "1st", "2nd", "3rd", "4th" — only ever used for a handful in one evening. */
+export function ordinal(n: number): string {
+  const suffix = n % 100 >= 11 && n % 100 <= 13 ? 'th' : ['th', 'st', 'nd', 'rd'][n % 10] ?? 'th';
+  return `${n}${suffix}`;
+}
