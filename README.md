@@ -192,10 +192,23 @@ returns 0 for equals leaves the engine free to order them however it likes, and
 in practice it reversed them — so an evening's two films read newest-first
 inside a list that was already newest-first.
 
-They now read oldest first, by id, which is the order they were logged in:
-`newId` starts an id with a base36 millisecond stamp. Where that is wrong — an
-evening is not always logged in the order it was watched — the ↑ and ↓ buttons
-beside a pick move it within its own day.
+The lists now run newest first the whole way down — within a day as much as
+across days — so the top row is always the most recent thing. Getting that
+wrong is not a cosmetic matter: a list that runs backwards across days and
+forwards inside one reverses the direction of time halfway down itself, and an
+evening went in backwards because its top row was read as the later film.
+
+Which film of an evening came first is decided by id, which is the order it was
+logged in: `newId` starts an id with a base36 millisecond stamp. Where that is
+wrong — an evening is not always logged in the order it was watched — the
+**Earlier** and **Later** buttons move a pick within its own day. They name
+real time, not direction, so Earlier moves a row *down*; a film sharing its
+date also says which it was, *1st of 2 that day*, so neither has to be worked
+out from which way the list runs.
+
+The rotation replays forwards, through `oldestFirst`, which is the same
+comparator read the other way. Display direction and replay direction are
+opposite on purpose and derived from one definition, so they cannot drift.
 
 A move renumbers the whole day rather than the pair that swapped. A day with
 `seq` on only some of its entries is a day ordered half by hand and half by
@@ -556,7 +569,7 @@ fills them in.
 ```bash
 npm install
 npm run dev     # local development
-npm test        # 537 assertions over the rules, the rotation and the parsers
+npm test        # 547 assertions over the rules, the rotation and the parsers
 npm run build
 ```
 

@@ -39,17 +39,23 @@ export function oldestFirst<T extends Ordered>(items: T[]): T[] {
 }
 
 /**
- * Newest day first, but oldest first within a day — which is how a list of
- * evenings reads: this week before last week, but the early film before the
- * late one. Undated entries trail, having no place in the order at all.
+ * Newest first, all the way down — within a day as well as across days.
+ *
+ * The top of the list is the most recent thing, and that has to hold inside a
+ * day too. A list that runs backwards across days and forwards within one
+ * reverses the direction of time in the middle of itself, and the top row of a
+ * day reads as the latest film when every day above it works that way. That
+ * put a real evening in backwards.
+ *
+ * Undated entries trail, having no place in the order at all.
  */
-export function newestDayFirst<T extends Ordered>(items: T[]): T[] {
+export function newestFirst<T extends Ordered>(items: T[]): T[] {
   return [...items].sort((a, b) => {
     if (!a.date || !b.date) {
       if (a.date === b.date) return withinDay(a, b);
       return a.date ? -1 : 1;
     }
-    return a.date === b.date ? withinDay(a, b) : a.date < b.date ? 1 : -1;
+    return a.date === b.date ? -withinDay(a, b) : a.date < b.date ? 1 : -1;
   });
 }
 
@@ -78,4 +84,25 @@ export function moveWithinDay<T extends Ordered>(items: T[], id: string, delta: 
 /** Whether an entry has anything to be reordered against. */
 export function sharesItsDay(items: Ordered[], w: Ordered): boolean {
   return Boolean(w.date) && items.filter((x) => x.date === w.date).length > 1;
+}
+
+/**
+ * Which film of its evening this was, 1-based, and how many there were.
+ *
+ * Shown on the row because the buttons beside it talk about real time while
+ * the list is ordered by it backwards: Earlier moves a film *down*. Saying
+ * which film of the evening this was settles that without anyone having to
+ * work out which way the list runs.
+ */
+export function dayPosition(items: Ordered[], w: Ordered): { nth: number; of: number } | null {
+  if (!w.date) return null;
+  const day = oldestFirst(items.filter((x) => x.date === w.date));
+  if (day.length < 2) return null;
+  return { nth: day.findIndex((x) => x.id === w.id) + 1, of: day.length };
+}
+
+/** "1st", "2nd", "3rd", "4th" — only ever used for a handful in one evening. */
+export function ordinal(n: number): string {
+  const suffix = n % 100 >= 11 && n % 100 <= 13 ? 'th' : ['th', 'st', 'nd', 'rd'][n % 10] ?? 'th';
+  return `${n}${suffix}`;
 }

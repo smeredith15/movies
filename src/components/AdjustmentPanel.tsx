@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { Adjustment, AdjustmentType, Config, Person } from '../lib/types';
 import { newId } from '../lib/store';
-import { newestDayFirst } from '../lib/watchOrder';
+import { newestFirst } from '../lib/watchOrder';
 
 export function AdjustmentPanel({
   config,
@@ -31,7 +31,7 @@ export function AdjustmentPanel({
     setCount(1);
   }
 
-  const sorted = newestDayFirst(adjustments);
+  const sorted = newestFirst(adjustments);
 
   return (
     <div className="panel">

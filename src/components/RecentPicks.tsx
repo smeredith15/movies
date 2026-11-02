@@ -1,7 +1,7 @@
 import type { Config, Picker, Watch } from '../lib/types';
 import { pickerLabel } from '../lib/people';
 import type { TurnState } from '../lib/turns';
-import { moveWithinDay, newestDayFirst, sharesItsDay } from '../lib/watchOrder';
+import { dayPosition, moveWithinDay, newestFirst, ordinal } from '../lib/watchOrder';
 
 /**
  * The last few picks, with the corrections we actually need in practice:
@@ -31,8 +31,9 @@ export function RecentPicks({
   busy: boolean;
   limit?: number;
 }) {
-  // Newest evening first, but oldest film first within an evening.
-  const recent = newestDayFirst(watches).slice(0, limit);
+  // Newest first throughout, so the top of the list is always the most recent
+  // thing — within an evening as much as across them.
+  const recent = newestFirst(watches).slice(0, limit);
 
   const tradedIds = new Set(
     turnState.events
@@ -68,6 +69,14 @@ export function RecentPicks({
               <div className="w-main">
                 <div className="w-title">{w.title}</div>
                 <div className="w-meta row">
+                  {(() => {
+                    const pos = dayPosition(watches, w);
+                    return pos ? (
+                      <span className="badge free">
+                        {ordinal(pos.nth)} of {pos.of} that day
+                      </span>
+                    ) : null;
+                  })()}
                   {w.venue === 'theater' && <span className="badge theater">Theater</span>}
                   {traded && <span className="badge traded">Out of turn</span>}
                   {!w.date && <span className="badge traded">No date — not counted</span>}
@@ -113,21 +122,21 @@ export function RecentPicks({
                     {w.consumesTurn ? 'Uses a turn' : 'Free'}
                   </button>
 
-                  {sharesItsDay(watches, w) && (
-                    <div className="seg" role="group" aria-label={`Order of ${w.title} that day`}>
+                  {dayPosition(watches, w) && (
+                    <div className="seg" role="group" aria-label={`When ${w.title} was watched that day`}>
                       <button
                         disabled={busy || !moveWithinDay(watches, w.id, -1).length}
-                        title="Watched earlier that day"
+                        title={`Watched earlier on ${w.date} — moves it down`}
                         onClick={() => void onReorder(moveWithinDay(watches, w.id, -1))}
                       >
-                        ↑
+                        Earlier
                       </button>
                       <button
                         disabled={busy || !moveWithinDay(watches, w.id, 1).length}
-                        title="Watched later that day"
+                        title={`Watched later on ${w.date} — moves it up`}
                         onClick={() => void onReorder(moveWithinDay(watches, w.id, 1))}
                       >
-                        ↓
+                        Later
                       </button>
                     </div>
                   )}
