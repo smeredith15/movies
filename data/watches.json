@@ -2016,7 +2016,7 @@
     "venue": "home",
     "picker": "me",
     "consumesTurn": true,
-    "seq": 0
+    "seq": 1
   },
   {
     "id": "w_mvymj2kdblv6e",
@@ -2026,6 +2026,6 @@
     "venue": "home",
     "picker": "her",
     "consumesTurn": true,
-    "seq": 1
+    "seq": 0
   }
 ]
