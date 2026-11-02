@@ -18,6 +18,7 @@ retries. Records merge by id, so neither of you can clobber the other.
 ```
 data/config.json        names, rotation size, Oscar dates, frozen years
 data/watches.json       every movie watched, with who picked it and where
+                        (`seq` orders a day that was put in order by hand)
 data/adjustments.json   bonus picks and skips, with an optional reason
 data/overrides.json     manual eligibility-year decisions — these always win
 data/catalog/<year>.json  the eligible-movie pool, rebuilt by the scraper
@@ -182,6 +183,30 @@ Either way the entry lands in `data/added.json` — a small file, rather than
 appending to a 300 KB year catalog — and the app merges it into the watched
 list. The importer folds those entries into the catalogs on its next run,
 marked `manual`, so they survive later re-imports.
+
+## Two films in one evening
+
+Every chronological list sorted with `a.date < b.date ? 1 : -1`, which claims
+"a comes first" for two entries on the *same* date. A comparator that never
+returns 0 for equals leaves the engine free to order them however it likes, and
+in practice it reversed them — so an evening's two films read newest-first
+inside a list that was already newest-first.
+
+They now read oldest first, by id, which is the order they were logged in:
+`newId` starts an id with a base36 millisecond stamp. Where that is wrong — an
+evening is not always logged in the order it was watched — the ↑ and ↓ buttons
+beside a pick move it within its own day.
+
+A move renumbers the whole day rather than the pair that swapped. A day with
+`seq` on only some of its entries is a day ordered half by hand and half by
+when it happened to be logged, which is the ambiguity the buttons exist to
+remove. An entry added later carries no `seq` and sorts last, which is right:
+it was logged after the day was put in order.
+
+The rotation replays through the same comparator. That matters — with two
+picks on one evening, which one the replay sees first decides who picked out of
+turn, so reordering a day moves the turn indicator with it rather than leaving
+the two disagreeing.
 
 ## Correcting a pick
 
@@ -531,7 +556,7 @@ fills them in.
 ```bash
 npm install
 npm run dev     # local development
-npm test        # 508 assertions over the rules, the rotation and the parsers
+npm test        # 537 assertions over the rules, the rotation and the parsers
 npm run build
 ```
 

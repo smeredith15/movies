@@ -30,6 +30,7 @@ import runFirstShowing from './firstshowing.test.mjs';
 import runSw from './sw.test.mjs';
 import runResolve from './resolve.test.mjs';
 import runSearchIndex from './searchIndex.test.mjs';
+import runWatchOrder from './watchOrder.test.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const BUILD = resolve(ROOT, '.test-build');
@@ -40,6 +41,7 @@ execFileSync(
   [
     'tsc',
     'src/lib/turns.ts',
+    'src/lib/watchOrder.ts',
     'src/lib/catalogIndex.ts',
     'src/lib/draft.ts',
     'src/lib/added.ts',
@@ -68,6 +70,7 @@ writeFileSync(resolve(BUILD, 'package.json'), '{"type":"commonjs"}');
 
 const require = createRequire(import.meta.url);
 const turns = require(resolve(BUILD, 'lib/turns.js'));
+const watchOrder = require(resolve(BUILD, 'lib/watchOrder.js'));
 const catalogIndex = require(resolve(BUILD, 'lib/catalogIndex.js'));
 const draft = require(resolve(BUILD, 'lib/draft.js'));
 const added = require(resolve(BUILD, 'lib/added.js'));
@@ -82,6 +85,7 @@ const github = require(resolve(BUILD, 'lib/github.js'));
 runEligibility();
 runParse();
 runTurns(turns);
+runWatchOrder(watchOrder);
 runIndex(catalogIndex);
 runCategories();
 runEntryTypes();
