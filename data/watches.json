@@ -2015,7 +2015,8 @@
     "movieId": "over-your-dead-body-2026",
     "venue": "home",
     "picker": "me",
-    "consumesTurn": true
+    "consumesTurn": true,
+    "seq": 1
   },
   {
     "id": "w_mvymj2kdblv6e",
@@ -2024,6 +2025,7 @@
     "movieId": "minions-monsters-2026",
     "venue": "home",
     "picker": "me",
-    "consumesTurn": true
+    "consumesTurn": true,
+    "seq": 0
   }
 ]
