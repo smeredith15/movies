@@ -213,7 +213,8 @@
     "movieId": "the-secret-agent-2025",
     "venue": "home",
     "picker": "me",
-    "consumesTurn": true
+    "consumesTurn": true,
+    "onBallot": true
   },
   {
     "id": "w_mubkb9o8arcmt",
