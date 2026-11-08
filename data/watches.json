@@ -2028,5 +2028,14 @@
     "picker": "her",
     "consumesTurn": true,
     "seq": 1
+  },
+  {
+    "id": "w_mw8gou89fw0fr",
+    "date": "2026-11-08",
+    "title": "Verity",
+    "movieId": "verity-2026",
+    "venue": "theater",
+    "picker": "joint",
+    "consumesTurn": false
   }
 ]
