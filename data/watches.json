@@ -2037,5 +2037,14 @@
     "venue": "theater",
     "picker": "joint",
     "consumesTurn": false
+  },
+  {
+    "id": "w_mw8pawq8jdn5o",
+    "date": "2026-11-08",
+    "title": "Jaws",
+    "movieId": "jaws-1975",
+    "venue": "home",
+    "picker": "her",
+    "consumesTurn": true
   }
 ]
