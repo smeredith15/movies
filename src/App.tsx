@@ -24,6 +24,7 @@ import { AdjustmentPanel } from './components/AdjustmentPanel';
 import { Settings } from './components/Settings';
 import { Ballot } from './components/Ballot';
 import { saveBallot, type Ballot as BallotData } from './lib/ballot';
+import { saveAddition, type CatalogAddition } from './lib/additions';
 
 type Tab = 'tracker' | 'browse' | 'backfill' | 'history' | 'ballot' | 'settings';
 
@@ -194,6 +195,22 @@ export default function App() {
    * would turn its own failure into a banner and resolve anyway — and the run
    * would come back green having read an overrides file that never changed.
    */
+  /**
+   * Record a film no source listed. Throws, like pinTmdbId and for the same
+   * reason: Browse asks a workflow to go and build the entry straight after,
+   * and a run that came back green having read a file that never changed is
+   * the failure that costs an hour to understand.
+   */
+  const addByTmdbId = async (addition: CatalogAddition) => {
+    setBusy(true);
+    try {
+      await saveAddition(addition);
+      await refresh();
+    } finally {
+      setBusy(false);
+    }
+  };
+
   const pinTmdbId = async (movieId: string, patch: OverridePatch) => {
     setBusy(true);
     try {
@@ -310,6 +327,7 @@ export default function App() {
           onSaveWatches={saveWatchSet}
           onOverride={setYearOverride}
           onPin={pinTmdbId}
+          onAdd={addByTmdbId}
           canEdit={canEdit}
           busy={busy}
         />

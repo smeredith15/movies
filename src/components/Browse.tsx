@@ -1,11 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { CatalogMovie, Config, EligibilityOverride, Watch } from '../lib/types';
 
+import type { CatalogAddition } from '../lib/additions';
 import { dispatchCatalogRefresh, latestCatalogRun, runProgress } from '../lib/github';
 import { loadCatalog, newId } from '../lib/store';
 import { applyMark, type Mark, type Marks } from '../lib/marks';
 import { BROWSE_DRAFT, clearDraft, draftSize, loadDraft, saveDraft } from '../lib/draft';
 import { watchFallsInSeason } from '../../shared/eligibility.js';
+import { additionId, parseTmdbId } from '../../shared/additions.js';
 
 /** What the Set button sends back; null clears the corrections entirely. */
 export interface OverridePatch {
@@ -64,6 +66,7 @@ export function Browse({
   onSaveWatches,
   onOverride,
   onPin,
+  onAdd,
   canEdit,
   busy,
 }: {
@@ -75,6 +78,8 @@ export function Browse({
   onSaveWatches: (add: Watch[], removeIds: string[]) => Promise<void>;
   onOverride: (movieId: string, patch: OverridePatch | null) => Promise<void>;
   onPin: (movieId: string, patch: OverridePatch) => Promise<void>;
+  /** Records a film no source listed, to be built by the next run. */
+  onAdd: (addition: CatalogAddition) => Promise<void>;
   canEdit: boolean;
   busy: boolean;
 }) {
@@ -88,6 +93,7 @@ export function Browse({
   const [attempt, setAttempt] = useState(0);
   const [staged, setStaged] = useState<Record<string, Partial<Mark>>>(() => loadDraft(BROWSE_DRAFT));
   const [resolving, setResolving] = useState<Resolve | null>(null);
+  const [addInput, setAddInput] = useState('');
   const alive = useRef(true);
   useEffect(() => {
     // Set on mount as well as cleared on unmount: in development StrictMode
@@ -243,27 +249,87 @@ export function Browse({
       say('Saving the id…');
       await onPin(movie.id, patch);
 
-      // Before the dispatch, so a run created in the same second still counts.
-      const since = new Date().toISOString();
-      say('Starting the lookup…');
-      await dispatchCatalogRefresh(year, 'enrich', [movie.id]);
+      await runFor(movie.id, movie.title, patch.tmdbId, say);
+    } catch (e) {
+      say(e instanceof Error ? e.message : String(e), { failed: true });
+    }
+  }
 
-      const deadline = Date.now() + 5 * 60_000;
-      for (;;) {
-        await new Promise((r) => setTimeout(r, 4000));
-        if (!alive.current) return;
+  /**
+   * Ask the workflow to resolve one catalog id, follow the run, and wait for
+   * the data to be readable. Shared by correcting a film's id and adding one
+   * the scrapers never listed, because past the first write they are the same
+   * round trip: the entry is named, the run fetches it, the row appears.
+   */
+  async function runFor(
+    movieId: string,
+    title: string,
+    tmdbId: number | null,
+    say: (note: string, extra?: Partial<Resolve>) => void,
+    onFound?: (row: CatalogMovie) => void
+  ) {
+    // Before the dispatch, so a run created in the same second still counts.
+    const since = new Date().toISOString();
+    say('Starting the lookup…');
+    await dispatchCatalogRefresh(year, 'enrich', [movieId]);
 
-        const run = await latestCatalogRun(since);
-        const { done, ok, note } = runProgress(run);
-        if (done) {
-          if (!ok) return say(note, { url: run?.url, failed: true });
-          return waitForData(movie, patch.tmdbId, say, run?.url);
-        }
-        if (Date.now() > deadline) {
-          return say('Still running after five minutes.', { url: run?.url, failed: true });
-        }
-        say(note, { url: run?.url });
+    const deadline = Date.now() + 5 * 60_000;
+    for (;;) {
+      await new Promise((r) => setTimeout(r, 4000));
+      if (!alive.current) return;
+
+      const run = await latestCatalogRun(since);
+      const { done, ok, note } = runProgress(run);
+      if (done) {
+        if (!ok) return say(note, { url: run?.url, failed: true });
+        return waitForData({ id: movieId, title } as CatalogMovie, tmdbId, say, run?.url, onFound);
       }
+      if (Date.now() > deadline) {
+        return say('Still running after five minutes.', { url: run?.url, failed: true });
+      }
+      say(note, { url: run?.url });
+    }
+  }
+
+  /**
+   * Add a film no source listed.
+   *
+   * There is no row to paste an id onto when every scraper missed it, which
+   * until now meant waiting for one of them to catch up. The id goes into
+   * data/additions.json — kept, not consumed, so a full rebuild puts the film
+   * back while the sources still do not list it — and the same run that
+   * resolves a pasted id builds the entry from scratch.
+   */
+  async function addByTmdbId(raw: string) {
+    const tmdbId = parseTmdbId(raw);
+    const base = { movieId: 'add', title: `TMDB ${tmdbId ?? '?'}` };
+    const say = (note: string, extra: Partial<Resolve> = {}) => {
+      if (alive.current) setResolving({ ...base, note, ...extra });
+    };
+
+    if (tmdbId === null) {
+      return say('That is not a TMDB id. Paste the number, or the film’s TMDB link.', {
+        failed: true,
+      });
+    }
+
+    const already = catalog?.find((m) => m.tmdbId === tmdbId);
+    if (already) {
+      return say(`${already.title} is already in ${year} — search for it above.`, { failed: true });
+    }
+
+    try {
+      say('Saving it…');
+      await onAdd({ tmdbId, year, at: new Date().toISOString(), by: config.people.me });
+      setAddInput('');
+      await runFor(additionId(tmdbId, year), `TMDB ${tmdbId}`, tmdbId, say, (row) => {
+        // The default view shows only what has come out, and a film TMDB has
+        // no US date for has no release date at all — so the run would succeed
+        // and the row stay hidden, which looks exactly like it having failed.
+        setShown('all');
+        setFilter('all');
+        setQuery(row.title);
+      });
     } catch (e) {
       say(e instanceof Error ? e.message : String(e), { failed: true });
     }
@@ -282,15 +348,17 @@ export function Browse({
     movie: CatalogMovie,
     pinned: number | null,
     say: (note: string, extra?: Partial<Resolve>) => void,
-    url?: string
+    url?: string,
+    onFound?: (row: CatalogMovie) => void
   ) {
     const deadline = Date.now() + 3 * 60_000;
     for (;;) {
       const fresh = await loadCatalog(year).catch(() => null);
       const row = fresh?.find((m) => m.id === movie.id);
-      if (fresh && carriesPin(row, pinned)) {
+      if (fresh && row && carriesPin(row, pinned)) {
         setCatalog(fresh);
-        say(`Resolved — now “${row?.title}”.`, { url });
+        onFound?.(row);
+        say(`Resolved — now “${row.title}”.`, { url });
         setTimeout(() => alive.current && setResolving(null), 5000);
         return;
       }
@@ -374,6 +442,30 @@ export function Browse({
             <button className="ghost" onClick={() => setAttempt((a) => a + 1)}>
               Try again
             </button>
+          </div>
+        )}
+
+        {canEdit && (
+          <div className="row b-override" style={{ marginTop: 12 }}>
+            <span className="small muted">Missing a film?</span>
+            <input
+              value={addInput}
+              onChange={(e) => setAddInput(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && addInput.trim() && void addByTmdbId(addInput)}
+              placeholder="TMDB id or link"
+              style={{ width: 170 }}
+              aria-label={`Add a film to ${year} by TMDB id`}
+            />
+            <button
+              className="primary"
+              disabled={busy || !addInput.trim() || Boolean(resolving && !resolving.failed)}
+              onClick={() => void addByTmdbId(addInput)}
+            >
+              Add to {year}
+            </button>
+            <span className="small muted">
+              For anything the scrapes missed — it is built from TMDB, same as Apply.
+            </span>
           </div>
         )}
 
