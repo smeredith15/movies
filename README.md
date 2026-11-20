@@ -424,6 +424,16 @@ link beside it to look the film up. The id is stored in `data/overrides.json`
 alongside any ballot-year correction, so it survives every rebuild, and the
 refresh **uses it directly without searching**.
 
+The run is followed by id, not by time. A dispatch does not say which run it
+created, so the page used to look for one created after the moment it asked —
+but that moment came from the browser's clock and `created_at` comes from
+GitHub's, truncated to the second. A browser a second and a half fast made
+every real run look older than the request that started it, and the page waited
+on a run that had already finished and committed. Noting which run was newest
+before dispatching needs no clocks at all. And following the run is only ever a
+progress report: when it cannot be recognised the page asks the data directly,
+so a missed run costs a slower answer rather than a wrong one.
+
 Apply waits for the data, not for the run. A run pushes its commit and reports
 success seconds later, while `raw.githubusercontent.com` can still be serving
 the previous file — so reloading the moment the run goes green reliably reloads
@@ -595,7 +605,7 @@ fills them in.
 ```bash
 npm install
 npm run dev     # local development
-npm test        # 574 assertions over the rules, the rotation and the parsers
+npm test        # 575 assertions over the rules, the rotation and the parsers
 npm run build
 ```
 

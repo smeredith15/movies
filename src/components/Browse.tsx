@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { CatalogMovie, Config, EligibilityOverride, Watch } from '../lib/types';
 
 import type { CatalogAddition } from '../lib/additions';
-import { dispatchCatalogRefresh, latestCatalogRun, runProgress } from '../lib/github';
+import { dispatchCatalogRefresh, isNewRun, latestCatalogRun, runProgress } from '../lib/github';
 import { loadCatalog, newId } from '../lib/store';
 import { applyMark, type Mark, type Marks } from '../lib/marks';
 import { BROWSE_DRAFT, clearDraft, draftSize, loadDraft, saveDraft } from '../lib/draft';
@@ -268,8 +268,10 @@ export function Browse({
     say: (note: string, extra?: Partial<Resolve>) => void,
     onFound?: (row: CatalogMovie) => void
   ) {
-    // Before the dispatch, so a run created in the same second still counts.
-    const since = new Date().toISOString();
+    // Which run was newest before we asked. The new one is whichever is in
+    // that position afterwards — a comparison of identities, not of two clocks
+    // that disagree, which is what left this waiting on a finished run.
+    const before = (await latestCatalogRun())?.id ?? null;
     say('Starting the lookup…');
     await dispatchCatalogRefresh(year, 'enrich', [movieId]);
 
@@ -278,14 +280,19 @@ export function Browse({
       await new Promise((r) => setTimeout(r, 4000));
       if (!alive.current) return;
 
-      const run = await latestCatalogRun(since);
+      const run = isNewRun(await latestCatalogRun(), before);
       const { done, ok, note } = runProgress(run);
       if (done) {
         if (!ok) return say(note, { url: run?.url, failed: true });
         return waitForData({ id: movieId, title } as CatalogMovie, tmdbId, say, run?.url, onFound);
       }
       if (Date.now() > deadline) {
-        return say('Still running after five minutes.', { url: run?.url, failed: true });
+        // Following the run is only ever a progress report. Whether the data
+        // arrived is the question that matters, and it can be asked directly —
+        // so a run we failed to recognise costs a slower answer, not a wrong
+        // one. That distinction is the whole reason this stuck once.
+        say('Still following the run — checking the data itself.', { url: run?.url });
+        return waitForData({ id: movieId, title } as CatalogMovie, tmdbId, say, run?.url, onFound);
       }
       say(note, { url: run?.url });
     }

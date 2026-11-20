@@ -25,7 +25,7 @@ const DIGGER = {
 
 export default async function run(
   { parseOnly, applyDetails },
-  { newestSince, runProgress, dispatchFailure }
+  { isNewRun, runProgress, dispatchFailure }
 ) {
   suite('--only: naming the entries to resolve', () => {
     check('a single id', [...parseOnly('digger-2026')].join(), 'digger-2026');
@@ -93,22 +93,24 @@ export default async function run(
   });
 
   suite('finding the run a dispatch created', () => {
-    const runs = [
-      { created_at: '2026-10-05T12:00:30Z', which: 'new' },
-      { created_at: '2026-10-05T11:00:00Z', which: 'old' },
-    ];
-    check('the newer run is found', newestSince(runs, '2026-10-05T12:00:29Z').which, 'new');
+    // This used to compare the moment we asked, from the browser's clock,
+    // against created_at, from GitHub's and truncated to the second. A browser
+    // a second and a half fast made every real run look older than the request
+    // that started it, and the page waited on a finished run for ever. Run ids
+    // need no clock.
+    const prior = { id: 11, status: 'completed', conclusion: 'success' };
+    const fresh = { id: 12, status: 'queued', conclusion: null };
+
+    check('a different run is the new one', isNewRun(fresh, 11).id, 12);
     // Reporting the previous run's success as this one's is the one answer
     // that would be worse than no answer at all.
-    check('nothing newer means nothing', newestSince([runs[1]], '2026-10-05T12:00:29Z'), null);
-    // created_at has one-second resolution, so same-second must still count.
-    check(
-      'a run created in the same second counts',
-      newestSince([{ created_at: '2026-10-05T12:00:30Z', which: 'new' }], '2026-10-05T12:00:30Z')
-        .which,
-      'new'
-    );
-    check('an empty list is not a run', newestSince([], '2026-10-05T12:00:29Z'), null);
+    check('the same run is not', isNewRun(prior, 11), null);
+    check('no run at all is not', isNewRun(null, 11), null);
+
+    // A workflow that has never run has nothing to compare against, so the
+    // first run to appear is necessarily the one we caused.
+    check('with no prior run, any run counts', isNewRun(fresh, null).id, 12);
+    check('and none still means none', isNewRun(null, null), null);
   });
 
   suite('what to say about a run, and when to stop asking', () => {

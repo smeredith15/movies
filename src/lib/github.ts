@@ -239,31 +239,25 @@ export async function canReadActions(): Promise<boolean> {
 }
 
 export interface CatalogRun {
+  id: number;
   status: string;
   conclusion: string | null;
   url: string;
   startedAt: string;
 }
 
-/**
- * The newest catalog run, optionally only if it started after `since`.
- *
- * A dispatch does not tell you which run it created, so the run has to be
- * found by time. Until one appears that is newer than the moment we asked,
- * this returns null rather than the previous run — reporting the last run's
- * success as this one's would be worse than reporting nothing.
- */
-export async function latestCatalogRun(since?: string): Promise<CatalogRun | null> {
+/** The newest catalog run, whatever it is. Runs come back newest first. */
+export async function latestCatalogRun(): Promise<CatalogRun | null> {
   const res = await fetch(
-    `${API}/repos/${REPO_OWNER}/${REPO_NAME}/actions/workflows/refresh-catalog.yml/runs?per_page=5`,
+    `${API}/repos/${REPO_OWNER}/${REPO_NAME}/actions/workflows/refresh-catalog.yml/runs?per_page=1`,
     { headers: headers(), cache: 'no-store' }
   );
   if (!res.ok) return null;
   const body = await res.json();
-  const runs: RawRun[] = body.workflow_runs ?? [];
-  const run = since ? newestSince(runs, since) : runs[0];
+  const run: RawRun | undefined = (body.workflow_runs ?? [])[0];
   if (!run) return null;
   return {
+    id: run.id,
     status: run.status,
     conclusion: run.conclusion,
     url: run.html_url,
@@ -285,6 +279,7 @@ export function runProgress(run: CatalogRun | null): { done: boolean; ok: boolea
 }
 
 interface RawRun {
+  id: number;
   status: string;
   conclusion: string | null;
   html_url: string;
@@ -292,13 +287,20 @@ interface RawRun {
 }
 
 /**
- * GitHub stamps `created_at` to the second, so a run dispatched within the
- * same second as the request reads as equal rather than later. Hence `>=`,
- * and a second of slack for clocks that disagree.
+ * Whether the newest run is one this page caused.
+ *
+ * A dispatch does not say which run it created, so the run used to be found by
+ * time: anything created after the moment we asked. Two clocks make that a
+ * guess — the moment we asked came from the browser, `created_at` comes from
+ * GitHub and is truncated to the second — and a browser a second and a half
+ * fast made every real run look older than the request that started it. The
+ * page then waited for a run that had already finished, for ever.
+ *
+ * Identity does not need clocks. Note which run was newest before dispatching;
+ * anything else in that position afterwards is new.
  */
-export function newestSince<T extends { created_at: string }>(runs: T[], since: string): T | null {
-  const floor = Date.parse(since) - 1000;
-  const after = runs.filter((r) => Date.parse(r.created_at) >= floor);
-  if (!after.length) return null;
-  return after.reduce((a, b) => (Date.parse(a.created_at) >= Date.parse(b.created_at) ? a : b));
+export function isNewRun(latest: CatalogRun | null, before: number | null): CatalogRun | null {
+  if (!latest) return null;
+  if (before !== null && latest.id === before) return null;
+  return latest;
 }
