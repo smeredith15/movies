@@ -83884,5 +83884,75 @@
     "needsReview": false,
     "manual": false,
     "detailsUpdated": "2026-09-21T22:42:12.316Z"
+  },
+  {
+    "id": "tmdb-1211598-2026",
+    "title": "Kill Me",
+    "kind": "theatrical",
+    "festivalDate": "2026-03-12",
+    "usLimitedDate": null,
+    "usTheatricalDate": null,
+    "homeDate": null,
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": false,
+    "services": [],
+    "poster": null,
+    "sources": [
+      "added by hand"
+    ],
+    "tmdbId": 1211598,
+    "computedYear": 2026,
+    "confidence": "medium",
+    "evidence": [
+      "Added by TMDB id 1211598."
+    ],
+    "needsReview": false,
+    "manual": true,
+    "tmdbVerified": true,
+    "tmdbNote": "TMDB id 1211598 set by hand.",
+    "titleWas": "TMDB 1211598",
+    "imdbId": "tt30227670",
+    "overview": "Jimmy wakes up in a bathtub after having tried to kill himself. Or, at least, that’s what it looks like to his friends and family. Jimmy is pretty sure he didn’t do it… maybe. Together with Margot, the 911 operator who took his call, Jimmy sets out on a mission to solve a vitally important whodunit: did someone try to kill him, or are they chasing the spectre of depression?",
+    "genres": [
+      "Comedy",
+      "Mystery"
+    ],
+    "cast": [
+      {
+        "name": "Charlie Day",
+        "character": "Jimmy",
+        "order": 0
+      },
+      {
+        "name": "Allison Williams",
+        "character": "Margot",
+        "order": 1
+      },
+      {
+        "name": "Giancarlo Esposito",
+        "character": "Dr. Singer",
+        "order": 2
+      },
+      {
+        "name": "Aya Cash",
+        "character": "Alice",
+        "order": 3
+      },
+      {
+        "name": "Jessica Harper",
+        "order": 4
+      },
+      {
+        "name": "David Krumholtz",
+        "character": "Lou",
+        "order": 5
+      },
+      {
+        "name": "Tony Cavalero",
+        "order": 6
+      }
+    ],
+    "detailsUpdated": "2026-11-20T16:52:44.216Z"
   }
 ]
