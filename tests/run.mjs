@@ -31,6 +31,7 @@ import runSw from './sw.test.mjs';
 import runResolve from './resolve.test.mjs';
 import runSearchIndex from './searchIndex.test.mjs';
 import runWatchOrder from './watchOrder.test.mjs';
+import runAdditions from './additions.test.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const BUILD = resolve(ROOT, '.test-build');
@@ -86,6 +87,7 @@ runEligibility();
 runParse();
 runTurns(turns);
 runWatchOrder(watchOrder);
+runAdditions(await import(pathToFileURL(resolve(ROOT, 'shared/additions.js')).href));
 runIndex(catalogIndex);
 runCategories();
 runEntryTypes();

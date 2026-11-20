@@ -17,6 +17,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { computeEligibility } from '../shared/eligibility.js';
+import { pendingAdditions } from '../shared/additions.js';
 import { writeSearchIndex } from './search-index.mjs';
 import { firstShowingUrl, WIKIPEDIA_LISTS, netflixCandidates, isRerelease } from './sources.mjs';
 import { parseWikipediaTables, titleKey, slugify } from './parse.mjs';
@@ -66,6 +67,29 @@ export function parseOnly(arg) {
 }
 
 const ONLY = parseOnly(args.only);
+
+/** Films added by TMDB id from Browse, which no source listed. */
+async function readAdditions() {
+  try {
+    return JSON.parse(await readFile(resolve(ROOT, 'data', 'additions.json'), 'utf8'));
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * Put any film added by hand into the catalog before anything looks at it.
+ *
+ * The stub carries its TMDB id, so the ordinary pin path fetches the detail
+ * and renames it — a film added by id and one corrected by id take the same
+ * route, and there is no second way for an entry to be filled in.
+ */
+function applyAdditions(catalog, additions, year) {
+  const fresh = pendingAdditions(catalog, additions, year);
+  for (const m of fresh) catalog.push(m);
+  if (fresh.length) log(`  ${fresh.length} added by hand: ${fresh.map((m) => m.tmdbId).join(', ')}`);
+  return fresh;
+}
 
 /** Manual corrections, which survive every rebuild. */
 async function readOverrides() {
@@ -481,6 +505,9 @@ async function main() {
         : `Enriching the existing ${YEAR} catalog from TMDB\n`
     );
     const catalog = JSON.parse(await readFile(outPath, 'utf8'));
+    // Before the --only check: a film added from Browse is named by an id that
+    // this run is what creates, so checking first would always report it missing.
+    const fresh = applyAdditions(catalog, await readAdditions(), YEAR);
     if (ONLY) {
       const unknown = [...ONLY].filter((id) => !catalog.some((m) => m.id === id));
       // Silence here would look exactly like a pin that did not take, and that
@@ -488,6 +515,7 @@ async function main() {
       if (unknown.length) warn(`not in the ${YEAR} catalog: ${unknown.join(', ')}`);
     }
     const pins = pinnedIds(await readOverrides());
+    for (const m of fresh) pins.set(m.id, m.tmdbId);
     if (pins.size) log(`  ${pins.size} TMDB id(s) set by hand will be used as given`);
     await enrich(catalog, process.env.TMDB_API, {
       force: Boolean(args.force),
@@ -579,7 +607,9 @@ async function main() {
   catalog.sort((a, b) => a.title.localeCompare(b.title));
 
   log('\nEnriching from TMDB:');
+  const byHand = applyAdditions(catalog, await readAdditions(), YEAR);
   const pins = pinnedIds(await readOverrides());
+  for (const m of byHand) pins.set(m.id, m.tmdbId);
   if (pins.size) log(`  ${pins.size} TMDB id(s) set by hand will be used as given`);
   await enrich(catalog, process.env.TMDB_API, { staleDays: STALE_DAYS, pins });
   recompute(catalog, YEAR);

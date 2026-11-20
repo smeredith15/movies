@@ -22,6 +22,7 @@ data/watches.json       every movie watched, with who picked it and where
 data/adjustments.json   bonus picks and skips, with an optional reason
 data/overrides.json     manual eligibility-year decisions — these always win
 data/catalog/<year>.json  the eligible-movie pool, rebuilt by the scraper
+data/additions.json     films no source listed, added by TMDB id
 data/index.json         title autocomplete, rebuilt with the catalog
 data/tmdb-index.json    the add-a-movie corpus, built by its own Action
 data/ballots/<year>.<person>.json   one file per person per year
@@ -461,6 +462,31 @@ keyed on it, so the slug has to outlive the name it was derived from.
 This is the same arrangement as the tv_votes repo, which leaves an unmatched
 show alone for a human to paste the right id into.
 
+### A film no source listed
+
+Pinning an id onto a row only works when there is a row. When firstshowing and
+every streaming list missed a film there is nothing to pin to, and the only way
+in was to wait for a source to catch up.
+
+**Missing a film?** on Browse takes a TMDB id — or the link it was copied from,
+which is what people actually have — and the rest is the path a pasted id
+already took: the id goes into `data/additions.json`, the same one-entry run
+fetches the detail, and the row appears with its real title.
+
+The entry's id is `tmdb-<id>-<year>` rather than a title slug. Every other id
+is a slug, but a slug needs a title and the point here is that there is not one
+yet; an id that changed once the title arrived would orphan the override, the
+seen tick, the watch and the ballot vote that point at it. The entry is
+`manual`, so a full rebuild keeps it while the sources still do not list it,
+and the addition is kept rather than consumed — it is the record of why a film
+nothing lists is in the catalog at all.
+
+Two things worth knowing. A film already in the catalog under a title we failed
+to recognise is matched on its TMDB id, so adding it does not make a second
+copy. And `recompute` may give it a different `computedYear` than the year it
+was added to, if TMDB's dates disagree — it stays in the year you put it in,
+and the ballot-year control settles which year it counts for.
+
 ### The two search indexes
 
 The Tracker's title box searches `data/index.json`, which is nothing but a
@@ -569,7 +595,7 @@ fills them in.
 ```bash
 npm install
 npm run dev     # local development
-npm test        # 547 assertions over the rules, the rotation and the parsers
+npm test        # 574 assertions over the rules, the rotation and the parsers
 npm run build
 ```
 
