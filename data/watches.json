@@ -2055,5 +2055,14 @@
     "venue": "home",
     "picker": "joint",
     "consumesTurn": false
+  },
+  {
+    "id": "w_mwspg4ooq7kat",
+    "date": "2026-11-23",
+    "title": "The Hunger Games: Sunrise on the Reaping",
+    "movieId": "the-hunger-games-sunrise-on-the-reaping-2026",
+    "venue": "theater",
+    "picker": "joint",
+    "consumesTurn": false
   }
 ]
