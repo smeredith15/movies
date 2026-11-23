@@ -83954,5 +83954,143 @@
       }
     ],
     "detailsUpdated": "2026-11-20T16:54:58.218Z"
+  },
+  {
+    "id": "tmdb-1377237-2026",
+    "title": "Runner",
+    "kind": "theatrical",
+    "festivalDate": null,
+    "usLimitedDate": "2026-09-07",
+    "usTheatricalDate": "2026-09-11",
+    "homeDate": "2026-10-13",
+    "isForeignLanguage": false,
+    "isDocumentary": false,
+    "hadUSTheatricalRelease": true,
+    "services": [],
+    "poster": null,
+    "sources": [
+      "added by hand"
+    ],
+    "tmdbId": 1377237,
+    "computedYear": 2026,
+    "confidence": "high",
+    "evidence": [
+      "Available in the US on 2026-09-11."
+    ],
+    "needsReview": false,
+    "manual": true,
+    "tmdbVerified": true,
+    "tmdbNote": "TMDB id 1377237 set by hand.",
+    "titleWas": "TMDB 1377237",
+    "imdbId": "tt31349844",
+    "overview": "A former soldier is thrown into a brutal race against time when a critical medical delivery makes him and his unlikely partner the targets of a ruthless cartel. As the mission spirals into a deadly manhunt, every detour, delay, and bullet pushes them closer to failure. With betrayal closing in from every side, they must survive the chase and deliver their cargo to save the life of a little girl.",
+    "genres": [
+      "Action",
+      "Comedy",
+      "Thriller"
+    ],
+    "cast": [
+      {
+        "name": "Alan Ritchson",
+        "character": "Hank Malone",
+        "order": 0
+      },
+      {
+        "name": "Owen Wilson",
+        "character": "Ben Bishop",
+        "order": 1
+      },
+      {
+        "name": "Rodrigo Santoro",
+        "character": "Damian Zaldivar",
+        "order": 2
+      },
+      {
+        "name": "Leila George",
+        "character": "Kate Baker",
+        "order": 3
+      },
+      {
+        "name": "Kate Box",
+        "character": "Dr. Ainsley",
+        "order": 4
+      },
+      {
+        "name": "Peta Sergeant",
+        "character": "Nurse Julie",
+        "order": 5
+      },
+      {
+        "name": "Cecilia Toussaint",
+        "character": "Donna Zaldivar",
+        "order": 6
+      },
+      {
+        "name": "Geraldine Hakewill",
+        "character": "Monica",
+        "order": 7
+      },
+      {
+        "name": "Goran D. Kleut",
+        "character": "Luke",
+        "order": 8
+      },
+      {
+        "name": "Scarlett Crabtree",
+        "character": "Ellie Baker",
+        "order": 9
+      },
+      {
+        "name": "Gyton Grantley",
+        "character": "Iggy",
+        "order": 10
+      },
+      {
+        "name": "Deirdree Wallace",
+        "character": "AA Group Leader",
+        "order": 11
+      },
+      {
+        "name": "Anthony Cogin",
+        "character": "Senator Roger Cameron",
+        "order": 12
+      },
+      {
+        "name": "Thomas Larkin",
+        "character": "Tech CEO",
+        "order": 13
+      },
+      {
+        "name": "Beth Waugh",
+        "character": "Stewardess Audrey",
+        "order": 14
+      },
+      {
+        "name": "Salomé Chandler",
+        "character": "Pre Op Nurse",
+        "order": 15
+      },
+      {
+        "name": "Jackson Raine",
+        "character": "Donna's Doctor",
+        "order": 16
+      },
+      {
+        "name": "Thomas Cocquerel",
+        "character": "Josh",
+        "order": 17
+      },
+      {
+        "name": "Ashan Kumar",
+        "character": "Gas Station Attendant",
+        "order": 18
+      },
+      {
+        "name": "Amelia Parsonson",
+        "character": "Ambulance Medic",
+        "order": 19
+      }
+    ],
+    "detailsUpdated": "2026-11-23T19:36:37.543Z"
   }
 ]
