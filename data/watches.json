@@ -2064,5 +2064,14 @@
     "venue": "theater",
     "picker": "joint",
     "consumesTurn": false
+  },
+  {
+    "id": "w_mwx14d559j85u",
+    "date": "2026-11-25",
+    "title": "I Love Boosters",
+    "movieId": "i-love-boosters-2026",
+    "venue": "home",
+    "picker": "me",
+    "consumesTurn": true
   }
 ]
